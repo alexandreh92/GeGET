@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D9C1A2E4-2F9B-4572-AEE4-40626B50FB43}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GeGET</RootNamespace>
+    <AssemblyName>GeGET</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Devart.DbForge.Data.Interfaces">
+      <HintPath>F:\Devart\dbForge Studio for MySQL\Devart.DbForge.Data.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Devart.DbForge.Data.MySql">
+      <HintPath>F:\Devart\dbForge Studio for MySQL\Devart.DbForge.Data.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Mvvm.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Core.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\DLLs\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App\BLL\CRM\Clientes\ClientesBLL.cs" />
+    <Compile Include="App\BLL\CRM\Estabelecimentos\EstabelecimentosBLL.cs" />
+    <Compile Include="App\BLL\CRM\Funil de Vendas\FunildeVendasBLL.cs" />
+    <Compile Include="App\BLL\CRM\Negócios\NegociosBLL.cs" />
+    <Compile Include="App\BLL\CRM\Pessoas\PessoasBLL.cs" />
+    <Compile Include="App\BLL\CRM\Shared\CategoriaClienteBLL.cs" />
+    <Compile Include="App\BLL\Layout\MySQLDependency.cs" />
+    <Compile Include="App\Controls\CRM\Clientes\EditarCliente.xaml.cs">
+      <DependentUpon>EditarCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\CRM\Funil de Vendas\FunilControl.xaml.cs">
+      <DependentUpon>FunilControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\CRM\Negócios\NegociosControl.xaml.cs">
+      <DependentUpon>NegociosControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\CRM\Pessoas\PessoasControl.xaml.cs">
+      <DependentUpon>PessoasControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Layout\MensagemLayout.xaml.cs">
+      <DependentUpon>MensagemLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\NoResults.xaml.cs">
+      <DependentUpon>NoResults.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\DTO\CRM\Clientes\ClientesDTO.cs" />
+    <Compile Include="App\DTO\CRM\Estabelecimentos\EstabelecimentosDTO.cs" />
+    <Compile Include="App\DTO\CRM\Funil de Vendas\FunildeVendasDTO.cs" />
+    <Compile Include="App\DTO\CRM\Negócios\NegociosDTO.cs" />
+    <Compile Include="App\DTO\CRM\Pessoas\PessoasDTO.cs" />
+    <Compile Include="App\DTO\CRM\Shared\CategoriaClienteDTO.cs" />
+    <Compile Include="App\DTO\Layout\LayoutDTO.cs" />
+    <Compile Include="App\Helpers\Helpers.cs" />
+    <Compile Include="App\VIEWS\CRM\Clientes\Clientes.xaml.cs">
+      <DependentUpon>Clientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\CRM.xaml.cs">
+      <DependentUpon>CRM.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Estabelecimentos\Estabelecimentos.xaml.cs">
+      <DependentUpon>Estabelecimentos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Funil de Vendas\Funil.Old.xaml.cs">
+      <DependentUpon>Funil.Old.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Funil de Vendas\Funil.xaml.cs">
+      <DependentUpon>Funil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Negócios\Negocios.xaml.cs">
+      <DependentUpon>Negocios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Pessoas\Pessoas.xaml.cs">
+      <DependentUpon>Pessoas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ButtonAdd.xaml.cs">
+      <DependentUpon>ButtonAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Teste.xaml.cs">
+      <DependentUpon>Teste.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\CRM\Estabelecimentos\EstablishmentControl.xaml.cs">
+      <DependentUpon>EstablishmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\CRM\Clientes\ClientControl.xaml.cs">
+      <DependentUpon>ClientControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="testeusercontrol.xaml.cs">
+      <DependentUpon>testeusercontrol.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserPanel.xaml.cs">
+      <DependentUpon>UserPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TaskbarMessage.xaml.cs">
+      <DependentUpon>TaskbarMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\CustomOKCancelMessageBox.xaml.cs">
+      <DependentUpon>CustomOKCancelMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window2.xaml.cs">
+      <DependentUpon>Window2.xaml</DependentUpon>
+    </Compile>
+    <Page Include="App\Controls\CRM\Clientes\EditarCliente.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\CRM\Funil de Vendas\FunilControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\CRM\Negócios\NegociosControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\CRM\Pessoas\PessoasControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Layout\MensagemLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Controls\Shared\NoResults.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\CRM.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Estabelecimentos\Estabelecimentos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Funil de Vendas\Funil.Old.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Funil de Vendas\Funil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Negócios\Negocios.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Pessoas\Pessoas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ButtonAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\VIEWS\Login\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\VIEWS\Layout\Layout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App\BLL\Login\LoginBLL.cs" />
+    <Compile Include="App\DAL\AcessoBancoDados.cs" />
+    <Compile Include="App\DTO\Login\LoginDTO.cs" />
+    <Compile Include="App\VIEWS\Login\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Layout\Layout.xaml.cs">
+      <DependentUpon>Layout.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="App\VIEWS\CRM\Clientes\Clientes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Teste.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Controls\CRM\Estabelecimentos\EstablishmentControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\CRM\Clientes\ClientControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="testeusercontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TaskbarMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Controls\Shared\CustomOKCancelMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Resource Include="Resources\Fonts\Synthview - Novecentowide-DemiBold.otf" />
+    <Resource Include="Resources\Fonts\Synthview - Novecentowide-Medium.otf" />
+    <Resource Include="Resources\Fonts\Novecentowide_Normal.otf" />
+    <Resource Include="Resources\Fonts\Novecentowide_Book.otf" />
+    <Resource Include="Resources\Fonts\Novecentosanswide-Bold_0.otf" />
+    <Resource Include="Resources\Fonts\AkzidenzGrotesk_Light.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Login.BackgroundImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\GETAC.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\updateurl.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Customer_70px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\teste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App\Assets\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
