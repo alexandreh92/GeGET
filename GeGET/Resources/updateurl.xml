@@ -1,0 +1,4 @@
+<App>
+  <!--<Mirror>\\192.168.15.10\Servidor\version.xml</Mirror>-->
+   <Mirror>C:\version.xml</Mirror>
+</App>
