@@ -7,9 +7,6 @@ using System.Reflection;
 
 namespace GeGET
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class Layout : Window
     {
         #region Declarations
