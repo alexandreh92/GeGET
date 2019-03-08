@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO;
 using DAL;
 using System.Data;
-using System.Windows;
 
 namespace BLL
 {
@@ -45,11 +41,11 @@ namespace BLL
             return clientes;
         }
 
-        public void UpdateClientes(int Id, string Razao_Social, string Nome_Fantasia, int Categoria_Id, int Status_Id)
+        public void UpdateClientes(ClientesDTO DTO)
         {
             try
             {
-                var query = "UPDATE cliente SET rsocial='"+ Razao_Social +"', fantasia='"+ Nome_Fantasia +"', categoria_cliente_id='"+ Categoria_Id +"', status_id='"+ Status_Id +"' WHERE id='"+ Id +"'";
+                var query = "UPDATE cliente SET rsocial='"+ DTO.Razao_Social +"', fantasia='"+ DTO.Nome_Fantasia +"', categoria_cliente_id='"+ DTO.Categoria_Id +"', status_id='"+ DTO.Status +"' WHERE id='"+ DTO.Id +"'";
                 bd.Conectar();
                 bd.ExecutarComandoSQL(query);
             }
