@@ -8,9 +8,6 @@ using DTO;
 
 namespace GeGET
 {
-    /// <summary>
-    /// Interaction logic for Teste.xaml
-    /// </summary>
     public partial class Clientes : UserControl
     {
         #region Declarations
