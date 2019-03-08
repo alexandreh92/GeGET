@@ -160,9 +160,6 @@
     <Compile Include="App\VIEWS\CRM\Pessoas\Pessoas.xaml.cs">
       <DependentUpon>Pessoas.xaml</DependentUpon>
     </Compile>
-    <Compile Include="App\VIEWS\CRM\Pessoas\PessoasOld.xaml.cs">
-      <DependentUpon>PessoasOld.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ButtonAdd.xaml.cs">
       <DependentUpon>ButtonAdd.xaml</DependentUpon>
     </Compile>
@@ -246,10 +243,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="App\VIEWS\CRM\Pessoas\Pessoas.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="App\VIEWS\CRM\Pessoas\PessoasOld.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

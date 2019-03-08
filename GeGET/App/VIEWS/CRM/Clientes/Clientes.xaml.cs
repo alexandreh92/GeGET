@@ -1,19 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using BLL;
 using DTO;
@@ -25,23 +13,27 @@ namespace GeGET
     /// </summary>
     public partial class Clientes : UserControl
     {
+        #region Declarations
         ClientesBLL bll = new ClientesBLL();
         ClientesDTO dto = new ClientesDTO();
         EstabelecimentosDTO Estabelecimentosdto = new EstabelecimentosDTO();
         NegociosDTO Negociosdto = new NegociosDTO();
         Helpers helpers = new Helpers();
-        Thread t1;
-        ManualResetEvent syncEvent = new ManualResetEvent(false);
+
+        #endregion
+
+        #region Initialize
 
         public Clientes()
         {
             InitializeComponent();
             dto.Pesquisa = "";
-            t1 = new Thread(LoadClients);
-            t1.Start();
+            LoadClients();
         }
 
+        #endregion
 
+        #region Methods
         private void LoadClients()
         {
             Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
@@ -50,6 +42,16 @@ namespace GeGET
             }));
         }
 
+        private void Commit()
+        {
+            dto.Pesquisa = txtProcurar.Text.Replace("'", "''");
+            LoadClients();
+        }
+        #endregion
+
+        #region Events
+
+        #region Keydowns
         private void CommentTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
@@ -57,33 +59,9 @@ namespace GeGET
                 Commit();
             }
         }
+        #endregion
 
-        private void Commit()
-        {
-            dto.Pesquisa = txtProcurar.Text.Replace("'", "''");
-            LoadClients();
-        }
-
-        private void ClearControls()
-        {
-            foreach (object ctrl in StackPanel1.Children)
-            {
-                if (ctrl is ButtonAdd)
-                {
-                    this.Dispatcher.BeginInvoke(new Action(delegate
-                    {
-                        StackPanel1.Children.Remove(((ButtonAdd)ctrl));
-                    }));
-                }
-                if (ctrl is ClientControl)
-                {
-                    this.Dispatcher.BeginInvoke(new Action(delegate
-                    {
-                        StackPanel1.Children.Remove(((ClientControl)ctrl));
-                    }));
-                }
-            }
-        }
+        #region Clicks
 
         private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
         {
@@ -105,7 +83,7 @@ namespace GeGET
             {
                 helpers.OpenBack(false);
             }
-            
+
         }
 
         private void BtnEstabelecimentos_Click(object sender, RoutedEventArgs e)
@@ -143,5 +121,9 @@ namespace GeGET
                 lstClientes.ItemsSource = bll.LoadClientes();
             }
         }
+
+        #endregion
+
+        #endregion
     }
 }
