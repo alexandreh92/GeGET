@@ -37,7 +37,7 @@ namespace BLL
                 Procurar = Procurar + " AND c.id = '" + dto.ParentId + "'";
             }
             var pessoas = new List<PessoasDTO>();
-            var query = "SELECT cc.id, cc.nome, cc.STATUS_id, cc.email, cc.funcao, cc.telefone, cc.celular, cc.data, cc.USUARIO_id, c.id as cliente_id, c.rsocial, c.fantasia FROM contato_cliente cc join cliente c on cc.CLIENTE_id = c.id  WHERE " + Procurar +" ORDER BY cc.nome LIMIT " + dto.Inicio + "," + dto.Limite + "";
+            var query = "SELECT cc.id, cc.nome, cc.STATUS_id, cc.email, cc.funcao, cc.telefone, cc.celular, cc.data, cc.USUARIO_id, c.id as cliente_id, c.rsocial, c.fantasia FROM contato_cliente cc join cliente c on cc.CLIENTE_id = c.id  WHERE " + Procurar +" ORDER BY cc.nome";
             bd.Conectar();
             var dtt = bd.RetDataTable(query);
             foreach (DataRow dr in dtt.Rows)

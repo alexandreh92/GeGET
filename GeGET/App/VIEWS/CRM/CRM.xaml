@@ -38,7 +38,7 @@
                 <Separator VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="0 0 0 0" />
             </Grid>
             <Grid Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2">
-                <ScrollViewer Margin="0,0,0,-209">
+                <ScrollViewer>
                     <Grid Margin="0,20,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80"/>

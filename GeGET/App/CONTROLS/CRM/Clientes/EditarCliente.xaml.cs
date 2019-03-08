@@ -2,23 +2,28 @@
 using System.Windows;
 using System.Windows.Forms;
 using BLL;
+using DTO;
 
 namespace GeGET
 {
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
     public partial class EditarCliente : Window
     {
+        #region Declarations
         public static EditarCliente EditCliente;
         static System.Windows.Forms.DialogResult result;
         public static int id;
         ClientesBLL bll = new ClientesBLL();
+        ClientesDTO dto = new ClientesDTO();
+        #endregion
 
+        #region Initialize
         public EditarCliente()
         {
             InitializeComponent();
         }
+        #endregion
+
+
 
         public static DialogResult Show(string Id, string Razao_Social, string Nome_Fantasia, int Categoria_Id, int Status_Id)
         {
@@ -38,12 +43,12 @@ namespace GeGET
 
         private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
-            var Id = id;
-            var Razao_Social = txtRazao.Text.Replace("'", "''").ToUpper();
-            var Nome_Fantasia = txtFantasia.Text.Replace("'", "''").ToUpper();
-            var Categoria_Id = Convert.ToInt32(cmbCategoria.SelectedValue);
-            var Status_Id = Convert.ToInt32(cbxStatus.IsChecked);
-            bll.UpdateClientes(Id, Razao_Social, Nome_Fantasia, Categoria_Id, Status_Id);
+            dto.Id = id.ToString();
+            dto.Razao_Social = txtRazao.Text.Replace("'", "''").ToUpper();
+            dto.Nome_Fantasia = txtFantasia.Text.Replace("'", "''").ToUpper();
+            dto.Categoria_Id = Convert.ToInt32(cmbCategoria.SelectedValue);
+            dto.Status = Convert.ToInt32(cbxStatus.IsChecked);
+            bll.UpdateClientes(dto);
             result = System.Windows.Forms.DialogResult.OK;
             EditCliente.Close();
         }
