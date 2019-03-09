@@ -1,6 +1,6 @@
 ﻿namespace DTO
 {
-    class EstabelecimentosDTO
+    public class EstabelecimentosDTO
     {
         private string id;
         private string cliente_Id;

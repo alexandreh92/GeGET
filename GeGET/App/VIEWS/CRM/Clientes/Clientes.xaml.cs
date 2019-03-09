@@ -15,6 +15,7 @@ namespace GeGET
         ClientesDTO dto = new ClientesDTO();
         EstabelecimentosDTO Estabelecimentosdto = new EstabelecimentosDTO();
         NegociosDTO Negociosdto = new NegociosDTO();
+        PessoasDTO Pessoasdto = new PessoasDTO();
         Helpers helpers = new Helpers();
 
         #endregion
@@ -80,7 +81,6 @@ namespace GeGET
             {
                 helpers.OpenBack(false);
             }
-
         }
 
         private void BtnEstabelecimentos_Click(object sender, RoutedEventArgs e)
@@ -103,22 +103,34 @@ namespace GeGET
             helpers.Open<Negocios>(this.GetType().Name, true);
         }
 
-        private void BtnEditar_Click(object sender, RoutedEventArgs e)
+        private void BtnPessoas_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             int index = lstClientes.Items.IndexOf(btn.DataContext);
             var Id = ((ClientesDTO)lstClientes.Items[index]).Id;
-            var Razao_Social = ((ClientesDTO)lstClientes.Items[index]).Razao_Social;
-            var Nome_Fantasia = ((ClientesDTO)lstClientes.Items[index]).Nome_Fantasia;
-            var Categoria_Id = ((ClientesDTO)lstClientes.Items[index]).Categoria_Id;
-            var Status = ((ClientesDTO)lstClientes.Items[index]).Status;
-            var result = EditarCliente.Show(Id, Razao_Social, Nome_Fantasia, Categoria_Id, Status);
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                lstClientes.ItemsSource = bll.LoadClientes();
-            }
+            Pessoasdto.FromParent = true;
+            Pessoasdto.ParentId = Id;
+            helpers.Open<Pessoas>(this.GetType().Name, true);
         }
 
+        private void BtnEditar_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            var index = lstClientes.Items.IndexOf(btn.DataContext);
+            dto.Id = ((ClientesDTO)lstClientes.Items[index]).Id;
+            dto.Razao_Social = ((ClientesDTO)lstClientes.Items[index]).Razao_Social;
+            dto.Nome_Fantasia = ((ClientesDTO)lstClientes.Items[index]).Nome_Fantasia;
+            dto.Categoria_Id = ((ClientesDTO)lstClientes.Items[index]).Categoria_Id;
+            dto.Status = ((ClientesDTO)lstClientes.Items[index]).Status;
+            using (var form = new EditarCliente(dto))
+            {
+                form.ShowDialog();
+                if (form.DialogResult.Value && form.DialogResult.HasValue)
+                {
+                    lstClientes.ItemsSource = bll.LoadClientes();
+                }
+            }
+        }
         #endregion
 
         #endregion

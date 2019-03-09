@@ -16,26 +16,40 @@ namespace BLL
 {
     class MySQLDependency
     {
+        #region Declarations
         AcessoBancoDados bd = new AcessoBancoDados();
         LayoutDTO dto = new LayoutDTO();
         LoginDTO Logindto = new LoginDTO();
+        #endregion
 
-        //ComponentResourceManager resources = new ComponentResourceManager(typeof(ResourceForm));
+        #region Methods
 
+        #region Dependency Start
         public void Start()
         {
-            var query = "SELECT * FROM mensagem_" + Logindto.Usuario + "";
-            bd.ConectarDevArt();
-            var dependency = bd.Dependency(query);
-            dependency.OnChange += new OnChangeEventHandler(dependency_OnChange);
-            bd.StartDependency();
+            try
+            {
+                var query = "SELECT * FROM mensagem_" + Logindto.Usuario + "";
+                bd.ConectarDevArt();
+                var dependency = bd.Dependency(query);
+                dependency.OnChange += new OnChangeEventHandler(dependency_OnChange);
+                bd.StartDependency();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
+        #endregion
 
+        #region Dependency Stop
         public void Stop()
         {
             bd.StopDependency();
         }
+        #endregion
 
+        #region Dependency OnChange
         private void dependency_OnChange(object sender, MySqlTableChangeEventArgs e)
         {
             if (!Logindto.SupressChange)
@@ -58,7 +72,7 @@ namespace BLL
                 }
                 finally
                 {
-                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => 
+                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
                     {
                         TaskbarMessage ws = new TaskbarMessage(dto.Descricao, dto.Mensagem);
                         ws.Show();
@@ -73,7 +87,9 @@ namespace BLL
                 }
             }
         }
+        #endregion
 
+        #region Has New Messages
         public bool HasNewMessages()
         {
             try
@@ -100,20 +116,19 @@ namespace BLL
                 bd.CloseConection();
             }
         }
+        #endregion
 
-
+        #region Load Mensagem
         public List<LayoutDTO> LoadMensagens()
         {
             var mensagens = new List<LayoutDTO>();
+            var dt = new DataTable();
             try
             {
                 var query = "SELECT f.nome, mu.id as msg_id, lida, descricao, mu.data, mensagem, negocio_id FROM mensagem_" + Logindto.Usuario + " mu JOIN usuario u ON u.id = mu.usuario_from_id JOIN funcionario f ON f.id = u.funcionario_id ORDER BY mu.data DESC";
                 bd.Conectar();
-                var dt = bd.RetDataTable(query);
-                foreach (DataRow dr in dt.Rows)
-                {
-                    mensagens.Add(new LayoutDTO { Id = dr["msg_id"].ToString(), Descricao = dr["descricao"].ToString(), Mensagem = dr["mensagem"].ToString(), Negocio = Convert.ToInt32(dr["negocio_id"]).ToString("0000"), Nome = dr["nome"].ToString(), Lida = dr["lida"].ToString(), Data = Convert.ToDateTime(dr["data"]).ToString("dd/MM/yyyy") + " - " + Convert.ToDateTime(dr["data"]).ToString("HH:mm") });
-                }
+                dt = bd.RetDataTable(query);
+                
             }
             catch (Exception ex)
             {
@@ -121,11 +136,17 @@ namespace BLL
             }
             finally
             {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    mensagens.Add(new LayoutDTO { Id = dr["msg_id"].ToString(), Descricao = dr["descricao"].ToString(), Mensagem = dr["mensagem"].ToString(), Negocio = Convert.ToInt32(dr["negocio_id"]).ToString("0000"), Nome = dr["nome"].ToString(), Lida = dr["lida"].ToString(), Data = Convert.ToDateTime(dr["data"]).ToString("dd/MM/yyyy") + " - " + Convert.ToDateTime(dr["data"]).ToString("HH:mm") });
+                }
                 bd.CloseConection();
             }
             return mensagens;
         }
+        #endregion
 
+        #region Mark As Read
 
         public void MarkAsRead()
         {
@@ -146,5 +167,8 @@ namespace BLL
             }
         }
 
+        #endregion
+
+        #endregion
     }
 }

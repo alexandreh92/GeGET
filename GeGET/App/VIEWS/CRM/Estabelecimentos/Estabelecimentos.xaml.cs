@@ -1,8 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
 using BLL;
 using DTO;
 
@@ -31,10 +29,7 @@ namespace GeGET
         #region Methods
         private void LoadEstabelecimentos()
         {
-            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
-            {
-                lstClientes.ItemsSource = bll.LoadEstabelecimentos();
-            }));
+            lstClientes.ItemsSource = bll.LoadEstabelecimentos();
         }
 
         private void Commit()
@@ -84,7 +79,7 @@ namespace GeGET
         {
             Button btn = sender as Button;
             int index = lstClientes.Items.IndexOf(btn.DataContext);
-            var Id = ((EstabelecimentosDTO)lstClientes.Items[index]).Id;
+            var Id = ((EstabelecimentosDTO)lstClientes.Items[index]).Cliente_Id;
             Negociosdto.FromParent = true;
             Negociosdto.ParentId = Id;
             helpers.Open<Negocios>(this.GetType().Name, true);
@@ -94,18 +89,18 @@ namespace GeGET
         {
             Button btn = sender as Button;
             int index = lstClientes.Items.IndexOf(btn.DataContext);
-            var Id = ((EstabelecimentosDTO)lstClientes.Items[index]).Id;
-            var Cliente_Id = ((EstabelecimentosDTO)lstClientes.Items[index]).Cliente_Id;
-            var Razao_Social = ((EstabelecimentosDTO)lstClientes.Items[index]).Razao_Social;
-            var Nome_Fantasia = ((EstabelecimentosDTO)lstClientes.Items[index]).Nome_Fantasia;
-            var Endereco = ((EstabelecimentosDTO)lstClientes.Items[index]).Endereco;
-            var UF_Id = ((EstabelecimentosDTO)lstClientes.Items[index]).UF_Id;
-            var Cidade_Id = ((EstabelecimentosDTO)lstClientes.Items[index]).Cidade_Id;
-            var CNPJ = ((EstabelecimentosDTO)lstClientes.Items[index]).Cnpj;
-            var IE = ((EstabelecimentosDTO)lstClientes.Items[index]).Ie;
-            var Telefone = ((EstabelecimentosDTO)lstClientes.Items[index]).Telefone;
-            var Status = ((EstabelecimentosDTO)lstClientes.Items[index]).Status;
-            using (var form = new EditarEstabelecimento(Id, Cliente_Id, Razao_Social, Nome_Fantasia, Endereco, UF_Id, Cidade_Id, CNPJ, IE, Telefone, Status))
+            dto.Id = ((EstabelecimentosDTO)lstClientes.Items[index]).Id;
+            dto.Cliente_Id = ((EstabelecimentosDTO)lstClientes.Items[index]).Cliente_Id;
+            dto.Razao_Social = ((EstabelecimentosDTO)lstClientes.Items[index]).Razao_Social;
+            dto.Nome_Fantasia = ((EstabelecimentosDTO)lstClientes.Items[index]).Nome_Fantasia;
+            dto.Endereco = ((EstabelecimentosDTO)lstClientes.Items[index]).Endereco;
+            dto.UF_Id = ((EstabelecimentosDTO)lstClientes.Items[index]).UF_Id;
+            dto.Cidade_Id = ((EstabelecimentosDTO)lstClientes.Items[index]).Cidade_Id;
+            dto.Cnpj = ((EstabelecimentosDTO)lstClientes.Items[index]).Cnpj;
+            dto.Ie = ((EstabelecimentosDTO)lstClientes.Items[index]).Ie;
+            dto.Telefone = ((EstabelecimentosDTO)lstClientes.Items[index]).Telefone;
+            dto.Status = ((EstabelecimentosDTO)lstClientes.Items[index]).Status;
+            using (var form = new EditarEstabelecimento(dto))
             {
                 form.ShowDialog();
                 if (form.DialogResult.Value && form.DialogResult.HasValue)

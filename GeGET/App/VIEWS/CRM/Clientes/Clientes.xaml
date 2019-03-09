@@ -78,11 +78,12 @@
                                 <Grid Grid.Column="1">
                                     <DockPanel >
                                         <materialDesign:PopupBox VerticalAlignment="Top" HorizontalAlignment="Right" StaysOpen="False" Margin="0,15,0,0" Foreground="#7A2932" x:Name="PopupBox">
-                                            <StackPanel x:Name="teste" Width="150">
+                                            <StackPanel Width="150">
                                                 <Button x:Name="btnEditar" Click="BtnEditar_Click" Content="Editar"/>
                                                 <Separator/>
                                                 <Button x:Name="btnEstabelecimentos" Click="BtnEstabelecimentos_Click" Content="Estabelecimentos"/>
                                                 <Button x:Name="btnNegocios" Click="BtnNegocios_Click" Content="Negócios"/>
+                                                <Button x:Name="btnPessoas" Click="BtnPessoas_Click" Content="Pessoas"/>
                                             </StackPanel>
                                         </materialDesign:PopupBox>
                                     </DockPanel>

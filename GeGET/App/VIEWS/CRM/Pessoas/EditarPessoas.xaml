@@ -1,4 +1,4 @@
-﻿<Window x:Class="GeGET.EditarEstabelecimento"
+﻿<Window x:Class="GeGET.EditarPessoas"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -13,18 +13,18 @@
         WindowState="Maximized"
         Topmost="True"
         ShowInTaskbar="False"
-        Height="450" Width="780">
+        Height="450" Width="750">
     <Window.Background>
         <SolidColorBrush Opacity="0.2" Color="Black"/>
     </Window.Background>
-    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,-2" Width="730">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="237.291"/>
-            <ColumnDefinition Width="112.709"/>
-            <ColumnDefinition Width="69"/>
-            <ColumnDefinition Width="124"/>
-            <ColumnDefinition Width="156"/>
+            <ColumnDefinition Width="49*"/>
+            <ColumnDefinition Width="140*"/>
+            <ColumnDefinition Width="71*"/>
+            <ColumnDefinition Width="69*"/>
+            <ColumnDefinition Width="191*"/>
             <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -38,38 +38,40 @@
         <Grid Grid.ColumnSpan="7">
             <TextBlock Text="Editar" VerticalAlignment="Bottom" Margin="30,0,0,0" FontFamily="Century Gothic" FontSize="24" Foreground="#7A2932"></TextBlock>
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="1"  Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="0,10,0,9">
-            <Button x:Name="btnPesquisa" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Top" Margin="70,25,0,0" HorizontalAlignment="Left" Height="25" Width="25" Click="BtnPesquisa_Click">
-                <materialDesign:PackIcon Kind="Magnify" Opacity=".56" VerticalAlignment="Center" Height="15" Width="15" />
-            </Button>
+        <Grid Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="0,10,0,9" Grid.ColumnSpan="3" Height="80">
+            
             <TextBox x:Name="txtRazao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontSize="16" Text=" " Grid.Column="1" Margin="5,30,10,0" Foreground="DimGray">
                 <materialDesign:HintAssist.Hint>
                     <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
-                        <TextBlock>Razão Social</TextBlock>
+                        <TextBlock>Cliente</TextBlock>
                     </StackPanel>
                 </materialDesign:HintAssist.Hint>
             </TextBox>
+            <Button x:Name="btnPesquisa" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Top" Margin="40,33,0,0" HorizontalAlignment="Left" Height="25" Width="25" Click="BtnPesquisa_Click">
+                <materialDesign:PackIcon Kind="Magnify" Opacity=".56" VerticalAlignment="Center" Height="15" Width="15" />
+            </Button>
         </Grid>
-        <Grid Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center" Margin="0,10,0,9">
-            <TextBox x:Name="txtFantasia" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontSize="16" Text=" " Grid.Column="1" Margin="5,30,5,0" Foreground="DimGray">
+        <Grid Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" Margin="0,10,0,9" Height="80" Grid.ColumnSpan="2">
+            <TextBox x:Name="txtNome" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  FontSize="16" Text=" " Grid.Column="1" Margin="5,30,5,0" Foreground="DimGray">
                 <materialDesign:HintAssist.Hint>
                     <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
-                        <TextBlock>Nome Fantasia</TextBlock>
+                        <TextBlock>Nome</TextBlock>
                     </StackPanel>
                 </materialDesign:HintAssist.Hint>
             </TextBox>
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Margin="0,25,0,24">
-            <TextBox x:Name="txtEndereco" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text=" " Grid.Column="1" Margin="5,0,10,0" Foreground="DimGray">
+        <Grid Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Margin="0,25,0,24" Grid.ColumnSpan="3" Height="50">
+            <TextBox x:Name="txtEmail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text=" " Grid.Column="1" Margin="5,0,10,0" Foreground="DimGray">
                 <materialDesign:HintAssist.Hint>
                     <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
-                        <TextBlock>Endereço</TextBlock>
+                        <TextBlock>E-Mail</TextBlock>
                     </StackPanel>
                 </materialDesign:HintAssist.Hint>
             </TextBox>
         </Grid>
-        <Grid Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" Margin="0,25">
-            <ComboBox VerticalAlignment="Center" x:Name="cmbUF" materialDesign:HintAssist.Hint="UF" SelectionChanged="CmbUF_SelectionChanged" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,5,10,0" Background="White" Foreground="DimGray">
+        <Grid Grid.Column="4" Grid.Row="2" VerticalAlignment="Center" Margin="0,49,0,50" Height="0" Grid.ColumnSpan="2"/>
+        <Grid Grid.Column="4" Grid.Row="2" VerticalAlignment="Center" Margin="0,6,0,0" Height="44" Grid.ColumnSpan="2">
+            <ComboBox VerticalAlignment="Center" x:Name="cmbFuncao" materialDesign:HintAssist.Hint="Função" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,0,10,0" Background="White" Foreground="DimGray" ScrollViewer.CanContentScroll="True">
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel />
@@ -77,34 +79,8 @@
                 </ComboBox.ItemsPanel>
             </ComboBox>
         </Grid>
-        <Grid Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,25">
-            <ComboBox VerticalAlignment="Center" x:Name="cmbCidade" materialDesign:HintAssist.Hint="Cidade" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,5,10,0" Background="White" Foreground="DimGray" ScrollViewer.CanContentScroll="True">
-                <ComboBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel />
-                    </ItemsPanelTemplate>
-                </ComboBox.ItemsPanel>
-            </ComboBox>
-        </Grid>
-        <Grid Grid.Column="5" Grid.Row="2" VerticalAlignment="Center" Margin="0,25,0,24">
-            <xctk:MaskedTextBox Mask="00,000,000/0000-00" TextAlignment="Center" x:Name="txtCNPJ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text=" " Grid.Column="1" Margin="5,0,5,0" Foreground="DimGray">
-                <materialDesign:HintAssist.Hint>
-                    <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
-                        <TextBlock>CNPJ</TextBlock>
-                    </StackPanel>
-                </materialDesign:HintAssist.Hint>
-            </xctk:MaskedTextBox>
-        </Grid>
-        <Grid Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,24,0,25">
-            <TextBox x:Name="txtIE" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text=" " Grid.Column="1" Margin="5,0,10,0" Foreground="DimGray" Width="110">
-                <materialDesign:HintAssist.Hint>
-                    <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
-                        <TextBlock>I.E.</TextBlock>
-                    </StackPanel>
-                </materialDesign:HintAssist.Hint>
-            </TextBox>
-        </Grid>
-        <Grid Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Center">
+        <Grid Grid.Column="6" Grid.Row="2" VerticalAlignment="Center" Margin="0,50,0,49" Height="0"/>
+        <Grid Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="126">
             <xctk:MaskedTextBox x:Name="txtTelefone" TextAlignment="Center" Mask="(00) 0000-0000" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text=" " Grid.Column="1" Margin="5,0,10,0" Foreground="DimGray">
                 <materialDesign:HintAssist.Hint>
                     <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
@@ -113,13 +89,22 @@
                 </materialDesign:HintAssist.Hint>
             </xctk:MaskedTextBox>
         </Grid>
-        <Grid Grid.Column="4" Grid.Row="3" VerticalAlignment="Center" Margin="0,40,0,39">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0">
+        <Grid Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Center" Margin="0,24,0,25" Height="50">
+            <xctk:MaskedTextBox x:Name="txtCelular" TextAlignment="Center" Mask="(00) 0 0000-0000" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text=" " Grid.Column="1" Margin="5,0,10,0" Foreground="DimGray">
+                <materialDesign:HintAssist.Hint>
+                    <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                        <TextBlock>Celular</TextBlock>
+                    </StackPanel>
+                </materialDesign:HintAssist.Hint>
+            </xctk:MaskedTextBox>
+        </Grid>
+        <Grid Grid.Column="5" Grid.Row="3" VerticalAlignment="Center" Margin="0,40,0,39" Height="20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0">
                 <TextBlock FontSize="16" FontFamily="Century Gothic" Foreground="DimGray">Ativo:</TextBlock>
                 <CheckBox x:Name="cbxStatus" Style="{StaticResource MaterialDesignCheckBox}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Margin="5,0,0,0" Foreground="DimGray"/>
             </StackPanel>
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="5">
+        <Grid Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="6">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,15">
                 <Button x:Name="btnConfirmar" Margin="0,0,5,0" FontFamily="{DynamicResource Novecento-Bold}" Click="BtnConfirmar_Click">CONFIRMAR</Button>
                 <Button x:Name="btnCancel" Margin="5,0,0,0" FontFamily="{DynamicResource Novecento-Bold}" Click="BtnCancel_Click">CANCELAR</Button>
