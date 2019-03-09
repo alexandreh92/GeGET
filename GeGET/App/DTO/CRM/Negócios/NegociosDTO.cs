@@ -1,6 +1,6 @@
 ﻿namespace DTO
 {
-    class NegociosDTO
+    public class NegociosDTO
     {
         private string id;
         private string numero;
@@ -11,13 +11,10 @@
         private string descricao;
         private string vendedor;
         private int status_Id;
+        private string cliente_Id;
+        private string estabelecimento_Id;
         private static string pesquisa;
         private static int status;
-        private static int limite;
-        private static int inicio;
-        private static int final;
-        private static int totalRows;
-        private static int rowsLeft;
         private static bool fromParent = false;
         private static bool fromChildrenParent = false;
         private static string parentId;
@@ -33,14 +30,10 @@
         public int Status_Id { get => status_Id; set => status_Id = value; }
         public string Pesquisa { get => pesquisa; set => pesquisa = value; }
         public int Status { get => status; set => status = value; }
-        public int Limite { get => limite; set => limite = value; }
-        public int Inicio { get => inicio; set => inicio = value; }
-        public int Final { get => final; set => final = value; }
-        public int TotalRows { get => totalRows; set => totalRows = value; }
-        public int RowsLeft { get => rowsLeft; set => rowsLeft = value; }
         public bool FromParent { get => fromParent; set => fromParent = value; }
         public bool FromChildrenParent { get => fromChildrenParent; set => fromChildrenParent = value; }
         public string ParentId { get => parentId; set => parentId = value; }
-        
+        public string Cliente_Id { get => cliente_Id; set => cliente_Id = value; }
+        public string Estabelecimento_Id { get => estabelecimento_Id; set => estabelecimento_Id = value; }
     }
 }

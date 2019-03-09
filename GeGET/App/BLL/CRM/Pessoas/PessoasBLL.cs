@@ -11,6 +11,7 @@ namespace BLL
         #region Declarations
         AcessoBancoDados bd = new AcessoBancoDados();
         PessoasDTO dto = new PessoasDTO();
+        LoginDTO Logindto = new LoginDTO();
         #endregion
 
         #region Methods
@@ -59,6 +60,39 @@ namespace BLL
             }
             return pessoas;
         }
+        #endregion
+
+        #region Create Pessoa
+
+        public bool CreatePessoa(PessoasDTO DTO)
+        {
+            bool sucess = false;
+            try
+            {
+                var data = DateTime.Now.ToString();
+                var query = "INSERT INTO contato_cliente (nome, email, funcao_id, telefone, celular, data, USUARIO_id, CLIENTE_id) VALUES ('" + DTO.Nome + "', '" + DTO.Email + "','" + DTO.Funcao_Id + "', '" + DTO.Telefone + "','" + DTO.Telefone + "','" + data + "', '" + Logindto.Id + "', '" + DTO.Cliente_Id + "')";
+                bd.Conectar();
+                bd.ExecutarComandoSQL(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                sucess = true;
+                bd.CloseConection();
+            }
+            if (sucess)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         #endregion
 
         #region Load Funcoes

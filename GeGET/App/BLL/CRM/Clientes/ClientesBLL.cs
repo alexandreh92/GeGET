@@ -10,6 +10,7 @@ namespace BLL
     {
         #region Declarations
         AcessoBancoDados bd = new AcessoBancoDados();
+        LoginDTO Logindto = new LoginDTO();
         ClientesDTO dto = new ClientesDTO();
         #endregion
 
@@ -56,6 +57,39 @@ namespace BLL
             }
             return clientes;
         }
+        #endregion
+
+        #region Create Clientes
+
+        public bool CreateCliente(ClientesDTO DTO)
+        {
+            bool sucess = false;
+            try
+            {
+                var data = DateTime.Now.ToString();
+                var query = "INSERT INTO cliente (rsocial, fantasia, data, USUARIO_id, CATEGORIA_CLIENTE_id) VALUES('" + DTO.Razao_Social + "', '" + DTO.Nome_Fantasia + "', '" + data + "', '" + Logindto.Id + "' , '" + DTO.Categoria_Id + "')";
+                bd.Conectar();
+                bd.ExecutarComandoSQL(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                sucess = true;
+                bd.CloseConection();
+            }
+            if (sucess)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         #endregion
 
         #region Update Clientes

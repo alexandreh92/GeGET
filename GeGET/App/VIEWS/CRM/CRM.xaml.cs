@@ -55,5 +55,25 @@ namespace GeGET
         {
             helpers.Open<Funil>(this.GetType().Name, false);
         }
+
+        private void BtnCadastroCliente_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Open<CadastroCliente>(this.GetType().Name, false);
+        }
+
+        private void BtnCadastroEstabelecimento_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Open<CadastroEstabelecimento>(this.GetType().Name, false);
+        }
+
+        private void BtnCadastroPessoa_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Open<CadastroPessoa>(this.GetType().Name, false);
+        }
+
+        private void BtnCadastroNegocio_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Open<CadastroNegocio>(this.GetType().Name, false);
+        }
     }
 }

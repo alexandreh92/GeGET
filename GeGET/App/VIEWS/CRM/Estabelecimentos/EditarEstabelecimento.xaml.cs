@@ -14,6 +14,7 @@ namespace GeGET
         EstabelecimentosDTO dto = new EstabelecimentosDTO();
         EstabelecimentosBLL bll = new EstabelecimentosBLL();
         EstadosBLL Estadosbll = new EstadosBLL();
+        EstadoDTO Estadosdto = new EstadoDTO();
         CidadesBLL Cidadesbll = new CidadesBLL();
         #endregion
 
@@ -30,7 +31,8 @@ namespace GeGET
             cmbUF.DisplayMemberPath = "Uf";
             cmbUF.SelectedValuePath = "Id";
             cmbUF.SelectedValue = Convert.ToInt32(DTO.UF_Id);
-            cmbCidade.ItemsSource = Cidadesbll.LoadCidades(DTO.UF_Id);
+            Estadosdto.Id = Convert.ToInt32(cmbUF.SelectedValue);
+            cmbCidade.ItemsSource = Cidadesbll.LoadCidades(Estadosdto);
             cmbCidade.DisplayMemberPath = "Cidade";
             cmbCidade.SelectedValuePath = "Id";
             cmbCidade.SelectedValue = Convert.ToInt32(DTO.Cidade_Id);
@@ -91,8 +93,8 @@ namespace GeGET
         {
             if (cmbUF.SelectedValue != null)
             {
-                var Estado_Id = cmbUF.SelectedValue.ToString();
-                cmbCidade.ItemsSource = Cidadesbll.LoadCidades(Estado_Id);
+                Estadosdto.Id = Convert.ToInt32(cmbUF.SelectedValue);
+                cmbCidade.ItemsSource = Cidadesbll.LoadCidades(Estadosdto);
                 cmbCidade.DisplayMemberPath = "Cidade";
                 cmbCidade.SelectedValuePath = "Id";
             }

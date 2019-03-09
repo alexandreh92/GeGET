@@ -10,7 +10,9 @@
         private string endereco;
         private string cidade;
         private string cidade_Id;
+        private string uF;
         private string uF_Id;
+        private string cidadeEstado;
         private string ie;
         private string telefone;
         private static string pesquisa;
@@ -33,6 +35,7 @@
         public int Status { get => status; set => status = value; }
         public bool FromParent { get => fromParent; set => fromParent = value; }
         public string ParentId { get => parentId; set => parentId = value; }
-        
+        public string UF { get => uF; set => uF = value; }
+        public string CidadeEstado { get => cidadeEstado; set => cidadeEstado = value; }
     }
 }

@@ -6,23 +6,24 @@ using System.Data;
 
 namespace BLL
 {
-    class CidadesBLL
+    class VendedoresBLL
     {
         #region Declarations
         AcessoBancoDados bd = new AcessoBancoDados();
         #endregion
 
-        #region Load Cidades
-        public List<CidadesDTO> LoadCidades(EstadoDTO DTO)
+        #region Methods
+
+        #region Load Categoria Cliente
+        public List<VendedoresDTO> LoadVendedores()
         {
-            var cidades = new List<CidadesDTO>();
+            var vendedor = new List<VendedoresDTO>();
             var dt = new DataTable();
             try
             {
-                var query = "SELECT id, cidade FROM cidades WHERE estado='" + DTO.Id + "' ORDER BY cidade ASC";
+                var query = "SELECT id, nome FROM gegetdb.vendedor ORDER BY nome ASC";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
-                
             }
             catch (Exception ex)
             {
@@ -32,12 +33,14 @@ namespace BLL
             {
                 foreach (DataRow item in dt.Rows)
                 {
-                    cidades.Add(new CidadesDTO { Id = Convert.ToInt32(item["id"]), Cidade = item["cidade"].ToString() });
+                    vendedor.Add(new VendedoresDTO { Id = Convert.ToInt32(item["id"]), Nome = item["nome"].ToString() });
                 }
                 bd.CloseConection();
             }
-            return cidades;
+            return vendedor;
         }
+        #endregion
+
         #endregion
     }
 }
