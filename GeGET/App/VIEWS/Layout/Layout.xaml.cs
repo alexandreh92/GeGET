@@ -55,7 +55,19 @@ namespace GeGET
 
         private void BtnMaximize_Click(object sender, RoutedEventArgs e)
         {
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+        }
 
+        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
 
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
@@ -113,6 +125,16 @@ namespace GeGET
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             dependency.Stop();
+        }
+        #endregion
+
+        #region DragWindow
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
         }
         #endregion
 

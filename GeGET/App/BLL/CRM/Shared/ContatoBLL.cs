@@ -6,23 +6,24 @@ using System.Data;
 
 namespace BLL
 {
-    class CidadesBLL
+    class ContatoBLL
     {
         #region Declarations
         AcessoBancoDados bd = new AcessoBancoDados();
         #endregion
 
-        #region Load Cidades
-        public List<CidadesDTO> LoadCidades(EstadoDTO DTO)
+        #region Methods
+
+        #region Load Contato Cliente
+        public List<ContatoDTO> LoadContato(ContatoDTO DTO)
         {
-            var cidades = new List<CidadesDTO>();
+            var contato = new List<ContatoDTO>();
             var dt = new DataTable();
             try
             {
-                var query = "SELECT id, cidade FROM cidades WHERE estado='" + DTO.Id + "' ORDER BY cidade ASC";
+                var query = "select id, nome from contato_cliente where cliente_id = '"+ DTO.Id +"' ORDER BY nome ASC";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
-                
             }
             catch (Exception ex)
             {
@@ -32,12 +33,14 @@ namespace BLL
             {
                 foreach (DataRow item in dt.Rows)
                 {
-                    cidades.Add(new CidadesDTO { Id = Convert.ToInt32(item["id"]), Cidade = item["cidade"].ToString() });
+                    contato.Add(new ContatoDTO { Id = Convert.ToInt32(item["id"]), Nome = item["nome"].ToString() });
                 }
                 bd.CloseConection();
             }
-            return cidades;
+            return contato;
         }
+        #endregion
+
         #endregion
     }
 }

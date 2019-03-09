@@ -104,18 +104,40 @@
     <Compile Include="App\BLL\CRM\Funil de Vendas\FunildeVendasBLL.cs" />
     <Compile Include="App\BLL\CRM\Negócios\NegociosBLL.cs" />
     <Compile Include="App\BLL\CRM\Pessoas\PessoasBLL.cs" />
+    <Compile Include="App\BLL\CRM\Shared\PrioridadeBLL.cs" />
+    <Compile Include="App\BLL\CRM\Shared\ContatoBLL.cs" />
+    <Compile Include="App\BLL\CRM\Shared\VendedoresBLL.cs" />
     <Compile Include="App\BLL\CRM\Shared\CategoriaClienteBLL.cs" />
     <Compile Include="App\BLL\Layout\MySQLDependency.cs" />
     <Compile Include="App\BLL\Shared\EstadosBLL.cs" />
     <Compile Include="App\BLL\Shared\CidadesBLL.cs" />
+    <Compile Include="App\Controls\AlignableWrapPanel\AlignableWrapPanel.cs" />
+    <Compile Include="App\Controls\Shared\CustomOKMessageBox.xaml.cs">
+      <DependentUpon>CustomOKMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarEstabelecimento.xaml.cs">
+      <DependentUpon>ProcurarEstabelecimento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\DTO\CRM\Shared\PrioridadeDTO.cs" />
+    <Compile Include="App\DTO\CRM\Shared\ContatoDTO.cs" />
+    <Compile Include="App\DTO\CRM\Shared\VedendoresDTO.cs" />
     <Compile Include="App\VIEWS\CRM\Clientes\EditarCliente.xaml.cs">
       <DependentUpon>EditarCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Estabelecimentos\CadastroEstabelecimento.xaml.cs">
+      <DependentUpon>CadastroEstabelecimento.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\VIEWS\CRM\Estabelecimentos\EditarEstabelecimento.xaml.cs">
       <DependentUpon>EditarEstabelecimento.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\Controls\CRM\Funil de Vendas\FunilControl.xaml.cs">
       <DependentUpon>FunilControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Negócios\CadastroNegocio.xaml.cs">
+      <DependentUpon>CadastroNegocio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Pessoas\CadastroPessoa.xaml.cs">
+      <DependentUpon>CadastroPessoa.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\VIEWS\CRM\Pessoas\EditarPessoas.xaml.cs">
       <DependentUpon>EditarPessoas.xaml</DependentUpon>
@@ -161,34 +183,31 @@
     <Compile Include="App\VIEWS\CRM\Pessoas\Pessoas.xaml.cs">
       <DependentUpon>Pessoas.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ButtonAdd.xaml.cs">
-      <DependentUpon>ButtonAdd.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Teste.xaml.cs">
-      <DependentUpon>Teste.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="testeusercontrol.xaml.cs">
-      <DependentUpon>testeusercontrol.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserPanel.xaml.cs">
+    <Compile Include="App\VIEWS\UserPanel\UserPanel.xaml.cs">
       <DependentUpon>UserPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TaskbarMessage.xaml.cs">
+    <Compile Include="App\Controls\Shared\TaskbarMessage.xaml.cs">
       <DependentUpon>TaskbarMessage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\Controls\Shared\CustomOKCancelMessageBox.xaml.cs">
       <DependentUpon>CustomOKCancelMessageBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="App\VIEWS\CRM\Clientes\CadastroCliente.xaml.cs">
+      <DependentUpon>CadastroCliente.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window2.xaml.cs">
-      <DependentUpon>Window2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Window3.xaml.cs">
-      <DependentUpon>Window3.xaml</DependentUpon>
-    </Compile>
+    <Page Include="App\Controls\Shared\CustomOKMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarEstabelecimento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\VIEWS\CRM\Clientes\EditarCliente.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Estabelecimentos\CadastroEstabelecimento.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -197,6 +216,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="App\Controls\CRM\Funil de Vendas\FunilControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Negócios\CadastroNegocio.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Pessoas\CadastroPessoa.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -240,10 +267,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ButtonAdd.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -270,19 +293,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Teste.xaml">
+    <Page Include="App\VIEWS\UserPanel\UserPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="testeusercontrol.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TaskbarMessage.xaml">
+    <Page Include="App\Controls\Shared\TaskbarMessage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -290,15 +305,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Window1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Window2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Window3.xaml">
+    <Page Include="App\VIEWS\CRM\Clientes\CadastroCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -355,9 +362,7 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\Icon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App\Assets\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Icons\favicon.ico" />
   </ItemGroup>
