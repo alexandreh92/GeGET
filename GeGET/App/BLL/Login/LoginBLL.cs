@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO;
 using DAL;
-using GeGET;
-using System.Windows;
 
 namespace BLL
 {
     class LoginBLL
     {
+        #region Declarations
         AcessoBancoDados bd = new AcessoBancoDados();
+        #endregion
 
+        #region Methods
+
+        #region Login
         public bool Login(LoginDTO dto)
         {
             string usuario = dto.Usuario.Replace("'", "''");
@@ -39,14 +38,17 @@ namespace BLL
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message);
             }
             finally
             {
                 bd.CloseConection();
             }
         }
+        #endregion
+
+        #endregion
     }
 }

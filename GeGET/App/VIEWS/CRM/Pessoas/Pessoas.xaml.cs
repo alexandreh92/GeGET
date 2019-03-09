@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Threading;
 using BLL;
 using DTO;
 
@@ -24,79 +13,42 @@ namespace GeGET
     /// </summary>
     public partial class Pessoas : UserControl
     {
-        Helpers helpers = new Helpers();
+        #region Declarations
         PessoasBLL bll = new PessoasBLL();
         PessoasDTO dto = new PessoasDTO();
+        Helpers helpers = new Helpers();
+        #endregion
+
+        #region Initialize
 
         public Pessoas()
         {
             InitializeComponent();
-            dto.Limite = 10;
-            dto.Inicio = 0;
             dto.Pesquisa = "";
-            LoadClients();
+            LoadPessoas();
         }
 
-        private void LoadClients()
+        #endregion
+
+        #region Methods
+        private void LoadPessoas()
         {
-            PessoasControl uc;
-            bll.CountRows();
-            var estabelecimentos = bll.LoadPessoas();
-
-            if (estabelecimentos.Count > 0)
+            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
             {
-
-                foreach (PessoasDTO item in estabelecimentos)
-                {
-                    uc = new PessoasControl(item.Id,item.Nome,item.Funcao,item.Telefone,item.Celular,item.Email);
-                    StackPanel1.Children.Add(uc);
-                    uc.btnEditar.Click += (s, e) =>
-                    {
-                        MessageBox.Show("");
-                    };
-                }
-
-                if (dto.TotalRows > dto.Inicio && dto.RowsLeft > dto.Limite)
-                {
-                    ButtonAdd bt = new ButtonAdd();
-
-                    bt.btnAdd.Click += (s, e) =>
-                    {
-                        dto.RowsLeft = dto.RowsLeft - dto.Limite;
-
-                        foreach (object ctrl in StackPanel1.Children)
-                        {
-                            if (ctrl is ButtonAdd)
-                            {
-                                this.Dispatcher.BeginInvoke(new Action(delegate
-                                {
-                                    StackPanel1.Children.Remove(((ButtonAdd)ctrl));
-                                }));
-                            }
-                        }
-                        dto.Inicio = dto.Inicio + dto.Limite;
-                        if (dto.Inicio >= dto.TotalRows)
-                        {
-                            dto.Inicio = dto.TotalRows;
-                        }
-
-                        LoadClients();
-
-                    };
-
-                    StackPanel1.Children.Add(bt);
-
-                }
-
-            }
-            else
-            {
-                NoResults nr = new NoResults();
-                StackPanel1.Children.Add(nr);
-            }
-
+                lstClientes.ItemsSource = bll.LoadPessoas();
+            }));
         }
 
+        private void Commit()
+        {
+            dto.Pesquisa = txtProcurar.Text.Replace("'", "''");
+            LoadPessoas();
+        }
+        #endregion
+
+        #region Events
+
+        #region Keydowns
         private void CommentTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
@@ -104,41 +56,9 @@ namespace GeGET
                 Commit();
             }
         }
+        #endregion
 
-        private void Commit()
-        {
-            dto.Pesquisa = txtProcurar.Text.Replace("'", "''");
-            ClearControls();
-            LoadClients();
-        }
-
-        private void ClearControls()
-        {
-            foreach (object ctrl in StackPanel1.Children)
-            {
-                if (ctrl is ButtonAdd)
-                {
-                    this.Dispatcher.BeginInvoke(new Action(delegate
-                    {
-                        StackPanel1.Children.Remove(((ButtonAdd)ctrl));
-                    }));
-                }
-                if (ctrl is PessoasControl)
-                {
-                    this.Dispatcher.BeginInvoke(new Action(delegate
-                    {
-                        StackPanel1.Children.Remove(((PessoasControl)ctrl));
-                    }));
-                }
-                if (ctrl is NoResults)
-                {
-                    this.Dispatcher.BeginInvoke(new Action(delegate
-                    {
-                        StackPanel1.Children.Remove(((NoResults)ctrl));
-                    }));
-                }
-            }
-        }
+        #region Clicks
 
         private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
         {
@@ -162,20 +82,50 @@ namespace GeGET
             }
         }
 
-        void Estabelecimentos_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void BtnNegocios_Click(object sender, RoutedEventArgs e)
         {
-            
+            Button btn = sender as Button;
+            int index = lstClientes.Items.IndexOf(btn.DataContext);
+            var Id = ((EstabelecimentosDTO)lstClientes.Items[index]).Id;
+            //Negociosdto.FromParent = true;
+            //Negociosdto.ParentId = Id;
+            helpers.Open<Negocios>(this.GetType().Name, true);
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void BtnEditar_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this).Closing += Estabelecimentos_Closing;
+            Button btn = sender as Button;
+            int index = lstClientes.Items.IndexOf(btn.DataContext);
+            dto.Id = ((PessoasDTO)lstClientes.Items[index]).Id;
+            dto.Nome = ((PessoasDTO)lstClientes.Items[index]).Nome;
+            dto.Rsocial = ((PessoasDTO)lstClientes.Items[index]).Rsocial;
+            dto.Email = ((PessoasDTO)lstClientes.Items[index]).Email;
+            dto.Telefone = ((PessoasDTO)lstClientes.Items[index]).Telefone;
+            dto.Celular = ((PessoasDTO)lstClientes.Items[index]).Celular;
+            dto.Cliente_Id = ((PessoasDTO)lstClientes.Items[index]).Cliente_Id;
+            dto.Funcao_Id = ((PessoasDTO)lstClientes.Items[index]).Funcao_Id;
+            dto.Status_Id = ((PessoasDTO)lstClientes.Items[index]).Status_Id;
+            using (var form = new EditarPessoas(dto))
+            {
+                form.ShowDialog();
+                if (form.DialogResult.Value && form.DialogResult.HasValue)
+                {
+                    lstClientes.ItemsSource = bll.LoadPessoas();
+                }
+            }
         }
 
+        #endregion
+
+        #region Unloaded
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
+            dto.FromChildrenParent = false;
             dto.FromParent = false;
             dto.ParentId = "";
         }
+        #endregion
+
+        #endregion
     }
 }

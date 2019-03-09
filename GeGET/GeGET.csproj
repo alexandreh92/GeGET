@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Icons\favicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Devart.DbForge.Data.Interfaces">
       <HintPath>F:\Devart\dbForge Studio for MySQL\Devart.DbForge.Data.Interfaces.dll</HintPath>
@@ -105,20 +108,17 @@
     <Compile Include="App\BLL\Layout\MySQLDependency.cs" />
     <Compile Include="App\BLL\Shared\EstadosBLL.cs" />
     <Compile Include="App\BLL\Shared\CidadesBLL.cs" />
-    <Compile Include="App\Controls\CRM\Clientes\EditarCliente.xaml.cs">
+    <Compile Include="App\VIEWS\CRM\Clientes\EditarCliente.xaml.cs">
       <DependentUpon>EditarCliente.xaml</DependentUpon>
     </Compile>
-    <Compile Include="App\Controls\CRM\Estabelecimentos\EditarEstabelecimento.xaml.cs">
+    <Compile Include="App\VIEWS\CRM\Estabelecimentos\EditarEstabelecimento.xaml.cs">
       <DependentUpon>EditarEstabelecimento.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\Controls\CRM\Funil de Vendas\FunilControl.xaml.cs">
       <DependentUpon>FunilControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="App\Controls\CRM\Negócios\NegociosControl.xaml.cs">
-      <DependentUpon>NegociosControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="App\Controls\CRM\Pessoas\PessoasControl.xaml.cs">
-      <DependentUpon>PessoasControl.xaml</DependentUpon>
+    <Compile Include="App\VIEWS\CRM\Pessoas\EditarPessoas.xaml.cs">
+      <DependentUpon>EditarPessoas.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\Controls\Layout\MensagemLayout.xaml.cs">
       <DependentUpon>MensagemLayout.xaml</DependentUpon>
@@ -133,6 +133,7 @@
     <Compile Include="App\DTO\CRM\Estabelecimentos\EstabelecimentosDTO.cs" />
     <Compile Include="App\DTO\CRM\Funil de Vendas\FunildeVendasDTO.cs" />
     <Compile Include="App\DTO\CRM\Negócios\NegociosDTO.cs" />
+    <Compile Include="App\DTO\CRM\Pessoas\FuncoesDTO.cs" />
     <Compile Include="App\DTO\CRM\Pessoas\PessoasDTO.cs" />
     <Compile Include="App\DTO\CRM\Shared\EstadoDTO.cs" />
     <Compile Include="App\DTO\CRM\Shared\CidadesDTO.cs" />
@@ -166,9 +167,6 @@
     <Compile Include="Teste.xaml.cs">
       <DependentUpon>Teste.xaml</DependentUpon>
     </Compile>
-    <Compile Include="App\Controls\CRM\Estabelecimentos\EstablishmentControl.xaml.cs">
-      <DependentUpon>EstablishmentControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="testeusercontrol.xaml.cs">
       <DependentUpon>testeusercontrol.xaml</DependentUpon>
     </Compile>
@@ -190,11 +188,11 @@
     <Compile Include="Window3.xaml.cs">
       <DependentUpon>Window3.xaml</DependentUpon>
     </Compile>
-    <Page Include="App\Controls\CRM\Clientes\EditarCliente.xaml">
+    <Page Include="App\VIEWS\CRM\Clientes\EditarCliente.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="App\Controls\CRM\Estabelecimentos\EditarEstabelecimento.xaml">
+    <Page Include="App\VIEWS\CRM\Estabelecimentos\EditarEstabelecimento.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -202,11 +200,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="App\Controls\CRM\Negócios\NegociosControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="App\Controls\CRM\Pessoas\PessoasControl.xaml">
+    <Page Include="App\VIEWS\CRM\Pessoas\EditarPessoas.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -279,10 +273,6 @@
     <Page Include="Teste.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="App\Controls\CRM\Estabelecimentos\EstablishmentControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="testeusercontrol.xaml">
       <SubType>Designer</SubType>
@@ -367,6 +357,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\favicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

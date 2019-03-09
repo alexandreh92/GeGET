@@ -8,9 +8,14 @@ namespace BLL
 {
     class EstabelecimentosBLL
     {
+        #region Declarations
         AcessoBancoDados bd = new AcessoBancoDados();
         EstabelecimentosDTO dto = new EstabelecimentosDTO();
+        #endregion
 
+        #region Methods
+
+        #region Load Estabelecimentos
         public List<EstabelecimentosDTO> LoadEstabelecimentos()
         {
             int i = 1;
@@ -30,20 +35,33 @@ namespace BLL
             }
             if (dto.FromParent)
             {
-                Procurar = Procurar + " AND c.id = '"+dto.ParentId+"'";
+                Procurar = Procurar + " AND c.id = '" + dto.ParentId + "'";
             }
             var estabelecimentos = new List<EstabelecimentosDTO>();
-            var query = "SELECT e.id, e.cnpj, e.endereco, e.inscricao, e.status_id, cid.estado as id_estado, c.id as cliente_id, cid.id as id_cidade, e.CLIENTE_id, e.telefone, c.rsocial, c.fantasia, c.data, cid.uf, cid.cidade FROM estabelecimento e join cliente c on e.CLIENTE_id = c.id join cidades cid on e.CIDADES_id = cid.id WHERE "+Procurar+" ORDER BY c.fantasia, cid.uf, cid.cidade ASC";
-            bd.Conectar();
-            var dtt = bd.RetDataTable(query);
-            foreach (DataRow dr in dtt.Rows)
+            var dt = new DataTable();
+            try
             {
-                estabelecimentos.Add(new EstabelecimentosDTO {Id = dr["id"].ToString(), Razao_Social = dr["rsocial"].ToString(), Nome_Fantasia = dr["fantasia"].ToString(), Cnpj = dr["cnpj"].ToString(), Status = Convert.ToInt32(dr["status_id"]), Endereco = dr["endereco"].ToString(), Cidade = dr["cidade"].ToString() + " - " + dr["uf"].ToString(), Cliente_Id = dr["cliente_id"].ToString(), Cidade_Id = dr["id_cidade"].ToString(), Ie = dr["inscricao"].ToString(), Telefone = dr["telefone"].ToString(), UF_Id = dr["id_estado"].ToString() });
+                var query = "SELECT e.id, e.cnpj, e.endereco, e.inscricao, e.status_id, cid.estado as id_estado, c.id as cliente_id, cid.id as id_cidade, e.CLIENTE_id, e.telefone, c.rsocial, c.fantasia, c.data, cid.uf, cid.cidade FROM estabelecimento e join cliente c on e.CLIENTE_id = c.id join cidades cid on e.CIDADES_id = cid.id WHERE " + Procurar + " ORDER BY c.fantasia, cid.uf, cid.cidade ASC";
+                bd.Conectar();
+                dt = bd.RetDataTable(query);
             }
-
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    estabelecimentos.Add(new EstabelecimentosDTO { Id = dr["id"].ToString(), Razao_Social = dr["rsocial"].ToString(), Nome_Fantasia = dr["fantasia"].ToString(), Cnpj = dr["cnpj"].ToString(), Status = Convert.ToInt32(dr["status_id"]), Endereco = dr["endereco"].ToString(), Cidade = dr["cidade"].ToString() + " - " + dr["uf"].ToString(), Cliente_Id = dr["cliente_id"].ToString(), Cidade_Id = dr["id_cidade"].ToString(), Ie = dr["inscricao"].ToString(), Telefone = dr["telefone"].ToString(), UF_Id = dr["id_estado"].ToString() });
+                }
+                bd.CloseConection();
+            }
             return estabelecimentos;
         }
+        #endregion
 
+        #region EditarEstabelecimento
         public void EditarEstabelecimento(EstabelecimentosDTO DTO)
         {
             try
@@ -62,5 +80,8 @@ namespace BLL
                 bd.CloseConection();
             }
         }
+        #endregion
+
+        #endregion
     }
 }
