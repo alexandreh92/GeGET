@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DTO;
 using DAL;
 using System.Data;
+using System.Collections.ObjectModel;
 
 namespace BLL
 {
@@ -17,32 +18,18 @@ namespace BLL
         #region Methods
 
         #region Load Estabelecimentos
-        public List<EstabelecimentosDTO> LoadEstabelecimentos()
+        public ObservableCollection<EstabelecimentosDTO> LoadEstabelecimentos()
         {
-            int i = 1;
             string Procurar = "";
-            string[] ListaClientes = dto.Pesquisa.Split(null);
-            foreach (string pesq in ListaClientes)
-            {
-                if (i == 1)
-                {
-                    Procurar = Procurar + "CONCAT(e.cnpj, e.endereco, e.inscricao, c.rsocial, c.fantasia, cid.uf, cid.cidade) LIKE '%" + pesq + "%'";
-                }
-                else
-                {
-                    Procurar = Procurar + " AND CONCAT(e.cnpj, e.endereco, e.inscricao, c.rsocial, c.fantasia, cid.uf, cid.cidade) LIKE '%" + pesq + "%'";
-                }
-                i++;
-            }
             if (dto.FromParent)
             {
-                Procurar = Procurar + " AND c.id = '" + dto.ParentId + "'";
+                Procurar = "WHERE c.id = '" + dto.ParentId + "'";
             }
-            var estabelecimentos = new List<EstabelecimentosDTO>();
+            var estabelecimentos = new ObservableCollection<EstabelecimentosDTO>();
             var dt = new DataTable();
             try
             {
-                var query = "SELECT e.id, e.cnpj, e.endereco, e.inscricao, e.status_id, cid.estado as id_estado, c.id as cliente_id, cid.id as id_cidade, e.CLIENTE_id, e.telefone, c.rsocial, c.fantasia, c.data, cid.uf, cid.cidade FROM estabelecimento e join cliente c on e.CLIENTE_id = c.id join cidades cid on e.CIDADES_id = cid.id WHERE " + Procurar + " ORDER BY c.fantasia, cid.uf, cid.cidade ASC";
+                var query = "SELECT e.id, e.cnpj, e.endereco, e.inscricao, e.status_id, cid.estado as id_estado, c.id as cliente_id, cid.id as id_cidade, e.CLIENTE_id, e.telefone, c.rsocial, c.fantasia, c.data, cid.uf, cid.cidade FROM estabelecimento e join cliente c on e.CLIENTE_id = c.id join cidades cid on e.CIDADES_id = cid.id " + Procurar + " ORDER BY c.fantasia, cid.uf, cid.cidade ASC";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
@@ -63,28 +50,13 @@ namespace BLL
         #endregion
 
         #region Load Estabelecimentos
-        public List<EstabelecimentosDTO> LoadEstabelecimentosFromClient(EstabelecimentosDTO DTO)
+        public ObservableCollection<EstabelecimentosDTO> LoadEstabelecimentosFromClient(EstabelecimentosDTO DTO)
         {
-            int i = 1;
-            string Procurar = "";
-            string[] ListaClientes = dto.Pesquisa.Split(null);
-            foreach (string pesq in ListaClientes)
-            {
-                if (i == 1)
-                {
-                    Procurar = Procurar + "CONCAT(e.cnpj, e.endereco, e.inscricao, c.rsocial, c.fantasia, cid.uf, cid.cidade) LIKE '%" + pesq + "%'";
-                }
-                else
-                {
-                    Procurar = Procurar + " AND CONCAT(e.cnpj, e.endereco, e.inscricao, c.rsocial, c.fantasia, cid.uf, cid.cidade) LIKE '%" + pesq + "%'";
-                }
-                i++;
-            }
-            var estabelecimentos = new List<EstabelecimentosDTO>();
+            var estabelecimentos = new ObservableCollection<EstabelecimentosDTO>();
             var dt = new DataTable();
             try
             {
-                var query = "SELECT e.id, e.cnpj, e.endereco, e.inscricao, e.status_id, cid.estado as id_estado, c.id as cliente_id, cid.id as id_cidade, e.CLIENTE_id, e.telefone, c.rsocial, c.fantasia, c.data, cid.uf, cid.cidade FROM estabelecimento e join cliente c on e.CLIENTE_id = c.id join cidades cid on e.CIDADES_id = cid.id WHERE " + Procurar + " AND c.id = '"+ DTO.Cliente_Id +"' ORDER BY c.fantasia, cid.uf, cid.cidade ASC";
+                var query = "SELECT e.id, e.cnpj, e.endereco, e.inscricao, e.status_id, cid.estado as id_estado, c.id as cliente_id, cid.id as id_cidade, e.CLIENTE_id, e.telefone, c.rsocial, c.fantasia, c.data, cid.uf, cid.cidade FROM estabelecimento e join cliente c on e.CLIENTE_id = c.id join cidades cid on e.CIDADES_id = cid.id WHERE c.id = '"+ DTO.Cliente_Id +"' ORDER BY c.fantasia, cid.uf, cid.cidade ASC";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }

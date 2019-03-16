@@ -44,7 +44,9 @@
       <HintPath>F:\Devart\dbForge Studio for MySQL\Devart.DbForge.Data.MySql.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Data.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Mvvm.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Mvvm.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Core.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Grid.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -55,6 +57,12 @@
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MMLib.Core, Version=1.0.5305.36249, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MMLib.Extensions.1.0.10.13\lib\MMLib.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MMLib.Extensions, Version=1.0.2.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MMLib.Extensions.1.0.10.13\lib\MMLib.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -99,6 +107,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\AdicionarItemOrcamentoBLL.cs" />
     <Compile Include="App\BLL\CRM\Clientes\ClientesBLL.cs" />
     <Compile Include="App\BLL\CRM\Estabelecimentos\EstabelecimentosBLL.cs" />
     <Compile Include="App\BLL\CRM\Funil de Vendas\FunildeVendasBLL.cs" />
@@ -109,11 +118,18 @@
     <Compile Include="App\BLL\CRM\Shared\VendedoresBLL.cs" />
     <Compile Include="App\BLL\CRM\Shared\CategoriaClienteBLL.cs" />
     <Compile Include="App\BLL\Layout\MySQLDependency.cs" />
+    <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\AtividadesBLL.cs" />
+    <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\DisciplinaBLL.cs" />
+    <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\OrcamentosBLL.cs" />
+    <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\ListaOrcamentosBLL.cs" />
     <Compile Include="App\BLL\Shared\EstadosBLL.cs" />
     <Compile Include="App\BLL\Shared\CidadesBLL.cs" />
     <Compile Include="App\Controls\AlignableWrapPanel\AlignableWrapPanel.cs" />
     <Compile Include="App\Controls\Shared\CustomOKMessageBox.xaml.cs">
       <DependentUpon>CustomOKMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarNegocio.xaml.cs">
+      <DependentUpon>ProcurarNegocio.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\Controls\Shared\ProcurarEstabelecimento.xaml.cs">
       <DependentUpon>ProcurarEstabelecimento.xaml</DependentUpon>
@@ -121,6 +137,15 @@
     <Compile Include="App\DTO\CRM\Shared\PrioridadeDTO.cs" />
     <Compile Include="App\DTO\CRM\Shared\ContatoDTO.cs" />
     <Compile Include="App\DTO\CRM\Shared\VedendoresDTO.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\AdicionarItemOrcamentoDTO.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\AtividadeDTO.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\DisciplinaDTO.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\OrcamentosDTO.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\ListaOrcamentosDTO.cs" />
+    <Compile Include="App\Helpers\BlackScreen.xaml.cs">
+      <DependentUpon>BlackScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Helpers\QueryHelper.cs" />
     <Compile Include="App\VIEWS\CRM\Clientes\EditarCliente.xaml.cs">
       <DependentUpon>EditarCliente.xaml</DependentUpon>
     </Compile>
@@ -183,6 +208,9 @@
     <Compile Include="App\VIEWS\CRM\Pessoas\Pessoas.xaml.cs">
       <DependentUpon>Pessoas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\VIEWS\Orçamentos\Orcamentos.xaml.cs">
+      <DependentUpon>Orcamentos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\VIEWS\UserPanel\UserPanel.xaml.cs">
       <DependentUpon>UserPanel.xaml</DependentUpon>
     </Compile>
@@ -199,9 +227,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="App\Controls\Shared\ProcurarNegocio.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\Controls\Shared\ProcurarEstabelecimento.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Helpers\BlackScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="App\VIEWS\CRM\Clientes\EditarCliente.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -267,6 +303,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="App\VIEWS\Orçamentos\Orcamentos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamento.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -282,6 +326,9 @@
     <Compile Include="App\BLL\Login\LoginBLL.cs" />
     <Compile Include="App\DAL\AcessoBancoDados.cs" />
     <Compile Include="App\DTO\Login\LoginDTO.cs" />
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamento.xaml.cs">
+      <DependentUpon>ListaOrcamento.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -309,8 +356,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ProcurarMateriais.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProcurarMateriais.xaml.cs">
+      <DependentUpon>ProcurarMateriais.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -362,7 +416,9 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\Icon.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App\Controls\Orçamentos\Lista de Orçamentos\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\favicon.ico" />
   </ItemGroup>

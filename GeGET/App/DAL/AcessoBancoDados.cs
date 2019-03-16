@@ -2,6 +2,9 @@
 using System.Data;
 using MySql.Data.MySqlClient;
 using Devart.Data.MySql;
+using System.Collections.Generic;
+using Helpers;
+using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -11,6 +14,7 @@ namespace DAL
         public MySql.Data.MySqlClient.MySqlConnection comm;
         public Devart.Data.MySql.MySqlConnection com;
         private DataTable data;
+        private DataSet ds;
         private MySql.Data.MySqlClient.MySqlDataAdapter da;
         private MySql.Data.MySqlClient.MySqlCommandBuilder cb;
 
@@ -22,15 +26,13 @@ namespace DAL
         public static string user = "root";
         public static string password = "root";
         public static string database = "gegetdb";
-        readonly string comStrDev = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false; ", server, user, password, database);
+        readonly string comStrDev = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false;", server, user, password, database);
+        string commStr = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false; Allow User Variables = true", server, user, password, database);
 
         public void Conectar()
         {
             if (comm != null)
                 comm.Close();
-
-            string commStr = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false; ", server, user, password, database);
-
             try
             {
                 comm = new MySql.Data.MySqlClient.MySqlConnection(commStr);
@@ -69,6 +71,15 @@ namespace DAL
             comm.Close();
         }
 
+        public async Task ExecutarComandoSQLAsync(string comandoSql)
+        {
+            MySql.Data.MySqlClient.MySqlConnection conn = new MySql.Data.MySqlClient.MySqlConnection(commStr);
+            await conn.OpenAsync();
+            MySql.Data.MySqlClient.MySqlCommand comando = new MySql.Data.MySqlClient.MySqlCommand(comandoSql, conn);
+            await comando.ExecuteNonQueryAsync();
+            await conn.CloseAsync();
+        }
+
         public DataTable RetDataTable(string sql)
         {
             data = new DataTable();
@@ -76,6 +87,18 @@ namespace DAL
             cb = new MySql.Data.MySqlClient.MySqlCommandBuilder(da);
             da.Fill(data);
             return data;
+        }
+
+        public DataSet RetDataSet(List<QueryHelper> list)
+        {
+            ds = new DataSet();
+            foreach (QueryHelper item in list)
+            {
+                da = new MySql.Data.MySqlClient.MySqlDataAdapter(item.Sql, comm);
+                cb = new MySql.Data.MySqlClient.MySqlCommandBuilder(da);
+                da.Fill(ds, item.Table);
+            }
+            return ds;
         }
 
         public MySql.Data.MySqlClient.MySqlDataReader RetDataReader(string sql)

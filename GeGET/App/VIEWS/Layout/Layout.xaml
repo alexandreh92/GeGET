@@ -114,10 +114,10 @@
                                 <TextBlock Text="CRM" VerticalAlignment="Center" Margin="20 10" FontFamily="{StaticResource Novecento-Book}" FontSize="15.0"/>
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem Height="60">
+                            <ListViewItem x:Name="btnOrcamentos" Height="60" PreviewMouseLeftButtonDown="BtnOrcamentos_PreviewMouseLeftButtonDown">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Ticket" Height="25" Width="25" Margin="13,5,0,0"/>
-                                <TextBlock Text="Tickets" VerticalAlignment="Center"  Margin="20 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
+                                <TextBlock Text="Orçamentos" VerticalAlignment="Center"  Margin="20 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
                             </StackPanel>
                         </ListViewItem>
                         <ListViewItem Height="60">

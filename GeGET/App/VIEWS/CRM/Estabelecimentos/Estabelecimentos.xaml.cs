@@ -1,8 +1,14 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using BLL;
 using DTO;
+using MMLib.Extensions;
 
 namespace GeGET
 {
@@ -13,6 +19,8 @@ namespace GeGET
         EstabelecimentosDTO dto = new EstabelecimentosDTO();
         NegociosDTO Negociosdto = new NegociosDTO();
         Helpers helpers = new Helpers();
+        Thread t1;
+        public ObservableCollection<EstabelecimentosDTO> listaEstabelecimentos;
         #endregion
 
         #region Initialize
@@ -20,7 +28,6 @@ namespace GeGET
         public Estabelecimentos()
         {
             InitializeComponent();
-            dto.Pesquisa = "";
             LoadEstabelecimentos();
         }
 
@@ -29,25 +36,29 @@ namespace GeGET
         #region Methods
         private void LoadEstabelecimentos()
         {
-            lstClientes.ItemsSource = bll.LoadEstabelecimentos();
+            listaEstabelecimentos = bll.LoadEstabelecimentos();
+            lstClientes.ItemsSource = listaEstabelecimentos;
         }
 
         private void Commit()
         {
-            dto.Pesquisa = txtProcurar.Text.Replace("'", "''");
-            LoadEstabelecimentos();
+            Dispatcher.Invoke(DispatcherPriority.Background,
+                  new Action(() =>
+                  {
+                      var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
+                      var filtered = listaEstabelecimentos.Where(descricao => Find.Any(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Nome_Fantasia.ToLower().RemoveDiacritics().Contains(list) || descricao.Endereco.ToLower().Contains(list) || descricao.Cidade.ToLower().Contains(list) || descricao.Cnpj.ToLower().Contains(list)));
+                      lstClientes.ItemsSource = filtered;
+                  }));
         }
         #endregion
 
         #region Events
 
-        #region Keydowns
-        private void CommentTextBox_KeyDown(object sender, KeyEventArgs e)
+        #region Text Changed
+        private void TxtProcurar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.Key == Key.Return)
-            {
-                Commit();
-            }
+            t1 = new Thread(Commit);
+            t1.Start();
         }
         #endregion
 

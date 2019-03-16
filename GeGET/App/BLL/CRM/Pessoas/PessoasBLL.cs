@@ -3,6 +3,7 @@ using DTO;
 using DAL;
 using System.Data;
 using System;
+using System.Collections.ObjectModel;
 
 namespace BLL
 {
@@ -17,32 +18,18 @@ namespace BLL
         #region Methods
 
         #region Load Pessoas
-        public List<PessoasDTO> LoadPessoas()
+        public ObservableCollection<PessoasDTO> LoadPessoas()
         {
-            int i = 1;
             string Procurar = "";
-            string[] ListaNegocios = dto.Pesquisa.Split(null);
-            foreach (string pesq in ListaNegocios)
-            {
-                if (i == 1)
-                {
-                    Procurar = Procurar + "CONCAT(cc.nome, cc.email, fc.descricao, cc.telefone, cc.celular, cc.data, c.rsocial, c.fantasia) LIKE '%" + pesq + "%'";
-                }
-                else
-                {
-                    Procurar = Procurar + " AND CONCAT(cc.nome, cc.email, fc.descricao, cc.telefone, cc.celular, cc.data, c.rsocial, c.fantasia) LIKE '%" + pesq + "%'";
-                }
-                i++;
-            }
             if (dto.FromParent)
             {
-                Procurar = Procurar + " AND c.id = '" + dto.ParentId + "'";
+                Procurar = "WHERE c.id = '" + dto.ParentId + "'";
             }
-            var pessoas = new List<PessoasDTO>();
+            var pessoas = new ObservableCollection<PessoasDTO>();
             var dt = new DataTable();
             try
             {
-                var query = "SELECT cc.id, cc.nome, cc.STATUS_id, cc.email, cc.telefone, cc.celular, cc.data, cc.USUARIO_id, fc.id as id_funcao, fc.descricao as desc_funcao, c.id as cliente_id, c.rsocial, c.fantasia FROM contato_cliente cc join cliente c on cc.CLIENTE_id = c.id join funcoes_contato fc ON cc.funcao_id = fc.id  WHERE " + Procurar + " ORDER BY cc.nome";
+                var query = "SELECT cc.id, cc.nome, cc.STATUS_id, cc.email, cc.telefone, cc.celular, cc.data, cc.USUARIO_id, fc.id as id_funcao, fc.descricao as desc_funcao, c.id as cliente_id, c.rsocial, c.fantasia FROM contato_cliente cc join cliente c on cc.CLIENTE_id = c.id join funcoes_contato fc ON cc.funcao_id = fc.id " + Procurar + " ORDER BY cc.nome";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }

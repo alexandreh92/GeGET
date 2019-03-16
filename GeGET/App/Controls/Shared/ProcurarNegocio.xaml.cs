@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
 using BLL;
 using DTO;
@@ -11,34 +13,33 @@ using MMLib.Extensions;
 
 namespace GeGET
 {
-    public partial class ProcurarCliente : Window, IDisposable
+    public partial class ProcurarNegocio : Window, IDisposable
     {
         #region Declarations
-        ClientesBLL bll = new ClientesBLL();
-        ClientesDTO dto = new ClientesDTO();
+        NegociosBLL bll = new NegociosBLL();
+        NegociosDTO dto = new NegociosDTO();
+        public string Negocio_Id;
+        public ObservableCollection<NegociosDTO> listaNegocios;
+        ManualResetEvent syncEvent = new ManualResetEvent(false);
         Thread t1;
         Thread t2;
-        ManualResetEvent syncEvent = new ManualResetEvent(false);
-        public ObservableCollection<ClientesDTO> listaClientes;
-        public string new_Cliente_Id;
-        public string new_Razao_Social;
-        public string new_Nome_Fantasia;
         #endregion
 
         #region Initialize
-        public ProcurarCliente(Point mouseLocation)
+        public ProcurarNegocio(Point mouseLocation)
         {
             InitializeComponent();
+            dto.Pesquisa = "";
             t1 = new Thread(Load);
             t1.Start();
-            Left = mouseLocation.X;
-            Top = mouseLocation.Y - 50;
+            Left = mouseLocation.X +240;
+            Top = mouseLocation.Y;
         }
         #endregion
 
-        #region Methods
         private void Load()
         {
+
             Dispatcher.Invoke(DispatcherPriority.Background,
                      new Action(() =>
                      {
@@ -46,10 +47,9 @@ namespace GeGET
                          syncEvent.Set();
                          t2 = new Thread(waitLoad);
                          t2.Start();
-                         listaClientes = bll.LoadClientes();
-                         lstMensagens.ItemsSource = listaClientes;
+                         listaNegocios = bll.LoadNegocios(dto);
+                         lstMensagens.ItemsSource = listaNegocios;
                      }));
-
         }
 
         private void waitLoad()
@@ -62,13 +62,15 @@ namespace GeGET
             }));
         }
 
+
+        #region Methods
         private void Commit()
         {
             Dispatcher.Invoke(DispatcherPriority.Background,
                   new Action(() =>
                   {
                       var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
-                      var filtered = listaClientes.Where(descricao => Find.Any(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Nome_Fantasia.ToLower().RemoveDiacritics().Contains(list) || descricao.Categoria.RemoveDiacritics().ToLower().Contains(list)));
+                      var filtered = listaNegocios.Where(descricao => Find.Any(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Descricao.ToLower().RemoveDiacritics().Contains(list) || descricao.Endereco.ToLower().Contains(list) || descricao.Anotacoes.ToLower().Contains(list) || descricao.Vendedor.ToLower().Contains(list) || descricao.CidadeEstado.ToLower().Contains(list) || descricao.Status_Descricao.ToLower().Contains(list) || descricao.Id.ToLower().Contains(list) || descricao.Numero.ToLower().Contains(list)));
                       lstMensagens.ItemsSource = filtered;
                   }));
         }
@@ -76,7 +78,7 @@ namespace GeGET
 
         #region Events
 
-        #region Text Changed
+        #region TextChanged
         private void TxtProcurar_TextChanged(object sender, TextChangedEventArgs e)
         {
             t1 = new Thread(Commit);
@@ -85,6 +87,10 @@ namespace GeGET
         #endregion
 
         #region Clicks
+        private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -96,9 +102,7 @@ namespace GeGET
         {
             Button btn = sender as Button;
             int index = lstMensagens.Items.IndexOf(btn.DataContext);
-            new_Cliente_Id = ((ClientesDTO)lstMensagens.Items[index]).Id;
-            new_Razao_Social = ((ClientesDTO)lstMensagens.Items[index]).Razao_Social;
-            new_Nome_Fantasia = ((ClientesDTO)lstMensagens.Items[index]).Nome_Fantasia;
+            Negocio_Id = ((NegociosDTO)lstMensagens.Items[index]).Id;
             DialogResult = true;
         }
         #endregion
@@ -110,5 +114,7 @@ namespace GeGET
         {
         }
         #endregion
+
+        
     }
 }

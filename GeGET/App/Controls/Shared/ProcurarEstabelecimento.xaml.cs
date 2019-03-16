@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
+using System.Windows.Threading;
 using BLL;
 using DTO;
+using MMLib.Extensions;
 
 namespace GeGET
 {
@@ -12,6 +16,10 @@ namespace GeGET
         #region Declarations
         EstabelecimentosBLL bll = new EstabelecimentosBLL();
         EstabelecimentosDTO dto = new EstabelecimentosDTO();
+        Thread t1;
+        Thread t2;
+        ManualResetEvent syncEvent = new ManualResetEvent(false);
+        public ObservableCollection<EstabelecimentosDTO> listaEstabelecimentos;
         public string Estabelecimento_Id;
         public string Endereco;
         public string Cidade;
@@ -23,40 +31,64 @@ namespace GeGET
         public ProcurarEstabelecimento(Point mouseLocation, NegociosDTO DTO)
         {
             InitializeComponent();
-            dto.Pesquisa = "";
             dto.Cliente_Id = DTO.Cliente_Id;
-            lstMensagens.ItemsSource = bll.LoadEstabelecimentosFromClient(dto);
+            t1 = new Thread(Load);
+            t1.Start();
             Left = mouseLocation.X;
             Top = mouseLocation.Y - 50;
         }
         #endregion
 
         #region Methods
+
+        private void Load()
+        {
+            Dispatcher.Invoke(DispatcherPriority.Background,
+                     new Action(() =>
+                     {
+                         progressbar.Visibility = Visibility.Visible;
+                         syncEvent.Set();
+                         t2 = new Thread(waitLoad);
+                         t2.Start();
+                         listaEstabelecimentos = bll.LoadEstabelecimentosFromClient(dto);
+                         lstMensagens.ItemsSource = listaEstabelecimentos;
+                     }));
+            
+        }
+
+        private void waitLoad()
+        {
+            syncEvent.WaitOne();
+            Dispatcher.Invoke(new Action(() =>
+            {
+                progressbar.Visibility = Visibility.Collapsed;
+                lstMensagens.Visibility = Visibility.Visible;
+            }));
+        }
+
         private void Commit()
         {
-            dto.Pesquisa = txtProcurar.Text.Replace("'", "''");
-            lstMensagens.ItemsSource = bll.LoadEstabelecimentosFromClient(dto);
+            Dispatcher.Invoke(DispatcherPriority.Background,
+                  new Action(() =>
+                  {
+                      var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
+                      var filtered = listaEstabelecimentos.Where(descricao => Find.Any(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Nome_Fantasia.ToLower().RemoveDiacritics().Contains(list) || descricao.Endereco.ToLower().Contains(list) || descricao.Cidade.ToLower().Contains(list) || descricao.Cnpj.ToLower().Contains(list)));
+                      lstMensagens.ItemsSource = filtered;
+                  }));
         }
         #endregion
 
         #region Events
 
-        #region KeyDown
-        private void TxtProcurar_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        #region Text Changed
+        private void TxtProcurar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.Key == Key.Return)
-            {
-                Commit();
-            }
+            t1 = new Thread(Commit);
+            t1.Start();
         }
         #endregion
 
         #region Clicks
-        private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
-        {
-            Commit();
-        }
-
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

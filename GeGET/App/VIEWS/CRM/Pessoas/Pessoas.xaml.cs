@@ -1,22 +1,24 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Threading;
 using BLL;
 using DTO;
+using MMLib.Extensions;
 
 namespace GeGET
 {
-    /// <summary>
-    /// Interaction logic for Teste.xaml
-    /// </summary>
     public partial class Pessoas : UserControl
     {
         #region Declarations
         PessoasBLL bll = new PessoasBLL();
         PessoasDTO dto = new PessoasDTO();
         Helpers helpers = new Helpers();
+        Thread t1;
+        ObservableCollection<PessoasDTO> listaPessoas;
         #endregion
 
         #region Initialize
@@ -24,7 +26,6 @@ namespace GeGET
         public Pessoas()
         {
             InitializeComponent();
-            dto.Pesquisa = "";
             LoadPessoas();
         }
 
@@ -33,37 +34,33 @@ namespace GeGET
         #region Methods
         private void LoadPessoas()
         {
-            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
-            {
-                lstClientes.ItemsSource = bll.LoadPessoas();
-            }));
+            listaPessoas = bll.LoadPessoas();
+            lstClientes.ItemsSource = listaPessoas;
         }
 
         private void Commit()
         {
-            dto.Pesquisa = txtProcurar.Text.Replace("'", "''");
-            LoadPessoas();
+            Dispatcher.Invoke(DispatcherPriority.Background,
+                  new Action(() =>
+                  {
+                      var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
+                      var filtered = listaPessoas.Where(descricao => Find.Any(list => descricao.Nome.ToLower().RemoveDiacritics().Contains(list) || descricao.Funcao.ToLower().RemoveDiacritics().Contains(list) || descricao.Email.ToLower().Contains(list) || descricao.Celular.ToLower().Contains(list) || descricao.Telefone.ToLower().Contains(list) || descricao.Rsocial.ToLower().Contains(list)));
+                      lstClientes.ItemsSource = filtered;
+                  }));
         }
         #endregion
 
         #region Events
 
-        #region Keydowns
-        private void CommentTextBox_KeyDown(object sender, KeyEventArgs e)
+        #region Text Changed
+        private void TxtProcurar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.Key == Key.Return)
-            {
-                Commit();
-            }
+            t1 = new Thread(Commit);
+            t1.Start();
         }
         #endregion
 
         #region Clicks
-
-        private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
-        {
-            Commit();
-        }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
