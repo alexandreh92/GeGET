@@ -10,6 +10,13 @@
         private string status_Descricao;
         private string descricao;
         private string vendedor;
+        private string prazo;
+        private string vendedor_Id;
+        private string contato_Id;
+        private string contato_Nome;
+        private string prioridade_Id;
+        private string prioridade_Descricao;
+        private string cidadeEstado;
         private int status_Id;
         private string cliente_Id;
         private string estabelecimento_Id;
@@ -35,5 +42,12 @@
         public string ParentId { get => parentId; set => parentId = value; }
         public string Cliente_Id { get => cliente_Id; set => cliente_Id = value; }
         public string Estabelecimento_Id { get => estabelecimento_Id; set => estabelecimento_Id = value; }
+        public string Prazo { get => prazo; set => prazo = value; }
+        public string Vendedor_Id { get => vendedor_Id; set => vendedor_Id = value; }
+        public string Contato_Id { get => contato_Id; set => contato_Id = value; }
+        public string Prioridade_Id { get => prioridade_Id; set => prioridade_Id = value; }
+        public string CidadeEstado { get => cidadeEstado; set => cidadeEstado = value; }
+        public string Contato_Nome { get => contato_Nome; set => contato_Nome = value; }
+        public string Prioridade_Descricao { get => prioridade_Descricao; set => prioridade_Descricao = value; }
     }
 }

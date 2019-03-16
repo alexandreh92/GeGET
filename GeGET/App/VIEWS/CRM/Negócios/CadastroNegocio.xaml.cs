@@ -34,15 +34,54 @@ namespace GeGET
         #region ClearControls
         private void ClearControls()
         {
-           /* txtFantasia.Text = "";
+            txtFantasia.Text = "";
             txtRazao.Text = " ";
             txtEndereco.Text = "";
-            txtIE.Text = "";
-            txtCNPJ.Text = "";
-            txtTelefone.Text = "";
-            cmbUF.SelectedIndex = -1;
-            cmbCidade.SelectedIndex = -1;*/
+            txtEstabelecimento.Text = "";
+            txtCidade.Text = "";
+            txtUF.Text = "";
+            dtPicker.Text = DateTime.Today.ToString("dd/MM/yyyy");
+            txtNome.Text = "";
+            txtAnotacoes.Text = "";
+            cmbContato.SelectedIndex = -1;
+            cmbPrioridade.SelectedIndex = -1;
+            cmbVendedor.SelectedIndex = -1;
         }
+
+
+
+        #endregion
+
+        #region Load Comboboxes
+        private void LoadComboboxes()
+        {
+            Contatodto.Id = Convert.ToInt32(dto.Cliente_Id);
+            cmbContato.ItemsSource = Contatobll.LoadContatoFromNegocios(dto);
+            cmbContato.DisplayMemberPath = "Nome";
+            cmbContato.SelectedValuePath = "Id";
+            cmbPrioridade.ItemsSource = Prioridadesbll.LoadPrioridades();
+            cmbPrioridade.DisplayMemberPath = "Descricao";
+            cmbPrioridade.SelectedValuePath = "Id";
+            cmbVendedor.ItemsSource = Vendedoresbll.LoadVendedores();
+            cmbVendedor.DisplayMemberPath = "Nome";
+            cmbVendedor.SelectedValuePath = "Id";
+        }
+        #endregion
+
+        #region GetValues
+
+        private void GetValues()
+        {
+            dto.Anotacoes = txtAnotacoes.Text.Replace("'","''").ToUpper();
+            dto.Descricao = txtNome.Text.Replace("'", "''").ToUpper();
+            dto.Prazo = Convert.ToDateTime(dtPicker.Text).ToString("yyyy/MM/dd");
+            dto.Vendedor_Id = cmbVendedor.SelectedValue.ToString();
+            dto.Contato_Id = cmbContato.SelectedValue.ToString();
+            dto.Prioridade_Id = cmbPrioridade.SelectedValue.ToString();
+            dto.Prioridade_Descricao = cmbPrioridade.Text;
+            dto.Contato_Nome = cmbContato.Text;
+        }
+
         #endregion
 
         #endregion
@@ -62,35 +101,31 @@ namespace GeGET
 
         private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
-           /* if (txtRazao.Text != "" && txtFantasia.Text != "" && txtEndereco.Text != "" && txtCNPJ.Text != "" && txtTelefone.Text != "" && cmbUF.SelectedIndex != -1 && cmbCidade.SelectedIndex != -1)
+            if (txtRazao.Text != "" && txtEstabelecimento.Text != "" && txtNome.Text != "" && dtPicker.Text != "" && cmbContato.SelectedIndex != -1 && cmbPrioridade.SelectedIndex != -1 && cmbVendedor.SelectedIndex != -1)
             {
                 var result = CustomOKCancelMessageBox.Show("Deseja mesmo cadastrar este estabelecimento?", "Atenção!");
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    dto.Razao_Social = txtRazao.Text.Replace("'", "''").ToUpper();
-                    dto.Nome_Fantasia = txtFantasia.Text.Replace("'", "''").ToUpper();
-                    dto.Endereco = txtEndereco.Text.Replace("'", "''").ToUpper();
-                    dto.Cnpj = txtCNPJ.Text.Replace("'", "''").ToUpper();
-                    dto.Ie = txtIE.Text.Replace("'", "''").ToUpper();
-                    dto.Telefone = txtTelefone.Text.Replace("'", "''").ToUpper();
-                    dto.UF_Id = cmbUF.SelectedValue.ToString();
-                    dto.Cidade_Id = cmbCidade.SelectedValue.ToString();
-                    if (bll.CreateEstabelecimento(dto))
+                    GetValues();
+                    if (bll.CreateNegocios(dto))
                     {
+                        var negocio = bll.RetNegocioId();
                         ClearControls();
-                        CustomOKMessageBox.Show("Estabelecimento cadastrado com sucesso!", "Sucesso!");
+                        CustomOKMessageBox.Show("Negocio P" + Convert.ToInt32(negocio.Id).ToString("0000") + " cadastrado com sucesso!", "Sucesso!");
                     }
                 }
             }
             else
             {
                 CustomOKMessageBox.Show("Campos não podem estar em branco.", "Atenção!");
-            }*/
+            }
         }
 
         private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
         {
             var position = Mouse.GetPosition(this);
+            BlackScreen bs = new BlackScreen();
+            bs.Show();
             using (var form = new ProcurarCliente(position))
             {
                 form.ShowDialog();
@@ -98,21 +133,37 @@ namespace GeGET
                 {
                     txtRazao.Text = form.new_Razao_Social;
                     txtFantasia.Text = form.new_Nome_Fantasia;
+                    txtEstabelecimento.Text = " ";
                     dto.Cliente_Id = form.new_Cliente_Id;
                 }
             }
+            bs.Close();
         }
 
-        #endregion
-
-        #region Selection Changed
-        private void CmbUF_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void BtnPesquisaEstabelecimento_Click(object sender, RoutedEventArgs e)
         {
-        /*    Estadosdto.Id = Convert.ToInt32(cmbUF.SelectedValue);
-            cmbCidade.ItemsSource = Cidadesbll.LoadCidades(Estadosdto);
-            cmbCidade.DisplayMemberPath = "Cidade";
-            cmbCidade.SelectedValuePath = "Id";*/
+            if (txtRazao.Text != " " && txtRazao.Text != "")
+            {
+                var position = Mouse.GetPosition(this);
+                BlackScreen bs = new BlackScreen();
+                bs.Show();
+                using (var form = new ProcurarEstabelecimento(position, dto))
+                {
+                    form.ShowDialog();
+                    if (form.DialogResult.Value && form.DialogResult.HasValue)
+                    {
+                        txtEstabelecimento.Text = form.CNPJ;
+                        txtEndereco.Text = form.Endereco;
+                        txtCidade.Text = form.Cidade;
+                        txtUF.Text = form.UF;
+                        dto.Estabelecimento_Id = form.Estabelecimento_Id;
+                        LoadComboboxes();
+                    }
+                }
+                bs.Close();
+            }
         }
+
         #endregion
 
         #region Loaded
@@ -124,35 +175,14 @@ namespace GeGET
 
         #endregion
 
-        private void BtnPesquisaEstabelecimento_Click(object sender, RoutedEventArgs e)
+        #region Selected Data Changed
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (txtRazao.Text != " " && txtRazao.Text != "")
+            if (Convert.ToDateTime(dtPicker.Text) < DateTime.Today)
             {
-                var position = Mouse.GetPosition(this);
-                using (var form = new ProcurarEstabelecimento(position, dto))
-                {
-                    form.ShowDialog();
-                    if (form.DialogResult.Value && form.DialogResult.HasValue)
-                    {
-                        txtEstabelecimento.Text = form.CNPJ;
-                        txtEndereco.Text = form.Endereco;
-                        txtCidade.Text = form.Cidade;
-                        txtUF.Text = form.UF;
-                        dto.Estabelecimento_Id = form.Estabelecimento_Id;
-                        cmbVendedor.ItemsSource = Vendedoresbll.LoadVendedores();
-                        cmbVendedor.DisplayMemberPath = "Nome";
-                        cmbVendedor.SelectedValuePath = "Id";
-                        Contatodto.Id = Convert.ToInt32(dto.Cliente_Id);
-                        cmbContato.ItemsSource = Contatobll.LoadContato(Contatodto);
-                        cmbContato.DisplayMemberPath = "Nome";
-                        cmbContato.SelectedValuePath = "Id";
-                        cmbPrioridade.ItemsSource = Prioridadesbll.LoadPrioridades();
-                        cmbPrioridade.DisplayMemberPath = "Descricao";
-                        cmbPrioridade.SelectedValuePath = "Id";
-                    }
-                }
-                
+                dtPicker.Text = DateTime.Today.ToString("dd/MM/yyyy");
             }
         }
+        #endregion
     }
 }

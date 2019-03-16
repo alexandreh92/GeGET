@@ -102,6 +102,11 @@ namespace GeGET
             helpers.Open<CRM>(null, false);
         }
 
+        private void BtnOrcamentos_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.Open<Orcamentos>(null, false);
+        }
+
         private void PopupBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (BadgeControl.Badge != null)

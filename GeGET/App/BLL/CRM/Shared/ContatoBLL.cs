@@ -15,13 +15,13 @@ namespace BLL
         #region Methods
 
         #region Load Contato Cliente
-        public List<ContatoDTO> LoadContato(ContatoDTO DTO)
+        public List<ContatoDTO> LoadContatoFromNegocios(NegociosDTO DTO)
         {
             var contato = new List<ContatoDTO>();
             var dt = new DataTable();
             try
             {
-                var query = "select id, nome from contato_cliente where cliente_id = '"+ DTO.Id +"' ORDER BY nome ASC";
+                var query = "select id, nome from contato_cliente where cliente_id = '"+ DTO.Cliente_Id +"' and status_id='1' ORDER BY nome ASC";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }

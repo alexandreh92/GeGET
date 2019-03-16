@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Threading;
 using BLL;
 using DTO;
+using MMLib.Extensions;
 
 namespace GeGET
 {
@@ -17,6 +20,8 @@ namespace GeGET
         NegociosDTO Negociosdto = new NegociosDTO();
         PessoasDTO Pessoasdto = new PessoasDTO();
         Helpers helpers = new Helpers();
+        Thread t1;
+        public ObservableCollection<ClientesDTO> listaClientes;
 
         #endregion
 
@@ -25,7 +30,6 @@ namespace GeGET
         public Clientes()
         {
             InitializeComponent();
-            dto.Pesquisa = "";
             LoadClients();
         }
 
@@ -36,35 +40,34 @@ namespace GeGET
         {
             Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
             {
-                lstClientes.ItemsSource = bll.LoadClientes();
+                listaClientes = bll.LoadClientes();
+                lstClientes.ItemsSource = listaClientes;
             }));
         }
 
         private void Commit()
         {
-            dto.Pesquisa = txtProcurar.Text.Replace("'", "''");
-            LoadClients();
+            Dispatcher.Invoke(DispatcherPriority.Background,
+                  new Action(() =>
+                  {
+                      var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
+                      var filtered = listaClientes.Where(descricao => Find.Any(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Nome_Fantasia.ToLower().RemoveDiacritics().Contains(list) || descricao.Categoria.RemoveDiacritics().ToLower().Contains(list)));
+                      lstClientes.ItemsSource = filtered;
+                  }));
         }
         #endregion
 
         #region Events
 
-        #region Keydowns
-        private void CommentTextBox_KeyDown(object sender, KeyEventArgs e)
+        #region Text Changed
+        private void TxtProcurar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.Key == Key.Return)
-            {
-                Commit();
-            }
+            t1 = new Thread(Commit);
+            t1.Start();
         }
         #endregion
 
         #region Clicks
-
-        private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
-        {
-            Commit();
-        }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {

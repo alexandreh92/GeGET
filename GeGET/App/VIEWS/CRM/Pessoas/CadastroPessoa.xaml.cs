@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using BLL;
@@ -84,6 +83,8 @@ namespace GeGET
         private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
         {
             var position = Mouse.GetPosition(this);
+            BlackScreen bs = new BlackScreen();
+            bs.Show();
             using (var form = new ProcurarCliente(position))
             {
                 form.ShowDialog();
@@ -93,6 +94,7 @@ namespace GeGET
                     dto.Cliente_Id = form.new_Cliente_Id;
                 }
             }
+            bs.Close();
         }
 
         #endregion

@@ -9,7 +9,7 @@
              xmlns:control = "clr-namespace:Teste"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
-             d:DesignHeight="1280" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800">
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide">
         <materialDesign:TransitioningContent.OpeningEffects>
             <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8" />
@@ -49,7 +49,7 @@
                             <ColumnDefinition Width="80"/>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="1">
-                            <materialDesign:Card x:Name="card1" Background="{DynamicResource MaterialDesignBackground}">
+                            <materialDesign:Card x:Name="card1" Margin="0,0,0,20" Background="{DynamicResource MaterialDesignBackground}">
                                 <StackPanel x:Name="StackPanel1">
                                     <TextBlock Foreground="#7A2932" Grid.Row="0" Margin="24,21,0,21" FontFamily="{DynamicResource Novecento-Bold}">Cadastro de Novo Estabelecimento</TextBlock>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
@@ -116,7 +116,7 @@
                                                                 </StackPanel>
                                                             </materialDesign:HintAssist.Hint>
                                                         </TextBox>
-                                                        <DatePicker FontSize="16" materialDesign:HintAssist.Hint="Prazo" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="40" Width="105" Margin="5,0,20,22"/>
+                                                        <DatePicker x:Name="dtPicker" FontSize="16" materialDesign:HintAssist.Hint="Prazo" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="40" Width="105" Margin="5,0,20,22" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
                                                         <ComboBox x:Name="cmbVendedor" materialDesign:HintAssist.Hint="Vendedor" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,50" Background="White" Foreground="DimGray" Width="120">
                                                             <ComboBox.ItemsPanel>
                                                                 <ItemsPanelTemplate>

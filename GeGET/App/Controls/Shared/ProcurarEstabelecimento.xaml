@@ -43,14 +43,14 @@
         </materialDesign:Card>
         <Grid Grid.Row="0" Grid.Column="0">
             <DockPanel>
-                <TextBlock x:Name="txtTitulo" Text="Procurar Estabeelcimento" VerticalAlignment="Bottom" Margin="20,0,0,10" FontFamily="Century Gothic" FontSize="24" Foreground="#7A2932"/>
+                <TextBlock x:Name="txtTitulo" Text="Procurar Estabelecimento" VerticalAlignment="Bottom" Margin="20,0,0,10" FontFamily="Century Gothic" FontSize="24" Foreground="#7A2932"/>
                 <Button x:Name="btnClose" Margin="0,0,25,10" VerticalAlignment="Bottom" Style="{DynamicResource MaterialDesignToolButton}" ToolTip="Configurações" HorizontalAlignment="Right" Height="30" Width="30" Click="BtnClose_Click">
                     <materialDesign:PackIcon Kind="Close" Opacity=".56" VerticalAlignment="Center" Height="20" Width="20"/>
                 </Button>
             </DockPanel>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="2">
-            <ListBox x:Name="lstMensagens" Margin="12,-3,12,12" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling">
+            <ListBox x:Name="lstMensagens" Visibility="Collapsed" Margin="12,-3,12,12" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <materialDesign:Card Height="120" Margin="5,3,5,3">
@@ -75,12 +75,17 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <StackPanel x:Name="progressbar" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <materialDesign:Card UniformCornerRadius="14" Padding="4">
+                    <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" Value="50" IsIndeterminate="True" />
+                </materialDesign:Card>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
             <materialDesign:Card VerticalAlignment="Stretch" Margin="20,5,20,5">
                 <Grid>
-                    <TextBox x:Name="txtProcurar" materialDesign:HintAssist.Hint="Procurar..." FontFamily="{DynamicResource Novecento-Book}" Foreground="DimGray" Width="280" KeyDown="TxtProcurar_KeyDown" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0"/>
-                    <Button x:Name="btnPesquisa" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,0" Height="25" Width="25" Click="BtnPesquisa_Click">
+                    <TextBox x:Name="txtProcurar" materialDesign:HintAssist.Hint="Procurar..." FontFamily="{DynamicResource Novecento-Book}" Foreground="DimGray" Width="280" TextChanged="TxtProcurar_TextChanged" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0"/>
+                    <Button x:Name="btnPesquisa" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,0" Height="25" Width="25">
                         <materialDesign:PackIcon Kind="Magnify" Opacity=".56" VerticalAlignment="Center" Height="20" Width="20" />
                     </Button>
                 </Grid>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DTO;
 using DAL;
 using System.Data;
+using System.Collections.ObjectModel;
 
 namespace BLL
 {
@@ -17,29 +18,14 @@ namespace BLL
         #region Methods
 
         #region Load Clientes
-        public List<ClientesDTO> LoadClientes()
+        public ObservableCollection<ClientesDTO> LoadClientes()
         {
-            int i = 1;
-            string Procurar = "";
-            string[] ListaClientes = dto.Pesquisa.Split(null);
-            foreach (string pesq in ListaClientes)
-            {
-                if (i == 1)
-                {
-                    Procurar = Procurar + "CONCAT(rsocial, fantasia, categoria) LIKE '%" + pesq + "%'";
-                }
-                else
-                {
-                    Procurar = Procurar + " AND CONCAT(rsocial, fantasia, categoria) LIKE '%" + pesq + "%'";
-                }
-                i++;
-            }
-            var clientes = new List<ClientesDTO>();
+            var clientes = new ObservableCollection<ClientesDTO>();
             var dt = new DataTable();
             try
             {
                 var cliente = dto.Pesquisa;
-                var query = "SELECT c.id, c.status_id, c.rsocial, c.fantasia, c.data, c.CATEGORIA_CLIENTE_id, cat.categoria FROM cliente c JOIN categoria_cliente cat ON c.CATEGORIA_CLIENTE_id = cat.id WHERE " + Procurar + " ORDER BY c.fantasia";
+                var query = "SELECT c.id, c.status_id, c.rsocial, c.fantasia, c.data, c.CATEGORIA_CLIENTE_id, cat.categoria FROM cliente c JOIN categoria_cliente cat ON c.CATEGORIA_CLIENTE_id = cat.id ORDER BY c.fantasia";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
