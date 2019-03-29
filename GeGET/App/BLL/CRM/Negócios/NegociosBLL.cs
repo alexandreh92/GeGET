@@ -52,6 +52,69 @@ namespace BLL
         }
         #endregion
 
+        #region Load Orcamentos
+        public ObservableCollection<NegociosDTO> LoadOrcamentos(NegociosDTO DTO)
+        {
+            string Procurar = "";
+            if (dto.FromParent)
+            {
+                Procurar = "WHERE c.id = '" + dto.ParentId + "'";
+            }
+            else if (dto.FromChildrenParent)
+            {
+                Procurar = "WHERE e.id = '" + dto.ParentId + "'";
+            }
+            var negocios = new ObservableCollection<NegociosDTO>();
+            var dt = new DataTable();
+            try
+            {
+                var query = "SELECT n.id, n.descricao, n.anotacoes, n.prazo, n.valor_fechamento, n.data, n.data_envio, v.nome, s.descricao as status_descricao, s.id as status_id, e.cnpj, e.endereco, cid.cidade, e.id as estabelecimento_id, c.id as cliente_id, cid.uf, c.rsocial, c.fantasia FROM negocio n JOIN vendedor v ON n.VENDEDOR_id = v.id JOIN status_orcamento s ON n.STATUS_ORCAMENTO_id = s.id JOIN estabelecimento e ON n.ESTABELECIMENTO_id = e.id JOIN cidades cid ON e.CIDADES_id = cid.id JOIN cliente c ON e.CLIENTE_id = c.id " + Procurar + " join orcamentista_negocio orc ON orc.negocio_id = n.id WHERE orc.usuario_id = '"+ Logindto.Id +"' AND n.status_orcamento_id = '2' ORDER BY n.id";
+                bd.Conectar();
+                dt = bd.RetDataTable(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    negocios.Add(new NegociosDTO { Id = dr["id"].ToString(), Numero = "p" + Convert.ToInt32(dr["id"]).ToString("0000"), Razao_Social = dr["rsocial"].ToString(), Descricao = dr["descricao"].ToString(), Anotacoes = dr["anotacoes"].ToString(), Status = Convert.ToInt32(dr["status_id"]), Endereco = dr["endereco"].ToString() + " - " + dr["cidade"].ToString() + " - " + dr["uf"].ToString(), Vendedor = dr["nome"].ToString(), Status_Descricao = dr["status_descricao"].ToString(), Status_Id = Convert.ToInt32(dr["status_id"]), Cliente_Id = dr["cliente_id"].ToString(), Estabelecimento_Id = dr["estabelecimento_id"].ToString(), CidadeEstado = dr["cidade"].ToString() + " - " + dr["uf"].ToString() });
+                }
+                bd.CloseConection();
+            }
+            return negocios;
+        }
+        #endregion
+
+        #region Load Gerenciar Orcamento
+        public ObservableCollection<NegociosDTO> LoadGerenciarOrcamento(NegociosDTO DTO)
+        {
+            var negocios = new ObservableCollection<NegociosDTO>();
+            var dt = new DataTable();
+            try
+            {
+                var query = "SELECT n.id, n.descricao, n.anotacoes, cc.nome as responsavel, e.cnpj, n.versao_valida, n.prazo, n.valor_fechamento, n.data, n.data_envio, v.nome as vendedor, s.descricao as status_descricao, s.id as status_id, e.cnpj, e.endereco, cid.cidade, cid.uf, c.rsocial, c.fantasia FROM negocio n JOIN vendedor v ON n.VENDEDOR_id = v.id JOIN status_orcamento s ON n.STATUS_ORCAMENTO_id = s.id JOIN estabelecimento e ON n.ESTABELECIMENTO_id = e.id JOIN cidades cid ON e.CIDADES_id = cid.id JOIN cliente c ON e.CLIENTE_id = c.id JOIN contato_cliente cc ON cc.cliente_id = c.id WHERE n.id = '"+ DTO.Id +"' ORDER BY n.id";
+                bd.Conectar();
+                dt = bd.RetDataTable(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    negocios.Add(new NegociosDTO { Id = dr["id"].ToString(), Numero = "p" + Convert.ToInt32(dr["id"]).ToString("0000"), Razao_Social = dr["rsocial"].ToString(), Descricao = dr["descricao"].ToString(), Anotacoes = dr["anotacoes"].ToString(), Status = Convert.ToInt32(dr["status_id"]), Endereco = dr["endereco"].ToString() + " - " + dr["cidade"].ToString() + " - " + dr["uf"].ToString(), Vendedor = dr["vendedor"].ToString(), Status_Descricao = dr["status_descricao"].ToString(), Status_Id = Convert.ToInt32(dr["status_id"]), CidadeEstado = dr["cidade"].ToString() + " - " + dr["uf"].ToString(), Cnpj = dr["cnpj"].ToString(), Contato_Nome = dr["responsavel"].ToString(), Prazo = dr["prazo"].ToString(), Versao_Id = dr["versao_valida"].ToString() });
+                }
+                bd.CloseConection();
+            }
+            return negocios;
+        }
+        #endregion
+
         #region Create Negocios
 
         public bool CreateNegocios(NegociosDTO DTO)

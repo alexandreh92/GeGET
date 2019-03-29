@@ -75,5 +75,10 @@ namespace GeGET
         {
             helpers.Open<CadastroNegocio>(this.GetType().Name, false);
         }
+
+        private void BtnDashboardNegocio_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Open<DashboardNegocios>(this.GetType().Name, false);
+        }
     }
 }

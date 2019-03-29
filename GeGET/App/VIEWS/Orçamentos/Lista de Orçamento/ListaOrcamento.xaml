@@ -8,6 +8,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GeGET"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              mc:Ignorable="d"
              Language="pt-BR"
              d:DesignHeight="900" d:DesignWidth="800">
@@ -60,18 +61,18 @@
                                     <Expander x:Name="expHeader" HorizontalAlignment="Stretch" IsExpanded="True" Header="Informações" Foreground="#7A2932" FontFamily="{DynamicResource Novecento-Bold}">
                                         <control:AlignableWrapPanel HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" Margin="0,25,20,30">
-                                                <TextBox x:Name="txtNumero" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Segoe UI" FontSize="16" Text=" " TextAlignment="Center" IsReadOnly="True" VerticalAlignment="Top" Margin="5,0,0,0" Width="60" Foreground="DimGray">
+                                                <TextBox x:Name="txtNumero" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Segoe UI" FontSize="16" Text=" " TextAlignment="Center" IsReadOnly="True" VerticalAlignment="Top" Margin="5,0,0,0" Width="70" Foreground="DimGray">
                                                     <materialDesign:HintAssist.Hint>
                                                         <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                             <TextBlock>Negócio</TextBlock>
                                                         </StackPanel>
                                                     </materialDesign:HintAssist.Hint>
                                                 </TextBox>
-                                                <Button x:Name="btnPesquisa" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Top" Margin="-18,-5,0,0" HorizontalAlignment="Left" Height="25" Width="25" Click="BtnPesquisa_Click">
+                                                <Button x:Name="btnPesquisa" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Top" Margin="-22,0,0,0" HorizontalAlignment="Left" Height="25" Width="25" Click="BtnPesquisa_Click">
                                                     <materialDesign:PackIcon Kind="Magnify" Opacity=".56" VerticalAlignment="Center" Height="15" Width="15" />
                                                 </Button>
                                             </StackPanel>
-                                            <TextBox x:Name="txtCliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="350" Foreground="DimGray">
+                                            <TextBox x:Name="txtCliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" MinWidth="350" Width="Auto" Foreground="DimGray">
                                                 <materialDesign:HintAssist.Hint>
                                                     <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                         <TextBlock>Cliente</TextBlock>
@@ -99,14 +100,14 @@
                                                     </StackPanel>
                                                 </materialDesign:HintAssist.Hint>
                                             </TextBox>
-                                            <TextBox x:Name="txtDescricao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="350" Foreground="DimGray">
+                                            <TextBox x:Name="txtDescricao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="400" Foreground="DimGray">
                                                 <materialDesign:HintAssist.Hint>
                                                     <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                         <TextBlock>Descrição</TextBlock>
                                                     </StackPanel>
                                                 </materialDesign:HintAssist.Hint>
                                             </TextBox>
-                                            <TextBox x:Name="txtVersao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" TextAlignment="Center" VerticalAlignment="Top" Margin="5,25,20,30" Width="50" Foreground="DimGray">
+                                            <TextBox x:Name="txtVersao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" TextAlignment="Center" VerticalAlignment="Top" Margin="5,25,20,30" Width="65" Foreground="DimGray">
                                                 <materialDesign:HintAssist.Hint>
                                                     <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                         <TextBlock>Versão</TextBlock>
@@ -149,260 +150,152 @@
                                                 <Button x:Name="AtualizarPrecos" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Atualizar Preços" Height="25" Width="25" Click="AtualizarPrecos_Click">
                                                     <materialDesign:PackIcon Kind="Refresh" Foreground="White"/>
                                                 </Button>
-                                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Excluir" Height="25" Width="25">
+                                                <Button x:Name="Excluir" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Excluir" Height="25" Width="25" Click="Excluir_Click">
                                                     <materialDesign:PackIcon Kind="Close" Foreground="White"/>
                                                 </Button>
-                                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Copiar Atividades" Height="25" Width="25">
+                                                <Button x:Name="CopiarItens" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Copiar Atividades" Height="25" Width="25" Click="CopiarItens_Click">
                                                     <materialDesign:PackIcon Kind="ContentCopy" Foreground="White"/>
                                                 </Button>
-                                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Alterar BDI" Height="25" Width="25">
+                                                <Button x:Name="AlterarBDI" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Alterar BDI" Height="25" Width="25" Click="AlterarBDI_Click">
                                                     <materialDesign:PackIcon Kind="Percent" Foreground="White"/>
                                                 </Button>
                                             </StackPanel>
                                         </Grid>
-
-                                        <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" SnapsToDevicePixels="True" />
-                                        <StackPanel x:Name="boxPesquisar" Visibility="Collapsed" Orientation="Horizontal" VerticalAlignment="Center">
-                                            <TextBox x:Name="txtFind" TextChanged="TxtFind_TextChanged" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="24,15,20,15" Width="250" Foreground="DimGray">
-                                                <materialDesign:HintAssist.Hint>
-                                                    <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
-                                                        <TextBlock>Filtrar</TextBlock>
-                                                    </StackPanel>
-                                                </materialDesign:HintAssist.Hint>
-                                            </TextBox>
-                                            <Button x:Name="btnLimparPesaquisa" Click="BtnLimparPesaquisa_Click">Limpar</Button>
-                                        </StackPanel>
-                                        
                                     </StackPanel>
-                                    
-                                    <DataGrid KeyDown="GrdItens_KeyDown" x:Name="grdItens" DataGridCell.Selected="GrdItens_Selected" AlternationCount="2" AlternatingRowBackground="#efefef" VerticalScrollBarVisibility="Auto" CanUserResizeColumns="False" CanUserSortColumns="True" HorizontalAlignment="Stretch" CanUserAddRows="False" GridLinesVisibility="Vertical" VerticalGridLinesBrush="#e0e0e0" AutoGenerateColumns="False" materialDesign:DataGridAssist.CellPadding="4 8 4 8" materialDesign:DataGridAssist.ColumnHeaderPadding="0,8,0,8" Grid.Row="1" VirtualizingPanel.IsVirtualizing="True" Margin="10,0,10,10" VirtualizingPanel.VirtualizationMode="Recycling">
-                                        <DataGrid.Columns>
-                                            <DataGridCheckBoxColumn Binding="{Binding IsSelected}" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
-                                                <DataGridCheckBoxColumn.Header>
-                                                    <!--padding to allow hit test to pass thru for sorting -->
-                                                    <Border Background="Transparent" Padding="9 0 6 0" HorizontalAlignment="Center">
-                                                        <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Center" DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext}"/>
-                                                    </Border>
-                                                </DataGridCheckBoxColumn.Header>
-                                            </DataGridCheckBoxColumn>
-                                            <!--ID-->
-                                            <materialDesign:MaterialDataGridTextColumn IsReadOnly="True" Binding="{Binding Produto_Id}" Header="Código" Width="90" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                                                <DataGridTextColumn.HeaderStyle>
-                                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                        <Setter Property="ContentTemplate">
-                                                            <Setter.Value>
-                                                                <DataTemplate>
-                                                                    <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Center" />
-                                                                </DataTemplate>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Style>
-                                                </DataGridTextColumn.HeaderStyle>
-                                                <DataGridTextColumn.ElementStyle>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                    </Style>
-                                                    
-                                                </DataGridTextColumn.ElementStyle>
-                                            </materialDesign:MaterialDataGridTextColumn>
-                                            <!--Descrição-->
-                                            <materialDesign:MaterialDataGridTextColumn IsReadOnly="True" Binding="{Binding Descricao}" Header="Descrição" Width="*" MinWidth="100" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                                                <DataGridTextColumn.HeaderStyle>
-                                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                                        <Setter Property="HorizontalAlignment" Value="Left" />
-                                                        <Setter Property="ContentTemplate">
-                                                            <Setter.Value>
-                                                                <DataTemplate>
-                                                                    <TextBlock TextWrapping="Wrap" Text="{Binding}" ToolTip="{Binding Descricao_Produto}" TextAlignment="Left" />
-                                                                </DataTemplate>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Style>
-                                                </DataGridTextColumn.HeaderStyle>
-                                                <DataGridTextColumn.ElementStyle>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="HorizontalAlignment" Value="Left" />
-                                                    </Style>
-                                                </DataGridTextColumn.ElementStyle>
-                                            </materialDesign:MaterialDataGridTextColumn>
-                                            <!--Partnumber-->
-                                            <materialDesign:MaterialDataGridTextColumn IsReadOnly="True" Binding="{Binding Partnumber}" Header="Partnumber" Width="150" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                                                <DataGridTextColumn.HeaderStyle>
-                                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                        <Setter Property="ContentTemplate">
-                                                            <Setter.Value>
-                                                                <DataTemplate>
-                                                                    <TextBlock TextWrapping="Wrap" Text="{Binding}" ToolTip="{Binding Partnumber}" TextAlignment="Center" />
-                                                                </DataTemplate>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Style>
-                                                </DataGridTextColumn.HeaderStyle>
-                                                <DataGridTextColumn.ElementStyle>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                    </Style>
-                                                </DataGridTextColumn.ElementStyle>
-                                            </materialDesign:MaterialDataGridTextColumn>
-                                            <!--Fabricante-->
-                                            <materialDesign:MaterialDataGridTextColumn IsReadOnly="True" Binding="{Binding Fabricante}" Header="Fabricante" Width="150" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                                                <DataGridTextColumn.HeaderStyle>
-                                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                                        <Setter Property="HorizontalAlignment" Value="Left" />
-                                                        <Setter Property="ContentTemplate">
-                                                            <Setter.Value>
-                                                                <DataTemplate>
-                                                                    <TextBlock TextWrapping="Wrap" Text="{Binding}" ToolTip="{Binding Fabricante}" TextAlignment="Left" />
-                                                                </DataTemplate>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Style>
-                                                </DataGridTextColumn.HeaderStyle>
-                                                <DataGridTextColumn.ElementStyle>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="HorizontalAlignment" Value="Left" />
-                                                    </Style>
-                                                </DataGridTextColumn.ElementStyle>
-                                            </materialDesign:MaterialDataGridTextColumn>
-                                            <!--Unidade-->
-                                            <materialDesign:MaterialDataGridTextColumn IsReadOnly="True" Binding="{Binding Un}" Header="UN" Width="80" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                                                <DataGridTextColumn.HeaderStyle>
-                                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                        <Setter Property="ContentTemplate">
-                                                            <Setter.Value>
-                                                                <DataTemplate>
-                                                                    <TextBlock TextWrapping="Wrap" Text="{Binding}" ToolTip="{Binding Un}" TextAlignment="Center" />
-                                                                </DataTemplate>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Style>
-                                                </DataGridTextColumn.HeaderStyle>
-                                                <DataGridTextColumn.ElementStyle>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                    </Style>
-                                                </DataGridTextColumn.ElementStyle>
-                                            </materialDesign:MaterialDataGridTextColumn>
-                                            <!--Quantidade-->
-                                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Quantidade, Mode=Default, StringFormat=N2}" Header="QTDE" Width="100">
-                                                <DataGridTextColumn.HeaderStyle>
-                                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                        <Setter Property="ContentTemplate">
-                                                            <Setter.Value>
-                                                                <DataTemplate>
-                                                                    <TextBlock TextWrapping="Wrap" Text="{Binding}" ToolTip="{Binding Quantidade}" TextAlignment="Center" />
-                                                                </DataTemplate>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Style>
-                                                </DataGridTextColumn.HeaderStyle>
-                                                <DataGridTextColumn.ElementStyle>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                    </Style>
-                                                </DataGridTextColumn.ElementStyle>
-                                                <DataGridTextColumn.EditingElementStyle>
-                                                    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
-                                                        <EventSetter Event="UIElement.GotKeyboardFocus" Handler="TextBox_GotKeyboardFocus" />
-                                                    </Style>
-                                                </DataGridTextColumn.EditingElementStyle>
-                                            </materialDesign:MaterialDataGridTextColumn>
-                                            <!--Custo Un.-->
-                                            <materialDesign:MaterialDataGridTextColumn x:Name="colteste" IsReadOnly="True" Binding="{Binding Preco_Unitario, StringFormat=C, Mode=TwoWay}" Header="Custo Un." Width="100" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                                                <DataGridTextColumn.HeaderStyle>
-                                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                        <Setter Property="ContentTemplate">
-                                                            <Setter.Value>
-                                                                <DataTemplate>
-                                                                    <TextBlock TextWrapping="Wrap" Text="{Binding}" ToolTip="{Binding Preco_Unitario}" TextAlignment="Center" />
-                                                                </DataTemplate>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Style>
-                                                </DataGridTextColumn.HeaderStyle>
-                                                <DataGridTextColumn.ElementStyle>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                    </Style>
-                                                </DataGridTextColumn.ElementStyle>
-                                            </materialDesign:MaterialDataGridTextColumn>
+
+                                    <dxg:GridControl x:Name="grdItens" ShowBorder="False" Background="#FAFAFA" Grid.Row="1" EnableSmartColumnsGeneration="True" HorizontalAlignment="Stretch" Margin="0,0,0,10" SelectionMode="MultipleRow">
+                                        <dxg:GridControl.Columns>
+                                            <!--CÓDIGO-->
+                                            <dxg:GridColumn Header="Código" HorizontalHeaderContentAlignment="Center" Width="90" FixedWidth="True" ReadOnly="True" Binding="{Binding Codigo_Produto}">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--DESCRICAO-->
+                                            <dxg:GridColumn Header="Descrição" HorizontalHeaderContentAlignment="Left" ReadOnly="True" Binding="{Binding Descricao}">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="4,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                            </dxg:GridColumn>
+                                            <!--PARTNUMBER-->
+                                            <dxg:GridColumn Header="Partnumber" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True" Binding="{Binding Partnumber}">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--FABRICANTE-->
+                                            <dxg:GridColumn Header="Fabricante" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True" Binding="{Binding Fabricante}">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings HorizontalContentAlignment="Left"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--UN-->
+                                            <dxg:GridColumn Name="Unidade" Header="UN" HorizontalHeaderContentAlignment="Center" Width="80" FixedWidth="True" ReadOnly="True" Binding="{Binding Un}">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--QUANTIDADE-->
+                                            <dxg:GridColumn Header="Quantidade" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="False" FixedWidth="True" Binding="{Binding Quantidade, Mode=TwoWay}">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="N2" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--CUSTO UNITARIO-->
+                                            <dxg:GridColumn Header="Custo Un." HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="True" FixedWidth="True" Binding="{Binding Preco_Unitario, StringFormat=C}">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
                                             <!--BDI-->
-                                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Bdi, StringFormat={}{0}%}" Header="BDI" Width="60" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                                                <DataGridTextColumn.HeaderStyle>
-                                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                        <Setter Property="ContentTemplate">
-                                                            <Setter.Value>
-                                                                <DataTemplate>
-                                                                    <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Center" />
-                                                                </DataTemplate>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Style>
-                                                </DataGridTextColumn.HeaderStyle>
-                                                <DataGridTextColumn.ElementStyle>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                    </Style>
-                                                </DataGridTextColumn.ElementStyle>
-                                            </materialDesign:MaterialDataGridTextColumn>
-                                            <!--Custo Total-->
-                                            <materialDesign:MaterialDataGridTextColumn IsReadOnly="True" Binding="{Binding Custo_Total, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=C}" Header="Custo Total" Width="120" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                                                <DataGridTextColumn.HeaderStyle>
-                                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                        <Setter Property="ContentTemplate">
-                                                            <Setter.Value>
-                                                                <DataTemplate>
-                                                                    <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Center" />
-                                                                </DataTemplate>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Style>
-                                                </DataGridTextColumn.HeaderStyle>
-                                                <DataGridTextColumn.ElementStyle>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                    </Style>
-                                                </DataGridTextColumn.ElementStyle>
-                                            </materialDesign:MaterialDataGridTextColumn>
-                                            <!--Preço Total-->
-                                            <materialDesign:MaterialDataGridTextColumn IsReadOnly="True" Binding="{Binding Preco_Total, StringFormat=C}" Header="Preço Total" Width="120" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                                                <DataGridTextColumn.HeaderStyle>
-                                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                        <Setter Property="ContentTemplate">
-                                                            <Setter.Value>
-                                                                <DataTemplate>
-                                                                    <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Center" />
-                                                                </DataTemplate>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Style>
-                                                </DataGridTextColumn.HeaderStyle>
-                                                <DataGridTextColumn.ElementStyle>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                                    </Style>
-                                                </DataGridTextColumn.ElementStyle>
-                                            </materialDesign:MaterialDataGridTextColumn>
-                                            <DataGridCheckBoxColumn Header="F.D." Binding="{Binding Fd, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
-                                                
-                                            </DataGridCheckBoxColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
+                                            <dxg:GridColumn Header="BDI" HorizontalHeaderContentAlignment="Center" Width="60" ReadOnly="False" FixedWidth="True" Binding="{Binding Bdi, Mode=TwoWay}">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="P1" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--CUSTO TOTAL-->
+                                            <dxg:GridColumn Header="Custo Total" HorizontalHeaderContentAlignment="Center" Width="120" ReadOnly="True" FixedWidth="True" Binding="{Binding Custo_Total, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--PRECO TOTAL-->
+                                            <dxg:GridColumn Header="Preco Total" HorizontalHeaderContentAlignment="Center" Width="120" ReadOnly="True" FixedWidth="True" Binding="{Binding Preco_Total}">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--FATURAMENTO DIRETO-->
+                                            <dxg:GridColumn Header="FD" HorizontalHeaderContentAlignment="Center" Width="50" FixedWidth="True" Binding="{Binding Fd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" local:CommitHelper.CommitOnValueChanged="True" IsEnabled="True" ReadOnly="False">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:CheckEditSettings IsThreeState="False"/>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                        </dxg:GridControl.Columns>
+                                        <dxg:GridControl.View>
+                                            <dxg:TableView AutoWidth="True" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" CellValueChanged="TableView_CellValueChanged" SearchDelay="10"/>
+                                        </dxg:GridControl.View>
+                                    </dxg:GridControl>
+
                                 </Grid>
 
                             </materialDesign:Card>
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid Grid.Column="1" Grid.ColumnSpan="2" Margin="20,0,0,0">
+                <Grid x:Name="sideExpander" Visibility="Collapsed" Grid.Column="1" Grid.ColumnSpan="2" Margin="20,0,0,0">
                     <Expander ExpandDirection="Left" Grid.Column="2" Background="#F0F0F0" IsExpanded="False" MaxWidth="350" HorizontalAlignment="Right">
                         <Expander.Header>
                             <TextBlock Text="" RenderTransformOrigin=".5,.5">
@@ -411,12 +304,180 @@
                                 </TextBlock.LayoutTransform>
                             </TextBlock>
                         </Expander.Header>
-                        <Grid>
-                            <TextBlock Text="Atividade" Margin="4,30" FontFamily="{DynamicResource Novecento-Bold}"/>
-                            <TextBlock Opacity=".68" Text="Total de Itens:" MaxWidth="180" Margin="8,50,0,0" TextWrapping="Wrap" />
-                            <TextBlock Opacity=".68" Text="R$1.000.000,00" MaxWidth="180" Margin="88,50,0,0" TextWrapping="Wrap" />
+                        <Grid Height="Auto">
+                            <Grid Margin="0,55,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="110"/>
+                                    <ColumnDefinition Width="110"/>
+                                </Grid.ColumnDefinitions>
+                                <Border BorderThickness="0 0 0 2" Grid.ColumnSpan="2" Margin="15,0,15,0" BorderBrush="#7A2932">
+                                    <Grid Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="Atividade" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontSize="16" />
+                                    </Grid>
+                                </Border>
+                                <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="Total de Materiais" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="com bdi" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="sem bdi" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Atividade_Total_Materiais_BDI" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Atividade_Total_Materiais" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="Mão de Obra" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="com bdi" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="sem bdi" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Atividade_Total_Mobra_BDI" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Atividade_Total_Mobra" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="Total" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="com bdi" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="sem bdi" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="11" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Atividade_Total_BDI" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="11" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Atividade_Total" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="13" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="Faturamento Direto" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="14" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="Getac" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="14" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="Cliente" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Atividade_Faturado" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Atividade_FD" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <!--NEGÓCIO-->
+                                <Border BorderThickness="0 0 0 2" Grid.ColumnSpan="2" Grid.Row="17" Margin="15,0,15,0" BorderBrush="#7A2932">
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="Negócio" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontSize="16" />
+                                    </Grid>
+                                </Border>
+                                <Grid Grid.Column="0" Grid.Row="18" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="Total de Itens" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="19" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="com bdi" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="19" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="sem bdi" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Negocio_Total_Materiais_BDI" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Negocio_Total_Materiais" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="22" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="Mão de Obra" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="23" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="com bdi" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="23" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="sem bdi" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="24" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Negocio_Total_Mobra_BDI" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="24" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Negocio_Total_Mobra" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="26" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="Total" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="27" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="com bdi" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="27" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="sem bdi" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="28" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Negocio_Total_BDI" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="28" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Negocio_Total" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="30" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="Faturamento Direto" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="31" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="Getac" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="31" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="Cliente" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                </Grid>
+                                <Grid Grid.Column="0" Grid.Row="32" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Negocio_Faturado" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="32" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="txt_Negocio_FD" Text="R$1.000.000" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                </Grid>
+                            </Grid>
                         </Grid>
-                        
                     </Expander>
                 </Grid>
             </Grid>

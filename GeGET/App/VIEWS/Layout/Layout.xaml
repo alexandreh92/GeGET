@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GeGET"
         mc:Ignorable="d"
-        Title="GeGET" Height="800" Width="600"
+        Title="GeGET" Height="768" Width="1366"
         WindowState="Maximized"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
@@ -62,7 +62,7 @@
                         <TextBlock  x:Name="txtTitle" VerticalAlignment="Center" FontSize="14" TextTrimming="CharacterEllipsis" Width="Auto" FontFamily="{StaticResource Novecento-Bold}" Margin="0,6,120,6">Getac Engenharia Integrada - GeGET v</TextBlock>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <materialDesign:Badged x:Name="BadgeControl" Badge="" BadgeBackground="White">
-                                <materialDesign:PopupBox StaysOpen="False" Margin="0,0,-5,0" VerticalAlignment="Center" PreviewMouseLeftButtonUp="PopupBox_PreviewMouseLeftButtonDown">
+                                <materialDesign:PopupBox StaysOpen="False" Margin="0,0,-15,0" VerticalAlignment="Center" PreviewMouseLeftButtonUp="PopupBox_PreviewMouseLeftButtonDown">
                                     <materialDesign:PopupBox.ToggleContent>
                                         <materialDesign:PackIcon x:Name="btnNotificationIcon" Foreground="White" VerticalAlignment="Center" Margin="0,3,0,0" Kind="BellOutline" Width="25" Height="25"/>
                                     </materialDesign:PopupBox.ToggleContent>
@@ -102,28 +102,28 @@
                         </Button>
                     </Grid>
                     <ListView x:Name="ListViewMenu" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ShadowAssist.ShadowEdges="Right">
-                        <ListViewItem x:Name="btnDashBoard" Height="60">
+                        <ListViewItem x:Name="btnDashBoard" Height="60" Foreground="White">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="13,8,0,0"/>
                                 <TextBlock Text="DASHBOARD" VerticalAlignment="Center" Margin="20 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="15.0"/>
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem x:Name="btnCRM" Height="60" PreviewMouseLeftButtonDown="BtnCRM_PreviewMouseLeftButtonDown">
+                        <ListViewItem x:Name="btnCRM" Height="60" PreviewMouseLeftButtonDown="BtnCRM_PreviewMouseLeftButtonDown" Foreground="White">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Briefcase" Height="25" Width="25" Margin="13,8,0,0"/>
                                 <TextBlock Text="CRM" VerticalAlignment="Center" Margin="20 10" FontFamily="{StaticResource Novecento-Book}" FontSize="15.0"/>
                             </StackPanel>
                         </ListViewItem>
-                            <ListViewItem x:Name="btnOrcamentos" Height="60" PreviewMouseLeftButtonDown="BtnOrcamentos_PreviewMouseLeftButtonDown">
+                            <ListViewItem x:Name="btnOrcamentos" Height="60" PreviewMouseLeftButtonDown="BtnOrcamentos_PreviewMouseLeftButtonDown" Foreground="White">
                             <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Ticket" Height="25" Width="25" Margin="13,5,0,0"/>
+                                <materialDesign:PackIcon Kind="Wallet" Height="25" Width="25" Margin="13,5,0,0"/>
                                 <TextBlock Text="Orçamentos" VerticalAlignment="Center"  Margin="20 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem Height="60">
+                        <ListViewItem Height="60" PreviewMouseDown="ListViewItem_PreviewMouseDown" Foreground="White">
                             <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Message" Height="25" Width="25" Margin="13,5,0,0"/>
-                                <TextBlock Text="Messages" VerticalAlignment="Center"  Margin="20 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="14.0" TextDecorations="{x:Null}"/>
+                                <materialDesign:PackIcon Kind="Worker" Height="25" Width="25" Margin="13,5,0,0"/>
+                                <TextBlock Text="Obras" VerticalAlignment="Center"  Margin="20 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="14.0" TextDecorations="{x:Null}"/>
                             </StackPanel>
                         </ListViewItem>
                     </ListView>
@@ -134,55 +134,24 @@
 
                     <materialDesign:PopupBox StaysOpen="False" Margin="0,0,0,2" x:Name="PopupBox">
                         <materialDesign:PopupBox.ToggleContent>
-
-
-                            <Grid Margin="0,0,0,10" x:Name="testegrid">
-                                <Border x:Name="borderImage" Canvas.Left="55"
-                            Canvas.Top="30"
-                            Width="40"
-                            Height="Auto"
-                            Margin="12,12,8,0"
-                            VerticalAlignment="Top"
-                            BorderBrush="#282828"
-                            BorderThickness=".5"
-                            CornerRadius="50">
-                                    <Border.Effect>
-                                        <DropShadowEffect BlurRadius="5"
-                              Opacity=".5"
-                              ShadowDepth="3" />
-                                    </Border.Effect>
-                                    <Border Name="ReceiverColor"
-                                BorderBrush="#7A2932"
-                                BorderThickness="2.5"
-                                CornerRadius="50">
-                                        <Grid>
-                                            <Border Name="Mask"
-                                        Background="#282828"
-                                        BorderBrush="#282828"
-                                        BorderThickness="0"
-                                        CornerRadius="50">
-                                            </Border>
-                                            <StackPanel x:Name="ImagePanel">
-
-                                                <StackPanel.OpacityMask>
-                                                    <VisualBrush Visual="{Binding ElementName=Mask}" />
-                                                </StackPanel.OpacityMask>
-                                                <Image x:Name="imgUser" Width="{Binding ActualWidth, ElementName=borderImage}" Height="30" Source="/Resources/Images/teste.png"/>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
+                            <Grid Margin="0,0,0,0" x:Name="testegrid">
+                                <Border BorderBrush="#7A2932" BorderThickness="2" CornerRadius="120">
+                                    <Ellipse Width="40" Height="40">
+                                        <Ellipse.Fill>
+                                            <ImageBrush x:Name="imgFoto" ImageSource="/Resources/Images/User.png" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
                                 </Border>
                             </Grid>
-
                         </materialDesign:PopupBox.ToggleContent>
                         <StackPanel x:Name="teste" Width="150">
-                            <Button Content="Conta"/>
+                            <Button x:Name="btnAccount" Content="Conta" Click="BtnAccount_Click"/>
                             <Separator/>
                             <Button x:Name="btnLogout" Content="Logout" Click="BtnLogout_Click"/>
                         </StackPanel>
                     </materialDesign:PopupBox>
 
-                    <TextBlock TextTrimming="CharacterEllipsis" x:Name="txtNome" Text="Alexandre" Width="180" VerticalAlignment="Center" FontFamily="{StaticResource Novecento-Bold}" FontSize="13.0" Foreground="White"/>
+                    <TextBlock TextTrimming="CharacterEllipsis" x:Name="txtNome" Text="Alexandre" Width="180" VerticalAlignment="Center" FontFamily="{StaticResource Novecento-Bold}" Margin="-5,-5,0,0" FontSize="13.0" Foreground="White"/>
                 </StackPanel>
             </Grid>
             

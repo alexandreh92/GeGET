@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 
 namespace DTO
 {
@@ -6,6 +7,7 @@ namespace DTO
     {
         private string id;
         private string produto_Id;
+        private string codigo_Produto;
         private string descricao;
         private string anotacoes;
         private string partnumber;
@@ -42,8 +44,6 @@ namespace DTO
                 {
                     Preco_Total = quantidade * preco_Unitario * (1 + bdi / 100);
                 }
-                OnChanged("Quantidade");
-                OnChanged("Fd");
             }
         }
         public double Desconto { get => desconto; set => desconto = value; }
@@ -86,6 +86,7 @@ namespace DTO
         }
 
         public string Atividade_Id { get => atividade_Id; set => atividade_Id = value; }
+        public string Codigo_Produto { get => codigo_Produto; set => codigo_Produto = value; }
 
 
         #region INotifyPropertyChanged Members
@@ -95,6 +96,11 @@ namespace DTO
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        private void update()
+        {
+            MessageBox.Show("");
         }
 
         #endregion

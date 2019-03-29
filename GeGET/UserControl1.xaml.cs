@@ -16,24 +16,13 @@ using System.Windows.Shapes;
 namespace GeGET
 {
     /// <summary>
-    /// Interaction logic for Teste.xaml
+    /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class Orcamentos : UserControl
+    public partial class UserControl1 : UserControl
     {
-        Helpers helpers = new Helpers();
-        public Orcamentos()
+        public UserControl1()
         {
             InitializeComponent();
-        }
-
-        private void BtnListaOrcamento_Click(object sender, RoutedEventArgs e)
-        {
-            helpers.Open<ListaOrcamento>(this.GetType().Name, false);
-        }
-
-        private void BtnEstabelecimentos_Click(object sender, RoutedEventArgs e)
-        {
-            helpers.Open<ListaOrcamentoOld>(this.GetType().Name, false);
         }
     }
 }

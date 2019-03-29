@@ -63,7 +63,7 @@
                                                     </materialDesign:Card>
                                                     <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <Button x:Name="btnEstabelecimentos" Height="90" Width="90">
+                                                            <Button x:Name="btnEstabelecimentos" Height="90" Width="90" Click="BtnEstabelecimentos_Click">
                                                                 <materialDesign:PackIcon Kind="OfficeBuilding" HorizontalAlignment="Center" Height="70" Width="70" />
                                                             </Button>
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" Margin="0,10,0,0">Estabelecimentos</TextBlock>

@@ -7,6 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         AllowsTransparency="True"
         WindowState="Maximized"
+        ShowInTaskbar="False"
         WindowStyle="None"
         mc:Ignorable="d"
         Title="ProcurarMateriais" Height="820" Width="1200">
@@ -33,7 +34,7 @@
                         </Grid>
 
                         <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" SnapsToDevicePixels="True" />
-                        <StackPanel x:Name="boxPesquisar" Visibility="Collapsed" Orientation="Horizontal" VerticalAlignment="Center">
+                        <StackPanel x:Name="boxPesquisar" Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBox x:Name="txtFind" TextChanged="TxtFind_TextChanged" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="24,15,20,15" Width="250" Foreground="DimGray">
                                 <materialDesign:HintAssist.Hint>
                                     <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
@@ -46,7 +47,7 @@
 
                     </StackPanel>
 
-                    <DataGrid KeyDown="GrdItens_KeyDown" Visibility="Collapsed" x:Name="grdItens" DataGridCell.Selected="GrdItens_Selected" AlternationCount="2" AlternatingRowBackground="#efefef" VerticalScrollBarVisibility="Auto" CanUserResizeColumns="False" CanUserSortColumns="True" HorizontalAlignment="Stretch" CanUserAddRows="False" GridLinesVisibility="Vertical" VerticalGridLinesBrush="#e0e0e0" AutoGenerateColumns="False" materialDesign:DataGridAssist.CellPadding="4 8 4 8" materialDesign:DataGridAssist.ColumnHeaderPadding="0,8,0,8" Grid.Row="1" VirtualizingPanel.IsVirtualizing="True" Margin="10,0,10,10" VirtualizingPanel.VirtualizationMode="Recycling">
+                    <DataGrid KeyDown="GrdItens_KeyDown" Visibility="Collapsed" x:Name="grdItens" AlternationCount="2" AlternatingRowBackground="#efefef" VerticalScrollBarVisibility="Auto" CanUserResizeColumns="False" CanUserSortColumns="True" HorizontalAlignment="Stretch" CanUserAddRows="False" GridLinesVisibility="Vertical" VerticalGridLinesBrush="#e0e0e0" AutoGenerateColumns="False" materialDesign:DataGridAssist.CellPadding="4 8 4 8" materialDesign:DataGridAssist.ColumnHeaderPadding="0,8,0,8" Grid.Row="1" VirtualizingPanel.IsVirtualizing="True" Margin="10,0,10,10" VirtualizingPanel.VirtualizationMode="Recycling">
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn Binding="{Binding IsSelected, Mode=TwoWay}" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
                                 

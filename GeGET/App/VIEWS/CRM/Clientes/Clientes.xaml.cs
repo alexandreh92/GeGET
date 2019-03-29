@@ -137,5 +137,10 @@ namespace GeGET
         #endregion
 
         #endregion
+
+        private void btnOpenFolder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
