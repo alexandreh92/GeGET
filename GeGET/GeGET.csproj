@@ -36,6 +36,7 @@
   <PropertyGroup>
     <ApplicationIcon>Resources\Icons\favicon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="Devart.DbForge.Data.Interfaces">
       <HintPath>F:\Devart\dbForge Studio for MySQL\Devart.DbForge.Data.Interfaces.dll</HintPath>
@@ -44,9 +45,7 @@
       <HintPath>F:\Devart\dbForge Studio for MySQL\Devart.DbForge.Data.MySql.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Data.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Mvvm.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="DevExpress.Mvvm.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Core.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Grid.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -71,6 +70,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Management.Instrumentation" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -128,6 +129,9 @@
     <Compile Include="App\Controls\Shared\CustomOKMessageBox.xaml.cs">
       <DependentUpon>CustomOKMessageBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarOrcamento.xaml.cs">
+      <DependentUpon>ProcurarOrcamento.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\Controls\Shared\ProcurarNegocio.xaml.cs">
       <DependentUpon>ProcurarNegocio.xaml</DependentUpon>
     </Compile>
@@ -140,8 +144,10 @@
     <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\AdicionarItemOrcamentoDTO.cs" />
     <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\AtividadeDTO.cs" />
     <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\DisciplinaDTO.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\MaterialDTO.cs" />
     <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\OrcamentosDTO.cs" />
     <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\ListaOrcamentosDTO.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\ValoresOrcamento.cs" />
     <Compile Include="App\Helpers\BlackScreen.xaml.cs">
       <DependentUpon>BlackScreen.xaml</DependentUpon>
     </Compile>
@@ -157,6 +163,9 @@
     </Compile>
     <Compile Include="App\Controls\CRM\Funil de Vendas\FunilControl.xaml.cs">
       <DependentUpon>FunilControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Dashboard de Negócios\DashboardNegocios.xaml.cs">
+      <DependentUpon>DashboardNegocios.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\VIEWS\CRM\Negócios\CadastroNegocio.xaml.cs">
       <DependentUpon>CadastroNegocio.xaml</DependentUpon>
@@ -208,6 +217,9 @@
     <Compile Include="App\VIEWS\CRM\Pessoas\Pessoas.xaml.cs">
       <DependentUpon>Pessoas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamento.xaml.cs">
+      <DependentUpon>ListaOrcamento.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\VIEWS\Orçamentos\Orcamentos.xaml.cs">
       <DependentUpon>Orcamentos.xaml</DependentUpon>
     </Compile>
@@ -223,7 +235,23 @@
     <Compile Include="App\VIEWS\CRM\Clientes\CadastroCliente.xaml.cs">
       <DependentUpon>CadastroCliente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\Controls\Shared\WaitBox.xaml.cs">
+      <DependentUpon>WaitBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\AlterarBDIOrcamento.xaml.cs">
+      <DependentUpon>AlterarBDIOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Permission.xaml.cs">
+      <DependentUpon>Permission.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl1.xaml.cs">
+      <DependentUpon>UserControl1.xaml</DependentUpon>
+    </Compile>
     <Page Include="App\Controls\Shared\CustomOKMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarOrcamento.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -252,6 +280,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="App\Controls\CRM\Funil de Vendas\FunilControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Dashboard de Negócios\DashboardNegocios.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -303,11 +335,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\VIEWS\Orçamentos\Orcamentos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamento.xaml">
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamentoOld.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\AlterarBDIOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamento.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -326,9 +370,14 @@
     <Compile Include="App\BLL\Login\LoginBLL.cs" />
     <Compile Include="App\DAL\AcessoBancoDados.cs" />
     <Compile Include="App\DTO\Login\LoginDTO.cs" />
-    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamento.xaml.cs">
-      <DependentUpon>ListaOrcamento.xaml</DependentUpon>
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamentoOld.xaml.cs">
+      <DependentUpon>ListaOrcamentoOld.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamento.xaml.cs">
+      <DependentUpon>CopiarItensOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\CopiarItensOrcamentoBLL.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\CopiarItensOrcamentoDTO.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -356,13 +405,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProcurarMateriais.xaml">
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\ProcurarMateriais.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Controls\Shared\WaitBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Permission.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProcurarMateriais.xaml.cs">
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\ProcurarMateriais.xaml.cs">
       <DependentUpon>ProcurarMateriais.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -388,6 +449,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\Fonts\abadimtstd-opentype.otf" />
+    <Resource Include="Resources\Fonts\Roboto-Medium.ttf" />
+    <Resource Include="Resources\Fonts\Roboto-Regular.ttf" />
     <Resource Include="Resources\Fonts\Synthview - Novecentowide-DemiBold.otf" />
     <Resource Include="Resources\Fonts\Synthview - Novecentowide-Medium.otf" />
     <Resource Include="Resources\Fonts\Novecentowide_Normal.otf" />
@@ -408,12 +472,6 @@
     <Resource Include="Resources\updateurl.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Customer_70px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\teste.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Icons\Icon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -421,6 +479,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\teste.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

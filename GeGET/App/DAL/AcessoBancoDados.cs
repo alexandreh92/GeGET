@@ -19,9 +19,9 @@ namespace DAL
         private MySql.Data.MySqlClient.MySqlCommandBuilder cb;
 
         public static string server_local = "localhost";
-        //public static string server_local = "192.168.15.10";
+        //public static string server_local = "192.168.15.5";
         public static string server_remoto = "getacengenharia.ddns.net";
-        //public static string server = "192.168.15.10";
+        //public static string server = "192.168.15.5";
         public static string server = "localhost";
         public static string user = "root";
         public static string password = "root";
@@ -67,8 +67,18 @@ namespace DAL
         public void ExecutarComandoSQL(string comandoSql)
         {
             MySql.Data.MySqlClient.MySqlCommand comando = new MySql.Data.MySqlClient.MySqlCommand(comandoSql, comm);
+            
             comando.ExecuteNonQuery();
             comm.Close();
+        }
+
+        public void ExecutarComandoSQLWithByteParameter(string comandoSql, byte[] photo)
+        {
+            MySql.Data.MySqlClient.MySqlCommand comando = new MySql.Data.MySqlClient.MySqlCommand(comandoSql, comm);
+            comando.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("@IMG", photo));
+            comando.ExecuteNonQuery();
+            comm.Close();
+            
         }
 
         public async Task ExecutarComandoSQLAsync(string comandoSql)

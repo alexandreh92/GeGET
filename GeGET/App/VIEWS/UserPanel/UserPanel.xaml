@@ -60,49 +60,27 @@
                 <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="2" VerticalAlignment="Top" Height="154">
                     <materialDesign:PopupBox StaysOpen="False" Margin="0,0,0,2" x:Name="PopupBox">
                         <materialDesign:PopupBox.ToggleContent>
+                            <Grid>
 
-
-                            <Grid Margin="0,0,0,10" x:Name="testegrid">
-                                <Border x:Name="borderImage" Canvas.Left="55"
-                            Canvas.Top="30"
-                            Width="120"
-                            Height="Auto"
-                            Margin="12,12,8,0"
-                            VerticalAlignment="Top"
-                            BorderBrush="#282828"
-                            BorderThickness=".5"
-                            CornerRadius="120">
+                                <Border RenderOptions.EdgeMode="Unspecified" BorderBrush="#7A2932" BorderThickness="4" CornerRadius="120" Background="#282828">
                                     <Border.Effect>
-                                        <DropShadowEffect BlurRadius="5"
-                              Opacity=".5"
-                              ShadowDepth="3" />
+                                        <DropShadowEffect ShadowDepth="2"/>
                                     </Border.Effect>
-                                    <Border Name="ReceiverColor"
-                                BorderBrush="#7A2932"
-                                BorderThickness="2.5"
-                                CornerRadius="120">
-                                        <Grid>
-                                            <Border Name="Mask"
-                                        Background="#282828"
-                                        BorderBrush="#282828"
-                                        BorderThickness="0"
-                                        CornerRadius="120">
-                                            </Border>
-                                            <StackPanel x:Name="ImagePanel">
-
-                                                <StackPanel.OpacityMask>
-                                                    <VisualBrush Visual="{Binding ElementName=Mask}" />
-                                                </StackPanel.OpacityMask>
-                                                <Image x:Name="imgUser" Width="{Binding ActualWidth, ElementName=borderImage}" Height="120" Source="/Resources/Images/teste.png"/>
-                                            </StackPanel>
-                                        </Grid>
+                                    <Ellipse Width="120" Height="120">
+                                            <Ellipse.Fill>
+                                                <ImageBrush x:Name="imgFoto" ImageSource="/Resources/Images/User.png" />
+                                            </Ellipse.Fill>
+                                        </Ellipse>
                                     </Border>
-                                </Border>
+                                
                             </Grid>
+
+                            
+                                
 
                         </materialDesign:PopupBox.ToggleContent>
                         <StackPanel Width="150">
-                            <Button x:Name="btnChangePhoto" Content="Trocar Foto"/>
+                            <Button x:Name="btnChangePhoto" Content="Trocar Foto" Click="BtnChangePhoto_Click"/>
                         </StackPanel>
                     </materialDesign:PopupBox>
                 </Grid>
@@ -111,24 +89,39 @@
                 </Grid>
                 <Grid Grid.Row="2" Grid.Column="3">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <TextBlock VerticalAlignment="Center" Margin="0,0,15,0" FontFamily="Century Gothic" FontSize="18">Usuário:</TextBlock>
-                        <TextBox IsEnabled="False" materialDesign:TransitionAssist.DisableTransitions="True" Width="250" />
+                        <TextBox x:Name="txtUsuario" IsReadOnly="True" Foreground="DimGray" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="250" >
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal" Margin="-6 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                                    <TextBlock>Usuário</TextBlock>
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="3" Grid.Column="3">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <TextBlock VerticalAlignment="Center" Margin="0,0,15,0" FontFamily="Century Gothic" FontSize="18">Senha:</TextBlock>
-                        <PasswordBox materialDesign:TransitionAssist.DisableTransitions="True" Width="250" />
+                        <PasswordBox x:Name="txtSenha" FontSize="16" Foreground="DimGray" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Width="250" >
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal" Margin="2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                                    <TextBlock>Senha</TextBlock>
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </PasswordBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="4" Grid.Column="3">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <TextBlock VerticalAlignment="Center" Margin="0,0,15,0" FontFamily="Century Gothic" FontSize="18">*Senha:</TextBlock>
-                        <PasswordBox materialDesign:TransitionAssist.DisableTransitions="True" Width="250" />
+                        <PasswordBox x:Name="txtConfirmaSenha" Foreground="DimGray" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Width="250" >
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal" Margin="2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                                    <TextBlock>Repita a senha</TextBlock>
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </PasswordBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="5" Grid.Column="3">
-                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Foreground="White" Width="100">
+                    <Button x:Name="btnSave" Style="{StaticResource MaterialDesignRaisedLightButton}" Foreground="White" Width="100" Click="BtnSave_Click">
                         SALVAR
                     </Button>
                 </Grid>

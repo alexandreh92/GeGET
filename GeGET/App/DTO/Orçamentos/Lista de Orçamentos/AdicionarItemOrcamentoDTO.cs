@@ -5,6 +5,7 @@ namespace DTO
     public class AdicionarItemOrcamentoDTO : INotifyPropertyChanged
     {
         private int id;
+        private string codigo_Produto;
         private string descricao;
         private string descricao_Produto;
         private string un;
@@ -34,7 +35,7 @@ namespace DTO
             }
         }
 
-        
+        public string Codigo_Produto { get => codigo_Produto; set => codigo_Produto = value; }
 
         private void OnPropertyChanged(string propertyName)
         {

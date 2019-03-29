@@ -4,6 +4,11 @@ using MaterialDesignThemes.Wpf;
 using DTO;
 using BLL;
 using System.Reflection;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System;
+using System.Drawing;
+using System.Windows.Interop;
 
 namespace GeGET
 {
@@ -25,11 +30,13 @@ namespace GeGET
             #region MyRegion
             txtNome.Text = Logindto.Primeiro_Nome + " " + Logindto.Ultimo_Sobrenome;
             #endregion
+            imgFoto.ImageSource = Logindto.Foto;
             txtTitle.Text = txtTitle.Text + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             LoadMensagens();
             dependency.Start();
         }
         #endregion
+
 
         #region Carrega Mensagens
         private void LoadMensagens()
@@ -144,5 +151,16 @@ namespace GeGET
         #endregion
 
         #endregion
+
+        private void ListViewItem_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.Open<UserControl1>(null, false);
+        }
+
+
+        private void BtnAccount_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Open<UserPanel>(null, false);
+        }
     }
 }

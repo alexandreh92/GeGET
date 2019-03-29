@@ -101,6 +101,8 @@
                                                 <Button Content="Gerenciar"/>
                                                 <Separator/>
                                                 <Button x:Name="btnFechamento" Content="Fechamento"/>
+                                                <Separator/>
+                                                <Button x:Name="btnOpenFolder" Content="Abrir Pasta"/>
                                             </StackPanel>
                                         </materialDesign:PopupBox>
                                     </DockPanel>
@@ -119,7 +121,7 @@
             
             <Grid Grid.Column="1" Grid.Row="2">
                 <StackPanel x:Name="StackPanel1" Orientation="Vertical" Height="Auto">
-                    <materialDesign:Card Height="80" Margin="8">
+                    <materialDesign:Card Height="80" Margin="8,8,7,8">
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <TextBox x:Name="txtProcurar" materialDesign:HintAssist.Hint="Procurar..." FontFamily="{DynamicResource Novecento-Book}" Foreground="DimGray" Width="250" TextChanged="TxtProcurar_TextChanged" VerticalAlignment="Center" Margin="32,0,0,0"/>
                             <Button x:Name="btnPesquisa" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Center" Height="25" Width="25">

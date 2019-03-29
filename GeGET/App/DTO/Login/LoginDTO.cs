@@ -1,4 +1,7 @@
-﻿namespace DTO
+﻿using System.IO;
+using System.Windows.Media.Imaging;
+
+namespace DTO
 {
     class LoginDTO
     {
@@ -10,7 +13,10 @@
         private static string primeiro_Nome;
         private static string ultimo_Sobrenome;
         private static bool supressChange = false;
+        private static BitmapSource foto;
+        private byte[] photo;
 
+        public BitmapSource Foto { get => foto; set => foto = value; }
         public string Primeiro_Nome { get => primeiro_Nome; set => primeiro_Nome = value; }
         public string Ultimo_Sobrenome { get => ultimo_Sobrenome; set => ultimo_Sobrenome = value; }
         public string Usuario { get => usuario; set => usuario = value; }
@@ -19,5 +25,6 @@
         public int Id { get => id; set => id = value; }
         public string Nome { get => nome; set => nome = value; }
         public bool SupressChange { get => supressChange; set => supressChange = value; }
+        public byte[] Photo { get => photo; set => photo = value; }
     }
 }

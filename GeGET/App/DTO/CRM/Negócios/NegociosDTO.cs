@@ -20,6 +20,8 @@
         private int status_Id;
         private string cliente_Id;
         private string estabelecimento_Id;
+        private string versao_Id;
+        private string cnpj;
         private static string pesquisa;
         private static int status;
         private static bool fromParent = false;
@@ -49,5 +51,7 @@
         public string CidadeEstado { get => cidadeEstado; set => cidadeEstado = value; }
         public string Contato_Nome { get => contato_Nome; set => contato_Nome = value; }
         public string Prioridade_Descricao { get => prioridade_Descricao; set => prioridade_Descricao = value; }
+        public string Versao_Id { get => versao_Id; set => versao_Id = value; }
+        public string Cnpj { get => cnpj; set => cnpj = value; }
     }
 }

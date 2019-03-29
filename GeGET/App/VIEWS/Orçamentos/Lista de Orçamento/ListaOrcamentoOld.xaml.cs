@@ -10,15 +10,13 @@ using System.Windows.Threading;
 using System.Threading;
 using MMLib.Extensions;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace GeGET
 {
-    public partial class ListaOrcamento : UserControl
+    public partial class ListaOrcamentoOld : UserControl
     {
         #region Declarations
         Helpers helpers = new Helpers();
-        MaterialDTO materialDTO = new MaterialDTO();
         ListaOrcamentosBLL bll = new ListaOrcamentosBLL();
         ListaOrcamentosDTO dto = new ListaOrcamentosDTO();
         AdicionarItemOrcamentoDTO adicionarItemOrcamentoDTO = new AdicionarItemOrcamentoDTO();
@@ -29,22 +27,30 @@ namespace GeGET
         AtividadesBLL atividadesBLL = new AtividadesBLL();
         public ObservableCollection<ListaOrcamentosDTO> listaOrcamentos;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
-        ManualResetEvent syncValues = new ManualResetEvent(false);
         Thread t1;
         WaitBox wb;
         ObservableCollection<CopiarItensOrcamentoDTO> listaCopiar;
-        ObservableCollection<MaterialDTO> listaAterarBDI;
-        ObservableCollection<ValoresOrcamento> valoresOrcamento;
         #endregion
 
         #region Initialize
-        public ListaOrcamento()
+        public ListaOrcamentoOld()
         {
             InitializeComponent();
         }
         #endregion
 
         #region Methods
+
+        private void Filter()
+        {
+            Dispatcher.Invoke(DispatcherPriority.Background,
+                  new Action(() =>
+                  {
+                      var Find = txtFind.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
+                      var filtered = listaOrcamentos.Where(descricao => Find.Any(list => descricao.Descricao.ToLower().Contains(list) || descricao.Fabricante.ToLower().Contains(list)));
+                      grdItens.ItemsSource = filtered;
+                  }));
+        }
 
         private void InitializeComponents()
         {
@@ -72,48 +78,67 @@ namespace GeGET
             syncEvent.WaitOne();
             Dispatcher.Invoke(new Action(() =>
             {
-                grdItens.UnselectAll();
-                Load();
+                listaOrcamentos = bll.LoadOrcamento(dto);
+                grdItens.ItemsSource = listaOrcamentos;
                 wb.Close();
             }));
         }
 
-        public void Load()
+        private void Commit()
         {
-            listaOrcamentos = bll.LoadOrcamento(dto);
-            grdItens.ItemsSource = listaOrcamentos;
-            LoadSidePanel();
-        }
-
-        private void LoadSidePanel()
-        {
-            valoresOrcamento = bll.LoadValores(dto);
-            foreach (var item in valoresOrcamento)
+            new Thread(() =>
             {
-                txt_Atividade_Total_Materiais.Text = item.Atividade_Total_Itens.ToString("c");
-                txt_Atividade_Total_Materiais_BDI.Text = item.Atividade_Total_Itens_BDI.ToString("c");
-                txt_Atividade_Total_Mobra.Text = item.Atividade_Total_Mobra.ToString("c");
-                txt_Atividade_Total_Mobra_BDI.Text = item.Atividade_Total_Mobra_BDI.ToString("c");
-                txt_Atividade_Total.Text = item.Atividade_Total_Atividade.ToString("c");
-                txt_Atividade_Total_BDI.Text = item.Atividade_Total_Atividade_BDI.ToString("c");
-                txt_Atividade_Faturado.Text = item.Atividade_Total_Faturado.ToString("c");
-                txt_Atividade_FD.Text = item.Atividade_Total_FD.ToString("c");
+                Dispatcher.Invoke(DispatcherPriority.Background,
+                  new Action(() =>
+                  {
+                      //bll.Update
+                  }));
 
-                txt_Negocio_Total_Materiais.Text = item.Negocio_Total_Itens.ToString("c");
-                txt_Negocio_Total_Materiais_BDI.Text = item.Negocio_Total_Itens_BDI.ToString("c");
-                txt_Negocio_Total_Mobra.Text = item.Negocio_Total_Mobra.ToString("c");
-                txt_Negocio_Total_Mobra_BDI.Text = item.Negocio_Total_Mobra_BDI.ToString("c");
-                txt_Negocio_Total.Text = item.Negocio_Total_Atividade.ToString("c");
-                txt_Negocio_Total_BDI.Text = item.Negocio_Total_Atividade_BDI.ToString("c");
-                txt_Negocio_Faturado.Text = item.Negocio_Total_Faturado.ToString("c");
-                txt_Negocio_FD.Text = item.Negocio_Total_FD.ToString("c");
-
-            }
+            });
         }
 
         #endregion
 
         #region Events
+
+        #region Checkbox Checked/Unchecked
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (ListaOrcamentosDTO c in grdItens.ItemsSource)
+            {
+                c.IsSelected = true;
+            }
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            foreach (ListaOrcamentosDTO c in grdItens.ItemsSource)
+            {
+                c.IsSelected = false;
+            }
+        }
+        #endregion
+
+        #region Grid Itens Selected Begin Edit
+        private void GrdItens_Selected(object sender, RoutedEventArgs e)
+        {
+            // Lookup for the source to be DataGridCell
+            if (e.OriginalSource.GetType() == typeof(DataGridCell))
+            {
+                // Starts the Edit on the row;
+                DataGrid grd = (DataGrid)sender;
+                grd.BeginEdit(e);
+
+            }
+        }
+        #endregion
+
+        #region Grid Textbox Got Focus
+        private void TextBox_GotKeyboardFocus(Object sender, KeyboardFocusChangedEventArgs e)
+        {
+            ((TextBox)sender).SelectAll();
+        }
+        #endregion
 
         #region Clicks
         private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
@@ -176,8 +201,9 @@ namespace GeGET
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 bll.AtualizarPreco(dto);
-                Load();
-                CustomOKMessageBox.Show("Preços atualizados com sucesso.","Atualizado!");
+                Thread.Sleep(200);
+                listaOrcamentos = bll.LoadOrcamento(dto);
+                grdItens.ItemsSource = listaOrcamentos;
             }
         }
 
@@ -191,11 +217,24 @@ namespace GeGET
             helpers.Close();
         }
 
+        private void BtnLimparPesaquisa_Click(object sender, RoutedEventArgs e)
+        {
+            txtFind.Text = "";
+        }
+
         private void Excluir_Click(object sender, RoutedEventArgs e)
         {
-            int[] handles = grdItens.GetSelectedRowHandles();
+            listaCopiar = new ObservableCollection<CopiarItensOrcamentoDTO>();
+            foreach (var item in listaOrcamentos)
+            {
+                if (item.IsSelected)
+                {
+                    listaCopiar.Add(new CopiarItensOrcamentoDTO { Id = item.Id });
+                    item.IsSelected = false;
+                }
+            }
 
-            if (handles.Length > 0)
+            if (listaCopiar.Count > 0)
             {
                 var result = CustomOKCancelMessageBox.Show("Deseja mesmo excluir todos os itens selecionados?", "Atenção!");
                 if (result == System.Windows.Forms.DialogResult.OK)
@@ -208,13 +247,12 @@ namespace GeGET
                             wb.Show();
                         }));
                         syncEvent.Set();
-                        foreach (var rowHandle in handles)
+                        foreach (var item in listaCopiar)
                         {
                             Dispatcher.Invoke(DispatcherPriority.Background,
                                new Action(() =>
                                {
-                                   var selectedItem = grdItens.GetRow(rowHandle) as ListaOrcamentosDTO;
-                                   adicionarItemOrcamentoDTO.Id = Convert.ToInt32( selectedItem.Id );
+                                   adicionarItemOrcamentoDTO.Id = Convert.ToInt32(item.Id);
                                    bll.Excluir(adicionarItemOrcamentoDTO);
                                }));
                         }
@@ -232,16 +270,16 @@ namespace GeGET
         private void CopiarItens_Click(object sender, RoutedEventArgs e)
         {
             listaCopiar = new ObservableCollection<CopiarItensOrcamentoDTO>();
-            int[] handles = grdItens.GetSelectedRowHandles();
-
-            if (handles.Length > 0)
+            foreach (var item in listaOrcamentos)
             {
-                listaCopiar = new ObservableCollection<CopiarItensOrcamentoDTO>();
-                foreach (var rowHandle in handles)
+                if (item.IsSelected)
                 {
-                    var selectedItem = grdItens.GetRow(rowHandle) as ListaOrcamentosDTO;
-                    listaCopiar.Add(new CopiarItensOrcamentoDTO { Id = selectedItem.Produto_Id });
+                    listaCopiar.Add(new CopiarItensOrcamentoDTO { Id = item.Produto_Id });
+                    item.IsSelected = false;
                 }
+            }
+            if (listaCopiar.Count > 0)
+            {
                 using (var form = new CopiarItensOrcamento(listaCopiar, dto))
                 {
                     form.ShowDialog();
@@ -251,34 +289,7 @@ namespace GeGET
             {
                 CustomOKMessageBox.Show("Você deve selecionar ao menos um item para copiar.", "Atenção!");
             }
-        }
 
-        private void AlterarBDI_Click(object sender, RoutedEventArgs e)
-        {
-            listaAterarBDI = new ObservableCollection<MaterialDTO>();
-            int[] handles = grdItens.GetSelectedRowHandles();
-            if (handles.Length>0)
-            {
-                foreach (var rowHandle in handles)
-                {
-                    var selectedItem = grdItens.GetRow(rowHandle) as ListaOrcamentosDTO;
-                    listaAterarBDI.Add(new MaterialDTO { Id = selectedItem.Id });
-                }
-                using (var form = new AlterarBDIOrcamento(listaAterarBDI))
-                {
-                    form.ShowDialog();
-                    if (form.DialogResult.HasValue && form.DialogResult.Value)
-                    {
-                        Load();
-                    }
-                }
-                
-
-            }
-            else
-            {
-                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para alterar o BDI.", "Atenção!");
-            }
         }
 
         #endregion
@@ -293,7 +304,12 @@ namespace GeGET
             cmbAtividade.SelectedIndex = 0;
         }
 
-        
+        public void Load()
+        {
+            listaOrcamentos = bll.LoadOrcamento(dto);
+
+            grdItens.ItemsSource = listaOrcamentos;
+        }
 
         private void CmbAtividade_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -301,53 +317,60 @@ namespace GeGET
             {
                 dto.Atividade_Id = cmbAtividade.SelectedValue.ToString();
             }
-            Load();
+            listaOrcamentos = bll.LoadOrcamento(dto);
+            grdItens.ItemsSource = listaOrcamentos;
             sideExpander.Visibility = Visibility.Visible;
             CardPanel.Visibility = Visibility.Visible;
             
         }
         #endregion
 
-        #region Cell Value Changed
-
-        private void TableView_CellValueChanged(object sender, DevExpress.Xpf.Grid.CellValueChangedEventArgs e)
+        #region KeyDown Show Search Textbox
+        private void GrdItens_KeyDown(object sender, KeyEventArgs e)
         {
-            var material = e.Row as ListaOrcamentosDTO;
-
-            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
+            if (e.Key == Key.F && Keyboard.Modifiers == ModifierKeys.Control)
             {
-                if (e.Column.Header.ToString() == "Quantidade")
+                if (boxPesquisar.Visibility == Visibility.Collapsed)
                 {
-                    materialDTO.Id = material.Id;
-                    materialDTO.Quantidade = material.Quantidade;
-                    MessageBox.Show("qtde");
-                    bll.AtualizarQuantidade(materialDTO);
+                    boxPesquisar.Visibility = Visibility.Visible;
                 }
-                else if (e.Column.Header.ToString() == "BDI")
+                else
                 {
-                    materialDTO.Id = material.Id;
-                    materialDTO.Bdi = material.Bdi.ToString();
-                    bll.AtualizarBDI(materialDTO);
+                    boxPesquisar.Visibility = Visibility.Collapsed;
                 }
-                else if (e.Column.Header.ToString() == "FD")
-                {
-                    materialDTO.Id = material.Id;
-                    materialDTO.Fd = material.Fd;
-                    bll.AtualizarFD(materialDTO);
-                }
-            }));
-            LoadSidePanel();
+            }
         }
-
         #endregion
 
-        #endregion
-
-        private void TableView_CellValueChanging(object sender, DevExpress.Xpf.Grid.CellValueChangedEventArgs e)
+        #region TextChanged
+        private void TxtFind_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var material = e.Row as ListaOrcamentosDTO;
-            
-            LoadSidePanel();
+            t1 = new Thread(Filter);
+            t1.Start();
         }
+        #endregion
+
+        #endregion
+
+        private void GrdItens_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            
+           /** if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var column = e.Column;
+                var row = e.Row.GetIndex();
+                var qtde = grdItens.Columns[6].GetCellContent(grdItens.Items[row]) as TextBlock;
+                MessageBox.Show(qtde.Text);
+            }*/
+        }
+
+        private void GrdItens_TargetUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
+        {
+            
+       //     MessageBox.Show("");
+        }
+
+
+
     }
 }
