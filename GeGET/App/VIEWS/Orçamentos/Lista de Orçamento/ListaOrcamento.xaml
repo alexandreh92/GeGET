@@ -7,11 +7,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
              xmlns:local="clr-namespace:GeGET"
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              mc:Ignorable="d"
              Language="pt-BR"
              d:DesignHeight="900" d:DesignWidth="800">
+    
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide">
         <materialDesign:TransitioningContent.OpeningEffects>
             <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8" />
@@ -55,10 +57,10 @@
                             <RowDefinition Height="266*"/>
                         </Grid.RowDefinitions>
                         <StackPanel Margin="0,0,0,10" Orientation="Vertical" Grid.RowSpan="2">
-                            <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}">
+                            <materialDesign:Card Background="White">
                                 <StackPanel x:Name="StackPanel1">
-                                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Expander x:Name="expHeader" HorizontalAlignment="Stretch" IsExpanded="True" Header="Informações" Foreground="#7A2932" FontFamily="{DynamicResource Novecento-Bold}">
+                                    <Border Background="White" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                                    <Expander x:Name="expHeader" HorizontalAlignment="Stretch" IsExpanded="True" Header="Informações" Background="White" Foreground="#7A2932" FontFamily="{DynamicResource Novecento-Bold}">
                                         <control:AlignableWrapPanel HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" Margin="0,25,20,30">
                                                 <TextBox x:Name="txtNumero" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Segoe UI" FontSize="16" Text=" " TextAlignment="Center" IsReadOnly="True" VerticalAlignment="Top" Margin="5,0,0,0" Width="70" Foreground="DimGray">
@@ -79,14 +81,14 @@
                                                     </StackPanel>
                                                 </materialDesign:HintAssist.Hint>
                                             </TextBox>
-                                            <ComboBox x:Name="cmbDisciplina" materialDesign:HintAssist.Hint="Disciplina" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,30" Background="#fafafa" Foreground="DimGray" Width="130" SelectionChanged="CmbDisciplina_SelectionChanged">
+                                            <ComboBox x:Name="cmbDisciplina" materialDesign:HintAssist.Hint="Disciplina" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="130" SelectionChanged="CmbDisciplina_SelectionChanged">
                                                 <ComboBox.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <VirtualizingStackPanel />
                                                     </ItemsPanelTemplate>
                                                 </ComboBox.ItemsPanel>
                                             </ComboBox>
-                                            <ComboBox x:Name="cmbAtividade" materialDesign:HintAssist.Hint="Atividade" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,30" Background="#fafafa" Foreground="DimGray" Width="200" SelectionChanged="CmbAtividade_SelectionChanged">
+                                            <ComboBox x:Name="cmbAtividade" materialDesign:HintAssist.Hint="Atividade" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="200" SelectionChanged="CmbAtividade_SelectionChanged">
                                                 <ComboBox.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <VirtualizingStackPanel />
@@ -134,7 +136,7 @@
                             </materialDesign:Card>
                         </StackPanel>
                         <Grid x:Name="gridpanel" Grid.Row="2">
-                            <materialDesign:Card MaxHeight="{Binding ActualHeight, ElementName=gridpanel}" Visibility="Collapsed" Background="#FAFAFA" x:Name="CardPanel" Padding="0" Margin="0,10,0,20" VerticalAlignment="Stretch">
+                            <materialDesign:Card MaxHeight="{Binding ActualHeight, ElementName=gridpanel}" Visibility="Collapsed" Background="White" x:Name="CardPanel" Padding="0" Margin="0,10,0,20" VerticalAlignment="Stretch">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -161,9 +163,10 @@
                                                 </Button>
                                             </StackPanel>
                                         </Grid>
+                                        
                                     </StackPanel>
-
-                                    <dxg:GridControl x:Name="grdItens" ShowBorder="False" Background="#FAFAFA" Grid.Row="1" EnableSmartColumnsGeneration="True" HorizontalAlignment="Stretch" Margin="0,0,0,10" SelectionMode="MultipleRow">
+                                    <Border BorderBrush="DarkGray" BorderThickness="0,0,0,0.5"></Border>
+                                    <dxg:GridControl x:Name="grdItens" ShowBorder="False" Grid.Row="1" EnableSmartColumnsGeneration="True" HorizontalAlignment="Stretch" Margin="0,0,0,10" VirtualizingPanel.VirtualizationMode="Recycling" SelectionMode="MultipleRow">
                                         <dxg:GridControl.Columns>
                                             <!--CÓDIGO-->
                                             <dxg:GridColumn Header="Código" HorizontalHeaderContentAlignment="Center" Width="90" FixedWidth="True" ReadOnly="True" Binding="{Binding Codigo_Produto}">
@@ -285,7 +288,21 @@
                                             </dxg:GridColumn>
                                         </dxg:GridControl.Columns>
                                         <dxg:GridControl.View>
-                                            <dxg:TableView AutoWidth="True" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" CellValueChanged="TableView_CellValueChanged" SearchDelay="10"/>
+                                            <dxg:TableView AutoWidth="True" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" CellValueChanged="TableView_CellValueChanged" SearchDelay="10">
+                                                <dxg:TableView.RowStyle>
+                                                    <Style TargetType="dxg:RowControl">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{DXBinding Expr='@c.RowHandle.Value % 1'}" Value="0">
+                                                                <Setter Property="Background" Value="#efefef"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{DXBinding Expr='@c.RowHandle.Value % 2'}" Value="0">
+                                                                <Setter Property="Background" Value="White"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </dxg:TableView.RowStyle>
+                                            </dxg:TableView>
+
                                         </dxg:GridControl.View>
                                     </dxg:GridControl>
 

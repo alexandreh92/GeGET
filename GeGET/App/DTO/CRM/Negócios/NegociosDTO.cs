@@ -27,6 +27,7 @@
         private static bool fromParent = false;
         private static bool fromChildrenParent = false;
         private static string parentId;
+        private string valor_Enviado;
 
         public string Id { get => id; set => id = value; }
         public string Numero { get => numero; set => numero = value; }
@@ -53,5 +54,6 @@
         public string Prioridade_Descricao { get => prioridade_Descricao; set => prioridade_Descricao = value; }
         public string Versao_Id { get => versao_Id; set => versao_Id = value; }
         public string Cnpj { get => cnpj; set => cnpj = value; }
+        public string Valor_Enviado { get => valor_Enviado; set => valor_Enviado = value; }
     }
 }

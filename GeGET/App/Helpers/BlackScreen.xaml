@@ -8,7 +8,6 @@
         Opacity="0.2"
         Background ="Black"
         ShowInTaskbar="False"
-        Topmost="True"
         WindowStyle="None"
         WindowState="Maximized"
         Title="BlackScreen" Height="450" Width="800">

@@ -5,21 +5,23 @@ namespace GeGET
 {
     public partial class CustomOKCancelMessageBox : Window
     {
-        public CustomOKCancelMessageBox()
+        public CustomOKCancelMessageBox(Window Parent)
         {
             InitializeComponent();
+            this.Owner = Parent;
         }
         public static CustomOKCancelMessageBox MsgBoxOKCancel;
         static System.Windows.Forms.DialogResult result;
 
-        public static DialogResult Show(string Text, string Caption)
+        public static DialogResult Show(string Text, string Caption, Window parent)
         {
-            MsgBoxOKCancel = new CustomOKCancelMessageBox();
+            MsgBoxOKCancel = new CustomOKCancelMessageBox(parent);
             MsgBoxOKCancel.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MsgBoxOKCancel.MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
             MsgBoxOKCancel.txtDescricao.Text = Text;
             MsgBoxOKCancel.txtTitulo.Text = Caption;
             MsgBoxOKCancel.ShowDialog();
+            MsgBoxOKCancel.Owner = parent;
             return result;
         }
 

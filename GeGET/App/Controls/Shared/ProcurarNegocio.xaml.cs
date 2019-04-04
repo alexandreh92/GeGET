@@ -29,6 +29,9 @@ namespace GeGET
         public ProcurarNegocio(Point mouseLocation)
         {
             InitializeComponent();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+            ColLeft.Width = new GridLength(mouseLocation.X + 230, GridUnitType.Pixel);
             dto.Pesquisa = "";
             t1 = new Thread(Load);
             t1.Start();

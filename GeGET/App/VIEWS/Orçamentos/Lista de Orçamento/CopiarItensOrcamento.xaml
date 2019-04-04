@@ -7,7 +7,6 @@
         xmlns:local="clr-namespace:GeGET"
         mc:Ignorable="d"
         WindowStyle="None"
-        Topmost="True"
         ShowInTaskbar="False"
         WindowState="Maximized"
         AllowsTransparency="True"

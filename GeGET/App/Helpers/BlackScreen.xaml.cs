@@ -22,6 +22,7 @@ namespace GeGET
         public BlackScreen()
         {
             InitializeComponent();
+            
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
         }

@@ -78,7 +78,7 @@ namespace GeGET
 
         private void BtnDashboardNegocio_Click(object sender, RoutedEventArgs e)
         {
-            helpers.Open<DashboardNegocios>(this.GetType().Name, false);
+            helpers.Open<GerenciarOrcamento>(this.GetType().Name, false);
         }
     }
 }

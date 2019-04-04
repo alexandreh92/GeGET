@@ -85,7 +85,7 @@ namespace GeGET
 
         private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
-            var result = CustomOKCancelMessageBox.Show("Você deseja mesmo aterar o BDI para '" + txtBDI.Text + "'% ?","Atenção!");
+            var result = CustomOKCancelMessageBox.Show("Você deseja mesmo aterar o BDI para '" + txtBDI.Text + "'% ?","Atenção!", Window.GetWindow(this));
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 Update();

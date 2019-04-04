@@ -5,7 +5,7 @@ using DTO;
 
 namespace GeGET
 {
-    public partial class MensagemLayout : Window
+    public partial class NotificacaoLayout : Window
     {
         #region Declarations
         MySQLDependency bll = new MySQLDependency();
@@ -14,7 +14,7 @@ namespace GeGET
         #endregion
 
         #region Initialize
-        public MensagemLayout()
+        public NotificacaoLayout()
         {
             InitializeComponent();
             lstMensagens.ItemsSource = bll.LoadMensagens();
@@ -34,5 +34,6 @@ namespace GeGET
         #endregion
 
         #endregion
+
     }
 }

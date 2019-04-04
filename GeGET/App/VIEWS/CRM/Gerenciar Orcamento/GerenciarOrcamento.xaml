@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GeGET.DashboardNegocios"
+﻿<UserControl x:Class="GeGET.GerenciarOrcamento"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -32,7 +32,7 @@
                     <Button x:Name="btnBack" ToolTip="Voltar" Height="40" Width="40" Margin="10,0,-5,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnBack_Click">
                         <materialDesign:PackIcon Foreground="#7A2932" Kind="LessThan" Width="25" Height="25"/>
                     </Button>
-                    <TextBlock VerticalAlignment="Center" Foreground="#7A2932" Margin="5,-2,0,0" FontSize="14" FontFamily="{DynamicResource Novecento-Bold}">Dashboard de Negócios</TextBlock>
+                    <TextBlock VerticalAlignment="Center" Foreground="#7A2932" Margin="5,-2,0,0" FontSize="14" FontFamily="{DynamicResource Novecento-Bold}">Gerenciar Orçamento</TextBlock>
                     <Button x:Name="btnClose" HorizontalAlignment="Right" ToolTip="Fechar" Height="40" Width="40" Margin="0,0,10,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnClose_Click">
                         <materialDesign:PackIcon Foreground="#7A2932" Kind="Close" Width="25" Height="25"/>
                     </Button>
@@ -70,14 +70,14 @@
                                                             <materialDesign:PackIcon Kind="Magnify" Opacity=".56" VerticalAlignment="Center" Height="15" Width="15" />
                                                         </Button>
                                                     </StackPanel>
-                                                    <TextBox x:Name="txtCliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" MinWidth="250" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtCliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="350" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Cliente</TextBlock>
                                                             </StackPanel>
                                                         </materialDesign:HintAssist.Hint>
                                                     </TextBox>
-                                                    <TextBox x:Name="txtCNPJ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" MinWidth="146" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtCNPJ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="155" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>CNPJ</TextBlock>
@@ -98,35 +98,35 @@
                                                             </StackPanel>
                                                         </materialDesign:HintAssist.Hint>
                                                     </TextBox>
-                                                    <TextBox x:Name="txtEndereco" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" MinWidth="250" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtEndereco" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="250" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Endereço</TextBlock>
                                                             </StackPanel>
                                                         </materialDesign:HintAssist.Hint>
                                                     </TextBox>
-                                                    <TextBox x:Name="txtCidadeEstado" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" MinWidth="100" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtCidadeEstado" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="180" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Cidade</TextBlock>
                                                             </StackPanel>
                                                         </materialDesign:HintAssist.Hint>
                                                     </TextBox>
-                                                    <TextBox x:Name="txtDescricao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" MinWidth="250" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtDescricao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="350" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Descrição</TextBlock>
                                                             </StackPanel>
                                                         </materialDesign:HintAssist.Hint>
                                                     </TextBox>
-                                                    <TextBox x:Name="txtVendedor" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" MinWidth="120" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtVendedor" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="175" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Vendedor</TextBlock>
                                                             </StackPanel>
                                                         </materialDesign:HintAssist.Hint>
                                                     </TextBox>
-                                                    <TextBox x:Name="txtResponsavel" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" MinWidth="120" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtResponsavel" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="175" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Responsável</TextBlock>
@@ -151,7 +151,7 @@
                                     </StackPanel>
                                 </materialDesign:Card>
                                 <StackPanel>
-                                    <Grid>
+                                    <Grid x:Name="gridOptions" Visibility="Collapsed">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="350"/>
                                             <ColumnDefinition Width="2*"/>
@@ -162,17 +162,17 @@
                                                 <TextBlock Foreground="#7A2932" Grid.Row="0" Margin="24,21,0,21" FontSize="15" TextTrimming="CharacterEllipsis" FontFamily="{DynamicResource Novecento-Bold}">Versões do Negócio</TextBlock>
                                                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
                                                 <control:AlignableWrapPanel HorizontalContentAlignment="Center">
-                                                    <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                                    <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="5,5,5,5">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <Button x:Name="btnNovaVersão" Height="70" Width="70">
+                                                            <Button x:Name="btnNovaVersão" Height="70" Width="70" IsEnabled="False">
                                                                 <materialDesign:PackIcon Kind="OpenInNew" HorizontalAlignment="Center" Height="50" Width="50" />
                                                             </Button>
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" Foreground="{DynamicResource MaterialDesignBody}" HorizontalAlignment="Center" Margin="0,10,0,0">Nova Versão</TextBlock>
                                                         </StackPanel>
                                                     </materialDesign:Card>
-                                                    <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                                    <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="5,5,5,5">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <Button x:Name="btnAterarVersao" Height="70" Width="70">
+                                                            <Button x:Name="btnAterarVersao" Height="70" Width="70" IsEnabled="False">
                                                                 <materialDesign:PackIcon Kind="ArrangeSendBackward" HorizontalAlignment="Center" Height="50" Width="50" />
                                                             </Button>
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" Foreground="{DynamicResource MaterialDesignBody}" HorizontalAlignment="Center" Margin="0,10,0,0">Alterar Versão</TextBlock>
@@ -186,7 +186,7 @@
                                             <StackPanel>
                                                     <DockPanel>
                                                         <TextBlock Foreground="#7A2932" Grid.Row="0" Margin="24,21,0,21" FontSize="15" TextTrimming="CharacterEllipsis" FontFamily="{DynamicResource Novecento-Bold}">Orçamentistas</TextBlock>
-                                                        <Button x:Name="btnOrcamentista" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Center" Margin="0,0,10,0" HorizontalAlignment="Right" Height="25" Width="25" Click="BtnOrcamentista_Click">
+                                                        <Button x:Name="btnOrcamentista" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Center" Margin="0,0,10,0" HorizontalAlignment="Right" Height="25" Width="25" Click="BtnOrcamentista_Click" IsEnabled="False">
                                                             <materialDesign:PackIcon Kind="Add" Opacity=".56" VerticalAlignment="Center" Height="15" Width="15" />
                                                         </Button>
                                                     </DockPanel>
@@ -200,9 +200,9 @@
                                                 </ItemsControl.ItemsPanel>
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
-                                                        <materialDesign:Chip Content="James Willock" Margin="2" HorizontalAlignment="Stretch" IsDeletable="True" x:Name="ButtonsDemoChip" ToolTip="Just a tool tip" DeleteToolTip="Your friendly neighbour delete button">
+                                                            <materialDesign:Chip Content="{Binding Nome_Simples}" Margin="2" HorizontalAlignment="Stretch" IsDeletable="{Binding ElementName=btnOrcamentista, Path=IsEnabled}" x:Name="ButtonsDemoChip" ToolTip="{Binding Nome}" DeleteToolTip="Excluir" DeleteClick="ButtonsDemoChip_DeleteClick">
                                                             <materialDesign:Chip.Icon>
-                                                                <Image Source="/Resources/Images/User.png"></Image>
+                                                                <Image Source="{Binding Foto}"></Image>
                                                             </materialDesign:Chip.Icon>
                                                         </materialDesign:Chip>
                                                     </DataTemplate>
@@ -224,33 +224,41 @@
                                                 <TextBlock Foreground="#7A2932" Grid.Row="0" Margin="24,21,0,21" FontSize="15" TextTrimming="CharacterEllipsis" FontFamily="{DynamicResource Novecento-Bold}">Status do Negócio</TextBlock>
                                                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
                                                 <control:AlignableWrapPanel HorizontalContentAlignment="Center">
-                                                    <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                                    <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="5,5,5,5">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <Button x:Name="btnEnviar" Height="70" Width="70">
-                                                                <materialDesign:PackIcon Kind="Email" HorizontalAlignment="Center" Height="50" Width="50" />
+                                                            <Button x:Name="btnHabilitar" Height="70" Width="70" IsEnabled="False" Click="BtnHabilitar_Click">
+                                                                <materialDesign:PackIcon Kind="Check" HorizontalAlignment="Center" Height="50" Width="50"/>
+                                                            </Button>
+                                                            <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" Foreground="{DynamicResource MaterialDesignBody}" HorizontalAlignment="Center" Margin="0,10,0,0">Habilitar Orçamento</TextBlock>
+                                                        </StackPanel>
+                                                    </materialDesign:Card>
+                                                    <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="5,5,5,5">
+                                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                            <Button x:Name="btnEnviar" Height="70" Width="70" IsEnabled="False" Click="BtnEnviar_Click">
+                                                                <materialDesign:PackIcon Kind="Email" HorizontalAlignment="Center" Height="50" Width="50"/>
                                                             </Button>
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" Foreground="{DynamicResource MaterialDesignBody}" HorizontalAlignment="Center" Margin="0,10,0,0">Enviar Para Cliente</TextBlock>
                                                         </StackPanel>
                                                     </materialDesign:Card>
-                                                    <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                                    <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="5,5,5,5">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <Button x:Name="btnNegociacao" Height="70" Width="70">
+                                                            <Button x:Name="btnNegociacao" Height="70" Width="70" IsEnabled="False" Click="BtnNegociacao_Click">
                                                                 <materialDesign:PackIcon Kind="BriefcaseEdit" HorizontalAlignment="Center" Height="50" Width="50" />
                                                             </Button>
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" Foreground="{DynamicResource MaterialDesignBody}" HorizontalAlignment="Center" Margin="0,10,0,0">Em Negociação</TextBlock>
                                                         </StackPanel>
                                                     </materialDesign:Card>
-                                                    <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                                    <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="5,5,5,5">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <Button x:Name="btnFechar" Height="70" Width="70">
+                                                            <Button x:Name="btnFechar" Height="70" Width="70" IsEnabled="False" Click="BtnFechar_Click">
                                                                 <materialDesign:PackIcon Kind="BriefcaseCheck" HorizontalAlignment="Center" Height="50" Width="50" />
                                                             </Button>
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" Foreground="{DynamicResource MaterialDesignBody}" HorizontalAlignment="Center" Margin="0,10,0,0">Fechar Negócio</TextBlock>
                                                         </StackPanel>
                                                     </materialDesign:Card>
-                                                    <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                                    <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="5,5,5,5">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <Button x:Name="btnCancelar" Height="70" Width="70">
+                                                            <Button x:Name="btnCancelar" Height="70" Width="70" IsEnabled="False" Click="BtnCancelar_Click">
                                                                 <materialDesign:PackIcon Kind="Close" HorizontalAlignment="Center" Height="50" Width="50" />
                                                             </Button>
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" Foreground="{DynamicResource MaterialDesignBody}" HorizontalAlignment="Center" Margin="0,10,0,0">Cancelar Negócio</TextBlock>
