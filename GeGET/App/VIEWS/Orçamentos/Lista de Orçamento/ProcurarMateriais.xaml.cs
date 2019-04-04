@@ -67,19 +67,6 @@ namespace GeGET
         }
         #endregion
 
-        #region Commit
-        private void Commit()
-        {
-            Dispatcher.Invoke(DispatcherPriority.Background,
-                  new Action(() =>
-                  {
-                      var Find = txtFind.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
-                      var filtered = listaItens.Where(descricao => Find.Any(list => descricao.Id.ToString().Contains(list) || descricao.Descricao.ToLower().RemoveDiacritics().Contains(list) || descricao.Descricao_Produto.RemoveDiacritics().ToLower().Contains(list) || descricao.Partnumber.RemoveDiacritics().ToLower().Contains(list)));
-                      grdItens.ItemsSource = filtered;
-                  }));
-        }
-        #endregion
-
         private void WaitBoxLoad()
         {
             syncEvent.WaitOne();
@@ -93,10 +80,6 @@ namespace GeGET
         #region Events
 
         #region Clicks
-        private void BtnLimparPesaquisa_Click(object sender, RoutedEventArgs e)
-        {
-            txtFind.Text = "";
-        }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -105,6 +88,13 @@ namespace GeGET
 
         private void BtnAdicionar_Click(object sender, RoutedEventArgs e)
         {
+            int[] handles = grdItens.GetSelectedRowHandles();
+            if (handles.Length > 0)
+            {
+
+            }
+
+
             new Thread(() =>
             {
                 Dispatcher.Invoke(new Action(() =>
@@ -113,30 +103,23 @@ namespace GeGET
                     wb.Show();
                 }));
                 syncEvent.Set();
-                foreach (var item in listaItens)
+                foreach (var rowHandle in handles)
                 {
-
-                    if (item.IsSelected)
-                    {
-
-
-                        Dispatcher.Invoke(DispatcherPriority.Background,
-                      new Action(() =>
-                      {
-                          dto.Id = item.Id;
-                          dto.Atividade_Id = Atividade_Id;
-                          dto.Negocio_Id = Negocio_Id;
-                          dto.Descricao_Produto = item.Descricao_Produto;
-                          bll.Add(dto);
-                          item.IsSelected = false;
-                      }));
-
-                    }
+                    Dispatcher.Invoke(DispatcherPriority.Background,
+                  new Action(() =>
+                  {
+                      var selectedItem = grdItens.GetRow(rowHandle) as AdicionarItemOrcamentoDTO;
+                      dto.Id = Convert.ToInt32(selectedItem.Id);
+                      dto.Atividade_Id = Atividade_Id;
+                      dto.Negocio_Id = Negocio_Id;
+                      dto.Descricao_Produto = selectedItem.Descricao_Produto;
+                      bll.Add(dto);
+                      grdItens.UnselectAll();
+                  }));
                 }
                 t1 = new Thread(WaitBoxLoad);
                 t1.Start();
             }).Start();
-
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
@@ -144,31 +127,6 @@ namespace GeGET
             this.Close();
         }
 
-        #endregion
-
-        #region TxtFind Text Changed
-        private void TxtFind_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            t1 = new Thread(Commit);
-            t1.Start();
-        }
-        #endregion
-
-        #region Grid Keydown Ctrl+F
-        private void GrdItens_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.F && Keyboard.Modifiers == ModifierKeys.Control)
-            {
-                if (boxPesquisar.Visibility == Visibility.Collapsed)
-                {
-                    boxPesquisar.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    boxPesquisar.Visibility = Visibility.Collapsed;
-                }
-            }
-        }
         #endregion
 
         #endregion

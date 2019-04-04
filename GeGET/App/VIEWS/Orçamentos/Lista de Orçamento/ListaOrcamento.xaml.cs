@@ -122,8 +122,7 @@ namespace GeGET
             var position = Mouse.GetPosition(this);
             using (var form = new ProcurarOrcamento(position))
             {
-
-                bs.Show();
+                form.Owner = Window.GetWindow(this);
                 form.ShowDialog();
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {
@@ -148,19 +147,19 @@ namespace GeGET
                     else
                     {
                         bs.Close();
-                        CustomOKMessageBox.Show("Não há atividades cadastradas para este negócio.", "Atenção!");
+                        CustomOKMessageBox.Show("Não há atividades cadastradas para este negócio.", "Atenção!", Window.GetWindow(this));
                         InitializeComponents();
                     }
 
                 }
             }
-            bs.Close();
         }
 
         private void Adicionar_Click(object sender, RoutedEventArgs e)
         {
             using (var form = new ProcurarMateriais(dto))
             {
+                form.Owner = Window.GetWindow(this);
                 form.ShowDialog();
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {
@@ -172,12 +171,12 @@ namespace GeGET
 
         private void AtualizarPrecos_Click(object sender, RoutedEventArgs e)
         {
-            var result = CustomOKCancelMessageBox.Show("Você deseja mesmo atualiazar os preços para a versão atual?", "Atenção!");
+            var result = CustomOKCancelMessageBox.Show("Você deseja mesmo atualiazar os preços para a versão atual?", "Atenção!", Window.GetWindow(this));
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 bll.AtualizarPreco(dto);
                 Load();
-                CustomOKMessageBox.Show("Preços atualizados com sucesso.","Atualizado!");
+                CustomOKMessageBox.Show("Preços atualizados com sucesso.","Atualizado!", Window.GetWindow(this));
             }
         }
 
@@ -197,7 +196,7 @@ namespace GeGET
 
             if (handles.Length > 0)
             {
-                var result = CustomOKCancelMessageBox.Show("Deseja mesmo excluir todos os itens selecionados?", "Atenção!");
+                var result = CustomOKCancelMessageBox.Show("Deseja mesmo excluir todos os itens selecionados?", "Atenção!", Window.GetWindow(this));
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     new Thread(() =>
@@ -225,7 +224,7 @@ namespace GeGET
             }
             else
             {
-                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para excluir.", "Atenção!");
+                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para excluir.", "Atenção!", Window.GetWindow(this));
             }
         }
 
@@ -244,12 +243,13 @@ namespace GeGET
                 }
                 using (var form = new CopiarItensOrcamento(listaCopiar, dto))
                 {
+                    form.Owner = Window.GetWindow(this);
                     form.ShowDialog();
                 }
             }
             else
             {
-                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para copiar.", "Atenção!");
+                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para copiar.", "Atenção!", Window.GetWindow(this));
             }
         }
 
@@ -266,6 +266,7 @@ namespace GeGET
                 }
                 using (var form = new AlterarBDIOrcamento(listaAterarBDI))
                 {
+                    form.Owner = Window.GetWindow(this);
                     form.ShowDialog();
                     if (form.DialogResult.HasValue && form.DialogResult.Value)
                     {
@@ -277,7 +278,7 @@ namespace GeGET
             }
             else
             {
-                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para alterar o BDI.", "Atenção!");
+                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para alterar o BDI.", "Atenção!", Window.GetWindow(this));
             }
         }
 

@@ -5,8 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         WindowStyle="None"
-        BorderBrush="DimGray"
-        BorderThickness="0.5"
+        BorderBrush="DarkGray"
+        BorderThickness="0.1"
         Topmost="True"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
@@ -31,7 +31,7 @@
                 <ProgressBar x:Name="progressBar" Height="Auto" Background="White" BorderBrush="White" Value="100" SmallChange="1"/>
             </Grid>
             <Grid Grid.Row="1">
-                <TextBlock x:Name="txtTitulo" VerticalAlignment="Bottom" Margin="10,0,0,0" FontFamily="Century Gothic" FontSize="22">Orçamento Cadastrado</TextBlock>
+                <TextBlock x:Name="txtTitulo" VerticalAlignment="Bottom" Margin="10,0,0,0" Foreground="DimGray" FontFamily="Century Gothic" FontSize="22">Orçamento Cadastrado</TextBlock>
                 <StackPanel HorizontalAlignment="Right" Margin="0,20,5,0">
                     <Button x:Name="btnClose" Height="25" Width="25" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#7A2932" Click="BtnClose_Click">
                         <materialDesign:PackIcon Kind="Close" Width="25" Height="25"/>
@@ -39,7 +39,7 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="3">
-                <TextBlock x:Name="txtDescription" TextWrapping="WrapWithOverflow" Margin="19,0,16,0" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DimGray">Alexandre Hansen cadastrou você no orçamento P0230.</TextBlock>
+                <TextBlock x:Name="txtDescription" TextWrapping="WrapWithOverflow" Margin="19,0,16,0" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray">Alexandre Hansen cadastrou você no orçamento P0230.</TextBlock>
             </Grid>
         </Grid>
     </materialDesign:TransitioningContent>

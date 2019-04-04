@@ -63,7 +63,7 @@ namespace GeGET
         {
             if (txtRazao.Text != "" && txtFantasia.Text != "" && txtEndereco.Text != "" && txtCNPJ.Text != "" && txtTelefone.Text != "" && cmbUF.SelectedIndex != -1 && cmbCidade.SelectedIndex != -1)
             {
-                var result = CustomOKCancelMessageBox.Show("Deseja mesmo cadastrar este estabelecimento?", "Atenção!");
+                var result = CustomOKCancelMessageBox.Show("Deseja mesmo cadastrar este estabelecimento?", "Atenção!", Window.GetWindow(this));
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     dto.Razao_Social = txtRazao.Text.Replace("'", "''").ToUpper();
@@ -77,13 +77,13 @@ namespace GeGET
                     if (bll.CreateEstabelecimento(dto))
                     {
                         ClearControls();
-                        CustomOKMessageBox.Show("Estabelecimento cadastrado com sucesso!", "Sucesso!");
+                        CustomOKMessageBox.Show("Estabelecimento cadastrado com sucesso!", "Sucesso!", Window.GetWindow(this));
                     }
                 }
             }
             else
             {
-                CustomOKMessageBox.Show("Campos não podem estar em branco.", "Atenção!");
+                CustomOKMessageBox.Show("Campos não podem estar em branco.", "Atenção!", Window.GetWindow(this));
             }
         }
 
@@ -91,9 +91,9 @@ namespace GeGET
         {
             var position = Mouse.GetPosition(this);
             BlackScreen bs = new BlackScreen();
-            bs.Show();
             using (var form = new ProcurarCliente(position))
             {
+                form.Owner = Window.GetWindow(this);
                 form.ShowDialog();
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {
@@ -102,7 +102,6 @@ namespace GeGET
                     dto.Cliente_Id = form.new_Cliente_Id;
                 }
             }
-            bs.Close();
         }
 
         #endregion

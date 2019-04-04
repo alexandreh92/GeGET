@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Costura.Fody.3.3.3\build\Costura.Fody.props" Condition="Exists('..\packages\Costura.Fody.3.3.3\build\Costura.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,6 +14,8 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,6 +41,9 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="Costura, Version=3.3.3.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Costura.Fody.3.3.3\lib\net40\Costura.dll</HintPath>
+    </Reference>
     <Reference Include="Devart.DbForge.Data.Interfaces">
       <HintPath>F:\Devart\dbForge Studio for MySQL\Devart.DbForge.Data.Interfaces.dll</HintPath>
     </Reference>
@@ -129,6 +135,9 @@
     <Compile Include="App\Controls\Shared\CustomOKMessageBox.xaml.cs">
       <DependentUpon>CustomOKMessageBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarOrcamentista.xaml.cs">
+      <DependentUpon>ProcurarOrcamentista.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\Controls\Shared\ProcurarOrcamento.xaml.cs">
       <DependentUpon>ProcurarOrcamento.xaml</DependentUpon>
     </Compile>
@@ -138,6 +147,7 @@
     <Compile Include="App\Controls\Shared\ProcurarEstabelecimento.xaml.cs">
       <DependentUpon>ProcurarEstabelecimento.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\DTO\CRM\Negócios\OrcamentistasDTO.cs" />
     <Compile Include="App\DTO\CRM\Shared\PrioridadeDTO.cs" />
     <Compile Include="App\DTO\CRM\Shared\ContatoDTO.cs" />
     <Compile Include="App\DTO\CRM\Shared\VedendoresDTO.cs" />
@@ -164,8 +174,11 @@
     <Compile Include="App\Controls\CRM\Funil de Vendas\FunilControl.xaml.cs">
       <DependentUpon>FunilControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="App\VIEWS\CRM\Dashboard de Negócios\DashboardNegocios.xaml.cs">
-      <DependentUpon>DashboardNegocios.xaml</DependentUpon>
+    <Compile Include="App\VIEWS\CRM\Gerenciar Orcamento\ValorEnviadoOrcamento.xaml.cs">
+      <DependentUpon>ValorEnviadoOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Gerenciar Orcamento\GerenciarOrcamento.xaml.cs">
+      <DependentUpon>GerenciarOrcamento.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\VIEWS\CRM\Negócios\CadastroNegocio.xaml.cs">
       <DependentUpon>CadastroNegocio.xaml</DependentUpon>
@@ -176,8 +189,8 @@
     <Compile Include="App\VIEWS\CRM\Pessoas\EditarPessoas.xaml.cs">
       <DependentUpon>EditarPessoas.xaml</DependentUpon>
     </Compile>
-    <Compile Include="App\Controls\Layout\MensagemLayout.xaml.cs">
-      <DependentUpon>MensagemLayout.xaml</DependentUpon>
+    <Compile Include="App\Controls\Layout\NotificacaoLayout.xaml.cs">
+      <DependentUpon>NotificacaoLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\Controls\Shared\ProcurarCliente.xaml.cs">
       <DependentUpon>ProcurarCliente.xaml</DependentUpon>
@@ -251,6 +264,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="App\Controls\Shared\ProcurarOrcamentista.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\Controls\Shared\ProcurarOrcamento.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -283,7 +300,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="App\VIEWS\CRM\Dashboard de Negócios\DashboardNegocios.xaml">
+    <Page Include="App\VIEWS\CRM\Gerenciar Orcamento\ValorEnviadoOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Gerenciar Orcamento\GerenciarOrcamento.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -299,7 +320,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="App\Controls\Layout\MensagemLayout.xaml">
+    <Page Include="App\Controls\Layout\NotificacaoLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -487,4 +508,12 @@
     <Resource Include="Resources\Images\teste.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.4.0.2\build\Fody.targets" Condition="Exists('..\packages\Fody.4.0.2\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.4.0.2\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.4.0.2\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.3.3.3\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.3.3.3\build\Costura.Fody.props'))" />
+  </Target>
 </Project>

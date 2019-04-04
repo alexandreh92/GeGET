@@ -55,7 +55,7 @@ namespace GeGET
         {
             if (txtRazao.Text != "" && txtFantasia.Text != "" && cmbCategoria.SelectedIndex != -1)
             {
-                var result = CustomOKCancelMessageBox.Show("Deseja mesmo cadastrar este cliente?", "Atenção!");
+                var result = CustomOKCancelMessageBox.Show("Deseja mesmo cadastrar este cliente?", "Atenção!", Window.GetWindow(this));
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     dto.Razao_Social = txtRazao.Text.Replace("'", "''").ToUpper();
@@ -64,13 +64,13 @@ namespace GeGET
                     if (bll.CreateCliente(dto))
                     {
                         ClearControls();
-                        CustomOKCancelMessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso!");
+                        CustomOKCancelMessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso!", Window.GetWindow(this));
                     }
                 }
             }
             else
             {
-                CustomOKCancelMessageBox.Show("Campos não podem estar em branco.", "Atenção!");
+                CustomOKCancelMessageBox.Show("Campos não podem estar em branco.", "Atenção!", Window.GetWindow(this));
             }
         }
         #endregion

@@ -83,7 +83,7 @@ namespace GeGET
                 }
                 else
                 {
-                    CustomOKMessageBox.Show("As senhas não são iguais.", "Atenção!");
+                    CustomOKMessageBox.Show("As senhas não são iguais.", "Atenção!", Window.GetWindow(this));
                 }
             }
 
@@ -91,7 +91,7 @@ namespace GeGET
             {
                 passwordsave = false;
                 imagesave = false;
-                CustomOKMessageBox.Show("Dados alterados com sucesso.", "Sucesso!");
+                CustomOKMessageBox.Show("Dados alterados com sucesso.", "Sucesso!", Window.GetWindow(this));
             }
 
 

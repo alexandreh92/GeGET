@@ -86,7 +86,7 @@ namespace GeGET
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            var result = CustomOKCancelMessageBox.Show("Você deseja mesmo fechar o programa?", "Atenção!");
+            var result = CustomOKCancelMessageBox.Show("Você deseja mesmo fechar o programa?", "Atenção!", Window.GetWindow(this));
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 Application.Current.Shutdown();
@@ -125,7 +125,7 @@ namespace GeGET
                 btnNotificationIcon.Kind = PackIconKind.BellOutline;
             }
             var position = Mouse.GetPosition(this);
-            MensagemLayout msgs = new MensagemLayout();
+            NotificacaoLayout msgs = new NotificacaoLayout();
             msgs.Left = position.X - msgs.Width;
             msgs.Top = position.Y;
             msgs.Show();

@@ -29,6 +29,9 @@ namespace GeGET
         public ProcurarCliente(Point mouseLocation)
         {
             InitializeComponent();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+            ColLeft.Width = new GridLength(mouseLocation.X + 230, GridUnitType.Pixel);
             t1 = new Thread(Load);
             t1.Start();
             Left = mouseLocation.X;

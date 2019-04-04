@@ -31,6 +31,9 @@ namespace GeGET
         public ProcurarEstabelecimento(Point mouseLocation, NegociosDTO DTO)
         {
             InitializeComponent();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+            ColLeft.Width = new GridLength(mouseLocation.X, GridUnitType.Pixel);
             dto.Cliente_Id = DTO.Cliente_Id;
             t1 = new Thread(Load);
             t1.Start();

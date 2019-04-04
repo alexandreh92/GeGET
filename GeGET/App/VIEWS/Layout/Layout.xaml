@@ -64,17 +64,17 @@
                             <materialDesign:Badged x:Name="BadgeControl" Badge="" BadgeBackground="White">
                                 <materialDesign:PopupBox StaysOpen="False" Margin="0,0,-15,0" VerticalAlignment="Center" PreviewMouseLeftButtonUp="PopupBox_PreviewMouseLeftButtonDown">
                                     <materialDesign:PopupBox.ToggleContent>
-                                        <materialDesign:PackIcon x:Name="btnNotificationIcon" Foreground="White" VerticalAlignment="Center" Margin="0,3,0,0" Kind="BellOutline" Width="25" Height="25"/>
+                                        <materialDesign:PackIcon x:Name="btnNotificationIcon" ToolTip="Notificações" Foreground="White" VerticalAlignment="Center" Margin="0,3,0,0" Kind="BellOutline" Width="25" Height="25"/>
                                     </materialDesign:PopupBox.ToggleContent>
                                 </materialDesign:PopupBox>
                             </materialDesign:Badged>
-                            <Button x:Name="btnMinimize" Height="25" Width="25" Margin="5,0,-5,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnMinimize_Click">
+                            <Button x:Name="btnMinimize" Height="25" Width="25" ToolTip="Minimizar" Margin="5,0,-5,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnMinimize_Click">
                                 <materialDesign:PackIcon Kind="WindowMinimize" Width="25" Height="25" Margin="0,5,0,0"/>
                             </Button>
-                            <Button x:Name="btnMaximize" Height="25" Width="25" Margin="5,0,-5,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnMaximize_Click">
+                            <Button x:Name="btnMaximize" Height="25" ToolTip="Maximizar" Width="25" Margin="5,0,-5,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnMaximize_Click">
                                 <materialDesign:PackIcon Kind="WindowMaximize" Width="25" Height="25"/>
                             </Button>
-                            <Button x:Name="btnClose" Height="25" Width="25" Margin="5,0,-5,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnClose_Click">
+                            <Button x:Name="btnClose" Height="25" Width="25" ToolTip="Fechar" Margin="5,0,-5,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnClose_Click">
                                 <materialDesign:PackIcon Kind="Close" Width="25" Height="25"/>
                             </Button>
                         </StackPanel>

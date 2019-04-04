@@ -13,31 +13,31 @@ using MMLib.Extensions;
 
 namespace GeGET
 {
-    public partial class ProcurarOrcamento : Window, IDisposable
+    public partial class ProcurarOrcamentista : Window, IDisposable
     {
         #region Declarations
         NegociosBLL bll = new NegociosBLL();
         NegociosDTO dto = new NegociosDTO();
         public string Negocio_Id;
-        public ObservableCollection<NegociosDTO> listaNegocios;
+        public string Id;
+        public string Login;
+        public string Nome_Simples;
+        public ObservableCollection<OrcamentistasDTO> listaOrcamentistas;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         Thread t1;
         Thread t2;
         #endregion
 
         #region Initialize
-        public ProcurarOrcamento(Point mouseLocation)
+        public ProcurarOrcamentista(Point mouseLocation, NegociosDTO DTO)
         {
             InitializeComponent();
-            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-            MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
             dto.Pesquisa = "";
+            dto.Id = DTO.Id;
             t1 = new Thread(Load);
             t1.Start();
-            ColLeft.Width = new GridLength(mouseLocation.X + 230, GridUnitType.Pixel);
-            ColTop.Height = new GridLength(mouseLocation.Y, GridUnitType.Pixel);
-            //Left = mouseLocation.X +240;
-            //Top = mouseLocation.Y;
+            Left = mouseLocation.X +240;
+            Top = mouseLocation.Y - 150;
         }
         #endregion
 
@@ -51,8 +51,8 @@ namespace GeGET
                          syncEvent.Set();
                          t2 = new Thread(waitLoad);
                          t2.Start();
-                         listaNegocios = bll.LoadOrcamentos(dto);
-                         lstMensagens.ItemsSource = listaNegocios;
+                         listaOrcamentistas = bll.LoadOrcamentistas(dto);
+                         lstMensagens.ItemsSource = listaOrcamentistas;
                      }));
         }
 
@@ -74,7 +74,7 @@ namespace GeGET
                   new Action(() =>
                   {
                       var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
-                      var filtered = listaNegocios.Where(descricao => Find.Any(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Descricao.ToLower().RemoveDiacritics().Contains(list) || descricao.Endereco.ToLower().Contains(list) || descricao.Anotacoes.ToLower().Contains(list) || descricao.Vendedor.ToLower().Contains(list) || descricao.CidadeEstado.ToLower().Contains(list) || descricao.Status_Descricao.ToLower().Contains(list) || descricao.Id.ToLower().Contains(list) || descricao.Numero.ToLower().Contains(list)));
+                      var filtered = listaOrcamentistas.Where(descricao => Find.Any(list => descricao.Nome.ToLower().RemoveDiacritics().Contains(list) || descricao.Celular.ToLower().RemoveDiacritics().Contains(list) || descricao.Email.ToLower().Contains(list) || descricao.Setor.ToLower().Contains(list)));
                       lstMensagens.ItemsSource = filtered;
                   }));
         }
@@ -106,7 +106,9 @@ namespace GeGET
         {
             Button btn = sender as Button;
             int index = lstMensagens.Items.IndexOf(btn.DataContext);
-            Negocio_Id = ((NegociosDTO)lstMensagens.Items[index]).Id;
+            Id = ((OrcamentistasDTO)lstMensagens.Items[index]).Id;
+            Login = ((OrcamentistasDTO)lstMensagens.Items[index]).Login;
+            Nome_Simples = ((OrcamentistasDTO)lstMensagens.Items[index]).Nome_Simples;
             DialogResult = true;
         }
         #endregion

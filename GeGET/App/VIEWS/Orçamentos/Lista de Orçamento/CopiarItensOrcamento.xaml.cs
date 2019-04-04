@@ -97,7 +97,7 @@ namespace GeGET
             Dispatcher.Invoke(new Action(() =>
             {
                 wb.Close();
-                var result = CustomOKCancelMessageBox.Show("Itens Inseridos com sucesso.\nDeseja inserir os itens selecionados em outra atividade?","Sucesso!");
+                var result = CustomOKCancelMessageBox.Show("Itens Inseridos com sucesso.\nDeseja inserir os itens selecionados em outra atividade?","Sucesso!", Window.GetWindow(this));
                 if (result != System.Windows.Forms.DialogResult.OK)
                 {
                     this.Close();
@@ -107,7 +107,7 @@ namespace GeGET
 
         private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
-            var result = CustomOKCancelMessageBox.Show("Você deseja mesmo copiar estes itens para a atividade '" + cmbAtividade.Text + "' ?","Atenção!");
+            var result = CustomOKCancelMessageBox.Show("Você deseja mesmo copiar estes itens para a atividade '" + cmbAtividade.Text + "' ?","Atenção!", Window.GetWindow(this));
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 Insert();

@@ -103,7 +103,7 @@ namespace GeGET
         {
             if (txtRazao.Text != "" && txtEstabelecimento.Text != "" && txtNome.Text != "" && dtPicker.Text != "" && cmbContato.SelectedIndex != -1 && cmbPrioridade.SelectedIndex != -1 && cmbVendedor.SelectedIndex != -1)
             {
-                var result = CustomOKCancelMessageBox.Show("Deseja mesmo cadastrar este estabelecimento?", "Atenção!");
+                var result = CustomOKCancelMessageBox.Show("Deseja mesmo cadastrar este estabelecimento?", "Atenção!", Window.GetWindow(this));
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     GetValues();
@@ -111,23 +111,22 @@ namespace GeGET
                     {
                         var negocio = bll.RetNegocioId();
                         ClearControls();
-                        CustomOKMessageBox.Show("Negocio P" + Convert.ToInt32(negocio.Id).ToString("0000") + " cadastrado com sucesso!", "Sucesso!");
+                        CustomOKMessageBox.Show("Negocio P" + Convert.ToInt32(negocio.Id).ToString("0000") + " cadastrado com sucesso!", "Sucesso!", Window.GetWindow(this));
                     }
                 }
             }
             else
             {
-                CustomOKMessageBox.Show("Campos não podem estar em branco.", "Atenção!");
+                CustomOKMessageBox.Show("Campos não podem estar em branco.", "Atenção!", Window.GetWindow(this));
             }
         }
 
         private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
         {
             var position = Mouse.GetPosition(this);
-            BlackScreen bs = new BlackScreen();
-            bs.Show();
             using (var form = new ProcurarCliente(position))
             {
+                form.Owner = Window.GetWindow(this);
                 form.ShowDialog();
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {
@@ -137,7 +136,6 @@ namespace GeGET
                     dto.Cliente_Id = form.new_Cliente_Id;
                 }
             }
-            bs.Close();
         }
 
         private void BtnPesquisaEstabelecimento_Click(object sender, RoutedEventArgs e)
@@ -145,10 +143,9 @@ namespace GeGET
             if (txtRazao.Text != " " && txtRazao.Text != "")
             {
                 var position = Mouse.GetPosition(this);
-                BlackScreen bs = new BlackScreen();
-                bs.Show();
                 using (var form = new ProcurarEstabelecimento(position, dto))
                 {
+                    form.Owner = Window.GetWindow(this);
                     form.ShowDialog();
                     if (form.DialogResult.Value && form.DialogResult.HasValue)
                     {
@@ -160,7 +157,6 @@ namespace GeGET
                         LoadComboboxes();
                     }
                 }
-                bs.Close();
             }
         }
 

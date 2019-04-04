@@ -5,21 +5,23 @@ namespace GeGET
 {
     public partial class CustomOKMessageBox : Window
     {
-        public CustomOKMessageBox()
+        public CustomOKMessageBox(Window Parent)
         {
             InitializeComponent();
+            this.Owner = Parent;
         }
         public static CustomOKMessageBox MsgBoxOK;
         static System.Windows.Forms.DialogResult result;
 
-        public static DialogResult Show(string Text, string Caption)
+        public static DialogResult Show(string Text, string Caption, Window parent)
         {
-            MsgBoxOK = new CustomOKMessageBox();
+            MsgBoxOK = new CustomOKMessageBox(parent);
             MsgBoxOK.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MsgBoxOK.MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
             MsgBoxOK.txtDescricao.Text = Text;
             MsgBoxOK.txtTitulo.Text = Caption;
             MsgBoxOK.ShowDialog();
+            MsgBoxOK.Owner = parent;
             return result;
         }
 

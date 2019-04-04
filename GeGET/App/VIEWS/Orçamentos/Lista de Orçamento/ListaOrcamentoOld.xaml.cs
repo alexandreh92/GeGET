@@ -173,7 +173,7 @@ namespace GeGET
                     else
                     {
                         bs.Close();
-                        CustomOKMessageBox.Show("Não há atividades cadastradas para este negócio.", "Atenção!");
+                        CustomOKMessageBox.Show("Não há atividades cadastradas para este negócio.", "Atenção!", Window.GetWindow(this));
                         InitializeComponents();
                     }
 
@@ -197,7 +197,7 @@ namespace GeGET
 
         private void AtualizarPrecos_Click(object sender, RoutedEventArgs e)
         {
-            var result = CustomOKCancelMessageBox.Show("Você deseja mesmo atualiazar os preços para a versão atual?", "Atenção!");
+            var result = CustomOKCancelMessageBox.Show("Você deseja mesmo atualiazar os preços para a versão atual?", "Atenção!", Window.GetWindow(this));
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 bll.AtualizarPreco(dto);
@@ -236,7 +236,7 @@ namespace GeGET
 
             if (listaCopiar.Count > 0)
             {
-                var result = CustomOKCancelMessageBox.Show("Deseja mesmo excluir todos os itens selecionados?", "Atenção!");
+                var result = CustomOKCancelMessageBox.Show("Deseja mesmo excluir todos os itens selecionados?", "Atenção!", Window.GetWindow(this));
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     new Thread(() =>
@@ -263,7 +263,7 @@ namespace GeGET
             }
             else
             {
-                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para excluir.", "Atenção!");
+                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para excluir.", "Atenção!", Window.GetWindow(this));
             }
         }
 
@@ -287,7 +287,7 @@ namespace GeGET
             }
             else
             {
-                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para copiar.", "Atenção!");
+                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para copiar.", "Atenção!", Window.GetWindow(this));
             }
 
         }
