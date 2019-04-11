@@ -28,6 +28,13 @@
         private static bool fromChildrenParent = false;
         private static string parentId;
         private string valor_Enviado;
+        private string valor_Fechamento;
+        private string motivo_Cancelamento_Id;
+        private string motivo_Cancelamento;
+        private string valor_Perdido;
+        private string versao_Descricao;
+        private int progressBarValue;
+        private int versao_Locked;
 
         public string Id { get => id; set => id = value; }
         public string Numero { get => numero; set => numero = value; }
@@ -55,5 +62,12 @@
         public string Versao_Id { get => versao_Id; set => versao_Id = value; }
         public string Cnpj { get => cnpj; set => cnpj = value; }
         public string Valor_Enviado { get => valor_Enviado; set => valor_Enviado = value; }
+        public string Valor_Fechamento { get => valor_Fechamento; set => valor_Fechamento = value; }
+        public string Motivo_Cancelamento_Id { get => motivo_Cancelamento_Id; set => motivo_Cancelamento_Id = value; }
+        public string Valor_Perdido { get => valor_Perdido; set => valor_Perdido = value; }
+        public string Motivo_Cancelamento { get => motivo_Cancelamento; set => motivo_Cancelamento = value; }
+        public string Versao_Descricao { get => versao_Descricao; set => versao_Descricao = value; }
+        public int ProgressBarValue { get => progressBarValue; set => progressBarValue = value; }
+        public int Versao_Locked { get => versao_Locked; set => versao_Locked = value; }
     }
 }

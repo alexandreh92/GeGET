@@ -113,6 +113,7 @@ namespace GeGET
             dto.Status = ((EstabelecimentosDTO)lstClientes.Items[index]).Status;
             using (var form = new EditarEstabelecimento(dto))
             {
+                form.Owner = Window.GetWindow(this);
                 form.ShowDialog();
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {

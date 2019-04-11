@@ -32,7 +32,7 @@ namespace GeGET
         public Login()
         {
             InitializeComponent();
-            CheckUpdate();
+            //CheckUpdate();
             Remember_Data();
             progressBar.Value = 0;
             var bc = new BrushConverter();

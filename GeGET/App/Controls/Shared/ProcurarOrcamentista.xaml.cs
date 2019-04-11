@@ -32,6 +32,8 @@ namespace GeGET
         public ProcurarOrcamentista(Point mouseLocation, NegociosDTO DTO)
         {
             InitializeComponent();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
             dto.Pesquisa = "";
             dto.Id = DTO.Id;
             t1 = new Thread(Load);

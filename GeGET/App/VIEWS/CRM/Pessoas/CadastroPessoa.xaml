@@ -9,7 +9,7 @@
              xmlns:control = "clr-namespace:Teste"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="1500" d:DesignWidth="800">
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide">
         <materialDesign:TransitioningContent.OpeningEffects>
             <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8" />
@@ -76,14 +76,14 @@
                                                                 <materialDesign:PackIcon Kind="Magnify" Opacity=".56" VerticalAlignment="Center" Height="15" Width="15" />
                                                             </Button>
                                                         </StackPanel>
-                                                        <TextBox x:Name="txtNome" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="350" Foreground="DimGray">
+                                                        <TextBox MaxLength="45" x:Name="txtNome" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="350" Foreground="DimGray">
                                                             <materialDesign:HintAssist.Hint>
                                                                 <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                     <TextBlock>Nome</TextBlock>
                                                                 </StackPanel>
                                                             </materialDesign:HintAssist.Hint>
                                                         </TextBox>
-                                                        <TextBox x:Name="txtEmail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="350" Foreground="DimGray">
+                                                        <TextBox MaxLength="50" x:Name="txtEmail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="350" Foreground="DimGray">
                                                             <materialDesign:HintAssist.Hint>
                                                                 <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                     <TextBlock>E-Mail</TextBlock>
@@ -97,14 +97,14 @@
                                                                 </ItemsPanelTemplate>
                                                             </ComboBox.ItemsPanel>
                                                         </ComboBox>
-                                                        <xctk:MaskedTextBox Mask="(00) 00000-0000" x:Name="txtTelefone" TextAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="146" Foreground="DimGray">
+                                                        <xctk:MaskedTextBox MaxLength="20" Mask="(00) 00000-0000" x:Name="txtTelefone" TextAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="146" Foreground="DimGray">
                                                             <materialDesign:HintAssist.Hint>
                                                                 <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                     <TextBlock>Telefone</TextBlock>
                                                                 </StackPanel>
                                                             </materialDesign:HintAssist.Hint>
                                                         </xctk:MaskedTextBox>
-                                                        <xctk:MaskedTextBox Mask="(00) 0000-0000" x:Name="txtCelular" TextAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="120" Foreground="DimGray">
+                                                        <xctk:MaskedTextBox MaxLength="20" Mask="(00) 0000-0000" x:Name="txtCelular" TextAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="120" Foreground="DimGray">
                                                             <materialDesign:HintAssist.Hint>
                                                                 <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                     <TextBlock>Celular</TextBlock>

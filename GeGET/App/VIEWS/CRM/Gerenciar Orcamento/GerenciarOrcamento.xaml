@@ -55,7 +55,7 @@
                                 <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}">
                                     <StackPanel x:Name="StackPanel1">
                                         <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                        <Expander HorizontalAlignment="Stretch" IsExpanded="True" Header="Informações" Foreground="#7A2932" FontFamily="{DynamicResource Novecento-Bold}">
+                                        <Expander HorizontalAlignment="Stretch" IsExpanded="True" Background="White" Header="Informações" Foreground="#7A2932" FontFamily="{DynamicResource Novecento-Bold}">
                                             <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                                                 <control:AlignableWrapPanel HorizontalContentAlignment="Center">
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" Margin="0,25,20,30">
@@ -141,7 +141,7 @@
                                                         </materialDesign:HintAssist.Hint>
                                                     </TextBox>
                                                 </control:AlignableWrapPanel>
-                                                <Expander Foreground="#7A2932" Header="Informações Adicionais">
+                                                <Expander Foreground="#7A2932" Background="White" Header="Informações Adicionais">
                                                     <StackPanel Margin="30,0,50,0">
                                                         <TextBlock x:Name="txtAnotacoes" TextWrapping="Wrap" FontFamily="SegoeUI" Foreground="{DynamicResource MaterialDesignBody}"></TextBlock>
                                                     </StackPanel>
@@ -164,7 +164,7 @@
                                                 <control:AlignableWrapPanel HorizontalContentAlignment="Center">
                                                     <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="5,5,5,5">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <Button x:Name="btnNovaVersão" Height="70" Width="70" IsEnabled="False">
+                                                            <Button x:Name="btnNovaVersão" Height="70" Width="70" IsEnabled="False" Click="BtnNovaVersão_Click">
                                                                 <materialDesign:PackIcon Kind="OpenInNew" HorizontalAlignment="Center" Height="50" Width="50" />
                                                             </Button>
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" Foreground="{DynamicResource MaterialDesignBody}" HorizontalAlignment="Center" Margin="0,10,0,0">Nova Versão</TextBlock>
@@ -172,7 +172,7 @@
                                                     </materialDesign:Card>
                                                     <materialDesign:Card Width="150" Height="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="5,5,5,5">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <Button x:Name="btnAterarVersao" Height="70" Width="70" IsEnabled="False">
+                                                            <Button x:Name="btnAterarVersao" Height="70" Width="70" IsEnabled="False" Click="BtnAterarVersao_Click">
                                                                 <materialDesign:PackIcon Kind="ArrangeSendBackward" HorizontalAlignment="Center" Height="50" Width="50" />
                                                             </Button>
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" Foreground="{DynamicResource MaterialDesignBody}" HorizontalAlignment="Center" Margin="0,10,0,0">Alterar Versão</TextBlock>
@@ -183,7 +183,7 @@
                                         </materialDesign:Card>
                                         <materialDesign:Card Margin="7.5,20,7.5,0" Grid.Column="1" Height="{Binding ActualHeight, ElementName=pnl}" Background="{DynamicResource MaterialDesignBackground}">
                                             <Grid>
-                                            <StackPanel>
+                                                <StackPanel>
                                                     <DockPanel>
                                                         <TextBlock Foreground="#7A2932" Grid.Row="0" Margin="24,21,0,21" FontSize="15" TextTrimming="CharacterEllipsis" FontFamily="{DynamicResource Novecento-Bold}">Orçamentistas</TextBlock>
                                                         <Button x:Name="btnOrcamentista" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Center" Margin="0,0,10,0" HorizontalAlignment="Right" Height="25" Width="25" Click="BtnOrcamentista_Click" IsEnabled="False">
@@ -191,32 +191,32 @@
                                                         </Button>
                                                     </DockPanel>
                                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                            </StackPanel>
-                                            <ItemsControl x:Name="pnlOrcamentistas" Height="Auto" Margin="10,70,10,10" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
-                                                <ItemsControl.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <VirtualizingStackPanel Orientation="Vertical"/>
-                                                    </ItemsPanelTemplate>
-                                                </ItemsControl.ItemsPanel>
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
+                                                </StackPanel>
+                                                <ItemsControl x:Name="pnlOrcamentistas" Height="Auto" Margin="10,70,10,10" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <VirtualizingStackPanel Orientation="Vertical"/>
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
                                                             <materialDesign:Chip Content="{Binding Nome_Simples}" Margin="2" HorizontalAlignment="Stretch" IsDeletable="{Binding ElementName=btnOrcamentista, Path=IsEnabled}" x:Name="ButtonsDemoChip" ToolTip="{Binding Nome}" DeleteToolTip="Excluir" DeleteClick="ButtonsDemoChip_DeleteClick">
-                                                            <materialDesign:Chip.Icon>
-                                                                <Image Source="{Binding Foto}"></Image>
-                                                            </materialDesign:Chip.Icon>
-                                                        </materialDesign:Chip>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                                <ItemsControl.Template>
-                                                    <ControlTemplate>
-                                                        <Border BorderThickness="{TemplateBinding Border.BorderThickness}" Padding="{TemplateBinding Control.Padding}" BorderBrush="{TemplateBinding Border.BorderBrush}" Background="{TemplateBinding Panel.Background}" SnapsToDevicePixels="True">                                                       
-                                                            <ScrollViewer Padding="{TemplateBinding Control.Padding}" Focusable="False">
-                                                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
-                                                            </ScrollViewer>
-                                                        </Border>
-                                                    </ControlTemplate>
-                                                </ItemsControl.Template>
-                                            </ItemsControl>
+                                                                <materialDesign:Chip.Icon>
+                                                                    <Image Source="{Binding Foto}"></Image>
+                                                                </materialDesign:Chip.Icon>
+                                                            </materialDesign:Chip>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                    <ItemsControl.Template>
+                                                        <ControlTemplate>
+                                                            <Border BorderThickness="{TemplateBinding Border.BorderThickness}" Padding="{TemplateBinding Control.Padding}" BorderBrush="{TemplateBinding Border.BorderBrush}" Background="{TemplateBinding Panel.Background}" SnapsToDevicePixels="True">
+                                                                <ScrollViewer Padding="{TemplateBinding Control.Padding}" Focusable="False">
+                                                                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                                                                </ScrollViewer>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </ItemsControl.Template>
+                                                </ItemsControl>
                                             </Grid>
                                         </materialDesign:Card>
                                         <materialDesign:Card Margin="7.5,20,0,0" Grid.Column="3" Background="{DynamicResource MaterialDesignBackground}">

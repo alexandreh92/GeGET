@@ -104,6 +104,7 @@ namespace GeGET
             dto.Status_Id = ((PessoasDTO)lstClientes.Items[index]).Status_Id;
             using (var form = new EditarPessoas(dto))
             {
+                form.Owner = Window.GetWindow(this);
                 form.ShowDialog();
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {

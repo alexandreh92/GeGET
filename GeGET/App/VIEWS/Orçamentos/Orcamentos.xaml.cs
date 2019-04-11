@@ -31,9 +31,14 @@ namespace GeGET
             helpers.Open<ListaOrcamento>(this.GetType().Name, false);
         }
 
-        private void BtnEstabelecimentos_Click(object sender, RoutedEventArgs e)
+        private void BtnConsultaOrcamento_Click(object sender, RoutedEventArgs e)
         {
-            helpers.Open<ListaOrcamentoOld>(this.GetType().Name, false);
+            helpers.Open<ConsultaListaOrcamento>(this.GetType().Name, false);
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Close();
         }
     }
 }

@@ -16,8 +16,8 @@ namespace GeGET
         public static DialogResult Show(string Text, string Caption, Window parent)
         {
             MsgBoxOKCancel = new CustomOKCancelMessageBox(parent);
-            MsgBoxOKCancel.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-            MsgBoxOKCancel.MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+            MsgBoxOKCancel.Height = parent.ActualHeight;
+            MsgBoxOKCancel.Width = parent.ActualWidth;
             MsgBoxOKCancel.txtDescricao.Text = Text;
             MsgBoxOKCancel.txtTitulo.Text = Caption;
             MsgBoxOKCancel.ShowDialog();

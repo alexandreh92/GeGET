@@ -43,7 +43,7 @@
             <RowDefinition x:Name="ColTop" Height="1*"/>
             <RowDefinition Height="72"/>
             <RowDefinition Height="78"/>
-            <RowDefinition Height="500"/>
+            <RowDefinition Height="527"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <materialDesign:Card Margin="10,10,10,7" Padding="10" VerticalAlignment="Stretch" Grid.Row="1" Grid.RowSpan="3" Grid.Column="1">
@@ -91,7 +91,7 @@
                 </materialDesign:Card>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="2" Grid.Column="1" Margin="0,1,0,498" Grid.RowSpan="2">
+        <Grid Grid.Row="2" Grid.Column="1">
             <materialDesign:Card VerticalAlignment="Stretch" Margin="20,5,20,5">
                 <Grid>
                     <TextBox x:Name="txtProcurar" TextChanged="TxtProcurar_TextChanged" materialDesign:HintAssist.Hint="Procurar..." FontFamily="{DynamicResource Novecento-Book}" Foreground="DimGray" Width="280" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0"/>

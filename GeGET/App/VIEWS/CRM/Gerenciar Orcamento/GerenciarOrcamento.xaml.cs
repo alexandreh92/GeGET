@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using BLL;
 using DTO;
+using System.Linq;
 
 namespace GeGET
 {
@@ -23,7 +24,7 @@ namespace GeGET
         NegociosBLL bll = new NegociosBLL();
         public ObservableCollection<OrcamentistasDTO> orcamentistas = new ObservableCollection<OrcamentistasDTO>();
         ManualResetEvent syncEvent = new ManualResetEvent(false);
-        WaitBox wb;
+        VersaoOrcamentoDTO versaoOrcamentoDTO = new VersaoOrcamentoDTO();
         #endregion
 
         #region Initialize
@@ -54,65 +55,29 @@ namespace GeGET
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {
                     dto.Id = form.Negocio_Id;
-                    var negocios = bll.LoadGerenciarOrcamento(dto);
-                    if (negocios.Count > 0)
-                    {
-                        new Thread(() =>
-                        {
-                            Dispatcher.Invoke(new Action(() =>
-                            {
-                                wb = new WaitBox();
-                                wb.Show();
-                            }));
-                            syncEvent.Set();
+                    
+                    dto = bll.LoadGerenciarOrcamento(dto).First();
 
-                            
-                            foreach (NegociosDTO item in negocios)
-                            {
-                                Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
-                               {
-                                   dto.Id = item.Id;
-                                   dto.Status_Id = item.Status_Id;
-
-                                   txtNumero.Text = item.Numero.ToUpper();
-                                   txtCliente.Text = item.Razao_Social;
-                                   txtCNPJ.Text = item.Cnpj;
-                                   txtStatus.Text = item.Status_Descricao;
-                                   txtVersao.Text = Convert.ToInt32(item.Versao_Id).ToString("00");
-                                   txtEndereco.Text = item.Endereco;
-                                   txtCidadeEstado.Text = item.CidadeEstado;
-                                   txtDescricao.Text = item.Descricao;
-                                   txtVendedor.Text = item.Vendedor;
-                                   txtResponsavel.Text = item.Contato_Nome;
-                                   if (item.Anotacoes != "") { txtAnotacoes.Text = item.Anotacoes; } else { txtAnotacoes.Text = "Não existe informações adicionais para este negócio."; }
-                                   txtPrazo.Text = Convert.ToDateTime(item.Prazo).ToString("dd/MM/yyyy");
-                                   InitializeComponents();
-                                   orcamentistas = bll.LoadOrcamentistaCadastrado(dto);
-                                   pnlOrcamentistas.ItemsSource = orcamentistas;
-
-                               }));
-                            }
-                        }).Start();
-                        
-                        Thread t1 = new Thread(WaitBoxLoad);
-                        t1.Start();
-                        
-                    }
-                    else
-                    {
-                        CustomOKMessageBox.Show("Ocorreu algum erro. Por favor, contate um desenvolvedor.", "Atenção!", Window.GetWindow(this));
-                    }
+                    txtNumero.Text = dto.Numero.ToUpper();
+                    txtCliente.Text = dto.Razao_Social;
+                    txtNumero.Text = dto.Numero.ToUpper();
+                    txtCliente.Text = dto.Razao_Social;
+                    txtCNPJ.Text = dto.Cnpj;
+                    txtStatus.Text = dto.Status_Descricao;
+                    txtVersao.Text = Convert.ToInt32(dto.Versao_Id).ToString("00");
+                    txtEndereco.Text = dto.Endereco;
+                    txtCidadeEstado.Text = dto.CidadeEstado;
+                    txtDescricao.Text = dto.Descricao;
+                    txtVendedor.Text = dto.Vendedor;
+                    
+                    txtResponsavel.Text = dto.Contato_Nome;
+                    if (dto.Anotacoes != "") { txtAnotacoes.Text = dto.Anotacoes; } else { txtAnotacoes.Text = "Não existe informações adicionais para este negócio."; }
+                    txtPrazo.Text = Convert.ToDateTime(dto.Prazo).ToString("dd/MM/yyyy");
+                    InitializeComponents();
+                    orcamentistas = bll.LoadOrcamentistaCadastrado(dto);
+                    pnlOrcamentistas.ItemsSource = orcamentistas;
                 }
             }
-        }
-
-        private void WaitBoxLoad()
-        {
-            syncEvent.WaitOne();
-            Dispatcher.Invoke(new Action(() =>
-            {
-                wb.Close();
-            }));
         }
 
         private void InitializeComponents()
@@ -217,9 +182,8 @@ namespace GeGET
         {
             if (pnlOrcamentistas.Items.Count > 0)
             {
-                dto.Status_Descricao = "NA FILA";
-                dto.Status_Id = 2;
                 bll.HabilitarOrcamento(dto);
+                dto.Status_Id = 2;
                 dto.Status_Descricao = "EM ANDAMENTO";
                 txtStatus.Text = dto.Status_Descricao;
                 InitializeComponents();
@@ -237,11 +201,11 @@ namespace GeGET
             {
                 using (var form = new ValorEnviadoOrcamento())
                 {
+                    form.Owner = Window.GetWindow(this);
                     form.ShowDialog();
                     if (form.DialogResult.Value && form.DialogResult.HasValue)
                     {
                         dto.Valor_Enviado = form.Valor;
-                        dto.Status_Descricao = "EM ANDAMENTO";
                         bll.EnviarCliente(dto);
                         dto.Status_Descricao = "ENVIADO AO CLIENTE";
                         txtStatus.Text = dto.Status_Descricao;
@@ -257,7 +221,6 @@ namespace GeGET
             var result = CustomOKCancelMessageBox.Show("Você deseja mesmo marcar este orçamento como em negociação?","Atenção!", Window.GetWindow(this));
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                dto.Status_Descricao = "ENVIADO AO CLIENTE";
                 bll.EmNegociacao(dto); //adicionar na query para atualizar a coluna negociado para 1
                 dto.Status_Descricao = "EM NEGOCIAÇÃO";
                 txtStatus.Text = dto.Status_Descricao;
@@ -268,12 +231,123 @@ namespace GeGET
 
         private void BtnFechar_Click(object sender, RoutedEventArgs e)
         {
-
+            var result = CustomOKCancelMessageBox.Show("Este procedimento não tem volta. Após fechar o orçamento você irá criar uma Ordem de Serviço baseada no número deste orçamento.\nDeseja continuar?","Atenção!",Window.GetWindow(this));
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                using (var form = new ValorFechadoOrcamento())
+                {
+                    form.Owner = Window.GetWindow(this);
+                    form.ShowDialog();
+                    if (form.DialogResult.Value && form.DialogResult.HasValue)
+                    {
+                        dto.Valor_Fechamento = form.Valor;
+                        bll.FecharNegocio(dto);
+                        dto.Status_Id = 5;
+                        dto.Status_Descricao = "FECHADO";
+                        txtStatus.Text = dto.Status_Descricao;
+                        InitializeComponents();
+                    }
+                }
+            }
         }
 
         private void BtnCancelar_Click(object sender, RoutedEventArgs e)
         {
+            var result = CustomOKCancelMessageBox.Show("Este procedimento irá cancelar o orçamento, este processo não tem volta.\nDeseja continuar?", "Atenção!", Window.GetWindow(this));
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                using (var form = new MotivoCancelamentoOrcamento())
+                {
+                    form.Owner = Window.GetWindow(this);
+                    form.ShowDialog();
+                    if (form.DialogResult.HasValue && form.DialogResult.Value)
+                    {
+                        var presult = CustomOKCancelMessageBox.Show("Deseja adicionar o valor da concorrência?", "Atenção!", Window.GetWindow(this));
+                        if (presult == System.Windows.Forms.DialogResult.OK)
+                        {
+                            using (var pp = new PrecoPerdidoOrcamento())
+                            {
+                                pp.Owner = Window.GetWindow(this);
+                                pp.ShowDialog();
+                                if (pp.DialogResult.HasValue && pp.DialogResult.Value)
+                                {
+                                    dto.Valor_Perdido = pp.Valor;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            dto.Valor_Perdido = "0";
+                        }
+                        dto.Motivo_Cancelamento = form.Motivo_Cancelamento;
+                        dto.Motivo_Cancelamento_Id = form.Motivo_Cancelamento_Id;
+                        bll.CancelarNegocio(dto);
+                        dto.Status_Id = 5;
+                        dto.Status_Descricao = "CANCELADO";
+                        txtStatus.Text = dto.Status_Descricao;
+                        InitializeComponents();
+                    }
+                }
+            }
+        }
 
+        private void BtnNovaVersão_Click(object sender, RoutedEventArgs e)
+        {
+            using (var form = new AdicionarVersaoOrcamento(dto))
+            {
+                form.Owner = Window.GetWindow(this);
+                form.ShowDialog();
+                if (form.DialogResult.HasValue && form.DialogResult.Value)
+                {
+                    dto.Versao_Id = form.Versao.ToString();
+                    dto.Versao_Descricao = form.Descricao;
+                    bll.AdicionarVersão(dto);
+                    txtVersao.Text = form.Versao.ToString("00");
+                    dto.Status_Id = 2;
+                    dto.Status_Descricao = "EM ANDAMENTO";
+                    InitializeComponents();
+                    CustomOKMessageBox.Show("Versão " + form.Versao.ToString("00") + " cadastrada com sucesso.","Sucesso!",Window.GetWindow(this));
+                    var result = CustomOKCancelMessageBox.Show("Deseja copiar os itens de alguma versão anterior para esta versão?", "Atenção!", Window.GetWindow(this));
+                    if (result == System.Windows.Forms.DialogResult.OK)
+                    {
+                        using (var cv = new CopiarVersaoOrcamento(dto))
+                        {
+                            cv.Owner = Window.GetWindow(this);
+                            cv.ShowDialog();
+                            if (cv.DialogResult.HasValue && cv.DialogResult.Value)
+                            {
+                                versaoOrcamentoDTO.Id = Convert.ToInt32(cv.Versao);
+                                versaoOrcamentoDTO.Versao_Atividade_Id = Convert.ToInt32(cv.Versao_Atividade_Id);
+                                bll.CopiarItensVersao(versaoOrcamentoDTO,dto);
+                                CustomOKMessageBox.Show("Itens copiados para nova versão.","Sucesso!",Window.GetWindow(this));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void BtnAterarVersao_Click(object sender, RoutedEventArgs e)
+        {
+            if (bll.HasEnabledVersion(dto))
+            {
+                using (var form = new AlterarVersaoOrcamento(dto))
+            {
+                form.Owner = Window.GetWindow(this);
+                form.ShowDialog();
+                if (form.DialogResult.HasValue && form.DialogResult.Value)
+                {
+                    dto.Versao_Id = form.Versao;
+                    bll.AlterarVersao(dto);
+                    txtVersao.Text = Convert.ToInt32(dto.Versao_Id).ToString("00");
+                    InitializeComponents();
+                }
+            }
+            }
+            else
+            {
+                CustomOKMessageBox.Show("Este orçamento só possui uma versão ou não possui versão habilitada para edição!","Atenção!",Window.GetWindow(this));
+            }
         }
     }
 }

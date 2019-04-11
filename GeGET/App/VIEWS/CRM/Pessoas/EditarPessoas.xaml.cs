@@ -21,6 +21,8 @@ namespace GeGET
         public EditarPessoas(PessoasDTO DTO)
         {
             InitializeComponent();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
             txtNome.Text = DTO.Nome;
             txtEmail.Text = DTO.Email;
             txtRazao.Text = DTO.Rsocial;

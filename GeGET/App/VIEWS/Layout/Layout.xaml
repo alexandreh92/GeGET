@@ -13,9 +13,13 @@
         Background="#f0f0f0"
         Closing="Window_Closing"
         Icon="/Resources/Icons/Icon.ico"
-        MouseDown="Window_MouseDown"
-        >
-    
+        MouseDown="Window_MouseDown" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+        CaptionHeight="0"
+        ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
 
     <Window.Resources>
         <Storyboard x:Key="OpenMenu">
@@ -83,9 +87,8 @@
             </Grid>
             <Grid x:Name="GridMenu" Grid.RowSpan="2" Background="#282828" Width="250" HorizontalAlignment="Stretch">
                 <materialDesign:ColorZone Background="#282828" VerticalAlignment="Stretch" materialDesign:ShadowAssist.ShadowDepth="Depth4" materialDesign:ShadowAssist.ShadowEdges="Right">
-                <StackPanel>
-                    
-                    <Grid Height="Auto" Background="#282828" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel>
+                        <Grid Height="Auto" Background="#282828" RenderTransformOrigin="0.5,0.5">
                         <Grid.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -101,29 +104,35 @@
                             <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
                         </Button>
                     </Grid>
-                    <ListView x:Name="ListViewMenu" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ShadowAssist.ShadowEdges="Right">
-                        <ListViewItem x:Name="btnDashBoard" Height="60" Foreground="White">
+                        <ListView x:Name="ListViewMenu" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ShadowAssist.ShadowEdges="Right">
+                            <ListViewItem x:Name="btnDashBoard" Height="60" Foreground="White">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="13,8,0,0"/>
-                                <TextBlock Text="DASHBOARD" VerticalAlignment="Center" Margin="20 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="15.0"/>
+                                <TextBlock Text="DASHBOARD" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="15.0"/>
                             </StackPanel>
                         </ListViewItem>
                         <ListViewItem x:Name="btnCRM" Height="60" PreviewMouseLeftButtonDown="BtnCRM_PreviewMouseLeftButtonDown" Foreground="White">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Briefcase" Height="25" Width="25" Margin="13,8,0,0"/>
-                                <TextBlock Text="CRM" VerticalAlignment="Center" Margin="20 10" FontFamily="{StaticResource Novecento-Book}" FontSize="15.0"/>
+                                <TextBlock Text="CRM" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Book}" FontSize="15.0"/>
                             </StackPanel>
                         </ListViewItem>
                             <ListViewItem x:Name="btnOrcamentos" Height="60" PreviewMouseLeftButtonDown="BtnOrcamentos_PreviewMouseLeftButtonDown" Foreground="White">
                             <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Wallet" Height="25" Width="25" Margin="13,5,0,0"/>
-                                <TextBlock Text="Orçamentos" VerticalAlignment="Center"  Margin="20 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
+                                <materialDesign:PackIcon Kind="Wallet" Height="25" Width="25" Margin="13,8,0,0"/>
+                                <TextBlock Text="Orçamentos" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem Height="60" PreviewMouseDown="ListViewItem_PreviewMouseDown" Foreground="White">
+                            <ListViewItem x:Name="btnSuprimentos" Height="60" PreviewMouseLeftButtonDown="btnSuprimentos_PreviewMouseLeftButtonDown" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Package" Height="25" Width="25" Margin="13,8,0,0"/>
+                                    <TextBlock Text="Suprimentos" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem Height="60" PreviewMouseDown="ListViewItem_PreviewMouseDown" Foreground="White">
                             <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Worker" Height="25" Width="25" Margin="13,5,0,0"/>
-                                <TextBlock Text="Obras" VerticalAlignment="Center"  Margin="20 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="14.0" TextDecorations="{x:Null}"/>
+                                <materialDesign:PackIcon Kind="Worker" Height="25" Width="25" Margin="13,8,0,0"/>
+                                <TextBlock Text="Obras" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="14.0" TextDecorations="{x:Null}"/>
                             </StackPanel>
                         </ListViewItem>
                     </ListView>

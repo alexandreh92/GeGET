@@ -80,5 +80,15 @@ namespace GeGET
         {
             helpers.Open<GerenciarOrcamento>(this.GetType().Name, false);
         }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Close();
+        }
+
+        private void BtnCadastroAtividades_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Open<CadastroAtividades>(this.GetType().Name, false);
+        }
     }
 }
