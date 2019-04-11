@@ -90,7 +90,7 @@
                                 <TextBlock HorizontalAlignment="Left" Margin="10,86,0,0" TextTrimming="CharacterEllipsis" Text="Vendedor:" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray"/>
                                 <TextBlock x:Name="txtVendedor" HorizontalAlignment="Left" Margin="87,86,0,0" TextTrimming="CharacterEllipsis" Text="{Binding Vendedor}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Light}" FontSize="12" Foreground="DimGray"/>
                                 <TextBlock x:Name="txtStatus" HorizontalAlignment="Right" Margin="0,91,10,0" TextTrimming="CharacterEllipsis" Text="{Binding Status_Descricao}" TextAlignment="Right" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Light}" FontSize="12" Foreground="DimGray" Width="190"/>
-                                <materialDesign:RatingBar x:Name="starStatus" Grid.Column="1" Width="Auto" Height="24" Margin="0,69,5,22" Value="{Binding Status_Id}" HorizontalAlignment="Right" IsEnabled="False" Opacity="1" />
+                                <ProgressBar materialDesign:TransitionAssist.DisableTransitions="True" Height="3" Grid.Column="1" Background="#d1afb3" BorderBrush="#d1afb3" Value="{Binding ProgressBarValue}" Width="120" Margin="0,69,10,22" HorizontalAlignment="Right"></ProgressBar>
                                 <Grid Grid.Column="1">
                                     <DockPanel>
                                         <materialDesign:PopupBox VerticalAlignment="Top" HorizontalAlignment="Right" StaysOpen="False" Margin="0,15,0,0" Foreground="#7A2932" x:Name="PopupBox">

@@ -34,7 +34,6 @@ namespace GeGET
         WaitBox wb;
         ObservableCollection<CopiarItensOrcamentoDTO> listaCopiar;
         ObservableCollection<MaterialDTO> listaAterarBDI;
-        ObservableCollection<ValoresOrcamento> valoresOrcamento;
         #endregion
 
         #region Initialize
@@ -87,28 +86,7 @@ namespace GeGET
 
         private void LoadSidePanel()
         {
-            valoresOrcamento = bll.LoadValores(dto);
-            foreach (var item in valoresOrcamento)
-            {
-                txt_Atividade_Total_Materiais.Text = item.Atividade_Total_Itens.ToString("c");
-                txt_Atividade_Total_Materiais_BDI.Text = item.Atividade_Total_Itens_BDI.ToString("c");
-                txt_Atividade_Total_Mobra.Text = item.Atividade_Total_Mobra.ToString("c");
-                txt_Atividade_Total_Mobra_BDI.Text = item.Atividade_Total_Mobra_BDI.ToString("c");
-                txt_Atividade_Total.Text = item.Atividade_Total_Atividade.ToString("c");
-                txt_Atividade_Total_BDI.Text = item.Atividade_Total_Atividade_BDI.ToString("c");
-                txt_Atividade_Faturado.Text = item.Atividade_Total_Faturado.ToString("c");
-                txt_Atividade_FD.Text = item.Atividade_Total_FD.ToString("c");
-
-                txt_Negocio_Total_Materiais.Text = item.Negocio_Total_Itens.ToString("c");
-                txt_Negocio_Total_Materiais_BDI.Text = item.Negocio_Total_Itens_BDI.ToString("c");
-                txt_Negocio_Total_Mobra.Text = item.Negocio_Total_Mobra.ToString("c");
-                txt_Negocio_Total_Mobra_BDI.Text = item.Negocio_Total_Mobra_BDI.ToString("c");
-                txt_Negocio_Total.Text = item.Negocio_Total_Atividade.ToString("c");
-                txt_Negocio_Total_BDI.Text = item.Negocio_Total_Atividade_BDI.ToString("c");
-                txt_Negocio_Faturado.Text = item.Negocio_Total_Faturado.ToString("c");
-                txt_Negocio_FD.Text = item.Negocio_Total_FD.ToString("c");
-
-            }
+            pnlValores.ItemsSource = bll.LoadValores(dto);
         }
 
         #endregion
@@ -120,7 +98,7 @@ namespace GeGET
         {
             BlackScreen bs = new BlackScreen();
             var position = Mouse.GetPosition(this);
-            using (var form = new ProcurarOrcamento(position))
+            using (var form = new ProcurarOrcamentoCadastrado(position))
             {
                 form.Owner = Window.GetWindow(this);
                 form.ShowDialog();
@@ -321,7 +299,6 @@ namespace GeGET
                 {
                     materialDTO.Id = material.Id;
                     materialDTO.Quantidade = material.Quantidade;
-                    MessageBox.Show("qtde");
                     bll.AtualizarQuantidade(materialDTO);
                 }
                 else if (e.Column.Header.ToString() == "BDI")

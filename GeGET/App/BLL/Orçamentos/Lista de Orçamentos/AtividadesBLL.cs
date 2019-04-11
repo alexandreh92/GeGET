@@ -12,14 +12,14 @@ namespace BLL
         AcessoBancoDados bd = new AcessoBancoDados();
         #endregion
 
-        #region Load Cidades
+        #region Load Atividades
         public List<AtividadeDTO> LoadAtividades(ListaOrcamentosDTO NDTO, DisciplinaDTO DTO)
         {
             var atividades = new List<AtividadeDTO>();
             var dt = new DataTable();
             try
             {
-                var query = "SELECT da.descricao as descricao_atividade, a.descricao, a.id FROM atividade a JOIN negocio n ON a.NEGOCIO_id = n.id JOIN versao_atividade va ON a.VERSAO_ATIVIDADE_id = va.id JOIN desc_atividades da ON a.DESC_ATIVIDADES_id = da.id JOIN disciplina disc ON da.DISCIPLINA_id = disc.id WHERE a.NEGOCIO_id = '" + NDTO.Id + "' AND DISCIPLINA_id = '" + DTO.Id + "' AND va.VERSAO_id = n.versao_valida";
+                var query = "SELECT da.descricao as descricao_atividade, a.descricao, a.id FROM atividade a JOIN negocio n ON a.NEGOCIO_id = n.id JOIN versao_atividade va ON a.VERSAO_ATIVIDADE_id = va.id JOIN desc_atividades da ON a.DESC_ATIVIDADES_id = da.id JOIN disciplina disc ON da.DISCIPLINA_id = disc.id WHERE a.NEGOCIO_id = '" + NDTO.Id + "' AND a.habilitado='1' AND DISCIPLINA_id = '" + DTO.Id + "' AND va.VERSAO_id = n.versao_valida";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
                 

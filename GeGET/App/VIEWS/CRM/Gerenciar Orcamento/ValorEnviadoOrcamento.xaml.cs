@@ -24,6 +24,8 @@ namespace GeGET
         public ValorEnviadoOrcamento()
         {
             InitializeComponent();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
         }
 
         void IDisposable.Dispose()
@@ -39,7 +41,7 @@ namespace GeGET
         private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
             decimal parse;
-            if (Decimal.TryParse(txtValor.Text, out parse) || txtValor.Text != "")
+            if (Decimal.TryParse(txtValor.Text, out parse) && txtValor.Text != "")
             {
                 var result = CustomOKCancelMessageBox.Show("Confirma o valor: " + Convert.ToDecimal(txtValor.Text).ToString("c") + " ?", "Atenção!", Window.GetWindow(this));
                 if (result == System.Windows.Forms.DialogResult.OK)

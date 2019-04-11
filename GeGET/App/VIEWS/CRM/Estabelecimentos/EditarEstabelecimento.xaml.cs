@@ -22,6 +22,8 @@ namespace GeGET
         public EditarEstabelecimento(EstabelecimentosDTO DTO)
         {
             InitializeComponent();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
             id = DTO.Id;
             cliente_Id = DTO.Cliente_Id;
             txtRazao.Text = DTO.Razao_Social;

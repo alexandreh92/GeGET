@@ -62,8 +62,8 @@ namespace GeGET.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;App&gt;
-        /// &lt;!-- &lt;Mirror&gt;\\192.168.15.10\Servidor\version.xml&lt;/Mirror&gt;--&gt;
-        ///   &lt;Mirror&gt;&lt;/Mirror&gt;
+        ///  &lt;!--&lt;Mirror&gt;\\192.168.15.10\Servidor\version.xml&lt;/Mirror&gt;--&gt;
+        ///   &lt;Mirror&gt;C:\version.xml&lt;/Mirror&gt;
         ///&lt;/App&gt;.
         /// </summary>
         internal static string updateurl {

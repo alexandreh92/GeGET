@@ -10,7 +10,6 @@
         AllowsTransparency="True"
         WindowStyle="None"
         WindowState="Maximized"
-        Topmost="True"
         ShowInTaskbar="False"
         Height="400" Width="780">
     <Window.Background>
@@ -36,7 +35,7 @@
             <TextBlock Text="Editar" VerticalAlignment="Bottom" Margin="30,0,0,0" FontFamily="Century Gothic" FontSize="24" Foreground="#7A2932"></TextBlock>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <TextBox x:Name="txtRazao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" Grid.Column="1" VerticalAlignment="Top" Margin="5,30,10,0" Foreground="DimGray">
+            <TextBox MaxLength="100" x:Name="txtRazao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" Grid.Column="1" VerticalAlignment="Top" Margin="5,30,10,0" Foreground="DimGray">
                 <materialDesign:HintAssist.Hint>
                     <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                         <TextBlock>Razão Social</TextBlock>
@@ -45,7 +44,7 @@
             </TextBox>
         </Grid>
         <Grid Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <TextBox x:Name="txtFantasia" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" Grid.Column="1" VerticalAlignment="Top" Margin="5,30,5,0" Foreground="DimGray">
+            <TextBox MaxLength="100" x:Name="txtFantasia" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" Grid.Column="1" VerticalAlignment="Top" Margin="5,30,5,0" Foreground="DimGray">
                 <materialDesign:HintAssist.Hint>
                     <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                         <TextBlock>Nome Fantasia</TextBlock>
@@ -57,9 +56,9 @@
             <ComboBox x:Name="cmbCategoria" materialDesign:HintAssist.Hint="Categoria" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,0,10,35" Background="White" Foreground="DimGray"></ComboBox>
         </Grid>
         <Grid Grid.Column="3" Grid.Row="2">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,20">
-                <TextBlock FontSize="16" FontFamily="Century Gothic" Foreground="DimGray">Ativo:</TextBlock>
-                <CheckBox x:Name="cbxStatus" Style="{StaticResource MaterialDesignCheckBox}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Margin="5,0,0,0" Foreground="DimGray"/>
+            <StackPanel Orientation="Vertical" Margin="25,21,15,0">
+                <TextBlock FontSize="12" HorizontalAlignment="Left" Margin="0,1,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" Foreground="#ababab">Ativo:</TextBlock>
+                <ToggleButton x:Name="cbxStatus" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSwitchDarkToggleButton}" IsChecked="True" />
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4">

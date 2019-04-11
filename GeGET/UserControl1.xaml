@@ -8,7 +8,38 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="GeGET.UserControl1"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        
+    <Grid Margin="0,0,0,314" Background="White">
+        <Border BorderBrush="Red" BorderThickness="0,0,0,2">
+            <Grid Margin="4,2,4,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="691*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:Card x:Name="Card" materialDesign:ShadowAssist.ShadowDepth="Depth2" Padding="32" Margin="0,5,0,0" Grid.ColumnSpan="2" Height="108" Grid.RowSpan="2"/>
+                <TextBlock x:Name="txtFantasia" HorizontalAlignment="Left" Margin="10,16,30,0" Width="Auto" TextTrimming="CharacterEllipsis" Text="Descricao do Item" ToolTip="{Binding Nome_Fantasia}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Bold}" FontSize="13" Foreground="#7A2932"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,35,0,0" TextTrimming="CharacterEllipsis" Text="Grupo:" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray"/>
+                <TextBlock x:Name="txtRazaoSocial" HorizontalAlignment="Left" Margin="60,35,0,0" TextTrimming="CharacterEllipsis" Width="Auto" Text="Grupo do Item" ToolTip="{Binding Razao_Social}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Light}" FontSize="12" Foreground="DimGray"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,52,0,0" TextTrimming="CharacterEllipsis" Text="Unidade:" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray"/>
+                <TextBlock x:Name="txtCNPJ" HorizontalAlignment="Left" Margin="72,52,0,0" TextTrimming="CharacterEllipsis" Width="Auto" Text="Unidade" ToolTip="{Binding Cnpj}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Light}" FontSize="12" Foreground="DimGray"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,69,0,0" TextTrimming="CharacterEllipsis" Text="Cadastrado Por:" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray"/>
+                <TextBlock x:Name="txtEndereco" HorizontalAlignment="Left" Margin="129,69,0,0" TextTrimming="CharacterEllipsis" Width="Auto" Text="Cadastrado" ToolTip="{Binding Endereco}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Light}" FontSize="12" Foreground="DimGray"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,86,0,0" TextTrimming="CharacterEllipsis" Text="Habilitado:" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray"/>
+                <TextBlock x:Name="txtCidade" HorizontalAlignment="Left" Margin="89,86,0,0" TextTrimming="CharacterEllipsis" Width="Auto" Text="Habilitado" ToolTip="{Binding Cidade}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Light}" FontSize="12" Foreground="DimGray"/>
+                <Grid Grid.Column="1">
+                    <DockPanel >
+                        <materialDesign:PopupBox VerticalAlignment="Top" HorizontalAlignment="Right" StaysOpen="False" Margin="0,15,0,0" Foreground="#7A2932" x:Name="PopupBox">
+                            <StackPanel x:Name="teste" Width="150">
+                                <Button x:Name="btnEditar" Content="Editar"/>
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+                    </DockPanel>
+                </Grid>
+                <Grid>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="CubeOutline" Height="60" Width="60" Foreground="#7A2932" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

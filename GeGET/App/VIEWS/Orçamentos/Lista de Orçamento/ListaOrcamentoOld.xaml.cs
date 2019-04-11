@@ -145,7 +145,7 @@ namespace GeGET
         {
             BlackScreen bs = new BlackScreen();
             var position = Mouse.GetPosition(this);
-            using (var form = new ProcurarOrcamento(position))
+            using (var form = new ProcurarOrcamentoCadastrado(position))
             {
 
                 bs.Show();

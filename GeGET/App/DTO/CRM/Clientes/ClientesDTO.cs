@@ -9,6 +9,7 @@
         private int categoria_Id;
         private static string pesquisa;
         private int status;
+        private string status_descricao;
         private static bool fromParent = false;
 
         public string Id { get => id; set => id = value; }
@@ -19,6 +20,6 @@
         public string Pesquisa { get => pesquisa; set => pesquisa = value; }
         public int Status { get => status; set => status = value; }
         public bool FromParent { get => fromParent; set => fromParent = value; }
-        
+        public string Status_descricao { get => status_descricao; set => status_descricao = value; }
     }
 }

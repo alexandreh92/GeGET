@@ -16,8 +16,8 @@ namespace GeGET
         public static DialogResult Show(string Text, string Caption, Window parent)
         {
             MsgBoxOK = new CustomOKMessageBox(parent);
-            MsgBoxOK.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-            MsgBoxOK.MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+            MsgBoxOK.Height = parent.ActualHeight;
+            MsgBoxOK.Width = parent.ActualWidth;
             MsgBoxOK.txtDescricao.Text = Text;
             MsgBoxOK.txtTitulo.Text = Caption;
             MsgBoxOK.ShowDialog();

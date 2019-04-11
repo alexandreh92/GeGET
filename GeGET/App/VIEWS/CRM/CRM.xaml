@@ -31,7 +31,7 @@
                         <materialDesign:PackIcon Foreground="#7A2932" Kind="GreaterThan" Width="25" Height="25"/>
                     </Button>
                     <TextBlock VerticalAlignment="Center" Foreground="#7A2932" Margin="5,-2,0,0" FontSize="14" FontFamily="{DynamicResource Novecento-Bold}">CRM</TextBlock>
-                    <Button x:Name="btnClose" HorizontalAlignment="Right" ToolTip="Fechar" Height="40" Width="40" Margin="0,0,10,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
+                    <Button x:Name="btnClose" HorizontalAlignment="Right" ToolTip="Fechar" Height="40" Width="40" Margin="0,0,10,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnClose_Click">
                         <materialDesign:PackIcon Foreground="#7A2932" Kind="Close" Width="25" Height="25"/>
                     </Button>
                 </DockPanel>
@@ -115,7 +115,7 @@
                                                     </materialDesign:Card>
                                                     <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,16,0,0">
-                                                            <Button x:Name="btnCadastroEstabelecimento" Height="90" Width="90" Click="BtnCadastroEstabelecimento_Click">
+                                                            <Button x:Name="btnCadastroEstabelecimento" Height="90" Width="90" Click="BtnCadastroEstabelecimento_Click" Margin="0,2,0,0">
                                                                 <materialDesign:PackIcon Kind="OfficeBuilding" HorizontalAlignment="Center" Height="70" Width="70" />
                                                             </Button>
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Margin="0,11,0,0">Cadastro de Estabelecimentos</TextBlock>
@@ -159,7 +159,7 @@
                                                     </materialDesign:Card>
                                                     <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <Button Height="90" Width="90">
+                                                            <Button x:Name="btnCadastroAtividades" Height="90" Width="90" Click="BtnCadastroAtividades_Click">
                                                                 <materialDesign:PackIcon Kind="Layers" HorizontalAlignment="Center" Height="70" Width="70" />
                                                             </Button>
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" Margin="0,10,0,0">Cadastro de Atividades</TextBlock>

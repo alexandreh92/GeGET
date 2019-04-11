@@ -127,6 +127,7 @@ namespace GeGET
             dto.Status = ((ClientesDTO)lstClientes.Items[index]).Status;
             using (var form = new EditarCliente(dto))
             {
+                form.Owner = Window.GetWindow(this);
                 form.ShowDialog();
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {

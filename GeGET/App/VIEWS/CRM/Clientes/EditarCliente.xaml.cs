@@ -9,7 +9,7 @@ namespace GeGET
     public partial class EditarCliente : Window, IDisposable
     {
         #region Declarations
-        public static int id;
+        string id;
         ClientesBLL bll = new ClientesBLL();
         ClientesDTO dto = new ClientesDTO();
         CategoriaClienteBLL Categoriabll = new CategoriaClienteBLL();
@@ -19,6 +19,8 @@ namespace GeGET
         public EditarCliente(ClientesDTO DTO)
         {
             InitializeComponent();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
             txtRazao.Text = DTO.Razao_Social;
             txtFantasia.Text = DTO.Nome_Fantasia;
             cmbCategoria.ItemsSource = Categoriabll.LoadCategoriaCliente();
@@ -26,6 +28,7 @@ namespace GeGET
             cmbCategoria.SelectedValuePath = "Id";
             cmbCategoria.SelectedValue = DTO.Categoria_Id;
             cbxStatus.IsChecked = Convert.ToBoolean(DTO.Status);
+            id = DTO.Id;
         }
         #endregion
 

@@ -162,5 +162,25 @@ namespace GeGET
         {
             helpers.Open<UserPanel>(null, false);
         }
+
+        private void btnSuprimentos_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.Open<Suprimentos>(null, false);
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                if (this.WindowState == WindowState.Maximized)
+                {
+                    this.WindowState = WindowState.Normal;
+                }
+                else
+                {
+                    this.WindowState = WindowState.Maximized;
+                }
+            }
+        }
     }
 }
