@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="GeGET.CadastroEstabelecimento"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GeGET"
+             xmlns:control = "clr-namespace:Teste"
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide">
+        <materialDesign:TransitioningContent.OpeningEffects>
+            <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8" />
+            <materialDesign:TransitionEffect Kind="ExpandIn" />
+        </materialDesign:TransitioningContent.OpeningEffects>
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"/>
+                <RowDefinition/>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.ColumnSpan="3">
+                <DockPanel>
+                    <Button x:Name="btnBack" ToolTip="Voltar" Height="40" Width="40" Margin="10,0,-5,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnBack_Click">
+                        <materialDesign:PackIcon Foreground="#7A2932" Kind="LessThan" Width="25" Height="25"/>
+                    </Button>
+                    <TextBlock VerticalAlignment="Center" Foreground="#7A2932" Margin="5,-2,0,0" FontSize="14" FontFamily="{DynamicResource Novecento-Bold}">Cadastro de Estabelecimento</TextBlock>
+                    <Button x:Name="btnClose" HorizontalAlignment="Right" ToolTip="Fechar" Height="40" Width="40" Margin="0,0,10,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnClose_Click">
+                        <materialDesign:PackIcon Foreground="#7A2932" Kind="Close" Width="25" Height="25"/>
+                    </Button>
+                </DockPanel>
+                <Separator VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="0 0 0 0" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="627*"/>
+                            <ColumnDefinition Width="80"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="1">
+                            <materialDesign:Card x:Name="card1" Background="{DynamicResource MaterialDesignBackground}">
+                                <StackPanel x:Name="StackPanel1">
+                                    <TextBlock Foreground="#7A2932" Grid.Row="0" Margin="24,21,0,21" FontFamily="{DynamicResource Novecento-Bold}">Cadastro de Novo Estabelecimento</TextBlock>
+                                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                                    <StackPanel HorizontalAlignment="Stretch">
+                                        <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="0,40">
+                                            <Grid Width="{Binding ActualWidth, ElementName=card1}">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="24*"/>
+                                                    <RowDefinition Height="23*"/>
+                                                    <RowDefinition Height="20"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <control:AlignableWrapPanel HorizontalContentAlignment="Center" HorizontalAlignment="Center">
+                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" Margin="0,25,20,50">
+                                                            <TextBox x:Name="txtRazao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text=" " IsReadOnly="True" VerticalAlignment="Top" Margin="5,0,0,0" Width="Auto" MinWidth="350" Foreground="DimGray">
+                                                                <materialDesign:HintAssist.Hint>
+                                                                    <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                                                                        <TextBlock>Razão Social</TextBlock>
+                                                                    </StackPanel>
+                                                                </materialDesign:HintAssist.Hint>
+                                                            </TextBox>
+                                                            <Button x:Name="btnPesquisa" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Top" Margin="-282,0,0,0" HorizontalAlignment="Left" Height="25" Width="25" Click="BtnPesquisa_Click">
+                                                                <materialDesign:PackIcon Kind="Magnify" Opacity=".56" VerticalAlignment="Center" Height="15" Width="15" />
+                                                            </Button>
+                                                        </StackPanel>
+                                                        <TextBox x:Name="txtFantasia" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" IsReadOnly="True" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="350" Foreground="DimGray">
+                                                            <materialDesign:HintAssist.Hint>
+                                                                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                                                                    <TextBlock>Nome Fantasia</TextBlock>
+                                                                </StackPanel>
+                                                            </materialDesign:HintAssist.Hint>
+                                                        </TextBox>
+                                                        <TextBox MaxLength="100" x:Name="txtEndereco" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="350" Foreground="DimGray">
+                                                            <materialDesign:HintAssist.Hint>
+                                                                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                                                                    <TextBlock>Endereço</TextBlock>
+                                                                </StackPanel>
+                                                            </materialDesign:HintAssist.Hint>
+                                                        </TextBox>
+                                                        <ComboBox x:Name="cmbUF" materialDesign:HintAssist.Hint="UF" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,50" Background="White" Foreground="DimGray" Width="Auto" MinWidth="60" SelectionChanged="CmbUF_SelectionChanged">
+                                                            <ComboBox.ItemsPanel>
+                                                                <ItemsPanelTemplate>
+                                                                    <VirtualizingStackPanel />
+                                                                </ItemsPanelTemplate>
+                                                            </ComboBox.ItemsPanel>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cmbCidade" materialDesign:HintAssist.Hint="Cidade" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,50" Background="White" Foreground="DimGray" Width="Auto" MinWidth="180">
+                                                            <ComboBox.ItemsPanel>
+                                                                <ItemsPanelTemplate>
+                                                                    <VirtualizingStackPanel />
+                                                                </ItemsPanelTemplate>
+                                                            </ComboBox.ItemsPanel>
+                                                        </ComboBox>
+                                                        <xctk:MaskedTextBox MaxLength="18" Mask="00,000,000/0000-00" x:Name="txtCNPJ" TextAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="146" Foreground="DimGray">
+                                                            <materialDesign:HintAssist.Hint>
+                                                                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                                                                    <TextBlock>CNPJ</TextBlock>
+                                                                </StackPanel>
+                                                            </materialDesign:HintAssist.Hint>
+                                                        </xctk:MaskedTextBox>
+                                                        <TextBox MaxLength="20" x:Name="txtIE" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="110" Foreground="DimGray">
+                                                            <materialDesign:HintAssist.Hint>
+                                                                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                                                                    <TextBlock>I.E.</TextBlock>
+                                                                </StackPanel>
+                                                            </materialDesign:HintAssist.Hint>
+                                                        </TextBox>
+                                                        <xctk:MaskedTextBox MaxLength="20" Mask="(00) 0000-0000" x:Name="txtTelefone" TextAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="120" Foreground="DimGray">
+                                                            <materialDesign:HintAssist.Hint>
+                                                                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                                                                    <TextBlock>Telefone</TextBlock>
+                                                                </StackPanel>
+                                                            </materialDesign:HintAssist.Hint>
+                                                        </xctk:MaskedTextBox>
+                                                    </control:AlignableWrapPanel>
+                                                </Grid>
+                                            </Grid>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,15">
+                                        <Button x:Name="btnConfirmar" Margin="0,0,5,10" FontFamily="{DynamicResource Novecento-Bold}" Click="BtnConfirmar_Click">CADASTRAR</Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </Grid>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+            <Grid Grid.Column="2" Grid.Row="1"></Grid>
+        </Grid>
+    </materialDesign:TransitioningContent>
+
+</UserControl>

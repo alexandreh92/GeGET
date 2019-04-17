@@ -1,0 +1,894 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D9C1A2E4-2F9B-4572-AEE4-40626B50FB43}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GeGET</RootNamespace>
+    <AssemblyName>GeGET</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Icons\favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <StartupObject>GeGET.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="Devart.DbForge.Data.Interfaces, Version=5.0.13.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\DLLs\Devart.DbForge.Data.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Devart.DbForge.Data.MySql">
+      <HintPath>..\..\..\DLLs\Devart.DbForge.Data.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="Devart.DbForge.Interfaces, Version=4.0.69.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\DLLs\Devart.DbForge.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DataAccess.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.DataAccess.v17.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Images.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Images.v17.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Office.v17.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Pdf.v17.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.RichEdit.v17.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v17.2.Export, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.RichEdit.v17.2.Export.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Docking.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.Docking.v17.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.DocumentViewer.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.DocumentViewer.v17.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.ExpressionEditor.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.ExpressionEditor.v17.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Layout.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.Layout.v17.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.LayoutControl.v17.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Printing.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.Printing.v17.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.Ribbon.v17.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.RichEdit.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.RichEdit.v17.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2016White.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2016White.v17.2.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Expression.Drawing.3.0.0\lib\net45\Microsoft.Expression.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="MMLib.Core, Version=1.0.5305.36249, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MMLib.Extensions.1.0.10.13\lib\MMLib.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MMLib.Extensions, Version=1.0.2.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MMLib.Extensions.1.0.10.13\lib\MMLib.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\DLLs\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleImpersonation, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleImpersonation.3.0.0\lib\net46\SimpleImpersonation.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Management">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Management.Instrumentation">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.5.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UIAutomationProvider">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UIAutomationTypes">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="VirtualizingWrapPanel, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtualizingWrapPanel.1.2.2\lib\net45\VirtualizingWrapPanel.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\AdicionarItemOrcamentoBLL.cs" />
+    <Compile Include="App\BLL\CRM\Clientes\ClientesBLL.cs" />
+    <Compile Include="App\BLL\CRM\Estabelecimentos\EstabelecimentosBLL.cs" />
+    <Compile Include="App\BLL\CRM\Funil de Vendas\FunildeVendasBLL.cs" />
+    <Compile Include="App\BLL\CRM\Negócios\NegociosBLL.cs" />
+    <Compile Include="App\BLL\CRM\Pessoas\PessoasBLL.cs" />
+    <Compile Include="App\BLL\CRM\Shared\PrioridadeBLL.cs" />
+    <Compile Include="App\BLL\CRM\Shared\ContatoBLL.cs" />
+    <Compile Include="App\BLL\CRM\Shared\VendedoresBLL.cs" />
+    <Compile Include="App\BLL\CRM\Shared\CategoriaClienteBLL.cs" />
+    <Compile Include="App\BLL\Layout\MySQLDependency.cs" />
+    <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\AtividadesBLL.cs" />
+    <Compile Include="App\BLL\Shared\DisciplinaBLL.cs" />
+    <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\OrcamentosBLL.cs" />
+    <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\ListaOrcamentosBLL.cs" />
+    <Compile Include="App\BLL\Shared\EstadosBLL.cs" />
+    <Compile Include="App\BLL\Shared\CidadesBLL.cs" />
+    <Compile Include="App\Controls\AlignableWrapPanel\AlignableWrapPanel.cs" />
+    <Compile Include="App\Controls\CircleProgressBar\ProgressCirclexaml.xaml.cs">
+      <DependentUpon>ProgressCirclexaml.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\CustomOKMessageBox.xaml.cs">
+      <DependentUpon>CustomOKMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarFornecedor.xaml.cs">
+      <DependentUpon>ProcurarFornecedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarItem.xaml.cs">
+      <DependentUpon>ProcurarItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarGrupoItens.xaml.cs">
+      <DependentUpon>ProcurarGrupoItens.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarGrupoFornecedor.xaml.cs">
+      <DependentUpon>ProcurarGrupoFornecedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarOrcamentista.xaml.cs">
+      <DependentUpon>ProcurarOrcamentista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarOrcamento.xaml.cs">
+      <DependentUpon>ProcurarOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarOrcamentoCadastrado.xaml.cs">
+      <DependentUpon>ProcurarOrcamentoCadastrado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarNegocio.xaml.cs">
+      <DependentUpon>ProcurarNegocio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarEstabelecimento.xaml.cs">
+      <DependentUpon>ProcurarEstabelecimento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\VirtualizingWrapPanel\VirtualizingWrapPanel.cs" />
+    <Compile Include="App\DTO\CRM\Negócios\OrcamentistasDTO.cs" />
+    <Compile Include="App\DTO\CRM\Shared\PrioridadeDTO.cs" />
+    <Compile Include="App\DTO\CRM\Shared\ContatoDTO.cs" />
+    <Compile Include="App\DTO\CRM\Shared\VedendoresDTO.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\AdicionarItemOrcamentoDTO.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\AtividadeDTO.cs" />
+    <Compile Include="App\DTO\Shared\DisciplinaDTO.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\MaterialDTO.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\OrcamentosDTO.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\ListaOrcamentosDTO.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\ValoresOrcamento.cs" />
+    <Compile Include="App\Helpers\BlackScreen.xaml.cs">
+      <DependentUpon>BlackScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Helpers\QueryHelper.cs" />
+    <Compile Include="App\VIEWS\CRM\Cadastro de Atividades\CadastroAtividades.xaml.cs">
+      <DependentUpon>CadastroAtividades.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Clientes\EditarCliente.xaml.cs">
+      <DependentUpon>EditarCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Estabelecimentos\CadastroEstabelecimento.xaml.cs">
+      <DependentUpon>CadastroEstabelecimento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Estabelecimentos\EditarEstabelecimento.xaml.cs">
+      <DependentUpon>EditarEstabelecimento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\CRM\Funil de Vendas\FunilControl.xaml.cs">
+      <DependentUpon>FunilControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Gerenciar Orcamento\AdicionarVersaoOrcamento.xaml.cs">
+      <DependentUpon>AdicionarVersaoOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Gerenciar Orcamento\CopiarVersaoOrcamento.xaml.cs">
+      <DependentUpon>CopiarVersaoOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Gerenciar Orcamento\AlterarVersaoOrcamento.xaml.cs">
+      <DependentUpon>AlterarVersaoOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Gerenciar Orcamento\MotivoCancelamentoOrcamento.xaml.cs">
+      <DependentUpon>MotivoCancelamentoOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Gerenciar Orcamento\PrecoPerdidoOrcamento.xaml.cs">
+      <DependentUpon>PrecoPerdidoOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Gerenciar Orcamento\ValorFechadoOrcamento.xaml.cs">
+      <DependentUpon>ValorFechadoOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Gerenciar Orcamento\ValorEnviadoOrcamento.xaml.cs">
+      <DependentUpon>ValorEnviadoOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Gerenciar Orcamento\GerenciarOrcamento.xaml.cs">
+      <DependentUpon>GerenciarOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Negócios\CadastroNegocio.xaml.cs">
+      <DependentUpon>CadastroNegocio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Pessoas\CadastroPessoa.xaml.cs">
+      <DependentUpon>CadastroPessoa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Pessoas\EditarPessoas.xaml.cs">
+      <DependentUpon>EditarPessoas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Layout\NotificacaoLayout.xaml.cs">
+      <DependentUpon>NotificacaoLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarCliente.xaml.cs">
+      <DependentUpon>ProcurarCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\NoResults.xaml.cs">
+      <DependentUpon>NoResults.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\DTO\CRM\Clientes\ClientesDTO.cs" />
+    <Compile Include="App\DTO\CRM\Estabelecimentos\EstabelecimentosDTO.cs" />
+    <Compile Include="App\DTO\CRM\Funil de Vendas\FunildeVendasDTO.cs" />
+    <Compile Include="App\DTO\CRM\Negócios\NegociosDTO.cs" />
+    <Compile Include="App\DTO\CRM\Pessoas\FuncoesDTO.cs" />
+    <Compile Include="App\DTO\CRM\Pessoas\PessoasDTO.cs" />
+    <Compile Include="App\DTO\CRM\Shared\EstadoDTO.cs" />
+    <Compile Include="App\DTO\CRM\Shared\CidadesDTO.cs" />
+    <Compile Include="App\DTO\CRM\Shared\CategoriaClienteDTO.cs" />
+    <Compile Include="App\DTO\Layout\LayoutDTO.cs" />
+    <Compile Include="App\Helpers\Helpers.cs" />
+    <Compile Include="App\VIEWS\CRM\Clientes\Clientes.xaml.cs">
+      <DependentUpon>Clientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\CRM.xaml.cs">
+      <DependentUpon>CRM.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Estabelecimentos\Estabelecimentos.xaml.cs">
+      <DependentUpon>Estabelecimentos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Funil de Vendas\Funil.Old.xaml.cs">
+      <DependentUpon>Funil.Old.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Funil de Vendas\Funil.xaml.cs">
+      <DependentUpon>Funil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Negócios\Negocios.xaml.cs">
+      <DependentUpon>Negocios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Pessoas\Pessoas.xaml.cs">
+      <DependentUpon>Pessoas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Orçamentos\Consulta Lista de Orçamento\ConsultaListaOrcamento.xaml.cs">
+      <DependentUpon>ConsultaListaOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamento.xaml.cs">
+      <DependentUpon>CopiarItensOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamento.xaml.cs">
+      <DependentUpon>ListaOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Orçamentos\Orcamentos.xaml.cs">
+      <DependentUpon>Orcamentos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Fornecedores\CadastroFornecedor.xaml.cs">
+      <DependentUpon>CadastroFornecedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Fornecedores\EditarFornecedor.xaml.cs">
+      <DependentUpon>EditarFornecedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Fornecedores\Fornecedores.xaml.cs">
+      <DependentUpon>Fornecedores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Grupo de Fornecedores\CadastroGrupodeFornecedores.xaml.cs">
+      <DependentUpon>CadastroGrupodeFornecedores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Grupo de Fornecedores\GrupodeFornecedores.xaml.cs">
+      <DependentUpon>GrupodeFornecedores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Grupo de Itens\CadastroGrupodeItens.xaml.cs">
+      <DependentUpon>CadastroGrupodeItens.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Grupo de Itens\GrupodeItens.xaml.cs">
+      <DependentUpon>GrupodeItens.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Itens\CadastroItens.xaml.cs">
+      <DependentUpon>CadastroItens.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Itens\Itens.xaml.cs">
+      <DependentUpon>Itens.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Produtos\CadastroProdutos.xaml.cs">
+      <DependentUpon>CadastroProdutos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Produtos\EditarProduto.xaml.cs">
+      <DependentUpon>EditarProduto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Produtos\Produtos.xaml.cs">
+      <DependentUpon>Produtos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Suprimentos.xaml.cs">
+      <DependentUpon>Suprimentos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\UserPanel\UserPanel.xaml.cs">
+      <DependentUpon>UserPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\TaskbarMessage.xaml.cs">
+      <DependentUpon>TaskbarMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\CustomOKCancelMessageBox.xaml.cs">
+      <DependentUpon>CustomOKCancelMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\CRM\Clientes\CadastroCliente.xaml.cs">
+      <DependentUpon>CadastroCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\WaitBox.xaml.cs">
+      <DependentUpon>WaitBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\AlterarBDIOrcamento.xaml.cs">
+      <DependentUpon>AlterarBDIOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\BLL\CRM\Gerenciar Orçamento\MotivoCancelamentoOrcamentoBLL.cs" />
+    <Compile Include="App\DTO\CRM\Gerenciar Orçamento\MotivoCancelamentoOrcamentoDTO.cs" />
+    <Compile Include="App\DTO\Suprimentos\Grupo de Itens\GrupoItensDTO.cs" />
+    <Compile Include="App\BLL\Suprimentos\Grupo de Itens\GrupoItensBLL.cs" />
+    <Compile Include="App\BLL\Suprimentos\Grupo de Fornecedores\GrupoFornecedoresBLL.cs" />
+    <Compile Include="App\DTO\Suprimentos\Grupo de Fornecedores\GrupoFornecedoresDTO.cs" />
+    <Compile Include="App\BLL\CRM\Cadastro de Atividades\CadastroAtividadeBLL.cs" />
+    <Compile Include="App\DTO\CRM\Cadastro de Atividades\CadastroAtividadesDTO.cs" />
+    <Compile Include="App\BLL\CRM\Cadastro de Atividades\DescricaoAtividadesBLL.cs" />
+    <Compile Include="App\DTO\CRM\Cadastro de Atividades\DescricaoAtividadesDTO.cs" />
+    <Compile Include="App\BLL\Suprimentos\Itens\ItensBLL.cs" />
+    <Compile Include="App\BLL\Suprimentos\Fornecedores\FornecedoresBLL.cs" />
+    <Compile Include="App\DTO\Suprimentos\Fornecedores\FornecedoresDTO.cs" />
+    <Compile Include="App\DTO\Suprimentos\Itens\ItensDTO.cs" />
+    <Compile Include="DashboardBLL.cs" />
+    <Compile Include="DashboardDTO.cs" />
+    <Compile Include="Permission.xaml.cs">
+      <DependentUpon>Permission.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\BLL\Suprimentos\Produtos\ProdutosBLL.cs" />
+    <Compile Include="App\DTO\Suprimentos\Produtos\ProdutosDTO.cs" />
+    <Compile Include="App\BLL\Shared\UnidadeBLL.cs" />
+    <Compile Include="App\DTO\Shared\UnidadeDTO.cs" />
+    <Compile Include="Dashboard.xaml.cs">
+      <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl1.xaml.cs">
+      <DependentUpon>UserControl1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\BLL\CRM\Gerenciar Orçamento\VersaoOrcamentoBLL.cs" />
+    <Compile Include="App\DTO\CRM\Gerenciar Orçamento\VersaoOrcamentoDTO.cs" />
+    <Page Include="App\Controls\CircleProgressBar\ProgressCirclexaml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Controls\Shared\CustomOKMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarFornecedor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarGrupoItens.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarGrupoFornecedor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarOrcamentista.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarOrcamentoCadastrado.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarNegocio.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarEstabelecimento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Helpers\BlackScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Cadastro de Atividades\CadastroAtividades.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Clientes\EditarCliente.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Estabelecimentos\CadastroEstabelecimento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Estabelecimentos\EditarEstabelecimento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\CRM\Funil de Vendas\FunilControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Gerenciar Orcamento\AdicionarVersaoOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Gerenciar Orcamento\CopiarVersaoOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Gerenciar Orcamento\AlterarVersaoOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Gerenciar Orcamento\MotivoCancelamentoOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Gerenciar Orcamento\PrecoPerdidoOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Gerenciar Orcamento\ValorFechadoOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Gerenciar Orcamento\ValorEnviadoOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Gerenciar Orcamento\GerenciarOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Negócios\CadastroNegocio.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Pessoas\CadastroPessoa.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Pessoas\EditarPessoas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Layout\NotificacaoLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarCliente.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\NoResults.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\CRM.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Estabelecimentos\Estabelecimentos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Funil de Vendas\Funil.Old.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Funil de Vendas\Funil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Negócios\Negocios.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Pessoas\Pessoas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Orçamentos\Consulta Lista de Orçamento\ConsultaListaOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Orçamentos\Orcamentos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamentoOld.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\AlterarBDIOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamentoOld.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Fornecedores\CadastroFornecedor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Fornecedores\EditarFornecedor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Fornecedores\Fornecedores.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Grupo de Fornecedores\CadastroGrupodeFornecedores.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Grupo de Fornecedores\GrupodeFornecedores.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Grupo de Itens\CadastroGrupodeItens.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Grupo de Itens\GrupodeItens.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Itens\CadastroItens.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Itens\Itens.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Produtos\CadastroProdutos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Produtos\EditarProduto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Produtos\Produtos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Suprimentos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\VIEWS\Layout\Layout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App\BLL\Login\LoginBLL.cs" />
+    <Compile Include="App\DAL\AcessoBancoDados.cs" />
+    <Compile Include="App\DTO\Login\LoginDTO.cs" />
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamentoOld.xaml.cs">
+      <DependentUpon>ListaOrcamentoOld.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamentoOld.xaml.cs">
+      <DependentUpon>CopiarItensOrcamentoOld.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\CopiarItensOrcamentoBLL.cs" />
+    <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\CopiarItensOrcamentoDTO.cs" />
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Layout\Layout.xaml.cs">
+      <DependentUpon>Layout.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="App\VIEWS\CRM\Clientes\Clientes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\UserPanel\UserPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Controls\Shared\TaskbarMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Controls\Shared\CustomOKCancelMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Clientes\CadastroCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\ProcurarMateriais.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Controls\Shared\WaitBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Permission.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\ProcurarMateriais.xaml.cs">
+      <DependentUpon>ProcurarMateriais.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Resource Include="Resources\Fonts\abadimtstd-opentype.otf" />
+    <Resource Include="Resources\Fonts\Roboto-Medium.ttf" />
+    <Resource Include="Resources\Fonts\Roboto-Regular.ttf" />
+    <Resource Include="Resources\Fonts\Synthview - Novecentowide-DemiBold.otf" />
+    <Resource Include="Resources\Fonts\Synthview - Novecentowide-Medium.otf" />
+    <Resource Include="Resources\Fonts\Novecentowide_Normal.otf" />
+    <Resource Include="Resources\Fonts\Novecentowide_Book.otf" />
+    <Resource Include="Resources\Fonts\Novecentosanswide-Bold_0.otf" />
+    <Resource Include="Resources\Fonts\AkzidenzGrotesk_Light.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Login.BackgroundImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\GETAC.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\updateurl.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App\Controls\Orçamentos\Lista de Orçamentos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\teste.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="template\styles\main.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Updater\Updater.csproj">
+      <Project>{e6d9ef14-e80f-4522-93ab-397c6fabde42}</Project>
+      <Name>Updater</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
