@@ -27,6 +27,8 @@ namespace GeGET
         private static string FileLocation;
         private static string Filename;
         public static bool HaveUpdate;
+        string UpdaterLocation;
+        string UpdaterFilename;
         #endregion
 
         #endregion
@@ -142,6 +144,11 @@ namespace GeGET
                 var FilenameElement = doc.Descendants("Filename");
                 Filename = string.Concat(FilenameElement.Nodes());
 
+                var UpdaterLocationElement = doc.Descendants("UpdaterLocation");
+                UpdaterLocation = string.Concat(UpdaterLocationElement.Nodes());
+
+                var UpdaterFilenameElement = doc.Descendants("UpdaterFilename");
+                UpdaterFilename = string.Concat(UpdaterFilenameElement.Nodes());
 
                 if (Convert.ToInt32(cVersion) < oVersion)
                 {
@@ -155,7 +162,14 @@ namespace GeGET
                         }
                         File.Move(oldfile,newfile);
                     }
-                    Process.Start(newfile);
+                    if (File.Exists(newfile))
+                    {
+                        Process.Start(newfile);
+                    }
+                    else
+                    {
+                        StartUpdate();
+                    }
                     this.Close();
                 }
             }
@@ -166,9 +180,9 @@ namespace GeGET
 
         private void StartUpdate()
         {
-            lblInfo.Text = "Fazendo Download...";
+            
             WebClient client = new WebClient();
-            client.DownloadFileAsync(new Uri(FileLocation), System.AppDomain.CurrentDomain.BaseDirectory + "/" + Filename);
+            client.DownloadFileAsync(new Uri(UpdaterLocation), System.AppDomain.CurrentDomain.BaseDirectory + "/" + UpdaterFilename);
             client.DownloadFileCompleted += new AsyncCompletedEventHandler(Client_DownloadFileCompleted);
             client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(Client_DownloadProgressChanged);
         }
@@ -176,9 +190,7 @@ namespace GeGET
         {
             if (e.Error == null)
             {
-                lblInfo.Text = "Download completo! Instalando...";
-                HaveUpdate = false;
-                Process.Start("Updater.exe");
+                Process.Start("Updater_Old.exe");
                 Application.Current.Shutdown();
             }
             else
@@ -190,10 +202,7 @@ namespace GeGET
 
         private void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            var total = (int)e.TotalBytesToReceive;
-            var recieved = (int)e.BytesReceived;
-            int current = 1/(total/recieved)*100;
-            progressBar.Value = current;
+            
         }
 
         #endregion

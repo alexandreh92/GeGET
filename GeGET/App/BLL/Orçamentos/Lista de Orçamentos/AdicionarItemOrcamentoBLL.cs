@@ -20,7 +20,7 @@ namespace BLL
             var dt = new DataTable();
             try
             {
-                var query = "SELECT p.id, i.descricao, p.descricao as desc_completa, i.unidade_id as un, p.partnumber, p.custounitario, f.rsocial FROM produto p JOIN item i ON p.DESCRICAO_ITEM_id = i.id JOIN fornecedor f ON p.FORNECEDOR_id = f.id WHERE p.STATUS_id='1' ORDER BY p.id, i.descricao";
+                var query = "SELECT p.id, i.descricao, p.descricao as desc_completa, un.descricao as un, p.partnumber, p.custounitario, f.rsocial FROM produto p JOIN item i ON p.DESCRICAO_ITEM_id = i.id JOIN unidade un ON un.id = i.unidade_id JOIN fornecedor f ON p.FORNECEDOR_id = f.id WHERE p.STATUS_id='1' ORDER BY p.id, i.descricao";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
@@ -32,7 +32,7 @@ namespace BLL
             {
                 foreach (DataRow item in dt.Rows)
                 {
-                    itens.Add(new AdicionarItemOrcamentoDTO { Id = Convert.ToInt32(item["id"]), Descricao = item["descricao"].ToString(), Descricao_Produto = item["desc_completa"].ToString(), Un = item["un"].ToString(), Partnumber = item["partnumber"].ToString(), Custo_Unitario = Convert.ToDouble(item["custounitario"]), Fabricante = item["rsocial"].ToString() });
+                    itens.Add(new AdicionarItemOrcamentoDTO { Id = Convert.ToInt32(item["id"]), Descricao = item["descricao"].ToString(), Descricao_Produto = item["desc_completa"].ToString(), Un = item["un"].ToString(), Partnumber = item["partnumber"].ToString(), Custo_Unitario = Convert.ToDouble(item["custounitario"]), Fabricante = item["rsocial"].ToString(), Codigo_Produto = Convert.ToInt32(item["id"]).ToString("000000") });
                 }
                 bd.CloseConection();
             }
