@@ -113,5 +113,10 @@ namespace GeGET
         {
         }
         #endregion
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtProcurar.Focus();
+        }
     }
 }

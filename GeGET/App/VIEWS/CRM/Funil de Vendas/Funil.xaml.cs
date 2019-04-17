@@ -30,7 +30,7 @@ namespace GeGET
         FunildeVendasBLL bll = new FunildeVendasBLL();
         Control teste;
         Thread t1;
-        Thread t2;
+        WaitBox w1;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
 
         public Funil()
@@ -48,8 +48,8 @@ namespace GeGET
 
             Dispatcher.Invoke(new Action(() =>
             {
-                /*w1 = new Window1();
-                w1.Show();*/
+                w1 = new WaitBox();
+                w1.Show();
             }));
 
             Thread.Sleep(500);
@@ -88,8 +88,7 @@ namespace GeGET
 
                   }));
         }
-                t2 = new Thread(CloseWindow);
-                t2.Start();
+                
             
             
         }
@@ -101,7 +100,7 @@ namespace GeGET
             {
                 
                 
-                //w1.Close();
+                w1.Close();
             }));
         }
 

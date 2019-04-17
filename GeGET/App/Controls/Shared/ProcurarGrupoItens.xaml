@@ -11,6 +11,7 @@
         WindowStyle="None"
         WindowState="Maximized"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         Title="MensagemLayout" Height="700" Width="500">
     <Window.Resources>
         <Style TargetType="{x:Type ListBoxItem}">
@@ -72,8 +73,8 @@
                                 <TextBlock HorizontalAlignment="Left" Margin="6,12,70,0" TextTrimming="CharacterEllipsis" Text="{Binding Descricao}" ToolTip="{Binding Descricao}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Bold}" FontSize="13" Foreground="#7A2932" Height="16" Width="Auto"/>
                                 <TextBlock HorizontalAlignment="Left" Margin="6,32,70,0" TextTrimming="CharacterEllipsis" Text="Cadastrado Por:" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Light}" FontSize="12" Foreground="DimGray" Height="14" Width="Auto"/>
                                 <TextBlock HorizontalAlignment="Left" Margin="124,32,70,0" TextTrimming="CharacterEllipsis" Text="{Binding Usuario}" ToolTip="{Binding Usuario}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Light}" FontSize="12" Foreground="DimGray" Height="14" Width="Auto"/>
-                                <TextBlock HorizontalAlignment="Left" Margin="6,52,70,0" TextTrimming="CharacterEllipsis" Text="Data:"  VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray" Height="14" Width="Auto"/>
-                                <TextBlock HorizontalAlignment="Left" Margin="43,52,70,0" TextTrimming="CharacterEllipsis" Text="{Binding Data}"  ToolTip="{Binding Data}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray" Height="14" Width="Auto"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="6,52,70,0" TextTrimming="CharacterEllipsis" Text="Data:"  VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DimGray" Height="14" Width="Auto"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="43,52,70,0" TextTrimming="CharacterEllipsis" Text="{Binding Data}"  ToolTip="{Binding Data}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DimGray" Height="14" Width="Auto"/>
                                 <Button x:Name="btnAdd" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Grid.Column="1" materialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Click="BtnAdd_Click">
                                     <materialDesign:PackIcon Kind="Plus" Height="24" Width="24" Foreground="White"  />
                                 </Button>

@@ -9,7 +9,9 @@ namespace GeGET
     class ProdutosBLL
     {
         AcessoBancoDados bd = new AcessoBancoDados();
+        LoginDTO loginDTO = new LoginDTO();
 
+        #region Load Produtos
         public ObservableCollection<ProdutosDTO> LoadProdutos()
         {
             var produtos = new ObservableCollection<ProdutosDTO>();
@@ -33,12 +35,14 @@ namespace GeGET
             }
             return produtos;
         }
+        #endregion
 
+        #region Update Produto
         public void UpdateProduto(ProdutosDTO DTO)
         {
             try
             {
-                var query = "UPDATE produto SET status_id='" + DTO.Status_Id + "', ncm='" + DTO.Ncm + "', custounitario='" + DTO.Custo.ToString().Replace(",", ".") + "', descricao='" + DTO.Anotacoes + "', ipi='" + DTO.Ipi.ToString().Replace(",", ".") + "', partnumber='" + DTO.Partnumber + "', icms='" + DTO.Icms.ToString().Replace(",",".") + "' WHERE id='" + DTO.Id + "'";
+                var query = "UPDATE produto SET status_id='" + DTO.Status_Id + "', ncm='" + DTO.Ncm + "', custounitario='" + DTO.Custo.ToString().Replace(",", ".") + "', descricao='" + DTO.Anotacoes + "', ipi='" + DTO.Ipi.ToString().Replace(",", ".") + "', partnumber='" + DTO.Partnumber + "', icms='" + DTO.Icms.ToString().Replace(",", ".") + "' WHERE id='" + DTO.Id + "'";
                 bd.Conectar();
                 bd.ExecutarComandoSQL(query);
             }
@@ -47,6 +51,35 @@ namespace GeGET
                 throw new Exception(ex.ToString());
             }
         }
+        #endregion
+
+        #region Inserir Produto
+
+        public bool InserirProduto(ProdutosDTO DTO)
+        {
+            bool success = false;
+            try
+            {
+                var query = "INSERT INTO produto (descricao, DESCRICAO_ITEM_id, ncm, custounitario, ipi, FORNECEDOR_id, USUARIO_id, data, partnumber, icms) VALUES ('" + DTO.Anotacoes + "','" + DTO.Item_Id + "', '" + DTO.Ncm + "', '" + DTO.Custo.ToString().Replace(",", ".") + "', '" + DTO.Ipi.ToString().Replace(",", ".") + "', '" + DTO.Fornecedor_Id + "', '" + loginDTO.Id + "' ,'" + DateTime.Now + "', '" + DTO.Partnumber + "', '" + DTO.Icms.ToString().Replace(",", ".") + "')";
+                bd.Conectar();
+                bd.ExecutarComandoSQL(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+            finally
+            {
+                success = true;
+            }
+            return success;
+        }
+
+        #endregion
+
+
+
+
 
     }
 }

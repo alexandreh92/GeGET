@@ -258,6 +258,33 @@ namespace BLL
         }
         #endregion
 
+        #region Load Negócios Dashboard
+        public ObservableCollection<NegociosDTO> LoadNegociosDashboard(NegociosDTO DTO)
+        {
+            var negocios = new ObservableCollection<NegociosDTO>();
+            var dt = new DataTable();
+            try
+            {
+                var query = "SELECT n.id, n.descricao, n.anotacoes, n.prazo, n.valor_fechamento, n.data, v.nome, s.descricao as status_descricao, s.id as status_id, e.cnpj, e.endereco, cid.cidade, e.id as estabelecimento_id, c.id as cliente_id, cid.uf, c.rsocial, c.fantasia FROM negocio n JOIN vendedor v ON n.VENDEDOR_id = v.id JOIN status_orcamento s ON n.STATUS_ORCAMENTO_id = s.id JOIN estabelecimento e ON n.ESTABELECIMENTO_id = e.id JOIN cidades cid ON e.CIDADES_id = cid.id JOIN cliente c ON e.CLIENTE_id = c.id WHERE n.status_orcamento_id != '0' AND n.status_orcamento_id != '5' ORDER BY n.id";
+                bd.Conectar();
+                dt = bd.RetDataTable(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    negocios.Add(new NegociosDTO { Id = dr["id"].ToString(), Numero = "p" + Convert.ToInt32(dr["id"]).ToString("0000"), Razao_Social = dr["rsocial"].ToString(), Descricao = dr["descricao"].ToString(), Anotacoes = dr["anotacoes"].ToString(), Status = Convert.ToInt32(dr["status_id"]), Endereco = dr["endereco"].ToString() + " - " + dr["cidade"].ToString() + " - " + dr["uf"].ToString(), Vendedor = dr["nome"].ToString(), Status_Descricao = dr["status_descricao"].ToString(), Status_Id = Convert.ToInt32(dr["status_id"]), Cliente_Id = dr["cliente_id"].ToString(), Estabelecimento_Id = dr["estabelecimento_id"].ToString(), CidadeEstado = dr["cidade"].ToString() + " - " + dr["uf"].ToString(), ProgressBarValue = Convert.ToInt32(dr["status_id"]) * 20, Nome_Fantasia = dr["fantasia"].ToString(), Prazo = Convert.ToDateTime(dr["prazo"]).ToString("dd/MM/yyyy") });
+                }
+                bd.CloseConection();
+            }
+            return negocios;
+        }
+        #endregion
+
         #region Inserir Orçamentista
 
         public void InserirOracamentista(OrcamentistasDTO DTO)
@@ -377,6 +404,7 @@ namespace BLL
                     var user_id = dr["usuario_id"].ToString();
                     var nome = dr["login"].ToString();
                     var querynotify = "INSERT INTO mensagem_" + nome + " (USUARIO_id, USUARIO_FROM_id, mensagem, data, NEGOCIO_id, descricao) VALUES ('" + user_id + "', '" + Logindto.Id + "', '" + notify.ToUpper() + "', '" + data + "', '" + DTO.Id + "', 'Status Atualizado')";
+                    bd.Conectar();
                     bd.ExecutarComandoSQL(querynotify);
                 }
             }
@@ -607,14 +635,15 @@ namespace BLL
                 bd.Conectar();
                 bd.ExecutarComandoSQL(query);
 
-                var select_items = "SELECT a.id, a.descricao FROM atividade a JOIN versao_atividade va ON va.id = a.VERSAO_ATIVIDADE_id WHERE a.NEGOCIO_id = '" + DTO.Id + "' AND va.VERSAO_id = '" + versaoDTO.Id + "'";
+                var select_items = "SELECT a.id, a.descricao, a.desc_atividades_id FROM atividade a JOIN versao_atividade va ON va.id = a.VERSAO_ATIVIDADE_id WHERE a.NEGOCIO_id = '" + DTO.Id + "' AND va.VERSAO_id = '" + versaoDTO.Id + "'";
                 bd.Conectar();
                 var dt = bd.RetDataTable(select_items);
 
                 foreach (DataRow dr in dt.Rows)
                 {
                     var descricao = dr["descricao"].ToString();
-                    var inserir_itens = "INSERT INTO lista_orcamento (PRODUTO_id, NEGOCIO_id, ATIVIDADES_id, quantidade, descricao_orc, preco_orc, bdi, fd) SELECT lo.PRODUTO_id, lo.NEGOCIO_id, (SELECT a.id FROM atividade a JOIN versao_atividade va ON va.id = a.VERSAO_ATIVIDADE_id WHERE a.NEGOCIO_id = '" + DTO.Id + "' AND va.VERSAO_id = (select max(versao_id) from versao_atividade where negocio_id = '"+DTO.Id+"') AND a.descricao = '" + descricao + "'), quantidade, descricao_orc, preco_orc, bdi, fd FROM lista_orcamento lo JOIN atividade a ON lo.ATIVIDADES_id = a.id JOIN versao_atividade va ON a.VERSAO_ATIVIDADE_id = va.id WHERE va.VERSAO_id = '" + versaoDTO.Id + "' AND lo.NEGOCIO_id = '" + DTO.Id + "' AND a.descricao = '" + descricao + "'";
+                    var desc_atividades_id = dr["desc_atividades_id"].ToString();
+                    var inserir_itens = "INSERT INTO lista_orcamento (PRODUTO_id, NEGOCIO_id, ATIVIDADES_id, quantidade, descricao_orc, preco_orc, bdi, fd) SELECT lo.PRODUTO_id, lo.NEGOCIO_id, (SELECT a.id FROM atividade a JOIN versao_atividade va ON va.id = a.VERSAO_ATIVIDADE_id WHERE a.NEGOCIO_id = '" + DTO.Id + "' AND va.VERSAO_id = (select max(versao_id) from versao_atividade where negocio_id = '"+DTO.Id+"') AND a.descricao = '" + descricao + "' AND a.desc_atividades_id = '"+ desc_atividades_id +"'), quantidade, descricao_orc, preco_orc, bdi, fd FROM lista_orcamento lo JOIN atividade a ON lo.ATIVIDADES_id = a.id JOIN versao_atividade va ON a.VERSAO_ATIVIDADE_id = va.id WHERE va.VERSAO_id = '" + versaoDTO.Id + "' AND lo.NEGOCIO_id = '" + DTO.Id + "' AND a.descricao = '" + descricao + "' AND a.desc_atividades_id = '" + desc_atividades_id + "'";
                     bd.Conectar();
                     bd.ExecutarComandoSQL(inserir_itens);
                 }

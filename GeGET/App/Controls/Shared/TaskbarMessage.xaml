@@ -9,11 +9,17 @@
         BorderThickness="0.1"
         Topmost="True"
         ShowInTaskbar="False"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         WindowStartupLocation="Manual"
         xmlns:local="clr-namespace:GeGET"
         mc:Ignorable="d"
-        Title="Window1" Height="200" Width="400">
+        Title="Window1" Height="200" MinHeight="200" MaxHeight="200" MinWidth="400" MaxWidth="400" Width="400">
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+        CaptionHeight="0"
+        ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+    
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide">
         <materialDesign:TransitioningContent.OpeningEffects>
             <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8" />

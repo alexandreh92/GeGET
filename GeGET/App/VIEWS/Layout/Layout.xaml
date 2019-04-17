@@ -12,8 +12,7 @@
         ResizeMode="CanResizeWithGrip"
         Background="#f0f0f0"
         Closing="Window_Closing"
-        Icon="/Resources/Icons/Icon.ico"
-        MouseDown="Window_MouseDown" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Icon="/Resources/Icons/Icon.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome 
         CaptionHeight="0"
@@ -61,7 +60,7 @@
 
             </Grid>
             <Grid x:Name="Header" Height="60" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="Auto">
-                <materialDesign:ColorZone Mode="PrimaryDark" Height="{Binding ActualHeight, ElementName=Header}" Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="0">
+                <materialDesign:ColorZone Mode="PrimaryDark" Height="{Binding ActualHeight, ElementName=Header}" Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="0,0,0,0" MouseDown="ColorZone_MouseDown" MouseLeftButtonDown="ColorZone_MouseLeftButtonDown">
                     <Grid>
                         <TextBlock  x:Name="txtTitle" VerticalAlignment="Center" FontSize="14" TextTrimming="CharacterEllipsis" Width="Auto" FontFamily="{StaticResource Novecento-Bold}" Margin="0,6,120,6">Getac Engenharia Integrada - GeGET v</TextBlock>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -105,7 +104,7 @@
                         </Button>
                     </Grid>
                         <ListView x:Name="ListViewMenu" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ShadowAssist.ShadowEdges="Right">
-                            <ListViewItem x:Name="btnDashBoard" Height="60" Foreground="White">
+                            <ListViewItem x:Name="btnDashBoard" Height="60" Foreground="White" PreviewMouseLeftButtonDown="BtnDashBoard_PreviewMouseLeftButtonDown">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="13,8,0,0"/>
                                 <TextBlock Text="DASHBOARD" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="15.0"/>

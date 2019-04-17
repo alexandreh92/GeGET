@@ -55,7 +55,7 @@ namespace GeGET
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            DialogResult = true;
         }
 
         private void CmbDisciplina_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -100,7 +100,7 @@ namespace GeGET
                 var result = CustomOKCancelMessageBox.Show("Itens Inseridos com sucesso.\nDeseja inserir os itens selecionados em outra atividade?","Sucesso!", Window.GetWindow(this));
                 if (result != System.Windows.Forms.DialogResult.OK)
                 {
-                    this.Close();
+                    DialogResult = true;
                 }
             }));
         }

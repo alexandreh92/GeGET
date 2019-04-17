@@ -11,6 +11,7 @@ using System.Threading;
 using MMLib.Extensions;
 using System.Collections.Generic;
 using System.ComponentModel;
+using DevExpress.Xpf.Grid;
 
 namespace GeGET
 {
@@ -223,6 +224,10 @@ namespace GeGET
                 {
                     form.Owner = Window.GetWindow(this);
                     form.ShowDialog();
+                    if (form.DialogResult.Value && form.DialogResult.HasValue)
+                    {
+                        Load();
+                    }
                 }
             }
             else
@@ -326,6 +331,15 @@ namespace GeGET
             var material = e.Row as ListaOrcamentosDTO;
             
             LoadSidePanel();
+        }
+
+        private void grdItens_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                ((TableView)grdItens.View).MoveNextRow();
+                e.Handled = true;
+            }
         }
     }
 }

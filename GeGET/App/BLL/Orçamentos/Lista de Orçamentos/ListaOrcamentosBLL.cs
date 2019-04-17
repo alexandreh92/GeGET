@@ -27,7 +27,7 @@ namespace BLL
             var dt = new DataTable();
             try
             {
-                var query = "SELECT (@cnt := @cnt + 1) AS Num, t.* FROM (SELECT p.id, i.descricao, lo.descricao_orc as desc_completa, p.partnumber, i.un, f.rsocial, lo.quantidade, lo.desconto, lo.preco_orc, lo.bdi, lo.quantidade * lo.preco_orc * (1-(desconto/100)) as preco_total, CASE lo.fd WHEN '0' THEN lo.quantidade * lo.preco_orc * (1 + (lo.bdi / 100)) * (1-(desconto/100)) WHEN '1' THEN lo.quantidade * lo.preco_orc * (1-(desconto/100)) * (1 + 10 / 100) END as preco_total_bdi, lo.fd, lo.id as pk FROM lista_orcamento lo JOIN produto p ON lo.PRODUTO_id = p.id JOIN item i ON p.DESCRICAO_ITEM_id = i.id JOIN fornecedor f ON p.FORNECEDOR_id = f.id WHERE lo.NEGOCIO_id = '"+ DTO.Id +"' AND lo.ATIVIDADES_id = '" + DTO.Atividade_Id + "') t CROSS JOIN(SELECT @cnt:= 0) AS dummy";
+                var query = "SELECT (@cnt := @cnt + 1) AS Num, t.* FROM (SELECT p.id, i.descricao, lo.descricao_orc as desc_completa, p.partnumber, i.unidade_id as un, f.rsocial, lo.quantidade, lo.desconto, lo.preco_orc, lo.bdi, lo.quantidade * lo.preco_orc * (1-(desconto/100)) as preco_total, CASE lo.fd WHEN '0' THEN lo.quantidade * lo.preco_orc * (1 + (lo.bdi / 100)) * (1-(desconto/100)) WHEN '1' THEN lo.quantidade * lo.preco_orc * (1-(desconto/100)) * (1 + 10 / 100) END as preco_total_bdi, lo.fd, lo.id as pk FROM lista_orcamento lo JOIN produto p ON lo.PRODUTO_id = p.id JOIN item i ON p.DESCRICAO_ITEM_id = i.id JOIN fornecedor f ON p.FORNECEDOR_id = f.id WHERE lo.NEGOCIO_id = '"+ DTO.Id +"' AND lo.ATIVIDADES_id = '" + DTO.Atividade_Id + "') t CROSS JOIN(SELECT @cnt:= 0) AS dummy";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }

@@ -9,6 +9,8 @@ using System.Windows.Media.Imaging;
 using System;
 using System.Drawing;
 using System.Windows.Interop;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace GeGET
 {
@@ -19,6 +21,7 @@ namespace GeGET
         LoginDTO Logindto = new LoginDTO();
         LayoutDTO dto = new LayoutDTO();
         MySQLDependency dependency = new MySQLDependency();
+        ManualResetEvent syncEvent = new ManualResetEvent(false);
         #endregion
 
         #region Initialize
@@ -34,9 +37,14 @@ namespace GeGET
             txtTitle.Text = txtTitle.Text + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             LoadMensagens();
             dependency.Start();
+            helpers.Open<Dashboard>(null, false);
         }
         #endregion
 
+        #region WaitLoad
+
+
+        #endregion
 
         #region Carrega Mensagens
         private void LoadMensagens()
@@ -140,16 +148,6 @@ namespace GeGET
         }
         #endregion
 
-        #region DragWindow
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                DragMove();
-            }
-        }
-        #endregion
-
         #endregion
 
         private void ListViewItem_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -168,7 +166,20 @@ namespace GeGET
             helpers.Open<Suprimentos>(null, false);
         }
 
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void BtnDashBoard_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.Open<Dashboard>(null, false);
+        }
+
+        private void ColorZone_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
+        }
+
+        private void ColorZone_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
             {

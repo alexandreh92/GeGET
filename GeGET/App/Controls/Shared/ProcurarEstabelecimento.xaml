@@ -11,6 +11,7 @@
         WindowStyle="None"
         WindowState="Maximized"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         Title="MensagemLayout" Height="679" Width="500">
     <Window.Resources>
         <Style TargetType="{x:Type ListBoxItem}">

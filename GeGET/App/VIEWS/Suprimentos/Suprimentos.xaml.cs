@@ -70,7 +70,7 @@ namespace GeGET
 
         private void BtnCadastroProduto_Click(object sender, RoutedEventArgs e)
         {
-
+            helpers.Open<CadastroProdutos>(this.GetType().Name, false);
         }
 
         private void BtnCadastroGrupoItens_Click(object sender, RoutedEventArgs e)

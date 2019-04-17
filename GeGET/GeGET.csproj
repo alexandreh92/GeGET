@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Costura.Fody.3.3.3\build\Costura.Fody.props" Condition="Exists('..\packages\Costura.Fody.3.3.3\build\Costura.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>GeGET</RootNamespace>
     <AssemblyName>GeGET</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -17,6 +16,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -29,7 +29,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -43,6 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -61,15 +61,18 @@
   <PropertyGroup>
     <StartupObject>GeGET.App</StartupObject>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
-    <Reference Include="Costura, Version=3.3.3.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
-      <HintPath>..\packages\Costura.Fody.3.3.3\lib\net40\Costura.dll</HintPath>
-    </Reference>
-    <Reference Include="Devart.DbForge.Data.Interfaces">
-      <HintPath>F:\Devart\dbForge Studio for MySQL\Devart.DbForge.Data.Interfaces.dll</HintPath>
+    <Reference Include="Devart.DbForge.Data.Interfaces, Version=5.0.13.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\DLLs\Devart.DbForge.Data.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="Devart.DbForge.Data.MySql">
-      <HintPath>F:\Devart\dbForge Studio for MySQL\Devart.DbForge.Data.MySql.dll</HintPath>
+      <HintPath>..\..\..\DLLs\Devart.DbForge.Data.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="Devart.DbForge.Interfaces, Version=4.0.69.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\DLLs\Devart.DbForge.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Data.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.DataAccess.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
@@ -137,12 +140,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2016White.v17.2.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Expression.Drawing.3.0.0\lib\net45\Microsoft.Expression.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="MMLib.Core, Version=1.0.5305.36249, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MMLib.Extensions.1.0.10.13\lib\MMLib.Core.dll</HintPath>
@@ -154,12 +166,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\DLLs\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleImpersonation, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleImpersonation.3.0.0\lib\net46\SimpleImpersonation.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing">
       <Private>True</Private>
     </Reference>
@@ -168,6 +184,10 @@
     </Reference>
     <Reference Include="System.Management.Instrumentation">
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.5.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms">
       <Private>True</Private>
@@ -199,6 +219,9 @@
     </Reference>
     <Reference Include="UIAutomationTypes">
       <Private>True</Private>
+    </Reference>
+    <Reference Include="VirtualizingWrapPanel, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtualizingWrapPanel.1.2.2\lib\net45\VirtualizingWrapPanel.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase">
       <Private>True</Private>
@@ -248,8 +271,17 @@
     <Compile Include="App\BLL\Shared\EstadosBLL.cs" />
     <Compile Include="App\BLL\Shared\CidadesBLL.cs" />
     <Compile Include="App\Controls\AlignableWrapPanel\AlignableWrapPanel.cs" />
+    <Compile Include="App\Controls\CircleProgressBar\ProgressCirclexaml.xaml.cs">
+      <DependentUpon>ProgressCirclexaml.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\Controls\Shared\CustomOKMessageBox.xaml.cs">
       <DependentUpon>CustomOKMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarFornecedor.xaml.cs">
+      <DependentUpon>ProcurarFornecedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarItem.xaml.cs">
+      <DependentUpon>ProcurarItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\Controls\Shared\ProcurarGrupoItens.xaml.cs">
       <DependentUpon>ProcurarGrupoItens.xaml</DependentUpon>
@@ -272,6 +304,7 @@
     <Compile Include="App\Controls\Shared\ProcurarEstabelecimento.xaml.cs">
       <DependentUpon>ProcurarEstabelecimento.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\Controls\VirtualizingWrapPanel\VirtualizingWrapPanel.cs" />
     <Compile Include="App\DTO\CRM\Negócios\OrcamentistasDTO.cs" />
     <Compile Include="App\DTO\CRM\Shared\PrioridadeDTO.cs" />
     <Compile Include="App\DTO\CRM\Shared\ContatoDTO.cs" />
@@ -379,6 +412,9 @@
     <Compile Include="App\VIEWS\Orçamentos\Consulta Lista de Orçamento\ConsultaListaOrcamento.xaml.cs">
       <DependentUpon>ConsultaListaOrcamento.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamento.xaml.cs">
+      <DependentUpon>CopiarItensOrcamento.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamento.xaml.cs">
       <DependentUpon>ListaOrcamento.xaml</DependentUpon>
     </Compile>
@@ -387,6 +423,9 @@
     </Compile>
     <Compile Include="App\VIEWS\Suprimentos\Fornecedores\CadastroFornecedor.xaml.cs">
       <DependentUpon>CadastroFornecedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Fornecedores\EditarFornecedor.xaml.cs">
+      <DependentUpon>EditarFornecedor.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\VIEWS\Suprimentos\Fornecedores\Fornecedores.xaml.cs">
       <DependentUpon>Fornecedores.xaml</DependentUpon>
@@ -408,6 +447,9 @@
     </Compile>
     <Compile Include="App\VIEWS\Suprimentos\Itens\Itens.xaml.cs">
       <DependentUpon>Itens.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Produtos\CadastroProdutos.xaml.cs">
+      <DependentUpon>CadastroProdutos.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\VIEWS\Suprimentos\Produtos\EditarProduto.xaml.cs">
       <DependentUpon>EditarProduto.xaml</DependentUpon>
@@ -450,6 +492,8 @@
     <Compile Include="App\BLL\Suprimentos\Fornecedores\FornecedoresBLL.cs" />
     <Compile Include="App\DTO\Suprimentos\Fornecedores\FornecedoresDTO.cs" />
     <Compile Include="App\DTO\Suprimentos\Itens\ItensDTO.cs" />
+    <Compile Include="DashboardBLL.cs" />
+    <Compile Include="DashboardDTO.cs" />
     <Compile Include="Permission.xaml.cs">
       <DependentUpon>Permission.xaml</DependentUpon>
     </Compile>
@@ -457,12 +501,27 @@
     <Compile Include="App\DTO\Suprimentos\Produtos\ProdutosDTO.cs" />
     <Compile Include="App\BLL\Shared\UnidadeBLL.cs" />
     <Compile Include="App\DTO\Shared\UnidadeDTO.cs" />
+    <Compile Include="Dashboard.xaml.cs">
+      <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\BLL\CRM\Gerenciar Orçamento\VersaoOrcamentoBLL.cs" />
     <Compile Include="App\DTO\CRM\Gerenciar Orçamento\VersaoOrcamentoDTO.cs" />
+    <Page Include="App\Controls\CircleProgressBar\ProgressCirclexaml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="App\Controls\Shared\CustomOKMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarFornecedor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -602,6 +661,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamento.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -618,11 +681,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamento.xaml">
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamentoOld.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="App\VIEWS\Suprimentos\Fornecedores\CadastroFornecedor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Fornecedores\EditarFornecedor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -651,6 +718,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="App\VIEWS\Suprimentos\Itens\Itens.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Produtos\CadastroProdutos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -684,8 +755,8 @@
     <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\ListaOrcamentoOld.xaml.cs">
       <DependentUpon>ListaOrcamentoOld.xaml</DependentUpon>
     </Compile>
-    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamento.xaml.cs">
-      <DependentUpon>CopiarItensOrcamento.xaml</DependentUpon>
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamentoOld.xaml.cs">
+      <DependentUpon>CopiarItensOrcamentoOld.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\CopiarItensOrcamentoBLL.cs" />
     <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\CopiarItensOrcamentoDTO.cs" />
@@ -727,6 +798,10 @@
     <Page Include="Permission.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControl1.xaml">
       <SubType>Designer</SubType>
@@ -804,13 +879,16 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="template\styles\main.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Updater\Updater.csproj">
+      <Project>{e6d9ef14-e80f-4522-93ab-397c6fabde42}</Project>
+      <Name>Updater</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Fody.4.0.2\build\Fody.targets" Condition="Exists('..\packages\Fody.4.0.2\build\Fody.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.4.0.2\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.4.0.2\build\Fody.targets'))" />
-    <Error Condition="!Exists('..\packages\Costura.Fody.3.3.3\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.3.3.3\build\Costura.Fody.props'))" />
-  </Target>
 </Project>

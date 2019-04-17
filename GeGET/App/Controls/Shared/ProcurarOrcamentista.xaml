@@ -11,6 +11,7 @@
         WindowStyle="None"
         Topmost="True"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         Title="Procurar Negócio" Height="679" Width="550">
     <Window.Resources>
         <Style TargetType="{x:Type ListBoxItem}">

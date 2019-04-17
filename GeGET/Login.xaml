@@ -8,10 +8,16 @@
         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" x:Class="GeGET.Login"
         mc:Ignorable="d"
         WindowStyle="None"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
+        WindowState="Normal"
         WindowStartupLocation="CenterScreen"
         Icon="/Resources/Icons/Icon.ico"
-        Title="GeGET - Login" Height="475" Width="640">
+        Title="GeGET - Login" MaxHeight="475" MinHeight="475" Height="475" MinWidth="640" MaxWidth="640" Width="640">
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+        CaptionHeight="0"
+        ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="85*"/>

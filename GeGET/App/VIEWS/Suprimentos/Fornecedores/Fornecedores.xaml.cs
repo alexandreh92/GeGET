@@ -89,17 +89,17 @@ namespace GeGET
             dto.Icms = ((ProdutosDTO)lstProdutos.Items[index]).Icms;
             dto.Ncm = ((ProdutosDTO)lstProdutos.Items[index]).Ncm;
             dto.Status_Id = ((ProdutosDTO)lstProdutos.Items[index]).Status_Id;
-            dto.Anotacoes = ((ProdutosDTO)lstProdutos.Items[index]).Anotacoes;
-            using (var form = new EditarProduto(dto))
+            dto.Anotacoes = ((ProdutosDTO)lstProdutos.Items[index]).Anotacoes;*/
+            using (var form = new EditarFornecedor(dto))
             {
                 form.Owner = Window.GetWindow(this);
                 form.ShowDialog();
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {
-                    listaProdutos = bll.LoadProdutos();
-                    lstProdutos.ItemsSource = listaProdutos;
+                    //listaProdutos = bll.LoadProdutos();
+                    //lstProdutos.ItemsSource = listaProdutos;
                 }
-            }*/
+            }
         }
         #endregion
 

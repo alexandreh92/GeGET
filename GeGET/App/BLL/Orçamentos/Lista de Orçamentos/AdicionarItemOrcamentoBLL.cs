@@ -20,7 +20,7 @@ namespace BLL
             var dt = new DataTable();
             try
             {
-                var query = "SELECT p.id, i.descricao, p.descricao as desc_completa, i.un, p.partnumber, p.custounitario, f.rsocial FROM produto p JOIN item i ON p.DESCRICAO_ITEM_id = i.id JOIN fornecedor f ON p.FORNECEDOR_id = f.id WHERE p.STATUS_id='1' ORDER BY p.id, i.descricao";
+                var query = "SELECT p.id, i.descricao, p.descricao as desc_completa, i.unidade_id as un, p.partnumber, p.custounitario, f.rsocial FROM produto p JOIN item i ON p.DESCRICAO_ITEM_id = i.id JOIN fornecedor f ON p.FORNECEDOR_id = f.id WHERE p.STATUS_id='1' ORDER BY p.id, i.descricao";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }

@@ -46,7 +46,7 @@ namespace GeGET
             var dt = new DataTable();
             try
             {
-                var query = "SELECT a.descricao, a.id FROM atividade a JOIN negocio n ON a.NEGOCIO_id = n.id JOIN versao_atividade va ON a.VERSAO_ATIVIDADE_id = va.id JOIN desc_atividades da ON a.DESC_ATIVIDADES_id = da.id JOIN disciplina disc ON da.DISCIPLINA_id = disc.id WHERE a.NEGOCIO_id = '" + dTO.Negocio_Id + "' AND DISCIPLINA_id = '" + dTO.Disciplina_Id + "' AND va.VERSAO_id = n.versao_valida";
+                var query = "SELECT a.descricao, a.id, da.descricao as descricao_atividade FROM atividade a JOIN negocio n ON a.NEGOCIO_id = n.id JOIN versao_atividade va ON a.VERSAO_ATIVIDADE_id = va.id JOIN desc_atividades da ON a.DESC_ATIVIDADES_id = da.id JOIN disciplina disc ON da.DISCIPLINA_id = disc.id WHERE a.NEGOCIO_id = '" + dTO.Negocio_Id + "' AND DISCIPLINA_id = '" + dTO.Disciplina_Id + "' AND va.VERSAO_id = n.versao_valida";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
@@ -58,7 +58,7 @@ namespace GeGET
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    atividades.Add(new AtividadeDTO { Id = Convert.ToInt32(dr["id"]), Descricao = dr["descricao"].ToString() });
+                    atividades.Add(new AtividadeDTO { Id = Convert.ToInt32(dr["id"]), Descricao = dr["descricao"].ToString(), Descricao_Atividade = dr["descricao_atividade"].ToString() });
                 }
                 bd.CloseConection();
             }

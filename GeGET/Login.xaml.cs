@@ -8,6 +8,9 @@ using System.Reflection;
 using System.Net;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Security;
+using System.IO;
+using SimpleImpersonation;
 
 namespace GeGET
 {
@@ -31,8 +34,8 @@ namespace GeGET
         #region Initialize
         public Login()
         {
+            CheckUpdate();
             InitializeComponent();
-            //CheckUpdate();
             Remember_Data();
             progressBar.Value = 0;
             var bc = new BrushConverter();
@@ -142,10 +145,18 @@ namespace GeGET
 
                 if (Convert.ToInt32(cVersion) < oVersion)
                 {
-                    HaveUpdate = true;
-                    btnLogin.IsEnabled = false;
-                    UpdateFields.Visibility = Visibility.Visible;
-                    StartUpdate();
+                    string oldfile = "Updater.exe";
+                    string newfile = "Updater_Old.exe";
+                    if (File.Exists(oldfile))
+                    {
+                        if (File.Exists(newfile))
+                        {
+                            File.Delete(newfile);
+                        }
+                        File.Move(oldfile,newfile);
+                    }
+                    Process.Start(newfile);
+                    this.Close();
                 }
             }
             catch (Exception)

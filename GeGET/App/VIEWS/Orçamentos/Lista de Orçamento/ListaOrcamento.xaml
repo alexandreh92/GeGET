@@ -166,7 +166,7 @@
                                         
                                     </StackPanel>
                                     <Border BorderBrush="DarkGray" BorderThickness="0,0,0,0.5"></Border>
-                                    <dxg:GridControl x:Name="grdItens" ShowBorder="False" Grid.Row="1" EnableSmartColumnsGeneration="True" HorizontalAlignment="Stretch" Margin="0,0,0,10" VirtualizingPanel.VirtualizationMode="Recycling" SelectionMode="MultipleRow">
+                                    <dxg:GridControl x:Name="grdItens" ShowBorder="False" Grid.Row="1" EnableSmartColumnsGeneration="True" HorizontalAlignment="Stretch" Margin="0,0,0,10" VirtualizingPanel.VirtualizationMode="Recycling" SelectionMode="MultipleRow" PreviewKeyDown="grdItens_PreviewKeyDown">
                                         <dxg:GridControl.Columns>
                                             <!--CÓDIGO-->
                                             <dxg:GridColumn Header="Código" HorizontalHeaderContentAlignment="Center" Width="90" FixedWidth="True" ReadOnly="True" Binding="{Binding Codigo_Produto}">
@@ -288,7 +288,7 @@
                                             </dxg:GridColumn>
                                         </dxg:GridControl.Columns>
                                         <dxg:GridControl.View>
-                                            <dxg:TableView AutoWidth="True" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" CellValueChanged="TableView_CellValueChanged" SearchDelay="10" SearchPanelCriteriaOperatorType="And">
+                                            <dxg:TableView AutoWidth="True" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" CellValueChanged="TableView_CellValueChanged" SearchDelay="10" SearchPanelCriteriaOperatorType="And" EditorShowMode="MouseUp">
                                                 <dxg:TableView.RowStyle>
                                                     <Style TargetType="dxg:RowControl">
                                                         <Style.Triggers>

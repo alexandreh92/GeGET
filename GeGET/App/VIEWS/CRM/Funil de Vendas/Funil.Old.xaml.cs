@@ -30,7 +30,6 @@ namespace GeGET
         FunildeVendasBLL bll = new FunildeVendasBLL();
         Control teste;
         Thread t1;
-        Thread t2;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
 
         public FunilOld()

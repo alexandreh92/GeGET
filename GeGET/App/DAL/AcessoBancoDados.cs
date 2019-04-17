@@ -18,11 +18,11 @@ namespace DAL
         private MySql.Data.MySqlClient.MySqlDataAdapter da;
         private MySql.Data.MySqlClient.MySqlCommandBuilder cb;
 
-        public static string server_local = "localhost";
-        //public static string server_local = "192.168.15.5";
+        //public static string server_local = "localhost";
+        public static string server_local = "192.168.15.5";
         public static string server_remoto = "getacengenharia.ddns.net";
-        //public static string server = "192.168.15.5";
-        public static string server = "localhost";
+        public static string server = "192.168.15.5";
+        //public static string server = "localhost";
         public static string user = "root";
         public static string password = "root";
         public static string database = "gegetdb";

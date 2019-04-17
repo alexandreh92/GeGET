@@ -11,7 +11,8 @@
         WindowStyle="None"
         WindowState="Maximized"
         mc:Ignorable="d"
-        Title="Procurar Negócio" Height="679" Width="500">
+        Loaded="Window_Loaded"
+        Title="Procurar Negócio" Height="680" Width="500">
     <Window.Resources>
         <Style TargetType="{x:Type ListBoxItem}">
             <Setter Property="Template">
@@ -43,7 +44,7 @@
             <RowDefinition x:Name="ColTop" Height="1*"/>
             <RowDefinition Height="72"/>
             <RowDefinition Height="78"/>
-            <RowDefinition Height="528"/>
+            <RowDefinition Height="529"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <materialDesign:Card Margin="10" Padding="10" VerticalAlignment="Stretch" Grid.Row="1" Grid.RowSpan="3" Grid.Column="1">

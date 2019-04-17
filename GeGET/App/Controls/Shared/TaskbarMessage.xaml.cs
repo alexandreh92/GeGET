@@ -30,8 +30,8 @@ namespace GeGET
             txtDescription.Text = Description;
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
             WindowStartupLocation = WindowStartupLocation.Manual;
-            Top = desktopWorkingArea.Bottom - this.Height;
-            Left = desktopWorkingArea.Right - this.Width;
+            Top = desktopWorkingArea.Bottom - this.Height - 10;
+            Left = desktopWorkingArea.Right - this.Width - 10;
             dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10);
             dispatcherTimer.Start();

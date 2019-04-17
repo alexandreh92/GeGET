@@ -83,7 +83,7 @@
                                     <DockPanel>
                                         <materialDesign:PopupBox VerticalAlignment="Top" HorizontalAlignment="Right" StaysOpen="False" Margin="0,15,0,0" Foreground="#7A2932" x:Name="PopupBox">
                                             <StackPanel Width="150">
-                                                <Button x:Name="btnEditar" Content="Editar"/>
+                                                <Button x:Name="btnEditar" Content="Editar" Click="BtnEditar_Click"/>
                                             </StackPanel>
                                         </materialDesign:PopupBox>
                                     </DockPanel>

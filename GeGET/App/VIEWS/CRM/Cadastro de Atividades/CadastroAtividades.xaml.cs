@@ -131,7 +131,7 @@ namespace GeGET
 
         private void BtnCadastrar_Click(object sender, RoutedEventArgs e)
         {
-            if (txtDescricao.Text.TrimStart(' ') != "")
+            if (txtDescricaoAtividade.Text.TrimStart(' ') != "")
             {
                 atividadeCadastradaDTO.Atividade_id = cmbAtividade.SelectedValue.ToString();
                 atividadeCadastradaDTO.Descricao = txtDescricaoAtividade.Text.Replace("'", "''").TrimStart(' ').ToUpper();

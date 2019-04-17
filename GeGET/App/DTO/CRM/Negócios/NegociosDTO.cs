@@ -5,6 +5,7 @@
         private string id;
         private string numero;
         private string razao_Social;
+        private string nome_Fantasia;
         private string endereco;
         private string anotacoes;
         private string status_Descricao;
@@ -69,5 +70,6 @@
         public string Versao_Descricao { get => versao_Descricao; set => versao_Descricao = value; }
         public int ProgressBarValue { get => progressBarValue; set => progressBarValue = value; }
         public int Versao_Locked { get => versao_Locked; set => versao_Locked = value; }
+        public string Nome_Fantasia { get => nome_Fantasia; set => nome_Fantasia = value; }
     }
 }
