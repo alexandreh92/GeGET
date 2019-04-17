@@ -169,7 +169,7 @@
                                     <dxg:GridControl x:Name="grdItens" ShowBorder="False" Grid.Row="1" EnableSmartColumnsGeneration="True" HorizontalAlignment="Stretch" Margin="0,0,0,10" VirtualizingPanel.VirtualizationMode="Recycling" SelectionMode="MultipleRow" PreviewKeyDown="grdItens_PreviewKeyDown">
                                         <dxg:GridControl.Columns>
                                             <!--CÓDIGO-->
-                                            <dxg:GridColumn Header="Código" HorizontalHeaderContentAlignment="Center" Width="90" FixedWidth="True" ReadOnly="True" Binding="{Binding Codigo_Produto}">
+                                            <dxg:GridColumn Header="Código" FieldName="Codigo_Produto" HorizontalHeaderContentAlignment="Center" Width="90" FixedWidth="True" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -180,7 +180,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--DESCRICAO-->
-                                            <dxg:GridColumn Header="Descrição" HorizontalHeaderContentAlignment="Left" ReadOnly="True" Binding="{Binding Descricao}">
+                                            <dxg:GridColumn Header="Descrição" FieldName="Descricao" HorizontalHeaderContentAlignment="Left" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="4,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -188,7 +188,7 @@
                                                 </dxg:GridColumn.HeaderTemplate>
                                             </dxg:GridColumn>
                                             <!--PARTNUMBER-->
-                                            <dxg:GridColumn Header="Partnumber" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True" Binding="{Binding Partnumber}">
+                                            <dxg:GridColumn Header="Partnumber" FieldName="Partnumber" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -199,7 +199,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--FABRICANTE-->
-                                            <dxg:GridColumn Header="Fabricante" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True" Binding="{Binding Fabricante}">
+                                            <dxg:GridColumn Header="Fabricante" FieldName="Fabricante" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -210,7 +210,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--UN-->
-                                            <dxg:GridColumn Name="Unidade" Header="UN" HorizontalHeaderContentAlignment="Center" Width="80" FixedWidth="True" ReadOnly="True" Binding="{Binding Un}">
+                                            <dxg:GridColumn Name="Unidade" Header="UN" FieldName="Un" HorizontalHeaderContentAlignment="Center" Width="80" FixedWidth="True" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -221,7 +221,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--QUANTIDADE-->
-                                            <dxg:GridColumn Header="Quantidade" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="False" FixedWidth="True" Binding="{Binding Quantidade, Mode=TwoWay}">
+                                            <dxg:GridColumn Header="Quantidade" FieldName="Quantidade" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="False" FixedWidth="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -232,7 +232,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--CUSTO UNITARIO-->
-                                            <dxg:GridColumn Header="Custo Un." HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="True" FixedWidth="True" Binding="{Binding Preco_Unitario, StringFormat=C}">
+                                            <dxg:GridColumn Header="Custo Un." FieldName="Preco_Unitario" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="True" FixedWidth="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -243,7 +243,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--BDI-->
-                                            <dxg:GridColumn Header="BDI" HorizontalHeaderContentAlignment="Center" Width="60" ReadOnly="False" FixedWidth="True" Binding="{Binding Bdi, Mode=TwoWay}">
+                                            <dxg:GridColumn Header="BDI" FieldName="Bdi" HorizontalHeaderContentAlignment="Center" Width="60" ReadOnly="False" FixedWidth="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -254,7 +254,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--CUSTO TOTAL-->
-                                            <dxg:GridColumn Header="Custo Total" HorizontalHeaderContentAlignment="Center" Width="120" ReadOnly="True" FixedWidth="True" Binding="{Binding Custo_Total, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                                            <dxg:GridColumn Header="Custo Total" FieldName="Custo_Total" HorizontalHeaderContentAlignment="Center" Width="120" ReadOnly="True" FixedWidth="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -265,7 +265,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--PRECO TOTAL-->
-                                            <dxg:GridColumn Header="Preco Total" HorizontalHeaderContentAlignment="Center" Width="120" ReadOnly="True" FixedWidth="True" Binding="{Binding Preco_Total}">
+                                            <dxg:GridColumn Header="Preço Total" FieldName="Preco_Total" HorizontalHeaderContentAlignment="Center" Width="120" ReadOnly="True" FixedWidth="True" Binding="{Binding Preco_Total}">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -276,7 +276,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--FATURAMENTO DIRETO-->
-                                            <dxg:GridColumn Header="FD" HorizontalHeaderContentAlignment="Center" Width="50" FixedWidth="True" Binding="{Binding Fd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" local:CommitHelper.CommitOnValueChanged="True" IsEnabled="True" ReadOnly="False">
+                                            <dxg:GridColumn Header="FD" FieldName="Fd" HorizontalHeaderContentAlignment="Center" Width="50" FixedWidth="True" local:CommitHelper.CommitOnValueChanged="True" IsEnabled="True" ReadOnly="False">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -288,7 +288,7 @@
                                             </dxg:GridColumn>
                                         </dxg:GridControl.Columns>
                                         <dxg:GridControl.View>
-                                            <dxg:TableView AutoWidth="True" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" CellValueChanged="TableView_CellValueChanged" SearchDelay="10" SearchPanelCriteriaOperatorType="And" EditorShowMode="MouseUp">
+                                            <dxg:TableView x:Name="grdView" AutoWidth="True" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" CellValueChanged="TableView_CellValueChanged" SearchDelay="10" SearchPanelCriteriaOperatorType="And" EditorShowMode="MouseDown" AllowSorting="False" IsTotalSummaryMenuEnabled="False" AllowGrouping="False" AllowCommitOnValidationAttributeError="True" ShowingEditor="TableView_ShowingEditor">
                                                 <dxg:TableView.RowStyle>
                                                     <Style TargetType="dxg:RowControl">
                                                         <Style.Triggers>

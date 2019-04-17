@@ -341,5 +341,29 @@ namespace GeGET
                 e.Handled = true;
             }
         }
+
+        private void TableView_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TableViewHitInfo hi = ((TableView)grdItens.View).CalcHitInfo(e.OriginalSource as DependencyObject);
+            if (hi.Column.Header.ToString() != "Quantidade" && hi.Column.Header.ToString() != "BDI")
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TableView_ShowingEditor(object sender, ShowingEditorEventArgs e)
+        {
+
+            if (grdItens.CurrentColumn.FieldName != "Quantidade" && grdItens.CurrentColumn.FieldName != "Bdi" && grdItens.CurrentColumn.FieldName != "Fd")
+            {
+                e.Cancel = true;
+            }
+
+
+        }
+
+        private void GrdView_ShownEditor(object sender, EditorEventArgs e)
+        {
+        }
     }
 }
