@@ -23,7 +23,7 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
-                        <RowDefinition Height="1080"/>
+                        <RowDefinition Height="670"/>
                         <RowDefinition Height="60"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Vertical" Background="White" VerticalAlignment="Stretch">

@@ -11,6 +11,11 @@ using System.Threading;
 using MMLib.Extensions;
 using System.Collections.Generic;
 using System.ComponentModel;
+using DevExpress.Mvvm;
+using DevExpress.Xpf.Grid;
+using System.IO;
+using DevExpress.XtraPrinting;
+using Microsoft.Win32;
 
 namespace GeGET
 {
@@ -326,6 +331,28 @@ namespace GeGET
             var material = e.Row as ListaOrcamentosDTO;
             
             LoadSidePanel();
+        }
+
+        private void ExportExcel_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            fileDialog.FileName = "teste";
+            fileDialog.Filter = "Arquivo Microsoft Excel (*.xlsx)|*.xlsx";
+            if (fileDialog.ShowDialog() == true)
+            {
+                grdView.ExportToXlsx(fileDialog.FileName, new XlsxExportOptionsEx() { ExportType = DevExpress.Export.ExportType.Default });
+
+            }
+
+            //string filepath = AppDomain.CurrentDomain.BaseDirectory;
+            //grdView.ExportToXls(@"grid_export.xls", new XlsExportOptionsEx() { ExportType = DevExpress.Export.ExportType.DataAware });
+            //grdView.ExportToHtml(@"grid_export.html", new HtmlExportOptions() { ExportMode = HtmlExportMode.SingleFile });
+
+        }
+
+        private void ExportExcel_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

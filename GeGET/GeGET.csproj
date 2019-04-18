@@ -264,6 +264,7 @@
     <Compile Include="App\BLL\CRM\Shared\CategoriaClienteBLL.cs" />
     <Compile Include="App\BLL\Layout\MySQLDependency.cs" />
     <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\AtividadesBLL.cs" />
+    <Compile Include="App\BLL\Shared\VersaoBLL.cs" />
     <Compile Include="App\BLL\Shared\DisciplinaBLL.cs" />
     <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\OrcamentosBLL.cs" />
     <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\ListaOrcamentosBLL.cs" />
@@ -315,9 +316,11 @@
     <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\OrcamentosDTO.cs" />
     <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\ListaOrcamentosDTO.cs" />
     <Compile Include="App\DTO\Orçamentos\Lista de Orçamentos\ValoresOrcamento.cs" />
+    <Compile Include="App\DTO\Shared\VersaoDTO.cs" />
     <Compile Include="App\Helpers\BlackScreen.xaml.cs">
       <DependentUpon>BlackScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\Helpers\ExportService.cs" />
     <Compile Include="App\Helpers\QueryHelper.cs" />
     <Compile Include="App\VIEWS\CRM\Cadastro de Atividades\CadastroAtividades.xaml.cs">
       <DependentUpon>CadastroAtividades.xaml</DependentUpon>
@@ -410,6 +413,9 @@
     </Compile>
     <Compile Include="App\VIEWS\Orçamentos\Consulta Lista de Orçamento\ConsultaListaOrcamento.xaml.cs">
       <DependentUpon>ConsultaListaOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Orçamentos\Exportar Lista Orçamento\ExportarListaOrcamento.xaml.cs">
+      <DependentUpon>ExportarListaOrcamento.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamento.xaml.cs">
       <DependentUpon>CopiarItensOrcamento.xaml</DependentUpon>
@@ -657,6 +663,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="App\VIEWS\Orçamentos\Consulta Lista de Orçamento\ConsultaListaOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Orçamentos\Exportar Lista Orçamento\ExportarListaOrcamento.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

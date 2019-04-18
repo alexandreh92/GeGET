@@ -47,6 +47,34 @@ namespace BLL
 
         #endregion
 
+        #region Load Orçamentos Exportar
+
+        public ObservableCollection<ListaOrcamentosDTO> LoadOrcamentoExportar(ListaOrcamentosDTO DTO)
+        {
+            var orcamento = new ObservableCollection<ListaOrcamentosDTO>();
+            var dt = new DataTable();
+            try
+            {
+                var query = "SELECT (@cnt := @cnt + 1) AS Num, t.* FROM (SELECT va.versao_id as versao, dis.descricao as disciplina,da.descricao as atividade, a.descricao as descricao_atividade, p.id as codigo, i.descricao as descricao, p.partnumber as partnumber, lo.descricao_orc as descricao_detalhada, un.descricao as unidade, f.rsocial as fabricante, lo.quantidade AS qtde, lo.preco_orc preco, lo.bdi, lo.quantidade * lo.preco_orc as preco_total, CASE lo.fd WHEN '0' THEN lo.quantidade * lo.preco_orc * (1 + (lo.bdi / 100)) WHEN '1' THEN lo.quantidade * lo.preco_orc * (1 + 10 / 100) END as preco_total_bdi, lo.fd FROM lista_orcamento lo JOIN produto p ON lo.PRODUTO_id = p.id JOIN atividade a ON a.id = lo.atividades_id JOIN desc_atividades da ON da.id = a.desc_atividades_id JOIN disciplina dis ON dis.id = da.disciplina_id JOIN versao_atividade va ON va.id = a.versao_atividade_id JOIN item i ON p.DESCRICAO_ITEM_id = i.id JOIN unidade un ON i.unidade_id = un.id JOIN fornecedor f ON p.FORNECEDOR_id = f.id WHERE lo.NEGOCIO_id = '"+ DTO.Id +"' AND va.versao_id = '"+ DTO.Versao +"') t CROSS JOIN(SELECT @cnt:= 0) AS dummy";
+                bd.Conectar();
+                dt = bd.RetDataTable(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+            finally
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    orcamento.Add(new ListaOrcamentosDTO { Versao = Convert.ToInt32(dr["versao"]).ToString("00"), Codigo_Produto = Convert.ToInt32(dr["codigo"]).ToString("000000"), Disciplina = dr["disciplina"].ToString(), Descricao_Atividade = dr["descricao_atividade"].ToString(), Atividade = dr["atividade"].ToString(), Produto_Id = dr["codigo"].ToString(), Descricao = dr["descricao"].ToString(), Partnumber = dr["partnumber"].ToString(), Anotacoes = dr["descricao_detalhada"].ToString(), Un = dr["unidade"].ToString(), Fabricante = dr["fabricante"].ToString().ToString(), Quantidade = Convert.ToDouble(dr["qtde"]), Preco_Unitario = Convert.ToDouble(dr["preco"]), Bdi = Convert.ToDouble(dr["bdi"]), Preco_Total = Convert.ToDouble(dr["preco_total_bdi"]), Custo_Total = Convert.ToDouble(dr["preco_total"]), Fd = Convert.ToInt32(dr["fd"]) });
+                }
+            }
+            return orcamento;
+        }
+
+        #endregion
+
         #region Load Dataset Orçamentos
         public ObservableCollection<ListaOrcamentosDTO> LoadDatasetOrcamento(ListaOrcamentosDTO DTO)
         {

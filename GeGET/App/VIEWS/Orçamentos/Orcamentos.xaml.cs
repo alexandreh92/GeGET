@@ -40,5 +40,10 @@ namespace GeGET
         {
             helpers.Close();
         }
+
+        private void BtnExportarListaOrcamento_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Open<ExportarListaOrcamento>(this.GetType().Name, false);
+        }
     }
 }

@@ -32,6 +32,13 @@ namespace GeGET
         public UserPanel()
         {
             InitializeComponent();
+            string nome = "";
+            var quebra = dto.Nome.Split();
+            foreach (string item in quebra)
+            {
+                nome = nome + char.ToUpper(item[0]) + item.Substring(1).ToLower() + " ";
+            }
+            txtNome.Text = nome;
             txtUsuario.Text = dto.Usuario;
             if (dto.Foto != null)
             {
