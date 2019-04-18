@@ -316,10 +316,23 @@ namespace GeGET
                 {
                     materialDTO.Id = material.Id;
                     materialDTO.Fd = material.Fd;
-                    bll.AtualizarFD(materialDTO);
+                    new Thread(() => 
+                    {
+                        Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
+                        {
+                            bll.AtualizarFD(materialDTO);
+                        }));
+                    }).Start();
+                    
                 }
             }));
-            LoadSidePanel();
+            new Thread(() => 
+            {
+                Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => 
+                {
+                    LoadSidePanel();
+                }));
+            });
         }
 
         #endregion
@@ -353,13 +366,10 @@ namespace GeGET
 
         private void TableView_ShowingEditor(object sender, ShowingEditorEventArgs e)
         {
-
             if (grdItens.CurrentColumn.FieldName != "Quantidade" && grdItens.CurrentColumn.FieldName != "Bdi" && grdItens.CurrentColumn.FieldName != "Fd")
             {
                 e.Cancel = true;
             }
-
-
         }
 
         private void GrdView_ShownEditor(object sender, EditorEventArgs e)

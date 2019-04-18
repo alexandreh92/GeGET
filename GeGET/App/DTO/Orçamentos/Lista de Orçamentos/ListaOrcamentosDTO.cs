@@ -13,6 +13,10 @@ namespace DTO
         private string partnumber;
         private string un;
         private string fabricante;
+        private string disciplina;
+        private string atividade;
+        private string versao;
+        private string descricao_Atividade;
         private string atividade_Id;
         private double quantidade;
         private double desconto;
@@ -87,6 +91,10 @@ namespace DTO
 
         public string Atividade_Id { get => atividade_Id; set => atividade_Id = value; }
         public string Codigo_Produto { get => codigo_Produto; set => codigo_Produto = value; }
+        public string Disciplina { get => disciplina; set => disciplina = value; }
+        public string Atividade { get => atividade; set => atividade = value; }
+        public string Versao { get => versao; set => versao = value; }
+        public string Descricao_Atividade { get => descricao_Atividade; set => descricao_Atividade = value; }
 
 
         #region INotifyPropertyChanged Members

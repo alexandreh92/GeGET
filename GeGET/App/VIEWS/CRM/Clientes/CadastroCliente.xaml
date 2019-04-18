@@ -11,7 +11,6 @@
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide">
         <materialDesign:TransitioningContent.OpeningEffects>
             <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8" />
-            <materialDesign:TransitionEffect Kind="ExpandIn" />
         </materialDesign:TransitioningContent.OpeningEffects>
         <Grid>
 

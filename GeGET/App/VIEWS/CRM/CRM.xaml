@@ -11,8 +11,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide">
         <materialDesign:TransitioningContent.OpeningEffects>
-            <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8" />
-            <materialDesign:TransitionEffect Kind="ExpandIn" />
+            <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.5" />
         </materialDesign:TransitioningContent.OpeningEffects>
         <Grid>
 
