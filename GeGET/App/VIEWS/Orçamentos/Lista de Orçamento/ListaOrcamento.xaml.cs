@@ -298,6 +298,9 @@ namespace GeGET
         {
             var material = e.Row as ListaOrcamentosDTO;
 
+            new Thread(() =>
+            {
+
             Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
             {
                 if (e.Column.Header.ToString() == "Quantidade")
@@ -318,7 +321,7 @@ namespace GeGET
                     materialDTO.Fd = material.Fd;
                     new Thread(() => 
                     {
-                        Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
+                        Dispatcher.BeginInvoke(DispatcherPriority.Render, new Action(() =>
                         {
                             bll.AtualizarFD(materialDTO);
                         }));
@@ -326,25 +329,19 @@ namespace GeGET
                     
                 }
             }));
+            }).Start();
             new Thread(() => 
             {
-                Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => 
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => 
                 {
                     LoadSidePanel();
                 }));
-            });
+            }).Start();
         }
 
         #endregion
 
         #endregion
-
-        private void TableView_CellValueChanging(object sender, DevExpress.Xpf.Grid.CellValueChangedEventArgs e)
-        {
-            var material = e.Row as ListaOrcamentosDTO;
-            
-            LoadSidePanel();
-        }
 
         private void grdItens_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -355,25 +352,12 @@ namespace GeGET
             }
         }
 
-        private void TableView_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            TableViewHitInfo hi = ((TableView)grdItens.View).CalcHitInfo(e.OriginalSource as DependencyObject);
-            if (hi.Column.Header.ToString() != "Quantidade" && hi.Column.Header.ToString() != "BDI")
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void TableView_ShowingEditor(object sender, ShowingEditorEventArgs e)
-        {
-            if (grdItens.CurrentColumn.FieldName != "Quantidade" && grdItens.CurrentColumn.FieldName != "Bdi" && grdItens.CurrentColumn.FieldName != "Fd")
-            {
-                e.Cancel = true;
-            }
-        }
-
         private void GrdView_ShownEditor(object sender, EditorEventArgs e)
         {
+            Dispatcher.BeginInvoke((Action)(() =>
+            {
+                this.grdView.ActiveEditor.SelectAll();
+            }), DispatcherPriority.Render);
         }
     }
 }

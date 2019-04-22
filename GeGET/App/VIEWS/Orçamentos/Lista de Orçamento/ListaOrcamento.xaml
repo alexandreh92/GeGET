@@ -80,14 +80,14 @@
                                                     </StackPanel>
                                                 </materialDesign:HintAssist.Hint>
                                             </TextBox>
-                                            <ComboBox x:Name="cmbDisciplina" materialDesign:HintAssist.Hint="Disciplina" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="130" SelectionChanged="CmbDisciplina_SelectionChanged">
+                                            <ComboBox x:Name="cmbDisciplina" materialDesign:HintAssist.Hint="Disciplina" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox, Path=IsChecked}" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="130" SelectionChanged="CmbDisciplina_SelectionChanged">
                                                 <ComboBox.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <VirtualizingStackPanel />
                                                     </ItemsPanelTemplate>
                                                 </ComboBox.ItemsPanel>
                                             </ComboBox>
-                                            <ComboBox x:Name="cmbAtividade" materialDesign:HintAssist.Hint="Atividade" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="200" SelectionChanged="CmbAtividade_SelectionChanged">
+                                            <ComboBox x:Name="cmbAtividade" materialDesign:HintAssist.Hint="Atividade" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox, Path=IsChecked}" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="200" SelectionChanged="CmbAtividade_SelectionChanged">
                                                 <ComboBox.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <VirtualizingStackPanel />
@@ -168,7 +168,7 @@
                                     <dxg:GridControl x:Name="grdItens" ShowBorder="False" Grid.Row="1" EnableSmartColumnsGeneration="True" HorizontalAlignment="Stretch" Margin="0,0,0,10" VirtualizingPanel.VirtualizationMode="Recycling" SelectionMode="MultipleRow" PreviewKeyDown="grdItens_PreviewKeyDown">
                                         <dxg:GridControl.Columns>
                                             <!--CÓDIGO-->
-                                            <dxg:GridColumn Header="Código" FieldName="Codigo_Produto" HorizontalHeaderContentAlignment="Center" Width="90" FixedWidth="True" ReadOnly="True">
+                                            <dxg:GridColumn AllowFocus="False" Header="Código" FieldName="Codigo_Produto" HorizontalHeaderContentAlignment="Center" Width="90" FixedWidth="True" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -179,7 +179,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--DESCRICAO-->
-                                            <dxg:GridColumn Header="Descrição" FieldName="Descricao" HorizontalHeaderContentAlignment="Left" ReadOnly="True">
+                                            <dxg:GridColumn AllowFocus="False" Header="Descrição" FieldName="Descricao" HorizontalHeaderContentAlignment="Left" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="4,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -187,7 +187,7 @@
                                                 </dxg:GridColumn.HeaderTemplate>
                                             </dxg:GridColumn>
                                             <!--PARTNUMBER-->
-                                            <dxg:GridColumn Header="Partnumber" FieldName="Partnumber" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True">
+                                            <dxg:GridColumn AllowFocus="False" Header="Partnumber" FieldName="Partnumber" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -198,7 +198,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--FABRICANTE-->
-                                            <dxg:GridColumn Header="Fabricante" FieldName="Fabricante" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True">
+                                            <dxg:GridColumn AllowFocus="False" Header="Fabricante" FieldName="Fabricante" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -209,7 +209,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--UN-->
-                                            <dxg:GridColumn Name="Unidade" Header="UN" FieldName="Un" HorizontalHeaderContentAlignment="Center" Width="80" FixedWidth="True" ReadOnly="True">
+                                            <dxg:GridColumn AllowFocus="False" Name="Unidade" Header="UN" FieldName="Un" HorizontalHeaderContentAlignment="Center" Width="80" FixedWidth="True" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -231,7 +231,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--CUSTO UNITARIO-->
-                                            <dxg:GridColumn Header="Custo Un." FieldName="Preco_Unitario" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="True" FixedWidth="True">
+                                            <dxg:GridColumn AllowFocus="False" Header="Custo Un." FieldName="Preco_Unitario" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="True" FixedWidth="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -253,7 +253,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--CUSTO TOTAL-->
-                                            <dxg:GridColumn Header="Custo Total" FieldName="Custo_Total" HorizontalHeaderContentAlignment="Center" Width="120" ReadOnly="True" FixedWidth="True">
+                                            <dxg:GridColumn AllowFocus="False" Header="Custo Total" FieldName="Custo_Total" HorizontalHeaderContentAlignment="Center" Width="120" ReadOnly="True" FixedWidth="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -264,7 +264,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--PRECO TOTAL-->
-                                            <dxg:GridColumn Header="Preço Total" FieldName="Preco_Total" HorizontalHeaderContentAlignment="Center" Width="120" ReadOnly="True" FixedWidth="True" Binding="{Binding Preco_Total}">
+                                            <dxg:GridColumn AllowFocus="False" Header="Preço Total" FieldName="Preco_Total" HorizontalHeaderContentAlignment="Center" Width="120" ReadOnly="True" FixedWidth="True" Binding="{Binding Preco_Total}">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -287,7 +287,7 @@
                                             </dxg:GridColumn>
                                         </dxg:GridControl.Columns>
                                         <dxg:GridControl.View>
-                                            <dxg:TableView x:Name="grdView" AutoWidth="True" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" CellValueChanged="TableView_CellValueChanged" SearchDelay="10" SearchPanelCriteriaOperatorType="And" EditorShowMode="MouseDown" IsTotalSummaryMenuEnabled="False" AllowGrouping="False" AllowCommitOnValidationAttributeError="True" ShowingEditor="TableView_ShowingEditor">
+                                            <dxg:TableView x:Name="grdView" AutoWidth="True" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" CellValueChanged="TableView_CellValueChanged" SearchDelay="10" SearchPanelCriteriaOperatorType="And" EditorShowMode="MouseDown" IsTotalSummaryMenuEnabled="False" AllowGrouping="False" AllowCommitOnValidationAttributeError="True" ShownEditor="GrdView_ShownEditor">
                                                 <dxg:TableView.RowStyle>
                                                     <Style TargetType="dxg:RowControl">
                                                         <Style.Triggers>
@@ -441,7 +441,7 @@
                                                 </Grid>
                                             </Border>
                                             <Grid Grid.Column="0" Grid.Row="18" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="Total de Itens" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
+                                                <TextBlock Text="Total de Materiais" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
                                             </Grid>
                                             <Grid Grid.Column="0" Grid.Row="19" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                 <TextBlock Text="com bdi" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />

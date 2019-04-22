@@ -17,7 +17,7 @@ namespace GeGET
         ClientesBLL bll = new ClientesBLL();
         ClientesDTO dto = new ClientesDTO();
         Thread t1;
-        Thread t2;
+        DispatcherTimer timer = new DispatcherTimer();
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         public ObservableCollection<ClientesDTO> listaClientes;
         public string new_Cliente_Id;
@@ -29,40 +29,44 @@ namespace GeGET
         public ProcurarCliente(Point mouseLocation)
         {
             InitializeComponent();
+            timer.Tick += new EventHandler(DispatcherTimer_Tick);
+            timer.Interval = TimeSpan.FromMilliseconds(310);
+            timer.Start();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
             ColLeft.Width = new GridLength(mouseLocation.X + 230, GridUnitType.Pixel);
-            t1 = new Thread(Load);
-            t1.Start();
             Left = mouseLocation.X;
             Top = mouseLocation.Y - 50;
         }
+
         #endregion
 
         #region Methods
         private void Load()
         {
-            Dispatcher.Invoke(DispatcherPriority.Background,
-                     new Action(() =>
-                     {
-                         progressbar.Visibility = Visibility.Visible;
-                         syncEvent.Set();
-                         t2 = new Thread(waitLoad);
-                         t2.Start();
-                         listaClientes = bll.LoadClientes();
-                         lstMensagens.ItemsSource = listaClientes;
-                     }));
-
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+            {
+                progressbar.Visibility = Visibility.Visible;
+                syncEvent.Set();
+                waitLoad();
+                t1 = new Thread(waitLoad);
+                t1.Start();
+                listaClientes = bll.LoadClientes();
+                lstMensagens.ItemsSource = listaClientes;
+            }));
         }
 
         private void waitLoad()
         {
-            syncEvent.WaitOne();
-            Dispatcher.Invoke(new Action(() =>
-            {
-                progressbar.Visibility = Visibility.Collapsed;
-                lstMensagens.Visibility = Visibility.Visible;
-            }));
+
+                syncEvent.WaitOne();
+                syncEvent.Set();
+                Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
+                {
+                    progressbar.Visibility = Visibility.Collapsed;
+                    lstMensagens.Visibility = Visibility.Visible;
+                    
+                }));
         }
 
         private void Commit()
@@ -106,6 +110,22 @@ namespace GeGET
         }
         #endregion
 
+        #region Timer Tick
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            timer.Stop();
+            t1 = new Thread(Load);
+            t1.Start();
+        }
+        #endregion
+
+        #region Window Loaded
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtProcurar.Focus();
+        }
+        #endregion
+
         #endregion
 
         #region IDisposable
@@ -113,10 +133,5 @@ namespace GeGET
         {
         }
         #endregion
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            txtProcurar.Focus();
-        }
     }
 }

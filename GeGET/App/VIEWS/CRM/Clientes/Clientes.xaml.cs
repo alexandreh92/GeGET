@@ -51,7 +51,7 @@ namespace GeGET
                   new Action(() =>
                   {
                       var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
-                      var filtered = listaClientes.Where(descricao => Find.Any(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Nome_Fantasia.ToLower().RemoveDiacritics().Contains(list) || descricao.Categoria.RemoveDiacritics().ToLower().Contains(list)));
+                      var filtered = listaClientes.Where(descricao => Find.All(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Nome_Fantasia.ToLower().RemoveDiacritics().Contains(list) || descricao.Categoria.RemoveDiacritics().ToLower().Contains(list)));
                       lstClientes.ItemsSource = filtered;
                   }));
         }

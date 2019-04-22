@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Threading;
 using BLL;
 using DTO;
@@ -19,6 +17,7 @@ namespace GeGET
         NegociosBLL bll = new NegociosBLL();
         NegociosDTO dto = new NegociosDTO();
         public string Negocio_Id;
+        DispatcherTimer timer = new DispatcherTimer();
         public ObservableCollection<NegociosDTO> listaNegocios;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         Thread t1;
@@ -31,6 +30,9 @@ namespace GeGET
             InitializeComponent();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+            timer.Tick += new EventHandler(DispatcherTimer_Tick);
+            timer.Interval = TimeSpan.FromMilliseconds(310);
+            timer.Start();
             dto.Pesquisa = "";
             t1 = new Thread(Load);
             t1.Start();
@@ -41,6 +43,9 @@ namespace GeGET
         }
         #endregion
 
+        #region Methods
+
+        #region Load
         private void Load()
         {
 
@@ -55,7 +60,9 @@ namespace GeGET
                          lstMensagens.ItemsSource = listaNegocios;
                      }));
         }
+        #endregion
 
+        #region Wait Load
         private void waitLoad()
         {
             syncEvent.WaitOne();
@@ -65,9 +72,9 @@ namespace GeGET
                 lstMensagens.Visibility = Visibility.Visible;
             }));
         }
+        #endregion
 
-
-        #region Methods
+        #region Commit
         private void Commit()
         {
             Dispatcher.Invoke(DispatcherPriority.Background,
@@ -80,7 +87,18 @@ namespace GeGET
         }
         #endregion
 
+        #endregion
+
         #region Events
+
+        #region Timer Tick
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            timer.Stop();
+            t1 = new Thread(Load);
+            t1.Start();
+        }
+        #endregion
 
         #region TextChanged
         private void TxtProcurar_TextChanged(object sender, TextChangedEventArgs e)
@@ -111,6 +129,13 @@ namespace GeGET
         }
         #endregion
 
+        #region Window Loaded
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtProcurar.Focus();
+        }
+        #endregion
+
         #endregion
 
         #region IDisposable
@@ -119,10 +144,5 @@ namespace GeGET
         }
 
         #endregion
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            txtProcurar.Focus();
-        }
     }
 }

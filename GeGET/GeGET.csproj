@@ -252,6 +252,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="App\BLL\Projetos\AdicionarItemProjetoBLL.cs" />
+    <Compile Include="App\DTO\Projetos\AdicionarItemProjetoDTO.cs" />
     <Compile Include="App\BLL\Orçamentos\Lista de Orçamentos\AdicionarItemOrcamentoBLL.cs" />
     <Compile Include="App\BLL\CRM\Clientes\ClientesBLL.cs" />
     <Compile Include="App\BLL\CRM\Estabelecimentos\EstabelecimentosBLL.cs" />
@@ -294,6 +296,9 @@
     </Compile>
     <Compile Include="App\Controls\Shared\ProcurarOrcamento.xaml.cs">
       <DependentUpon>ProcurarOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Controls\Shared\ProcurarVenda.xaml.cs">
+      <DependentUpon>ProcurarVenda.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\Controls\Shared\ProcurarOrcamentoCadastrado.xaml.cs">
       <DependentUpon>ProcurarOrcamentoCadastrado.xaml</DependentUpon>
@@ -426,6 +431,18 @@
     <Compile Include="App\VIEWS\Orçamentos\Orcamentos.xaml.cs">
       <DependentUpon>Orcamentos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\VIEWS\Projetos\Lista de Projetos\CopiarItensProjeto.xaml.cs">
+      <DependentUpon>CopiarItensProjeto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Projetos\Lista de Projetos\ListaProjeto.xaml.cs">
+      <DependentUpon>ListaProjeto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Projetos\Lista de Projetos\AdicionarItemProjeto.xaml.cs">
+      <DependentUpon>AdicionarItemProjeto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Projetos\Projetos.xaml.cs">
+      <DependentUpon>Projetos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\VIEWS\Suprimentos\Fornecedores\CadastroFornecedor.xaml.cs">
       <DependentUpon>CadastroFornecedor.xaml</DependentUpon>
     </Compile>
@@ -499,6 +516,8 @@
     <Compile Include="App\DTO\Suprimentos\Itens\ItensDTO.cs" />
     <Compile Include="DashboardBLL.cs" />
     <Compile Include="DashboardDTO.cs" />
+    <Compile Include="App\BLL\Projetos\ListaProjetosBLL.cs" />
+    <Compile Include="App\DTO\Projetos\ListaProjetosDTO.cs" />
     <Compile Include="Permission.xaml.cs">
       <DependentUpon>Permission.xaml</DependentUpon>
     </Compile>
@@ -509,6 +528,8 @@
     <Compile Include="Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\BLL\Controls\ProcurarVendaBLL.cs" />
+    <Compile Include="App\DTO\Controls\ProcurarVendaDTO.cs" />
     <Compile Include="UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
@@ -543,6 +564,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="App\Controls\Shared\ProcurarOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Controls\Shared\ProcurarVenda.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -693,6 +718,22 @@
     <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\CopiarItensOrcamentoOld.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\VIEWS\Projetos\Lista de Projetos\CopiarItensProjeto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Projetos\Lista de Projetos\ListaProjeto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Projetos\Lista de Projetos\AdicionarItemProjeto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Projetos\Projetos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="App\VIEWS\Suprimentos\Fornecedores\CadastroFornecedor.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -871,6 +912,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Controls\Orçamentos\Lista de Orçamentos\" />
+    <Folder Include="App\VIEWS\Controls\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\favicon.ico" />
@@ -889,6 +931,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\changelog.txt" />
     <Content Include="template\styles\main.css" />
   </ItemGroup>
   <ItemGroup>
