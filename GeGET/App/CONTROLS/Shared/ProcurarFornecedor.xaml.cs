@@ -18,6 +18,7 @@ namespace GeGET
         FornecedoresDTO dto = new FornecedoresDTO();
         Thread t1;
         Thread t2;
+        DispatcherTimer timer = new DispatcherTimer();
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         public ObservableCollection<FornecedoresDTO> listaFornecedores;
         public string Fornecedor_Id;
@@ -28,11 +29,12 @@ namespace GeGET
         public ProcurarFornecedor(Point mouseLocation)
         {
             InitializeComponent();
+            timer.Tick += new EventHandler(DispatcherTimer_Tick);
+            timer.Interval = TimeSpan.FromMilliseconds(310);
+            timer.Start();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
             ColLeft.Width = new GridLength(mouseLocation.X, GridUnitType.Pixel);
-            t1 = new Thread(Load);
-            t1.Start();
             Left = mouseLocation.X;
             Top = mouseLocation.Y - 50;
         }
@@ -79,6 +81,15 @@ namespace GeGET
 
         #region Events
 
+        #region Timer Tick
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            timer.Stop();
+            t1 = new Thread(Load);
+            t1.Start();
+        }
+        #endregion
+
         #region Text Changed
         private void TxtProcurar_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -104,6 +115,13 @@ namespace GeGET
         }
         #endregion
 
+        #region Window Loaded
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtProcurar.Focus();
+        }
+        #endregion
+
         #endregion
 
         #region IDisposable
@@ -111,10 +129,5 @@ namespace GeGET
         {
         }
         #endregion
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            txtProcurar.Focus();
-        }
     }
 }

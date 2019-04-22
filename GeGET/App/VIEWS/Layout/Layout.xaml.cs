@@ -193,5 +193,10 @@ namespace GeGET
                 }
             }
         }
+
+        private void BtnProjetos_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.Open<Projetos>(null, false);
+        }
     }
 }

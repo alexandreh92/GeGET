@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GeGET.ConsultaListaOrcamento"
+﻿<UserControl x:Class="GeGET.ListaProjeto"
              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
              xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -9,18 +9,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
              xmlns:local="clr-namespace:GeGET"
-             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              mc:Ignorable="d"
              Language="pt-BR"
              d:DesignHeight="900" d:DesignWidth="800">
-
-
+    
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide">
         <materialDesign:TransitioningContent.OpeningEffects>
             <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8" />
-            <materialDesign:TransitionEffect Kind="ExpandIn" />
         </materialDesign:TransitioningContent.OpeningEffects>
         <Grid>
 
@@ -40,7 +36,7 @@
                     <Button x:Name="btnBack" Height="40" Width="40" Margin="10,0,-5,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnBack_Click">
                         <materialDesign:PackIcon Foreground="#7A2932" Kind="LessThan" Width="25" Height="25"/>
                     </Button>
-                    <TextBlock VerticalAlignment="Center" Foreground="#7A2932" Margin="5,-2,0,0" FontSize="14" FontFamily="{DynamicResource Novecento-Bold}">Lista de Orçamentos</TextBlock>
+                    <TextBlock VerticalAlignment="Center" Foreground="#7A2932" Margin="5,-2,0,0" FontSize="14" FontFamily="{DynamicResource Novecento-Bold}">Lista de Projetos</TextBlock>
                     <Button x:Name="btnClose" HorizontalAlignment="Right" ToolTip="Fechar" Height="40" Width="40" Margin="0,0,10,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnClose_Click">
                         <materialDesign:PackIcon Foreground="#7A2932" Kind="Close" Width="25" Height="25"/>
                     </Button>
@@ -148,13 +144,28 @@
                                     <StackPanel Grid.Row="0" Orientation="Vertical" VerticalAlignment="Stretch">
                                         <Grid>
                                             <TextBlock Foreground="#7A2932" Grid.Row="0" Margin="24,21,0,21" HorizontalAlignment="Left" FontFamily="{DynamicResource Novecento-Bold}" FontSize="15" Text="Lista de Materiais"></TextBlock>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <Button x:Name="Adicionar" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Adicionar" Height="25" Width="25" Click="Adicionar_Click">
+                                                    <materialDesign:PackIcon Kind="Add" Foreground="White"/>
+                                                </Button>
+                                                <Button x:Name="AtualizarPrecos" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Atualizar Preços" Height="25" Width="25" Click="AtualizarPrecos_Click">
+                                                    <materialDesign:PackIcon Kind="Refresh" Foreground="White"/>
+                                                </Button>
+                                                <Button x:Name="Excluir" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Excluir" Height="25" Width="25" Click="Excluir_Click">
+                                                    <materialDesign:PackIcon Kind="Close" Foreground="White"/>
+                                                </Button>
+                                                <Button x:Name="CopiarItens" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Copiar Atividades" Height="25" Width="25" Click="CopiarItens_Click">
+                                                    <materialDesign:PackIcon Kind="ContentCopy" Foreground="White"/>
+                                                </Button>
+                                            </StackPanel>
                                         </Grid>
+                                        
                                     </StackPanel>
                                     <Border BorderBrush="DarkGray" BorderThickness="0,0,0,0.5"></Border>
-                                    <dxg:GridControl x:Name="grdItens" ShowBorder="False" Grid.Row="1" EnableSmartColumnsGeneration="True" HorizontalAlignment="Stretch" Margin="0,0,0,10" VirtualizingPanel.VirtualizationMode="Recycling" SelectionMode="MultipleRow">
+                                    <dxg:GridControl x:Name="grdItens" ShowBorder="False" Grid.Row="1" PreviewKeyDown="grdItens_PreviewKeyDown" EnableSmartColumnsGeneration="True" HorizontalAlignment="Stretch" Margin="0,0,0,10" VirtualizingPanel.VirtualizationMode="Recycling" SelectionMode="MultipleRow">
                                         <dxg:GridControl.Columns>
                                             <!--CÓDIGO-->
-                                            <dxg:GridColumn AllowFocus="False" Header="Código" HorizontalHeaderContentAlignment="Center" Width="90" FixedWidth="True" ReadOnly="True" Binding="{Binding Codigo_Produto}">
+                                            <dxg:GridColumn Header="Código" FieldName="Codigo" Focusable="False" HorizontalHeaderContentAlignment="Center" Width="90" FixedWidth="True" ReadOnly="True" AllowFocus="False">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -165,7 +176,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--DESCRICAO-->
-                                            <dxg:GridColumn AllowFocus="False" Header="Descrição" HorizontalHeaderContentAlignment="Left" ReadOnly="True" Binding="{Binding Descricao}">
+                                            <dxg:GridColumn Header="Descrição" FieldName="Descricao" HorizontalHeaderContentAlignment="Left" ReadOnly="True" AllowFocus="False">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="4,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -173,7 +184,7 @@
                                                 </dxg:GridColumn.HeaderTemplate>
                                             </dxg:GridColumn>
                                             <!--PARTNUMBER-->
-                                            <dxg:GridColumn AllowFocus="False" Header="Partnumber" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True" Binding="{Binding Partnumber}">
+                                            <dxg:GridColumn Header="Partnumber" FieldName="Partnumber" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True" AllowFocus="False">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -184,7 +195,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--FABRICANTE-->
-                                            <dxg:GridColumn AllowFocus="False" Header="Fabricante" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True" Binding="{Binding Fabricante}">
+                                            <dxg:GridColumn Header="Fabricante" FieldName="Fabricante" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True" AllowFocus="False">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -195,7 +206,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--UN-->
-                                            <dxg:GridColumn AllowFocus="False" Name="Unidade" Header="UN" HorizontalHeaderContentAlignment="Center" Width="80" FixedWidth="True" ReadOnly="True" Binding="{Binding Un}">
+                                            <dxg:GridColumn Name="Unidade" Header="UN" FieldName="Unidade" HorizontalHeaderContentAlignment="Center" Width="80" FixedWidth="True" ReadOnly="True" AllowFocus="False">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -205,8 +216,30 @@
                                                     <dxe:TextEditSettings HorizontalContentAlignment="Center"></dxe:TextEditSettings>
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
+                                            <!--QUANTIDADE ORÇAMENTO-->
+                                            <dxg:GridColumn Header="Quantidade Orçamento" FieldName="Quantidade_Orcamento" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="False" FixedWidth="True" AllowFocus="False">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" TextAlignment="Center" TextWrapping="Wrap" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="N2" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--PREÇO ORÇAMENTO-->
+                                            <dxg:GridColumn Header="Custo Orçamento" FieldName="Preco_Orcamento" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="True" FixedWidth="True" AllowFocus="False">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" TextWrapping="Wrap" TextAlignment="Center" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
                                             <!--QUANTIDADE-->
-                                            <dxg:GridColumn AllowFocus="False" Header="Quantidade" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="True" FixedWidth="True" Binding="{Binding Quantidade, Mode=TwoWay}">
+                                            <dxg:GridColumn Header="Quantidade" FieldName="Quantidade" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="False" FixedWidth="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -217,7 +250,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--CUSTO UNITARIO-->
-                                            <dxg:GridColumn AllowFocus="False" Header="Custo Un." HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="True" FixedWidth="True" Binding="{Binding Preco_Unitario, StringFormat=C}">
+                                            <dxg:GridColumn Header="Custo Un." FieldName="Preco" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="True" FixedWidth="True" AllowFocus="False">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -227,30 +260,8 @@
                                                     <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
-                                            <!--BDI-->
-                                            <dxg:GridColumn AllowFocus="False" Header="BDI" HorizontalHeaderContentAlignment="Center" Width="60" ReadOnly="True" FixedWidth="True" Binding="{Binding Bdi, Mode=TwoWay}">
-                                                <dxg:GridColumn.HeaderTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
-                                                    </DataTemplate>
-                                                </dxg:GridColumn.HeaderTemplate>
-                                                <dxg:GridColumn.EditSettings>
-                                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="P1" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
-                                                </dxg:GridColumn.EditSettings>
-                                            </dxg:GridColumn>
-                                            <!--CUSTO TOTAL-->
-                                            <dxg:GridColumn AllowFocus="False" Header="Custo Total" HorizontalHeaderContentAlignment="Center" Width="120" ReadOnly="True" FixedWidth="True" Binding="{Binding Custo_Total, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
-                                                <dxg:GridColumn.HeaderTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
-                                                    </DataTemplate>
-                                                </dxg:GridColumn.HeaderTemplate>
-                                                <dxg:GridColumn.EditSettings>
-                                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
-                                                </dxg:GridColumn.EditSettings>
-                                            </dxg:GridColumn>
-                                            <!--PRECO TOTAL-->
-                                            <dxg:GridColumn AllowFocus="False" Header="Preco Total" HorizontalHeaderContentAlignment="Center" Width="120" ReadOnly="True" FixedWidth="True" Binding="{Binding Preco_Total}">
+                                            <!--TOTAL-->
+                                            <dxg:GridColumn Header="Preço Total" FieldName="Total" HorizontalHeaderContentAlignment="Center" Width="120" ReadOnly="True" FixedWidth="True" AllowFocus="False">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -261,7 +272,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--FATURAMENTO DIRETO-->
-                                            <dxg:GridColumn AllowFocus="False" Header="FD" HorizontalHeaderContentAlignment="Center" Width="50" FixedWidth="True" Binding="{Binding Fd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" local:CommitHelper.CommitOnValueChanged="True" IsEnabled="True" ReadOnly="True">
+                                            <dxg:GridColumn Header="FD" FieldName="Fd" HorizontalHeaderContentAlignment="Center" Width="50" FixedWidth="True" local:CommitHelper.CommitOnValueChanged="True" IsEnabled="True" ReadOnly="False">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -273,7 +284,7 @@
                                             </dxg:GridColumn>
                                         </dxg:GridControl.Columns>
                                         <dxg:GridControl.View>
-                                            <dxg:TableView x:Name="grdView" AutoWidth="True" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" CellValueChanged="TableView_CellValueChanged" SearchDelay="10" SearchPanelCriteriaOperatorType="And">
+                                            <dxg:TableView x:Name="grdView" AutoWidth="True" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" CellValueChanged="TableView_CellValueChanged" SearchDelay="10" SearchPanelCriteriaOperatorType="And" EditorShowMode="MouseDown" IsTotalSummaryMenuEnabled="False" AllowGrouping="False" AllowCommitOnValidationAttributeError="True" ShownEditor="GrdView_ShownEditor">
                                                 <dxg:TableView.RowStyle>
                                                     <Style TargetType="dxg:RowControl">
                                                         <Style.Triggers>
@@ -322,34 +333,32 @@
                                                 <RowDefinition Height="20"/>
                                                 <RowDefinition Height="20"/>
                                                 <RowDefinition Height="10"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="10"/>
-                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="25"/>
                                                 <RowDefinition Height="20"/>
                                                 <RowDefinition Height="20"/>
                                                 <RowDefinition Height="10"/>
+                                                <RowDefinition Height="25"/>
                                                 <RowDefinition Height="20"/>
                                                 <RowDefinition Height="20"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="10"/>
                                                 <RowDefinition Height="25"/>
                                                 <RowDefinition Height="25"/>
                                                 <RowDefinition Height="20"/>
                                                 <RowDefinition Height="20"/>
                                                 <RowDefinition Height="10"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="10"/>
-                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="25"/>
                                                 <RowDefinition Height="20"/>
                                                 <RowDefinition Height="20"/>
                                                 <RowDefinition Height="10"/>
+                                                <RowDefinition Height="25"/>
                                                 <RowDefinition Height="20"/>
                                                 <RowDefinition Height="20"/>
+                                                <RowDefinition Height="10"/>
+                                                <RowDefinition Height="25"/>
                                                 <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="10"/>
+
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="110"/>
@@ -364,127 +373,97 @@
                                                 <TextBlock Text="Total de Materiais" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
                                             </Grid>
                                             <Grid Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="com bdi" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                                <TextBlock Text="Orçamento" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
                                             </Grid>
                                             <Grid Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="sem bdi" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                                <TextBlock Text="Projeto" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
                                             </Grid>
                                             <Grid Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Atividade_Total_Materiais_BDI" Text="{Binding Atividade_Total_Itens_BDI, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                                <TextBlock Text="{Binding Atividade_Itens_Orcamento, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
                                             </Grid>
                                             <Grid Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Atividade_Total_Materiais" Text="{Binding Atividade_Total_Itens, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                                <TextBlock Text="{Binding Atividade_Itens_Projeto, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
                                             </Grid>
                                             <Grid Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="Mão de Obra" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
+                                                <TextBlock Text="Faturamento Direto" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
                                             </Grid>
                                             <Grid Grid.Column="0" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="com bdi" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                                <TextBlock Text="Orçamento" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
                                             </Grid>
                                             <Grid Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="sem bdi" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                                <TextBlock Text="Projeto" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
                                             </Grid>
                                             <Grid Grid.Column="0" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Atividade_Total_Mobra_BDI" Text="{Binding Atividade_Total_Mobra_BDI, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                                <TextBlock Text="{Binding Atividade_FD_Orcamento, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
                                             </Grid>
                                             <Grid Grid.Column="1" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Atividade_Total_Mobra" Text="{Binding Atividade_Total_Mobra, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                                <TextBlock Text="{Binding Atividade_FD_Projeto, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
                                             </Grid>
                                             <Grid Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                 <TextBlock Text="Total" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
                                             </Grid>
                                             <Grid Grid.Column="0" Grid.Row="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="com bdi" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                                <TextBlock Text="Orçamento" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
                                             </Grid>
                                             <Grid Grid.Column="1" Grid.Row="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="sem bdi" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                                <TextBlock Text="Projeto" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
                                             </Grid>
                                             <Grid Grid.Column="0" Grid.Row="11" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Atividade_Total_BDI" Text="{Binding Atividade_Total_Atividade_BDI, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                                <TextBlock Text="{Binding Atividade_Total_Orcamento, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
                                             </Grid>
                                             <Grid Grid.Column="1" Grid.Row="11" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Atividade_Total" Text="{Binding Atividade_Total_Atividade, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
-                                            </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="13" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="Faturamento Direto" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
-                                            </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="14" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="Getac" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
-                                            </Grid>
-                                            <Grid Grid.Column="1" Grid.Row="14" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="Cliente" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
-                                            </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="15" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Atividade_Faturado" Text="{Binding Atividade_Total_Faturado, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
-                                            </Grid>
-                                            <Grid Grid.Column="1" Grid.Row="15" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Atividade_FD" Text="{Binding Atividade_Total_FD, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                                <TextBlock Text="{Binding Atividade_Total_Projeto, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
                                             </Grid>
                                             <!--NEGÓCIO-->
-                                            <Border BorderThickness="0 0 0 2" Grid.ColumnSpan="2" Grid.Row="17" Margin="15,0,15,0" BorderBrush="#7A2932">
+                                            <Border BorderThickness="0 0 0 2" Grid.ColumnSpan="2" Grid.Row="13" Margin="15,0,15,0" BorderBrush="#7A2932">
                                                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                                                     <TextBlock Text="Negócio" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontSize="16" />
                                                 </Grid>
                                             </Border>
-                                            <Grid Grid.Column="0" Grid.Row="18" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Grid Grid.Column="0" Grid.Row="14" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                 <TextBlock Text="Total de Itens" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
                                             </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="19" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="com bdi" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                            <Grid Grid.Column="0" Grid.Row="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="Orçamento" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
                                             </Grid>
-                                            <Grid Grid.Column="1" Grid.Row="19" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="sem bdi" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                            <Grid Grid.Column="1" Grid.Row="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="Projeto" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
                                             </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="20" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Negocio_Total_Materiais_BDI" Text="{Binding Negocio_Total_Itens_BDI, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                            <Grid Grid.Column="0" Grid.Row="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Negocio_Itens_Orcamento, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
                                             </Grid>
-                                            <Grid Grid.Column="1" Grid.Row="20" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Negocio_Total_Materiais" Text="{Binding Negocio_Total_Itens, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                            <Grid Grid.Column="1" Grid.Row="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Negocio_Itens_Projeto, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
                                             </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="22" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="Mão de Obra" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
-                                            </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="23" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="com bdi" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
-                                            </Grid>
-                                            <Grid Grid.Column="1" Grid.Row="23" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="sem bdi" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
-                                            </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="24" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Negocio_Total_Mobra_BDI" Text="{Binding Negocio_Total_Mobra_BDI, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
-                                            </Grid>
-                                            <Grid Grid.Column="1" Grid.Row="24" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Negocio_Total_Mobra" Text="{Binding Negocio_Total_Mobra, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
-                                            </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="26" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="Total" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
-                                            </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="27" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="com bdi" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
-                                            </Grid>
-                                            <Grid Grid.Column="1" Grid.Row="27" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="sem bdi" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
-                                            </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="28" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Negocio_Total_BDI" Text="{Binding Negocio_Total_Atividade_BDI, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
-                                            </Grid>
-                                            <Grid Grid.Column="1" Grid.Row="28" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Negocio_Total" Text="{Binding Negocio_Total_Atividade, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
-                                            </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="30" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Grid Grid.Column="0" Grid.Row="18" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                 <TextBlock Text="Faturamento Direto" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
                                             </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="31" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="Getac" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                            <Grid Grid.Column="0" Grid.Row="19" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="Orçamento" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
                                             </Grid>
-                                            <Grid Grid.Column="1" Grid.Row="31" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Text="Cliente" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                            <Grid Grid.Column="1" Grid.Row="19" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="Projeto" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
                                             </Grid>
-                                            <Grid Grid.Column="0" Grid.Row="32" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Negocio_Faturado" Text="{Binding Negocio_Total_Faturado, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                            <Grid Grid.Column="0" Grid.Row="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Negocio_FD_Orcamento, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
                                             </Grid>
-                                            <Grid Grid.Column="1" Grid.Row="32" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock x:Name="txt_Negocio_FD" Text="{Binding Negocio_Total_FD, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                            <Grid Grid.Column="1" Grid.Row="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Negocio_FD_Projeto, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                            </Grid>
+                                            <Grid Grid.Column="0" Grid.Row="22" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="Total" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" />
+                                            </Grid>
+                                            <Grid Grid.Column="0" Grid.Row="23" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="Orçamento" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="DemiBold" />
+                                            </Grid>
+                                            <Grid Grid.Column="1" Grid.Row="23" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="Projeto" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="{DynamicResource Novecento-Bold}" FontWeight="SemiBold" />
+                                            </Grid>
+                                            <Grid Grid.Column="0" Grid.Row="24" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Negocio_Total_Orcamento, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Margin="5,0,5,0" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
+                                            </Grid>
+                                            <Grid Grid.Column="1" Grid.Row="24" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Negocio_Total_Projeto, StringFormat=c}" MaxWidth="180" TextWrapping="Wrap" Foreground="DimGray" FontFamily="Century Gothic" FontWeight="Normal" />
                                             </Grid>
                                         </Grid>
                                     </DataTemplate>

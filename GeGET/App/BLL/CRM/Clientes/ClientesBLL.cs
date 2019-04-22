@@ -4,6 +4,7 @@ using DTO;
 using DAL;
 using System.Data;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace BLL
 {
@@ -28,6 +29,34 @@ namespace BLL
                 var query = "SELECT c.id, c.status_id, s.descricao as status_descricao, c.rsocial, c.fantasia, c.data, c.CATEGORIA_CLIENTE_id, cat.categoria FROM cliente c JOIN categoria_cliente cat ON c.CATEGORIA_CLIENTE_id = cat.id join status s on s.id = c.status_id ORDER BY c.fantasia";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    clientes.Add(new ClientesDTO { Id = dr["id"].ToString(), Razao_Social = dr["rsocial"].ToString(), Nome_Fantasia = dr["fantasia"].ToString(), Categoria = dr["categoria"].ToString(), Status = Convert.ToInt32(dr["status_id"]), Categoria_Id = Convert.ToInt32(dr["categoria_cliente_id"]), Status_descricao = dr["status_descricao"].ToString() });
+                }
+                bd.CloseConection();
+            }
+            return clientes;
+        }
+        #endregion
+
+        #region Load Clientes Async
+        public async Task<ObservableCollection<ClientesDTO>> LoadClientesAsync()
+        {
+            var clientes = new ObservableCollection<ClientesDTO>();
+            var dt = new DataTable();
+            try
+            {
+                var cliente = dto.Pesquisa;
+                var query = "SELECT c.id, c.status_id, s.descricao as status_descricao, c.rsocial, c.fantasia, c.data, c.CATEGORIA_CLIENTE_id, cat.categoria FROM cliente c JOIN categoria_cliente cat ON c.CATEGORIA_CLIENTE_id = cat.id join status s on s.id = c.status_id ORDER BY c.fantasia";
+                bd.Conectar();
+                dt = await bd.RetDataTableAsync(query);
             }
             catch (Exception ex)
             {

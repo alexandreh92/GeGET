@@ -133,6 +133,14 @@ namespace GeGET
                     txtRazao.Text = form.new_Razao_Social;
                     txtFantasia.Text = form.new_Nome_Fantasia;
                     txtEstabelecimento.Text = " ";
+                    txtEndereco.Text = "";
+                    txtCidade.Text = "";
+                    txtUF.Text = "";
+                    cmbVendedor.SelectedIndex = -1;
+                    cmbContato.SelectedIndex = -1;
+                    cmbPrioridade.SelectedIndex = -1;
+                    txtAnotacoes.Text = "";
+                    txtNome.Text = "";
                     dto.Cliente_Id = form.new_Cliente_Id;
                 }
             }
@@ -154,6 +162,11 @@ namespace GeGET
                         txtCidade.Text = form.Cidade;
                         txtUF.Text = form.UF;
                         dto.Estabelecimento_Id = form.Estabelecimento_Id;
+                        cmbVendedor.SelectedIndex = -1;
+                        cmbContato.SelectedIndex = -1;
+                        cmbPrioridade.SelectedIndex = -1;
+                        txtAnotacoes.Text = "";
+                        txtNome.Text = "";
                         LoadComboboxes();
                     }
                 }

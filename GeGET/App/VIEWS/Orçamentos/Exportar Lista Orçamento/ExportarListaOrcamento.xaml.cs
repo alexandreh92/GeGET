@@ -144,11 +144,6 @@ namespace GeGET
                 grdView.ExportToXlsx(fileDialog.FileName, new XlsxExportOptionsEx() { ExportType = DevExpress.Export.ExportType.Default });
 
             }
-
-            //string filepath = AppDomain.CurrentDomain.BaseDirectory;
-            //grdView.ExportToXls(@"grid_export.xls", new XlsExportOptionsEx() { ExportType = DevExpress.Export.ExportType.DataAware });
-            //grdView.ExportToHtml(@"grid_export.html", new HtmlExportOptions() { ExportMode = HtmlExportMode.SingleFile });
-
         }
 
         private void CmbVersao_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -159,6 +154,17 @@ namespace GeGET
             }
             Load();
             CardPanel.Visibility = Visibility.Visible;
+        }
+
+        private void ExportPDF_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            fileDialog.FileName = "P" + Convert.ToInt32(dto.Id).ToString("0000") + "-LO";
+            fileDialog.Filter = "Arquivo Portable Document Format (*.pdf)|*.pdf";
+            if (fileDialog.ShowDialog() == true)
+            {
+                grdView.ExportToPdf(fileDialog.FileName, new PdfExportOptions());
+            }
         }
     }
 }

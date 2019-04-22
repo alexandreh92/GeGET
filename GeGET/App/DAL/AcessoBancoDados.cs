@@ -18,11 +18,11 @@ namespace DAL
         private MySql.Data.MySqlClient.MySqlDataAdapter da;
         private MySql.Data.MySqlClient.MySqlCommandBuilder cb;
 
-        //public static string server_local = "localhost";
-        public static string server_local = "192.168.15.5";
-        public static string server_remoto = "getacengenharia.ddns.net";
-        public static string server = "192.168.15.5";
-        //public static string server = "localhost";
+        public static string server_local = "localhost";
+        //public static string server_local = "192.168.15.5";
+        //public static string server_remoto = "getacengenharia.ddns.net";
+        //public static string server = "192.168.15.5";
+        public static string server = "localhost";
         public static string user = "root";
         public static string password = "root";
         public static string database = "gegetdb";
@@ -97,6 +97,24 @@ namespace DAL
             cb = new MySql.Data.MySqlClient.MySqlCommandBuilder(da);
             da.Fill(data);
             return data;
+        }
+
+        public async Task<DataTable> RetDataTableAsync(string sql)
+        {
+            var datatable = new DataTable();
+
+            using (var con = new MySql.Data.MySqlClient.MySqlConnection(commStr))
+            {
+                using (var cmd = new MySql.Data.MySqlClient.MySqlCommand(sql, con))
+                {
+                    await con.OpenAsync();
+                    cmd.CommandType = CommandType.Text;
+                    var sda = new MySql.Data.MySqlClient.MySqlDataAdapter(cmd);
+                    await sda.FillAsync(datatable);
+                }
+            }
+
+            return datatable;
         }
 
         public DataSet RetDataSet(List<QueryHelper> list)

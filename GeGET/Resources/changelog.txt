@@ -1,0 +1,34 @@
+# CHANGELOG TODAS AS ALTERAÇÕES SERÃO DOCUMENTADAS NESTE ARQUIVO.
+## [2.0.0.4] - ??-??-?? - ?
+### ADICIONADO
+- ADICIONADO TELA DE LISTA DE PROJETOS;
+--------------------------------------------------------------------------------------------------------
+## [2.0.0.4] - 22-04-2019 - ATUALIZAÇÃO DE ROTINA
+### ADICIONADO
+- EXPORTAÇÃO PARA PDF;
+###CORRIGIDO:
+- ALGUNS GLITCHES GRÁFICOS FORAM CORRIGIDOS;
+- CORRIGIDO BUG QUE NÃO ATUALIZAVA O PAINEL DE VALORES NA TELA DE LISTA DE ORÇAMENTOS.
+###EDITADO:
+- MELHORADO O MÉTODO DE ATUALIZAR FATURAMENTO DIRETO: BOTÃO NÃO TRAVA MAIS;
+- TELA DE COPIAR ITENS EDITADA PARA TER CHECKBOXES;
+- EDITADO OS ITENS DAS COMBOBOXES PARA FICAR NO NUMERO QUE OS PERTENCEM;
+- TELAS DE LISTA DE MATERIAIS AGORA SÓ SELECIONAM AS COLUNAS QUE POSSAM SER EDITADAS.
+--------------------------------------------------------------------------------------------------------
+## [2.0.0.3] - 17-04-2019 - PATCH
+###ADICIONADO:
+- TELA DE EXPORTAÇÃO DE ORÇAMENTOS.
+###CORRIGIDO:
+- BOTÃO DE FATURAMENTO DIRETO NÃO SALVAVA;
+- ALGUNS GLITCHES GRÁFICOS FORAM CORRIGIDOS.
+--------------------------------------------------------------------------------------------------------
+## [2.0.0.2] - 17-04-2019 - ATUALIZAÇÃO DE EMERGÊNCIA
+###CORRIGIDO:
+- ALGUNS BUGS MINORITÁRIOS.
+--------------------------------------------------------------------------------------------------------
+## [2.0.0.1] - 16-04-2019 - ATUALIZAÇÃO DE EMERGÊNCIA
+###CORRIGIDO:
+- ALGUNS BUGS MINORITÁRIOS.
+--------------------------------------------------------------------------------------------------------
+## [2.0.0.0] - 16-04-2019 - RELEASE INICIAL 
+--------------------------------------------------------------------------------------------------------

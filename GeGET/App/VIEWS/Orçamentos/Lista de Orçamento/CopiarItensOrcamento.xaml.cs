@@ -22,6 +22,7 @@ namespace GeGET
     {
         CopiarItensOrcamentoDTO dto = new CopiarItensOrcamentoDTO();
         CopiarItensOrcamentoBLL bll = new CopiarItensOrcamentoBLL();
+        ObservableCollection<AtividadeDTO> listaChecked = new ObservableCollection<AtividadeDTO>();
         ObservableCollection<CopiarItensOrcamentoDTO> listaCopiar = new ObservableCollection<CopiarItensOrcamentoDTO>();
         WaitBox wb;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
@@ -62,33 +63,34 @@ namespace GeGET
         {
             dto.Disciplina_Id = cmbDisciplina.SelectedValue.ToString();
             var atividades = bll.LoadAtividades(dto);
-            cmbAtividade.ItemsSource = atividades;
-            cmbAtividade.SelectedValuePath = "Id";
-            cmbAtividade.DisplayMemberPath = "Descricao";
-            cmbAtividade.SelectedIndex = 0;
+            grdCheck.ItemsSource = atividades;
+            
         }
 
         private void Insert()
         {
-            dto.Atividade_Id = cmbAtividade.SelectedValue.ToString();
-            new Thread(() => 
+            new Thread(() =>
             {
                 Dispatcher.Invoke(new Action(() =>
                 {
                     wb = new WaitBox();
+                    wb.Owner = Window.GetWindow(this);
                     wb.Show();
                 }));
                 syncEvent.Set();
 
-                foreach (var item in listaCopiar)
+                foreach (var atividade in listaChecked)
                 {
-                    dto.Id = item.Id;
-                    bll.Insert(dto);
+                    dto.Atividade_Id = atividade.Id.ToString();
+                    foreach (var item in listaCopiar)
+                    {
+                        dto.Id = item.Id;
+                        bll.Insert(dto);
+                    }
                 }
                 t1 = new Thread(WaitBoxLoad);
                 t1.Start();
             }).Start();
-            
         }
 
         private void WaitBoxLoad()
@@ -107,8 +109,26 @@ namespace GeGET
 
         private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
-            var result = CustomOKCancelMessageBox.Show("Você deseja mesmo copiar estes itens para a atividade '" + cmbAtividade.Text + "' ?","Atenção!", Window.GetWindow(this));
-            if (result == System.Windows.Forms.DialogResult.OK)
+            int checks = 0;
+
+            for (int i = 0; i < grdCheck.Items.Count; i++)
+            {
+
+                ContentPresenter c = (ContentPresenter)grdCheck.ItemContainerGenerator.ContainerFromItem(grdCheck.Items[i]);
+                CheckBox cb = c.ContentTemplate.FindName("cbx", c) as CheckBox;
+                if (cb.IsChecked.Value)
+                {
+                    checks++;
+                    int index = grdCheck.Items.IndexOf(cb.DataContext);
+                    var atividade = ((AtividadeDTO)grdCheck.Items[index]);
+
+                    listaChecked.Add(new AtividadeDTO
+                    {
+                        Id = atividade.Id
+                    });
+                }
+            }
+            if (checks > 0)
             {
                 Insert();
             }

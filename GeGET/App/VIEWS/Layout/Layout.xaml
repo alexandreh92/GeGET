@@ -122,6 +122,12 @@
                                 <TextBlock Text="Orçamentos" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
                             </StackPanel>
                         </ListViewItem>
+                            <ListViewItem Visibility="Collapsed" x:Name="btnProjetos" Height="60" PreviewMouseLeftButtonDown="BtnProjetos_PreviewMouseLeftButtonDown" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Laptop" Height="25" Width="25" Margin="13,8,0,0"/>
+                                    <TextBlock Text="Projetos" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
+                                </StackPanel>
+                            </ListViewItem>
                             <ListViewItem x:Name="btnSuprimentos" Height="60" PreviewMouseLeftButtonDown="btnSuprimentos_PreviewMouseLeftButtonDown" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Package" Height="25" Width="25" Margin="13,8,0,0"/>

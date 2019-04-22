@@ -18,6 +18,7 @@ namespace GeGET
         #region Declarations
         NegociosBLL bll = new NegociosBLL();
         NegociosDTO dto = new NegociosDTO();
+        DispatcherTimer timer = new DispatcherTimer();
         public string Negocio_Id;
         public string Id;
         public string Login;
@@ -32,6 +33,9 @@ namespace GeGET
         public ProcurarOrcamentista(Point mouseLocation, NegociosDTO DTO)
         {
             InitializeComponent();
+            timer.Tick += new EventHandler(DispatcherTimer_Tick);
+            timer.Interval = TimeSpan.FromMilliseconds(310);
+            timer.Start();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
             dto.Pesquisa = "";
@@ -43,6 +47,9 @@ namespace GeGET
         }
         #endregion
 
+        #region Methods
+
+        #region Load
         private void Load()
         {
 
@@ -57,7 +64,9 @@ namespace GeGET
                          lstMensagens.ItemsSource = listaOrcamentistas;
                      }));
         }
+        #endregion
 
+        #region Wait Load
         private void waitLoad()
         {
             syncEvent.WaitOne();
@@ -67,9 +76,9 @@ namespace GeGET
                 lstMensagens.Visibility = Visibility.Visible;
             }));
         }
+        #endregion
 
-
-        #region Methods
+        #region Commit
         private void Commit()
         {
             Dispatcher.Invoke(DispatcherPriority.Background,
@@ -82,7 +91,18 @@ namespace GeGET
         }
         #endregion
 
+        #endregion
+
         #region Events
+
+        #region Timer Tick
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            timer.Stop();
+            t1 = new Thread(Load);
+            t1.Start();
+        }
+        #endregion
 
         #region TextChanged
         private void TxtProcurar_TextChanged(object sender, TextChangedEventArgs e)
@@ -115,6 +135,13 @@ namespace GeGET
         }
         #endregion
 
+        #region Window Loaded
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtProcurar.Focus();
+        }
+        #endregion
+
         #endregion
 
         #region IDisposable
@@ -123,10 +150,5 @@ namespace GeGET
         }
 
         #endregion
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            txtProcurar.Focus();
-        }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
 using BLL;
 using DTO;
@@ -11,21 +13,23 @@ using MMLib.Extensions;
 
 namespace GeGET
 {
-    public partial class ProcurarNegocio : Window, IDisposable
+    public partial class ProcurarVenda : Window, IDisposable
     {
         #region Declarations
-        NegociosBLL bll = new NegociosBLL();
-        NegociosDTO dto = new NegociosDTO();
+        ProcurarVendaBLL bll = new ProcurarVendaBLL();
+        ProcurarVendaDTO dto = new ProcurarVendaDTO();
         public string Negocio_Id;
         DispatcherTimer timer = new DispatcherTimer();
-        public ObservableCollection<NegociosDTO> listaNegocios;
+        public string Venda_Id;
+        public string Cliente_Id;
+        public ObservableCollection<ProcurarVendaDTO> listaVendas;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         Thread t1;
         Thread t2;
         #endregion
 
         #region Initialize
-        public ProcurarNegocio(Point mouseLocation)
+        public ProcurarVenda(Point mouseLocation)
         {
             InitializeComponent();
             timer.Tick += new EventHandler(DispatcherTimer_Tick);
@@ -33,12 +37,12 @@ namespace GeGET
             timer.Start();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
-            ColLeft.Width = new GridLength(mouseLocation.X + 230, GridUnitType.Pixel);
-            dto.Pesquisa = "";
             t1 = new Thread(Load);
             t1.Start();
-            Left = mouseLocation.X +240;
-            Top = mouseLocation.Y;
+            ColLeft.Width = new GridLength(mouseLocation.X + 230, GridUnitType.Pixel);
+            ColTop.Height = new GridLength(mouseLocation.Y, GridUnitType.Pixel);
+            //Left = mouseLocation.X +240;
+            //Top = mouseLocation.Y;
         }
         #endregion
 
@@ -55,8 +59,8 @@ namespace GeGET
                          syncEvent.Set();
                          t2 = new Thread(waitLoad);
                          t2.Start();
-                         listaNegocios = bll.LoadNegocios(dto);
-                         lstMensagens.ItemsSource = listaNegocios;
+                         listaVendas = bll.LoadVendas();
+                         lstMensagens.ItemsSource = listaVendas;
                      }));
         }
         #endregion
@@ -80,7 +84,7 @@ namespace GeGET
                   new Action(() =>
                   {
                       var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
-                      var filtered = listaNegocios.Where(descricao => Find.Any(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Descricao.ToLower().RemoveDiacritics().Contains(list) || descricao.Endereco.ToLower().Contains(list) || descricao.Anotacoes.ToLower().Contains(list) || descricao.Vendedor.ToLower().Contains(list) || descricao.CidadeEstado.ToLower().Contains(list) || descricao.Status_Descricao.ToLower().Contains(list) || descricao.Id.ToLower().Contains(list) || descricao.Numero.ToLower().Contains(list)));
+                      var filtered = listaVendas.Where(descricao => Find.Any(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Descricao.ToLower().RemoveDiacritics().Contains(list) || descricao.Endereco.ToLower().Contains(list) || descricao.Id.ToString().Contains(list) || descricao.Negocio_Numero.ToLower().Contains(list)));
                       lstMensagens.ItemsSource = filtered;
                   }));
         }
@@ -99,6 +103,13 @@ namespace GeGET
         }
         #endregion
 
+        #region Window Loaded
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtProcurar.Focus();
+        }
+        #endregion
+
         #region TextChanged
         private void TxtProcurar_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -108,10 +119,6 @@ namespace GeGET
         #endregion
 
         #region Clicks
-        private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -123,15 +130,10 @@ namespace GeGET
         {
             Button btn = sender as Button;
             int index = lstMensagens.Items.IndexOf(btn.DataContext);
-            Negocio_Id = ((NegociosDTO)lstMensagens.Items[index]).Id;
+            Negocio_Id = ((ProcurarVendaDTO)lstMensagens.Items[index]).Negocio_Id.ToString();
+            Venda_Id = ((ProcurarVendaDTO)lstMensagens.Items[index]).Id.ToString();
+            Cliente_Id = ((ProcurarVendaDTO)lstMensagens.Items[index]).Negocio_Id.ToString();
             DialogResult = true;
-        }
-        #endregion
-
-        #region Window Loaded
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            txtProcurar.Focus();
         }
         #endregion
 
