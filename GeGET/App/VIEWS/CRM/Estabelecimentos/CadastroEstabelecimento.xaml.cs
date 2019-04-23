@@ -74,6 +74,7 @@ namespace GeGET
                     dto.Telefone = txtTelefone.Text.Replace("'", "''").ToUpper();
                     dto.UF_Id = cmbUF.SelectedValue.ToString();
                     dto.Cidade_Id = cmbCidade.SelectedValue.ToString();
+                    dto.Descricao = txtDescricao.Text.Replace("'", "''").ToUpper();
                     if (bll.CreateEstabelecimento(dto))
                     {
                         ClearControls();

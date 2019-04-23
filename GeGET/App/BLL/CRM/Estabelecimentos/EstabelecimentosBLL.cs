@@ -29,7 +29,7 @@ namespace BLL
             var dt = new DataTable();
             try
             {
-                var query = "SELECT e.id, e.cnpj, e.endereco, e.inscricao, e.status_id, cid.estado as id_estado, c.id as cliente_id, cid.id as id_cidade, e.CLIENTE_id, e.telefone, c.rsocial, c.fantasia, c.data, cid.uf, cid.cidade FROM estabelecimento e join cliente c on e.CLIENTE_id = c.id join cidades cid on e.CIDADES_id = cid.id " + Procurar + " ORDER BY c.fantasia, cid.uf, cid.cidade ASC";
+                var query = "SELECT e.id, e.cnpj, e.endereco, e.descricao, e.inscricao, e.status_id, cid.estado as id_estado, c.id as cliente_id, cid.id as id_cidade, e.CLIENTE_id, e.telefone, c.rsocial, c.fantasia, c.data, cid.uf, cid.cidade FROM estabelecimento e join cliente c on e.CLIENTE_id = c.id join cidades cid on e.CIDADES_id = cid.id " + Procurar + " ORDER BY c.fantasia, cid.uf, cid.cidade ASC";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
@@ -41,7 +41,7 @@ namespace BLL
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    estabelecimentos.Add(new EstabelecimentosDTO { Id = dr["id"].ToString(), Razao_Social = dr["rsocial"].ToString(), Nome_Fantasia = dr["fantasia"].ToString(), Cnpj = dr["cnpj"].ToString(), Status = Convert.ToInt32(dr["status_id"]), Endereco = dr["endereco"].ToString(), Cidade = dr["cidade"].ToString() + " - " + dr["uf"].ToString(), Cliente_Id = dr["cliente_id"].ToString(), Cidade_Id = dr["id_cidade"].ToString(), Ie = dr["inscricao"].ToString(), Telefone = dr["telefone"].ToString(), UF_Id = dr["id_estado"].ToString() });
+                    estabelecimentos.Add(new EstabelecimentosDTO { Id = dr["id"].ToString(), Razao_Social = dr["rsocial"].ToString(), Nome_Fantasia = dr["fantasia"].ToString(), Cnpj = dr["cnpj"].ToString(), Status = Convert.ToInt32(dr["status_id"]), Endereco = dr["endereco"].ToString(), Cidade = dr["cidade"].ToString() + " - " + dr["uf"].ToString(), Cliente_Id = dr["cliente_id"].ToString(), Cidade_Id = dr["id_cidade"].ToString(), Ie = dr["inscricao"].ToString(), Telefone = dr["telefone"].ToString(), UF_Id = dr["id_estado"].ToString(), Descricao = dr["descricao"].ToString() });
                 }
                 bd.CloseConection();
             }
@@ -56,7 +56,7 @@ namespace BLL
             var dt = new DataTable();
             try
             {
-                var query = "SELECT e.id, e.cnpj, e.endereco, e.inscricao, e.status_id, cid.estado as id_estado, c.id as cliente_id, cid.id as id_cidade, e.CLIENTE_id, e.telefone, c.rsocial, c.fantasia, c.data, cid.uf, cid.cidade FROM estabelecimento e join cliente c on e.CLIENTE_id = c.id join cidades cid on e.CIDADES_id = cid.id WHERE c.id = '"+ DTO.Cliente_Id +"' ORDER BY c.fantasia, cid.uf, cid.cidade ASC";
+                var query = "SELECT e.id, e.cnpj, e.endereco, e.descricao, e.inscricao, e.status_id, cid.estado as id_estado, c.id as cliente_id, cid.id as id_cidade, e.CLIENTE_id, e.telefone, c.rsocial, c.fantasia, c.data, cid.uf, cid.cidade FROM estabelecimento e join cliente c on e.CLIENTE_id = c.id join cidades cid on e.CIDADES_id = cid.id WHERE c.id = '"+ DTO.Cliente_Id +"' ORDER BY c.fantasia, cid.uf, cid.cidade ASC";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
@@ -68,7 +68,7 @@ namespace BLL
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    estabelecimentos.Add(new EstabelecimentosDTO { Id = dr["id"].ToString(), Razao_Social = dr["rsocial"].ToString(), Nome_Fantasia = dr["fantasia"].ToString(), Cnpj = dr["cnpj"].ToString(), Status = Convert.ToInt32(dr["status_id"]), Endereco = dr["endereco"].ToString(), Cidade = dr["cidade"].ToString(), UF = dr["uf"].ToString(), CidadeEstado = dr["cidade"].ToString() + " - " + dr["uf"].ToString(),  Cliente_Id = dr["cliente_id"].ToString(), Cidade_Id = dr["id_cidade"].ToString(), Ie = dr["inscricao"].ToString(), Telefone = dr["telefone"].ToString(), UF_Id = dr["id_estado"].ToString() });
+                    estabelecimentos.Add(new EstabelecimentosDTO { Id = dr["id"].ToString(), Razao_Social = dr["rsocial"].ToString(), Nome_Fantasia = dr["fantasia"].ToString(), Cnpj = dr["cnpj"].ToString(), Status = Convert.ToInt32(dr["status_id"]), Endereco = dr["endereco"].ToString(), Cidade = dr["cidade"].ToString(), UF = dr["uf"].ToString(), CidadeEstado = dr["cidade"].ToString() + " - " + dr["uf"].ToString(),  Cliente_Id = dr["cliente_id"].ToString(), Cidade_Id = dr["id_cidade"].ToString(), Ie = dr["inscricao"].ToString(), Telefone = dr["telefone"].ToString(), UF_Id = dr["id_estado"].ToString(), Descricao = dr["descricao"].ToString() });
                 }
                 bd.CloseConection();
             }
@@ -84,7 +84,7 @@ namespace BLL
             try
             {
                 var data = DateTime.Now.ToString();
-                var query = "INSERT INTO estabelecimento (USUARIO_id, cnpj, endereco, inscricao, telefone, data, ESTADOS_id, CIDADES_id, CLIENTE_id) VALUES('" + Logindto.Id + "','" + DTO.Cnpj + "','" + DTO.Endereco + "','" + DTO.Ie + "','" + DTO.Telefone + "','" + data + "','" + DTO.UF_Id + "','" + DTO.Cidade_Id + "', '" + DTO.Cliente_Id + "')";
+                var query = "INSERT INTO estabelecimento (USUARIO_id, cnpj, endereco, inscricao, telefone, data, ESTADOS_id, CIDADES_id, CLIENTE_id, descricao) VALUES('" + Logindto.Id + "','" + DTO.Cnpj + "','" + DTO.Endereco + "','" + DTO.Ie + "','" + DTO.Telefone + "','" + data + "','" + DTO.UF_Id + "','" + DTO.Cidade_Id + "', '" + DTO.Cliente_Id + "', '"+DTO.Descricao+"')";
                 bd.Conectar();
                 bd.ExecutarComandoSQL(query);
             }
@@ -114,7 +114,7 @@ namespace BLL
         {
             try
             {
-                var query = "UPDATE estabelecimento SET cnpj='" + DTO.Cnpj + "', endereco='" + DTO.Endereco + "', inscricao='" + DTO.Ie + "', cliente_id='" + DTO.Cliente_Id + "', telefone='" + DTO.Telefone + "', ESTADOS_id='" + DTO.UF_Id + "', CIDADES_id='" + DTO.Cidade_Id + "', status_id='" + DTO.Status + "' WHERE id='" + DTO.Id + "'";
+                var query = "UPDATE estabelecimento SET cnpj='" + DTO.Cnpj + "', endereco='" + DTO.Endereco + "', inscricao='" + DTO.Ie + "', cliente_id='" + DTO.Cliente_Id + "', telefone='" + DTO.Telefone + "', ESTADOS_id='" + DTO.UF_Id + "', CIDADES_id='" + DTO.Cidade_Id + "', status_id='" + DTO.Status + "', descricao='"+DTO.Descricao+"' WHERE id='" + DTO.Id + "'";
                 bd.Conectar();
                 bd.ExecutarComandoSQL(query);
             }

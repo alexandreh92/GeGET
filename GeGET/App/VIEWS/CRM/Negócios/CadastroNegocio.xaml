@@ -116,21 +116,21 @@
                                                             </materialDesign:HintAssist.Hint>
                                                         </TextBox>
                                                         <DatePicker x:Name="dtPicker" FontSize="16" materialDesign:HintAssist.Hint="Prazo" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="40" Width="105" Margin="5,0,20,22" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
-                                                        <ComboBox x:Name="cmbVendedor" materialDesign:HintAssist.Hint="Vendedor" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,50" Background="White" Foreground="DimGray" Width="120">
+                                                        <ComboBox x:Name="cmbVendedor" materialDesign:ComboBoxAssist.ShowSelectedItem="True" materialDesign:HintAssist.Hint="Vendedor" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,50" Background="White" Foreground="DimGray" Width="120">
                                                             <ComboBox.ItemsPanel>
                                                                 <ItemsPanelTemplate>
                                                                     <VirtualizingStackPanel />
                                                                 </ItemsPanelTemplate>
                                                             </ComboBox.ItemsPanel>
                                                         </ComboBox>
-                                                        <ComboBox x:Name="cmbContato" materialDesign:HintAssist.Hint="Responsável" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,50" Background="White" Foreground="DimGray" Width="120">
+                                                        <ComboBox x:Name="cmbContato" materialDesign:ComboBoxAssist.ShowSelectedItem="True" materialDesign:HintAssist.Hint="Responsável" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,50" Background="White" Foreground="DimGray" Width="120">
                                                             <ComboBox.ItemsPanel>
                                                                 <ItemsPanelTemplate>
                                                                     <VirtualizingStackPanel />
                                                                 </ItemsPanelTemplate>
                                                             </ComboBox.ItemsPanel>
                                                         </ComboBox>
-                                                        <ComboBox x:Name="cmbPrioridade" materialDesign:HintAssist.Hint="Prioridade" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,50" Background="White" Foreground="DimGray" Width="120">
+                                                        <ComboBox x:Name="cmbPrioridade" materialDesign:ComboBoxAssist.ShowSelectedItem="True" materialDesign:HintAssist.Hint="Prioridade" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,50" Background="White" Foreground="DimGray" Width="120">
                                                             <ComboBox.ItemsPanel>
                                                                 <ItemsPanelTemplate>
                                                                     <VirtualizingStackPanel />

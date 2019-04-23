@@ -219,6 +219,25 @@ namespace BLL
 
         #endregion
 
+        #region Update Anotações
+
+        public void UpdateAnotacoes(ListaOrcamentosDTO DTO)
+        {
+            try
+            {
+                var query = "UPDATE lista_orcamento SET descricao_orc ='"+DTO.Anotacoes+"' WHERE id='"+DTO.Id+"'";
+                bd.Conectar();
+                bd.ExecutarComandoSQL(query);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.ToString());
+            }
+        }
+
+        #endregion
+
         #endregion
     }
 }

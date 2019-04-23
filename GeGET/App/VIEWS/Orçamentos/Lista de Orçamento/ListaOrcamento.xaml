@@ -13,7 +13,6 @@
              mc:Ignorable="d"
              Language="pt-BR"
              d:DesignHeight="900" d:DesignWidth="800">
-    
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide">
         <materialDesign:TransitioningContent.OpeningEffects>
             <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8" />
@@ -80,14 +79,14 @@
                                                     </StackPanel>
                                                 </materialDesign:HintAssist.Hint>
                                             </TextBox>
-                                            <ComboBox x:Name="cmbDisciplina" materialDesign:HintAssist.Hint="Disciplina" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox, Path=IsChecked}" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="130" SelectionChanged="CmbDisciplina_SelectionChanged">
+                                            <ComboBox x:Name="cmbDisciplina" materialDesign:HintAssist.Hint="Disciplina" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:ComboBoxAssist.ShowSelectedItem="True" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="130" SelectionChanged="CmbDisciplina_SelectionChanged">
                                                 <ComboBox.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <VirtualizingStackPanel />
                                                     </ItemsPanelTemplate>
                                                 </ComboBox.ItemsPanel>
                                             </ComboBox>
-                                            <ComboBox x:Name="cmbAtividade" materialDesign:HintAssist.Hint="Atividade" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox, Path=IsChecked}" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="200" SelectionChanged="CmbAtividade_SelectionChanged">
+                                            <ComboBox x:Name="cmbAtividade" materialDesign:HintAssist.Hint="Atividade" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:ComboBoxAssist.ShowSelectedItem="True" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="200" SelectionChanged="CmbAtividade_SelectionChanged">
                                                 <ComboBox.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <VirtualizingStackPanel />
@@ -298,6 +297,19 @@
                                                                 <Setter Property="Background" Value="White"/>
                                                             </DataTrigger>
                                                         </Style.Triggers>
+                                                        <Setter Property="ContextMenu">
+                                                            <Setter.Value>
+                                                                <ContextMenu>
+                                                                    <Button Content="Informações" Foreground="DimGray">
+                                                                        <Button.Style>
+                                                                            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                                                                                <EventSetter Event="Click" Handler="BtnAnotacoes_Click"/>
+                                                                            </Style>
+                                                                        </Button.Style>
+                                                                    </Button>
+                                                                </ContextMenu>
+                                                            </Setter.Value>
+                                                        </Setter>
                                                     </Style>
                                                 </dxg:TableView.RowStyle>
                                             </dxg:TableView>

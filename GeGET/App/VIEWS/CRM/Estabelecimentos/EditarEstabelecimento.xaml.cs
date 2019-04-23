@@ -29,6 +29,7 @@ namespace GeGET
             txtRazao.Text = DTO.Razao_Social;
             txtFantasia.Text = DTO.Nome_Fantasia;
             txtEndereco.Text = DTO.Endereco;
+            txtDescricao.Text = DTO.Descricao;
             cmbUF.ItemsSource = Estadosbll.LoadEstados();
             cmbUF.DisplayMemberPath = "Uf";
             cmbUF.SelectedValuePath = "Id";
@@ -53,6 +54,7 @@ namespace GeGET
             dto.Id = id;
             dto.Razao_Social = txtRazao.Text.Replace("'", "''").ToUpper();
             dto.Nome_Fantasia = txtFantasia.Text.Replace("'", "''").ToUpper();
+            dto.Descricao = txtDescricao.Text.Replace("'", "''").ToUpper();
             dto.Cnpj = txtCNPJ.Text;
             dto.Endereco = txtEndereco.Text.Replace("'", "''");
             dto.Ie = txtIE.Text.Replace("'", "''");

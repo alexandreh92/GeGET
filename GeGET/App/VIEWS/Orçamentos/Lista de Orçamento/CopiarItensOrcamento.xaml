@@ -33,7 +33,7 @@
                 </StackPanel>
                 <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,90,0,90" FontFamily="Century Gothic" FontSize="14" TextAlignment="Center" Foreground="DimGray">Selecione em qual atividade deseja copiar os itens:</TextBlock>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,120,0,0">
-                    <ComboBox x:Name="cmbDisciplina" materialDesign:HintAssist.Hint="Disciplina" Grid.Row="1" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,30" Background="{DynamicResource MaterialDesignBackground}" Foreground="DimGray" Width="140" SelectionChanged="CmbDisciplina_SelectionChanged">
+                    <ComboBox materialDesign:ComboBoxAssist.ShowSelectedItem="True" x:Name="cmbDisciplina" materialDesign:HintAssist.Hint="Disciplina" Grid.Row="1" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,30" Background="{DynamicResource MaterialDesignBackground}" Foreground="DimGray" Width="140" SelectionChanged="CmbDisciplina_SelectionChanged">
                         <ComboBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel />
