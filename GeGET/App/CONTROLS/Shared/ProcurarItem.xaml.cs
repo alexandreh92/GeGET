@@ -75,7 +75,7 @@ namespace GeGET
                   new Action(() =>
                   {
                       var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
-                      var filtered = listaItens.Where(descricao => Find.Any(list => descricao.Descricao.ToLower().RemoveDiacritics().Contains(list) || descricao.Un.ToString().ToLower().RemoveDiacritics().Contains(list)));
+                      var filtered = listaItens.Where(descricao => Find.All(list => descricao.Descricao.ToLower().RemoveDiacritics().Contains(list) || descricao.Un.ToString().ToLower().RemoveDiacritics().Contains(list)));
                       lstMensagens.ItemsSource = filtered;
                   }));
         }

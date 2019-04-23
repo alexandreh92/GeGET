@@ -73,7 +73,7 @@ namespace GeGET
                   new Action(() =>
                   {
                       var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
-                      var filtered = listaFornecedores.Where(descricao => Find.Any(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Nome_Fantasia.ToLower().RemoveDiacritics().Contains(list) || descricao.Endereco.ToLower().Contains(list) || descricao.CidadeEstado.ToLower().Contains(list) || descricao.Cnpj.ToLower().Contains(list)));
+                      var filtered = listaFornecedores.Where(descricao => Find.All(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Nome_Fantasia.ToLower().RemoveDiacritics().Contains(list) || descricao.Endereco.ToLower().Contains(list) || descricao.CidadeEstado.ToLower().Contains(list) || descricao.Cnpj.ToLower().Contains(list)));
                       lstMensagens.ItemsSource = filtered;
                   }));
         }

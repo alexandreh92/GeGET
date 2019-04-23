@@ -359,5 +359,22 @@ namespace GeGET
                 this.grdView.ActiveEditor.SelectAll();
             }), DispatcherPriority.Render);
         }
+
+        private void BtnAnotacoes_Click(object sender, RoutedEventArgs e)
+        {
+            var Id = grdItens.GetFocusedRowCellValue("Id").ToString();
+            var Anotacoes = grdItens.GetFocusedRowCellValue("Anotacoes").ToString();
+            var Produto_Id = grdItens.GetFocusedRowCellValue("Produto_Id").ToString();
+
+            using (var form = new AnotacoesOrcamento(Id, Anotacoes, Produto_Id))
+            {
+                form.Owner = Window.GetWindow(this);
+                form.ShowDialog();
+                if (form.DialogResult.HasValue && form.DialogResult.Value)
+                {
+                    Load();
+                }
+            }
+        }
     }
 }

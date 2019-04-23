@@ -3,6 +3,7 @@
     public class EstabelecimentosDTO
     {
         private string id;
+        private string descricao;
         private string cliente_Id;
         private string razao_Social;
         private string nome_Fantasia;
@@ -37,5 +38,6 @@
         public string ParentId { get => parentId; set => parentId = value; }
         public string UF { get => uF; set => uF = value; }
         public string CidadeEstado { get => cidadeEstado; set => cidadeEstado = value; }
+        public string Descricao { get => descricao; set => descricao = value; }
     }
 }

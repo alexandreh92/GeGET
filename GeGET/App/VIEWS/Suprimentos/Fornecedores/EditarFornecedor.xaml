@@ -67,14 +67,14 @@
                             </StackPanel>
                         </materialDesign:HintAssist.Hint>
                     </TextBox>
-                    <ComboBox x:Name="cmbUF" materialDesign:HintAssist.Hint="UF" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="15,35,15,0" Background="White" Foreground="DimGray" Width="60" SelectionChanged="CmbUF_SelectionChanged">
+                    <ComboBox materialDesign:ComboBoxAssist.ShowSelectedItem="True" x:Name="cmbUF" materialDesign:HintAssist.Hint="UF" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="15,35,15,0" Background="White" Foreground="DimGray" Width="60" SelectionChanged="CmbUF_SelectionChanged">
                         <ComboBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel />
                             </ItemsPanelTemplate>
                         </ComboBox.ItemsPanel>
                     </ComboBox>
-                    <ComboBox x:Name="cmbCidade" materialDesign:HintAssist.Hint="Cidade" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="15,35,15,0" Background="White" Foreground="DimGray" Width="180">
+                    <ComboBox materialDesign:ComboBoxAssist.ShowSelectedItem="True" x:Name="cmbCidade" materialDesign:HintAssist.Hint="Cidade" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="15,35,15,0" Background="White" Foreground="DimGray" Width="180">
                         <ComboBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel />

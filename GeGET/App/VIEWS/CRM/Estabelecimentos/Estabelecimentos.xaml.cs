@@ -46,7 +46,7 @@ namespace GeGET
                   new Action(() =>
                   {
                       var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
-                      var filtered = listaEstabelecimentos.Where(descricao => Find.Any(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Nome_Fantasia.ToLower().RemoveDiacritics().Contains(list) || descricao.Endereco.ToLower().Contains(list) || descricao.Cidade.ToLower().Contains(list) || descricao.Cnpj.ToLower().Contains(list)));
+                      var filtered = listaEstabelecimentos.Where(descricao => Find.All(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Nome_Fantasia.ToLower().RemoveDiacritics().Contains(list) || descricao.Endereco.ToLower().Contains(list) || descricao.Cidade.ToLower().Contains(list) || descricao.Cnpj.ToLower().Contains(list)));
                       lstClientes.ItemsSource = filtered;
                   }));
         }
@@ -111,6 +111,7 @@ namespace GeGET
             dto.Ie = ((EstabelecimentosDTO)lstClientes.Items[index]).Ie;
             dto.Telefone = ((EstabelecimentosDTO)lstClientes.Items[index]).Telefone;
             dto.Status = ((EstabelecimentosDTO)lstClientes.Items[index]).Status;
+            dto.Descricao = ((EstabelecimentosDTO)lstClientes.Items[index]).Descricao;
             using (var form = new EditarEstabelecimento(dto))
             {
                 form.Owner = Window.GetWindow(this);

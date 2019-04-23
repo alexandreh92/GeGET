@@ -88,7 +88,7 @@
                                                                 </StackPanel>
                                                             </materialDesign:HintAssist.Hint>
                                                         </TextBox>
-                                                        <ComboBox x:Name="cmbUn" FontSize="16" HorizontalContentAlignment="Left" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,31,20,50" Background="White" Foreground="DimGray" Width="76">
+                                                        <ComboBox materialDesign:ComboBoxAssist.ShowSelectedItem="True" x:Name="cmbUn" FontSize="16" HorizontalContentAlignment="Left" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,31,20,50" Background="White" Foreground="DimGray" Width="76">
                                                             <materialDesign:HintAssist.Hint>
                                                                 <StackPanel Orientation="Horizontal" Margin="-2 -5 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                     <TextBlock>Unidade</TextBlock>

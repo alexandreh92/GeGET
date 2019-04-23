@@ -11,13 +11,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="800">
     <Grid>
-        <ComboBox
-    materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox}"
-    Margin="10 8 0 8"
-    HorizontalAlignment="Left">
-            <ComboBoxItem IsSelected="True">DASDSASDA</ComboBoxItem>
-            <ComboBoxItem>FFFF</ComboBoxItem>
-            <ComboBoxItem>DRDRDR</ComboBoxItem>
-        </ComboBox>
+        
     </Grid>
 </UserControl>

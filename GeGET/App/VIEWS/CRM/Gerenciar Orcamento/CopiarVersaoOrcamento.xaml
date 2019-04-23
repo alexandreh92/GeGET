@@ -33,7 +33,7 @@
                 </StackPanel>
                 <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,90" FontFamily="Century Gothic" FontSize="14" TextAlignment="Center" Foreground="DimGray">Selecione a versão que deseja copiar:</TextBlock>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,0,0">
-                    <ComboBox x:Name="cmbVersao" materialDesign:HintAssist.Hint="Versão" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Background="White" Foreground="DimGray" Width="Auto" MinWidth="64">
+                    <ComboBox x:Name="cmbVersao" materialDesign:ComboBoxAssist.ShowSelectedItem="True" materialDesign:HintAssist.Hint="Versão" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Background="White" Foreground="DimGray" Width="Auto" MinWidth="64">
                         <ComboBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel />

@@ -72,7 +72,7 @@
         </Grid>
         <Grid Grid.Column="4" Grid.Row="2" VerticalAlignment="Center" Margin="0,49,0,50" Height="0" Grid.ColumnSpan="2"/>
         <Grid Grid.Column="4" Grid.Row="2" VerticalAlignment="Center" Margin="0,6,0,0" Height="44" Grid.ColumnSpan="2">
-            <ComboBox VerticalAlignment="Center" x:Name="cmbFuncao" materialDesign:HintAssist.Hint="Função" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,0,10,0" Background="White" Foreground="DimGray" ScrollViewer.CanContentScroll="True">
+            <ComboBox materialDesign:ComboBoxAssist.ShowSelectedItem="True" VerticalAlignment="Center" x:Name="cmbFuncao" materialDesign:HintAssist.Hint="Função" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,0,10,0" Background="White" Foreground="DimGray" ScrollViewer.CanContentScroll="True">
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel />

@@ -84,14 +84,14 @@
                                                     </StackPanel>
                                                 </materialDesign:HintAssist.Hint>
                                             </TextBox>
-                                            <ComboBox x:Name="cmbDisciplina" materialDesign:HintAssist.Hint="Disciplina" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="130" SelectionChanged="CmbDisciplina_SelectionChanged">
+                                            <ComboBox materialDesign:ComboBoxAssist.ShowSelectedItem="True" x:Name="cmbDisciplina" materialDesign:HintAssist.Hint="Disciplina" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="130" SelectionChanged="CmbDisciplina_SelectionChanged">
                                                 <ComboBox.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <VirtualizingStackPanel />
                                                     </ItemsPanelTemplate>
                                                 </ComboBox.ItemsPanel>
                                             </ComboBox>
-                                            <ComboBox x:Name="cmbAtividade" materialDesign:HintAssist.Hint="Atividade" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="200" SelectionChanged="CmbAtividade_SelectionChanged">
+                                            <ComboBox materialDesign:ComboBoxAssist.ShowSelectedItem="True" x:Name="cmbAtividade" materialDesign:HintAssist.Hint="Atividade" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="200" SelectionChanged="CmbAtividade_SelectionChanged">
                                                 <ComboBox.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <VirtualizingStackPanel />

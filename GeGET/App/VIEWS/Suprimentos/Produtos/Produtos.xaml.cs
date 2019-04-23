@@ -48,7 +48,7 @@ namespace GeGET
                   new Action(() =>
                   {
                       var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
-                      var filtered = listaProdutos.Where(descricao => Find.Any(list => descricao.Fornecedor.ToLower().RemoveDiacritics().Contains(list) || descricao.Codigo.ToLower().RemoveDiacritics().Contains(list) || descricao.Status_Id.RemoveDiacritics().ToLower().Contains(list) || descricao.Item_Descricao.RemoveDiacritics().ToLower().Contains(list) || descricao.Partnumber.RemoveDiacritics().ToLower().Contains(list)));
+                      var filtered = listaProdutos.Where(descricao => Find.All(list => descricao.Fornecedor.ToLower().RemoveDiacritics().Contains(list) || descricao.Codigo.ToLower().RemoveDiacritics().Contains(list) || descricao.Status_Id.RemoveDiacritics().ToLower().Contains(list) || descricao.Item_Descricao.RemoveDiacritics().ToLower().Contains(list) || descricao.Partnumber.RemoveDiacritics().ToLower().Contains(list)));
                       lstProdutos.ItemsSource = filtered;
                   }));
         }

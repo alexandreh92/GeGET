@@ -33,7 +33,7 @@
                 </StackPanel>
                 <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,90" FontFamily="Century Gothic" FontSize="14" TextAlignment="Center" Foreground="DimGray">Selecione o motivo do cancelamento:</TextBlock>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,0,0">
-                    <ComboBox x:Name="cmbMotivo" materialDesign:HintAssist.Hint="Motivo Cancelamento" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Background="White" Foreground="DimGray" Width="Auto" MinWidth="180"></ComboBox>
+                    <ComboBox x:Name="cmbMotivo" materialDesign:ComboBoxAssist.ShowSelectedItem="True" materialDesign:HintAssist.Hint="Motivo Cancelamento" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Background="White" Foreground="DimGray" Width="Auto" MinWidth="180"></ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
                     <Button x:Name="btnConfirmar" Margin="0,0,5,0" FontFamily="{DynamicResource Novecento-Bold}" Click="BtnConfirmar_Click">CONFIRMAR</Button>
