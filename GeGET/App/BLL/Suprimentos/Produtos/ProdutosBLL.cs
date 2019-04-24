@@ -30,7 +30,17 @@ namespace GeGET
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    produtos.Add(new ProdutosDTO { Id = dr["id"].ToString(), Status_Id = dr["status_id"].ToString(), Item_Descricao = dr["descricao"].ToString(), Anotacoes = dr["anotacoes"].ToString(), Ncm = dr["ncm"].ToString(), Icms = Convert.ToDouble(dr["icms"]), Ipi = Convert.ToDouble(dr["ipi"]), Partnumber = dr["partnumber"].ToString(), Custo = Convert.ToDouble(dr["custounitario"]), Fornecedor = dr["rsocial"].ToString(), Unidade = dr["un"].ToString(), Codigo = Convert.ToInt32(dr["id"]).ToString("000000"), Item_Id = dr["item_id"].ToString(), Fornecedor_Id = dr["fornecedor_id"].ToString() });
+                    produtos.Add(new ProdutosDTO
+                    { Id = dr["id"].ToString(),
+                        Status_Id = dr["status_id"].ToString(),
+                        Item_Descricao = dr["descricao"].ToString(),
+                        Anotacoes = dr["anotacoes"].ToString(), Ncm = dr["ncm"].ToString(),
+                        Icms = Convert.ToDouble(dr["icms"]), Ipi = Convert.ToDouble(dr["ipi"]),
+                        Partnumber = dr["partnumber"].ToString(), Custo = Convert.ToDouble(dr["custounitario"]),
+                        Fornecedor = dr["rsocial"].ToString(), Unidade = dr["un"].ToString(),
+                        Codigo = Convert.ToInt32(dr["id"]).ToString("000000"),
+                        Item_Id = dr["item_id"].ToString(),
+                        Fornecedor_Id = dr["fornecedor_id"].ToString() });
                 }
             }
             return produtos;
@@ -77,9 +87,106 @@ namespace GeGET
 
         #endregion
 
+        #region Update Anotações Precificar
 
+        public void P_UpdateAnotacoes(ProdutosDTO DTO)
+        {
+            try
+            {
+                var query = "UPDATE produto SET descricao='"+DTO.Anotacoes+"' WHERE id='"+DTO.Id+"'";
+                bd.Conectar();
+                bd.ExecutarComandoSQL(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+        #endregion
 
+        #region Update Partnumber Precificar
 
+        public void P_UpdatePartnumber(ProdutosDTO DTO)
+        {
+            try
+            {
+                var query = "UPDATE produto SET partnumber='" + DTO.Partnumber + "' WHERE id='" + DTO.Id + "'";
+                bd.Conectar();
+                bd.ExecutarComandoSQL(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+        #endregion
 
+        #region Update NCM Precificar
+
+        public void P_UpdateNcm(ProdutosDTO DTO)
+        {
+            try
+            {
+                var query = "UPDATE produto SET ncm='" + DTO.Ncm + "' WHERE id='" + DTO.Id + "'";
+                bd.Conectar();
+                bd.ExecutarComandoSQL(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+        #endregion
+
+        #region Update Custo Precificar
+
+        public void P_UpdateCusto(ProdutosDTO DTO)
+        {
+            try
+            {
+                var query = "UPDATE produto SET custounitario='" + DTO.Custo.ToString().Replace(",",".") + "' WHERE id='" + DTO.Id + "'";
+                bd.Conectar();
+                bd.ExecutarComandoSQL(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+        #endregion
+
+        #region Update Ipi Precificar
+
+        public void P_UpdateIpi(ProdutosDTO DTO)
+        {
+            try
+            {
+                var query = "UPDATE produto SET ipi='" + DTO.Ipi.ToString().Replace(",", ".") + "' WHERE id='" + DTO.Id + "'";
+                bd.Conectar();
+                bd.ExecutarComandoSQL(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+        #endregion
+
+        #region Update Ipi Precificar
+
+        public void P_UpdateIcms(ProdutosDTO DTO)
+        {
+            try
+            {
+                var query = "UPDATE produto SET icms='" + DTO.Icms.ToString().Replace(",", ".") + "' WHERE id='" + DTO.Id + "'";
+                bd.Conectar();
+                bd.ExecutarComandoSQL(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+        #endregion
     }
 }

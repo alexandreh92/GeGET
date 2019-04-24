@@ -419,6 +419,9 @@
     <Compile Include="App\VIEWS\CRM\Pessoas\Pessoas.xaml.cs">
       <DependentUpon>Pessoas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\VIEWS\CRM\Relatórios\ListaNegociosSimplificada.xaml.cs">
+      <DependentUpon>ListaNegociosSimplificada.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\VIEWS\Orçamentos\Consulta Lista de Orçamento\ConsultaListaOrcamento.xaml.cs">
       <DependentUpon>ConsultaListaOrcamento.xaml</DependentUpon>
     </Compile>
@@ -479,6 +482,9 @@
     <Compile Include="App\VIEWS\Suprimentos\Produtos\EditarProduto.xaml.cs">
       <DependentUpon>EditarProduto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Produtos\PrecificarProdutos.xaml.cs">
+      <DependentUpon>PrecificarProdutos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\VIEWS\Suprimentos\Produtos\Produtos.xaml.cs">
       <DependentUpon>Produtos.xaml</DependentUpon>
     </Compile>
@@ -533,8 +539,8 @@
     </Compile>
     <Compile Include="App\BLL\Controls\ProcurarVendaBLL.cs" />
     <Compile Include="App\DTO\Controls\ProcurarVendaDTO.cs" />
-    <Compile Include="UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
+    <Compile Include="Changelog.xaml.cs">
+      <DependentUpon>Changelog.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\BLL\CRM\Gerenciar Orçamento\VersaoOrcamentoBLL.cs" />
     <Compile Include="App\DTO\CRM\Gerenciar Orçamento\VersaoOrcamentoDTO.cs" />
@@ -694,6 +700,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="App\VIEWS\CRM\Relatórios\ListaNegociosSimplificada.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\VIEWS\Orçamentos\Consulta Lista de Orçamento\ConsultaListaOrcamento.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -778,6 +788,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="App\VIEWS\Suprimentos\Produtos\PrecificarProdutos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\VIEWS\Suprimentos\Produtos\Produtos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -846,7 +860,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControl1.xaml">
+    <Page Include="Changelog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -870,7 +884,7 @@
     </Compile>
     <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -924,7 +938,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\changelog.txt" />
+    <None Include="Resources\changelog.txt" />
     <Content Include="template\styles\main.css" />
   </ItemGroup>
   <ItemGroup>

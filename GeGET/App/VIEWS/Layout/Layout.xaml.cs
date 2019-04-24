@@ -152,7 +152,7 @@ namespace GeGET
 
         private void ListViewItem_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<UserControl1>(null, false);
+            //helpers.Open<UserControl1>(null, false);
         }
 
 
@@ -197,6 +197,11 @@ namespace GeGET
         private void BtnProjetos_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             helpers.Open<Projetos>(null, false);
+        }
+
+        private void BtnChangelog_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.Open<Changelog>(null, false);
         }
     }
 }

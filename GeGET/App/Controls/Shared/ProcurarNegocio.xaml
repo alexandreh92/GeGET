@@ -48,7 +48,7 @@
                 <RowDefinition x:Name="ColTop" Height="1*"/>
                 <RowDefinition Height="72"/>
                 <RowDefinition Height="78"/>
-                <RowDefinition Height="529"/>
+                <RowDefinition Height="609"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <materialDesign:Card Margin="10" Padding="10" VerticalAlignment="Stretch" Grid.Row="1" Grid.RowSpan="3" Grid.Column="1">
@@ -68,7 +68,7 @@
                 <ListBox x:Name="lstMensagens" Visibility="Collapsed" Margin="12,-3,12,12" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <materialDesign:Card Height="120" Margin="5,3,5,3">
+                            <materialDesign:Card Height="140" Margin="5,3,5,3">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="6*"/>
@@ -76,9 +76,14 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock HorizontalAlignment="Left" Margin="6,12,70,0" TextTrimming="CharacterEllipsis" Text="{Binding Numero}" ToolTip="{Binding Numero}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Bold}" FontSize="13" Foreground="#7A2932" Height="16" Width="Auto"/>
                                     <TextBlock HorizontalAlignment="Left" Margin="6,32,70,0" TextTrimming="CharacterEllipsis" Text="{Binding Razao_Social}" ToolTip="{Binding Nome_Fantasia}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Light}" FontSize="12" Foreground="DimGray" Height="14" Width="Auto"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="6,52,70,0" TextTrimming="CharacterEllipsis" Text="{Binding Endereco}"  ToolTip="{Binding Cnpj}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray" Height="14" Width="Auto"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="6,72,70,0" TextTrimming="CharacterEllipsis" Text="{Binding CidadeEstado}"  ToolTip="{Binding Endereco}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray" Height="14" Width="Auto"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="6,92,70,0" TextTrimming="CharacterEllipsis" Text="{Binding Descricao}"  ToolTip="{Binding CidadeEstado}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray" Height="14" Width="Auto"/>
+                                    <StackPanel Orientation="Horizontal" Margin="6,52,70,0" Grid.Column="1">
+                                        <TextBlock HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" Text="{Binding Cnpj}" ToolTip="{Binding Cnpj}" VerticalAlignment="Top" FontFamily="{DynamicResource Novecento-Light}" FontSize="12" Foreground="DimGray" Height="14" Width="Auto"/>
+                                        <TextBlock HorizontalAlignment="Left" Margin="5,0,5,0" TextTrimming="CharacterEllipsis" Text="-" VerticalAlignment="Top" FontFamily="{DynamicResource Novecento-Light}" FontSize="12" Foreground="DimGray" Height="14" Width="Auto"/>
+                                        <TextBlock HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" Text="{Binding Descricao_Estabelecimento}" ToolTip="{Binding Descricao_Estabelecimento}" VerticalAlignment="Top" FontFamily="{DynamicResource Novecento-Light}" FontSize="12" Foreground="DimGray" Height="14" Width="Auto"/>
+                                    </StackPanel>
+                                    <TextBlock HorizontalAlignment="Left" Margin="6,72,70,0" TextTrimming="CharacterEllipsis" Text="{Binding Endereco}"  ToolTip="{Binding Cnpj}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray" Height="14" Width="Auto"/>
+                                    <TextBlock HorizontalAlignment="Left" Margin="6,92,70,0" TextTrimming="CharacterEllipsis" Text="{Binding CidadeEstado}"  ToolTip="{Binding Endereco}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray" Height="14" Width="Auto"/>
+                                    <TextBlock HorizontalAlignment="Left" Margin="6,112,70,0" TextTrimming="CharacterEllipsis" Text="{Binding Descricao}"  ToolTip="{Binding CidadeEstado}" VerticalAlignment="Top" Grid.Column="1" FontFamily="{DynamicResource Novecento-Book}" FontSize="12" Foreground="DarkGray" Height="14" Width="Auto"/>
                                     <Button x:Name="btnAdd" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Grid.Column="1" materialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Click="BtnAdd_Click">
                                         <materialDesign:PackIcon Kind="Plus" Height="24" Width="24" Foreground="White"  />
                                     </Button>

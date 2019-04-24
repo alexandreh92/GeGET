@@ -80,7 +80,7 @@ namespace GeGET
 
         private void BtnPrecificar_Click(object sender, RoutedEventArgs e)
         {
-
+            helpers.Open<PrecificarProdutos>(this.GetType().Name, false);
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)

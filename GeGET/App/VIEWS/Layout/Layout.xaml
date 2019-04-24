@@ -134,13 +134,19 @@
                                     <TextBlock Text="Suprimentos" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
                                 </StackPanel>
                             </ListViewItem>
-                            <ListViewItem Height="60" PreviewMouseDown="ListViewItem_PreviewMouseDown" Foreground="White">
+                            <ListViewItem Visibility="Collapsed" Height="60" PreviewMouseDown="ListViewItem_PreviewMouseDown" Foreground="White">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Worker" Height="25" Width="25" Margin="13,8,0,0"/>
                                 <TextBlock Text="Obras" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="14.0" TextDecorations="{x:Null}"/>
                             </StackPanel>
                         </ListViewItem>
-                    </ListView>
+                            <ListViewItem x:Name="btnChangelog" Height="60" PreviewMouseDown="BtnChangelog_PreviewMouseDown" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Stackexchange" Height="25" Width="25" Margin="13,8,0,0"/>
+                                    <TextBlock Text="Changelog" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="14.0" TextDecorations="{x:Null}"/>
+                                </StackPanel>
+                            </ListViewItem>
+                        </ListView>
                 </StackPanel>
                 </materialDesign:ColorZone>
                 <StackPanel x:Name="pnUsuario" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,10">

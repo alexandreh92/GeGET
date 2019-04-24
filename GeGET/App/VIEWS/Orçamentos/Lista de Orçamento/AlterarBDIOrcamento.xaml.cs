@@ -20,7 +20,7 @@ namespace GeGET
 {
     public partial class AlterarBDIOrcamento : Window, IDisposable
     {
-        MaterialDTO dto = new MaterialDTO();
+        ListaOrcamentosDTO dto = new ListaOrcamentosDTO();
         ListaOrcamentosBLL bll = new ListaOrcamentosBLL();
         ObservableCollection<MaterialDTO> listaAlterar = new ObservableCollection<MaterialDTO>();
         WaitBox wb;
@@ -53,7 +53,7 @@ namespace GeGET
             {
                 Dispatcher.Invoke(new Action(() =>
                 {
-                    dto.Bdi = txtBDI.Text.Replace(",",".");
+                    dto.Bdi = Convert.ToDouble(txtBDI.Text);
                     wb = new WaitBox();
                     wb.Show();
                 }));

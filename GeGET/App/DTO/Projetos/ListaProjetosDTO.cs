@@ -55,6 +55,7 @@ namespace DTO
         private string atividade_Id;
         private ObservableCollection<DisciplinasProjetoDTO> disciplinas;
         private ObservableCollection<AtividadesProjetoDTO> atividades;
+        private ObservableCollection<DescricaoAtividadesProjetoDTO> descricao_Atividades;
 
         public int Id { get => id; set => id = value; }
         public string Descricao { get => descricao; set => descricao = value; }
@@ -66,6 +67,7 @@ namespace DTO
         public string Atividade_Id { get => atividade_Id; set => atividade_Id = value; }
         internal ObservableCollection<DisciplinasProjetoDTO> Disciplinas { get => disciplinas; set => disciplinas = value; }
         internal ObservableCollection<AtividadesProjetoDTO> Atividades { get => atividades; set => atividades = value; }
+        internal ObservableCollection<DescricaoAtividadesProjetoDTO> Descricao_Atividades { get => descricao_Atividades; set => descricao_Atividades = value; }
     }
 
     class DisciplinasProjetoDTO
@@ -82,13 +84,27 @@ namespace DTO
         private int id;
         private string descricao;
         private string descricao_Atividade;
-        private string disciplina;
+        private string disciplina_Id;
+        private string atividade_Id;
 
         public int Id { get => id; set => id = value; }
         public string Descricao { get => descricao; set => descricao = value; }
         public string Descricao_Atividade { get => descricao_Atividade; set => descricao_Atividade = value; }
-        public string Disciplina { get => disciplina; set => disciplina = value; }
+        public string Disciplina_Id { get => disciplina_Id; set => disciplina_Id = value; }
+        public string Atividade_Id { get => atividade_Id; set => atividade_Id = value; }
     }
+
+    class DescricaoAtividadesProjetoDTO
+    {
+        private int id;
+        private string descricao;
+        private string desc_Atividade_Id;
+
+        public int Id { get => id; set => id = value; }
+        public string Descricao { get => descricao; set => descricao = value; }
+        public string Desc_Atividade_Id { get => desc_Atividade_Id; set => desc_Atividade_Id = value; }
+    }
+
 
     class ValoresProjetoDTO
     {

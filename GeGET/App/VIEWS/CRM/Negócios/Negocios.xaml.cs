@@ -126,6 +126,14 @@ namespace GeGET
         #endregion
 
         #endregion
+
+        private void TxtProcurar_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                Commit();
+            }
+        }
     }
     [ValueConversion(typeof(string), typeof(Visibility))]
     public class StringToVisibilityConverter : IValueConverter

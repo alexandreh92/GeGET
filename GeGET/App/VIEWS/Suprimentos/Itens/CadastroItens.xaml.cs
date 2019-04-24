@@ -81,7 +81,7 @@ namespace GeGET
         {
             var position = Mouse.GetPosition(this);
             BlackScreen bs = new BlackScreen();
-            using (var form = new ProcurarGrupoFornecedor(position))
+            using (var form = new ProcurarGrupoItens(position))
             {
                 form.Owner = Window.GetWindow(this);
                 form.ShowDialog();

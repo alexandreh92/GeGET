@@ -22,7 +22,7 @@ namespace GeGET.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace GeGET.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GeGET.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace GeGET.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,12 +61,30 @@ namespace GeGET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to # CHANGELOG TODAS AS ALTERAÇÕES SERÃO DOCUMENTADAS NESTE ARQUIVO.
+        ///## [2.0.0.5] - ??-??-?? - ?
+        ///### ADICIONADO
+        ///- ADICIONADO TELA DE LISTA DE PROJETOS;
+        ///- ADICIONADO MENU STRIP NA TELA DE LISTA DE MATERIAIS PARA EDITAR;
+        ///### EDITADO
+        ///- MELHORADO O FILTRO DE PESQUISA DE TODAS AS TELAS PARA MÉTODO &apos;AND&apos;;
+        ///- EDITADO QUANDO ITEM DA COMBOBOX É SELECIONADO PARA FICAR EM SEU LUGAR NA LISTA;
+        ///--------------------------------------------------------------------------------------------------------
+        ///## [2.0.0.4] - 22- [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string changelog {
+            get {
+                return ResourceManager.GetString("changelog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;App&gt;
-        ///  &lt;!--&lt;Mirror&gt;\\192.168.15.10\Servidor\version.xml&lt;/Mirror&gt;--&gt;
-        ///   &lt;Mirror&gt;C:\version.xml&lt;/Mirror&gt;
+        ///  &lt;Mirror&gt;\\SERVIDORAD\Storage\version.xml&lt;/Mirror&gt;
+        ///  &lt;!--&lt;Mirror&gt;\\130.1.1.101\teste\version.xml&lt;/Mirror&gt;--&gt;
         ///&lt;/App&gt;.
         /// </summary>
-        internal static string updateurl {
+        public static string updateurl {
             get {
                 return ResourceManager.GetString("updateurl", resourceCulture);
             }

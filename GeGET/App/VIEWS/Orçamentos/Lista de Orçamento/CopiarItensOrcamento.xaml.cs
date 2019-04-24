@@ -28,10 +28,10 @@ namespace GeGET
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         Thread t1;
 
-        public CopiarItensOrcamento(ObservableCollection<CopiarItensOrcamentoDTO> dTOs, ListaOrcamentosDTO dTO)
+        public CopiarItensOrcamento(ObservableCollection<CopiarItensOrcamentoDTO> dTOs, InformacoesListaOrcamentosDTO dTO)
         {
             InitializeComponent();
-            dto.Negocio_Id = dTO.Id;
+            dto.Negocio_Id = dTO.Id.ToString();
             foreach (CopiarItensOrcamentoDTO item in dTOs)
             {
                 listaCopiar.Add(new CopiarItensOrcamentoDTO { Id = item.Id });

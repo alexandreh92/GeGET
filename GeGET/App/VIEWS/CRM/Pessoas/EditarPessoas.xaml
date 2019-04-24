@@ -62,7 +62,7 @@
             </TextBox>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Margin="0,25,0,24" Grid.ColumnSpan="3" Height="50">
-            <TextBox MaxLength="50" x:Name="txtEmail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text=" " Grid.Column="1" Margin="5,0,10,0" Foreground="DimGray">
+            <TextBox MaxLength="50" x:Name="txtEmail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text=" " Grid.Column="1" Margin="5,0,10,1" Foreground="DimGray">
                 <materialDesign:HintAssist.Hint>
                     <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                         <TextBlock>E-Mail</TextBlock>
@@ -72,7 +72,12 @@
         </Grid>
         <Grid Grid.Column="4" Grid.Row="2" VerticalAlignment="Center" Margin="0,49,0,50" Height="0" Grid.ColumnSpan="2"/>
         <Grid Grid.Column="4" Grid.Row="2" VerticalAlignment="Center" Margin="0,6,0,0" Height="44" Grid.ColumnSpan="2">
-            <ComboBox materialDesign:ComboBoxAssist.ShowSelectedItem="True" VerticalAlignment="Center" x:Name="cmbFuncao" materialDesign:HintAssist.Hint="Função" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,0,10,0" Background="White" Foreground="DimGray" ScrollViewer.CanContentScroll="True">
+            <ComboBox materialDesign:ComboBoxAssist.ShowSelectedItem="True" VerticalAlignment="Center" x:Name="cmbFuncao" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,0,10,0" Background="White" Foreground="DimGray" ScrollViewer.CanContentScroll="True">
+                <materialDesign:HintAssist.Hint>
+                    <StackPanel Orientation="Horizontal" Margin="0 -4 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                        <TextBlock>Função</TextBlock>
+                    </StackPanel>
+                </materialDesign:HintAssist.Hint>
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel />

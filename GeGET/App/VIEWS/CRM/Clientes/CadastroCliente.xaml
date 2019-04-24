@@ -75,7 +75,18 @@
                                                             </materialDesign:HintAssist.Hint>
                                                         </TextBox>
                                                         <Grid Grid.Column="2" Grid.Row="2">
-                                                            <ComboBox x:Name="cmbCategoria" materialDesign:HintAssist.Hint="Categoria" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,0" Background="White" Foreground="DimGray" Width="Auto" MinWidth="180"></ComboBox>
+                                                            <ComboBox x:Name="cmbCategoria" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,31,20,0" Background="White" Foreground="DimGray" Width="Auto" MinWidth="180">
+                                                                <materialDesign:HintAssist.Hint>
+                                                                    <StackPanel Orientation="Horizontal" Margin="0 -5 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                                                                        <TextBlock>Categoria</TextBlock>
+                                                                    </StackPanel>
+                                                                </materialDesign:HintAssist.Hint>
+                                                                <ComboBox.ItemsPanel>
+                                                                    <ItemsPanelTemplate>
+                                                                        <VirtualizingStackPanel />
+                                                                    </ItemsPanelTemplate>
+                                                                </ComboBox.ItemsPanel>
+                                                            </ComboBox>
                                                         </Grid>
                                                     </control:AlignableWrapPanel>
                                                 </Grid>
