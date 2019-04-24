@@ -139,5 +139,14 @@ namespace GeGET
         {
 
         }
+
+        private void TxtProcurar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                Commit();
+            }
+        }
+
     }
 }

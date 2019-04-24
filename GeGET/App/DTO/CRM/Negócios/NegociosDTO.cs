@@ -36,6 +36,7 @@
         private string versao_Descricao;
         private int progressBarValue;
         private int versao_Locked;
+        private string descricao_Estabelecimento;
 
         public string Id { get => id; set => id = value; }
         public string Numero { get => numero; set => numero = value; }
@@ -71,5 +72,6 @@
         public int ProgressBarValue { get => progressBarValue; set => progressBarValue = value; }
         public int Versao_Locked { get => versao_Locked; set => versao_Locked = value; }
         public string Nome_Fantasia { get => nome_Fantasia; set => nome_Fantasia = value; }
+        public string Descricao_Estabelecimento { get => descricao_Estabelecimento; set => descricao_Estabelecimento = value; }
     }
 }

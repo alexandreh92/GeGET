@@ -57,8 +57,8 @@
                                     </Grid.ColumnDefinitions>
                                     <CheckBox x:Name="cbx" VerticalAlignment="Center"/>
                                     <StackPanel Margin="8 8 8 8" Grid.Column="1">
-                                        <TextBlock TextTrimming="CharacterEllipsis" Foreground="#565656" FontWeight="Bold" FontFamily="Segoe UI" ToolTip="{Binding Descricao_Atividade}" Text="{Binding Descricao_Atividade}" />
-                                        <TextBlock TextTrimming="CharacterEllipsis" Foreground="DarkGray" FontFamily="Segoe UI" ToolTip="{Binding Descricao}" Text="{Binding Descricao}" />
+                                        <TextBlock TextTrimming="CharacterEllipsis" Foreground="#565656" FontWeight="Bold" FontFamily="Segoe UI" ToolTip="{Binding Descricao}" Text="{Binding Descricao}" />
+                                        <TextBlock TextTrimming="CharacterEllipsis" Foreground="DarkGray" FontFamily="Segoe UI" ToolTip="{Binding Descricao_Atividade}" Text="{Binding Descricao_Atividade}" />
                                     </StackPanel>
                                 </Grid>
                             </Border>

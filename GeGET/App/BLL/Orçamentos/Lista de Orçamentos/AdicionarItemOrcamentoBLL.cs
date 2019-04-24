@@ -32,7 +32,7 @@ namespace BLL
             {
                 foreach (DataRow item in dt.Rows)
                 {
-                    itens.Add(new AdicionarItemOrcamentoDTO { Id = Convert.ToInt32(item["id"]), Descricao = item["descricao"].ToString(), Descricao_Produto = item["desc_completa"].ToString(), Un = item["un"].ToString(), Partnumber = item["partnumber"].ToString(), Custo_Unitario = Convert.ToDouble(item["custounitario"]), Fabricante = item["rsocial"].ToString(), Codigo_Produto = Convert.ToInt32(item["id"]).ToString("000000") });
+                    itens.Add(new AdicionarItemOrcamentoDTO { Id = Convert.ToInt32(item["id"]), Descricao = item["descricao"].ToString(), Descricao_Produto = item["desc_completa"].ToString().Trim('\n', '\r'), Un = item["un"].ToString(), Partnumber = item["partnumber"].ToString(), Custo_Unitario = Convert.ToDouble(item["custounitario"]), Fabricante = item["rsocial"].ToString(), Codigo_Produto = Convert.ToInt32(item["id"]).ToString("000000") });
                 }
                 bd.CloseConection();
             }
@@ -42,11 +42,11 @@ namespace BLL
 
         #region Add
 
-        public void Add(AdicionarItemOrcamentoDTO DTO)
+        public void Add(InformacoesListaOrcamentosDTO DTO, AdicionarItemOrcamentoDTO listaDTO)
         {
             try
             {
-                var query = "INSERT INTO lista_orcamento (NEGOCIO_id, PRODUTO_id, ATIVIDADES_id, preco_orc, descricao_orc) VALUES ('" + DTO.Negocio_Id + "','" + DTO.Id + "','" + DTO.Atividade_Id + "', (SELECT CASE WHEN icms = '0' AND ipi = '0' THEN custounitario+(custounitario*(1+ipi)-(custounitario*(1+ipi)*icms))/(1)*((0))-(custounitario*(1+ipi)*icms)+custounitario*ipi ELSE custounitario+(custounitario*(1+ipi)-(custounitario*(1+ipi)*icms))/(1-0.18)*((0.18))-(custounitario*(1+ipi)*icms)+custounitario*ipi END FROM produto WHERE id='" + DTO.Id + "'), '" + DTO.Descricao_Produto + "' )";
+                var query = "INSERT INTO lista_orcamento (NEGOCIO_id, PRODUTO_id, ATIVIDADES_id, preco_orc, descricao_orc) VALUES ('" + DTO.Negocio_Id + "','" + listaDTO.Id + "','" + DTO.Atividade_Id + "', (SELECT CASE WHEN icms = '0' AND ipi = '0' THEN custounitario+(custounitario*(1+ipi)-(custounitario*(1+ipi)*icms))/(1)*((0))-(custounitario*(1+ipi)*icms)+custounitario*ipi ELSE custounitario+(custounitario*(1+ipi)-(custounitario*(1+ipi)*icms))/(1-0.18)*((0.18))-(custounitario*(1+ipi)*icms)+custounitario*ipi END FROM produto WHERE id='" + listaDTO.Id + "'), '" + listaDTO.Descricao_Produto + "' )";
                 bd.Conectar();
                 bd.ExecutarComandoSQL(query);
             }

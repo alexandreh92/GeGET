@@ -21,7 +21,7 @@ namespace BLL
         #region Methods
 
         #region Load Orçamentos
-        public ObservableCollection<ListaOrcamentosDTO> LoadOrcamento(ListaOrcamentosDTO DTO)
+        public ObservableCollection<ListaOrcamentosDTO> LoadOrcamento(InformacoesListaOrcamentosDTO DTO)
         {
             var orcamento = new ObservableCollection<ListaOrcamentosDTO>();
             var dt = new DataTable();
@@ -88,7 +88,7 @@ namespace BLL
 
         #region Atualizar Preco
 
-        public void AtualizarPreco(ListaOrcamentosDTO DTO)
+        public void AtualizarPreco(InformacoesListaOrcamentosDTO DTO)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace BLL
 
         #region Excluir
 
-        public void Excluir(AdicionarItemOrcamentoDTO dTO)
+        public void Excluir(ListaOrcamentosDTO dTO)
         {
             try
             {
@@ -125,7 +125,7 @@ namespace BLL
 
         #region Atualizar Quantidade
 
-        public void AtualizarQuantidade(MaterialDTO dto)
+        public void AtualizarQuantidade(ListaOrcamentosDTO dto)
         {
             try
             {
@@ -143,7 +143,7 @@ namespace BLL
 
         #region Atualizar BDI
 
-        public void AtualizarBDI(MaterialDTO dto)
+        public void AtualizarBDI(ListaOrcamentosDTO dto)
         {
             try
             {
@@ -161,7 +161,7 @@ namespace BLL
 
         #region Atualizar Faturamento Direto
 
-        public void AtualizarFD(MaterialDTO dto)
+        public void AtualizarFD(ListaOrcamentosDTO dto)
         {
             try
             {
@@ -179,7 +179,7 @@ namespace BLL
 
         #region LoadValores
 
-        public ObservableCollection<ValoresOrcamento> LoadValores(ListaOrcamentosDTO dto)
+        public ObservableCollection<ValoresOrcamento> LoadValores(InformacoesListaOrcamentosDTO dto)
         {
             ObservableCollection<ValoresOrcamento> valores = new ObservableCollection<ValoresOrcamento>();
             DataTable dt = new DataTable();
@@ -240,4 +240,163 @@ namespace BLL
 
         #endregion
     }
+
+    class InformacoesListaOrcamentosBLL
+    {
+        AcessoBancoDados bd = new AcessoBancoDados();
+
+        #region Load Informações
+        public ObservableCollection<InformacoesListaOrcamentosDTO> LoadInformacoes(InformacoesListaOrcamentosDTO DTO)
+        {
+            var informacoes = new ObservableCollection<InformacoesListaOrcamentosDTO>();
+            var dt = new DataTable();
+            try
+            {
+                var query = "SELECT DISTINCT n.id, n.descricao, c.rsocial, cid.cidade, cid.uf, n.versao_valida, n.STATUS_ORCAMENTO_id FROM negocio n JOIN estabelecimento e ON n.ESTABELECIMENTO_id = e.id JOIN cliente c ON e.CLIENTE_id = c.id JOIN cidades cid ON e.CIDADES_id = cid.id JOIN status_orcamento so ON n.STATUS_ORCAMENTO_id = so.id JOIN atividade a ON a.NEGOCIO_id = n.id JOIN versao_atividade va ON a.VERSAO_ATIVIDADE_id = va.id  WHERE n.id = '" + DTO.Id + "' AND va.VERSAO_id = n.versao_valida";
+                bd.Conectar();
+                dt = bd.RetDataTable(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+            finally
+            {
+                informacoes.Add(new InformacoesListaOrcamentosDTO
+                {
+                    Id = Convert.ToInt32(dt.Rows[0]["id"]),
+                    Descricao = dt.Rows[0]["descricao"].ToString(),
+                    Razao_Social = dt.Rows[0]["rsocial"].ToString(),
+                    Cidade = dt.Rows[0]["cidade"].ToString(),
+                    Uf = dt.Rows[0]["uf"].ToString(),
+                    Versao = dt.Rows[0]["versao_valida"].ToString(),
+                    Disciplinas = LoadDisciplinas(DTO),
+                    Atividades = LoadAtividades(DTO),
+                    Descricao_Atividades = LoadAtividadesDescricao(DTO),
+                    Negocio_Id = Convert.ToInt32(dt.Rows[0]["id"])
+                });
+            }
+            return informacoes;
+        }
+        #endregion
+
+        #region Load Disciplinas
+        private ObservableCollection<DisciplinasOrcamentoDTO> LoadDisciplinas(InformacoesListaOrcamentosDTO DTO)
+        {
+            var disciplinas = new ObservableCollection<DisciplinasOrcamentoDTO>();
+            var dt = new DataTable();
+            try
+            {
+                var query = "SELECT DISTINCT d.descricao, d.id FROM atividade a JOIN negocio n ON a.NEGOCIO_id = n.id JOIN desc_atividades da ON a.DESC_ATIVIDADES_id = da.id JOIN disciplina d ON da.DISCIPLINA_id = d.id JOIN versao_atividade va ON a.VERSAO_ATIVIDADE_id = va.id WHERE a.NEGOCIO_id = '" + DTO.Id + "' AND va.VERSAO_id = n.versao_valida and a.habilitado='1' ORDER BY d.descricao";
+                bd.Conectar();
+                dt = bd.RetDataTable(query);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.ToString());
+            }
+            finally
+            {
+                if (dt.Rows.Count>0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        disciplinas.Add(new DisciplinasOrcamentoDTO
+                        {
+                            Id = Convert.ToInt32(dr["id"]),
+                            Descricao = dr["descricao"].ToString()
+                        });
+                    }
+                }
+                else
+                {
+                    disciplinas = null;
+                }
+            }
+            return disciplinas;
+        }
+        #endregion
+
+        #region LoadAtividades
+        private ObservableCollection<AtividadesOrcamentoDTO> LoadAtividades(InformacoesListaOrcamentosDTO DTO)
+        {
+            var atividades = new ObservableCollection<AtividadesOrcamentoDTO>();
+            var dt = new DataTable();
+            try
+            {
+                var query = "select distinct da.id, da.descricao, da.disciplina_id from atividade a JOIN desc_atividades da ON da.id = a.desc_atividades_id join versao_atividade va ON va.id = a.versao_atividade_id join negocio n ON a.negocio_id = n.id and n.versao_valida = va.versao_id where a.negocio_id = '" + DTO.Id + "' and a.habilitado ='1'";
+                bd.Conectar();
+                dt = bd.RetDataTable(query);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.ToString());
+            }
+            finally
+            {
+                if (dt.Rows.Count>0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        atividades.Add(new AtividadesOrcamentoDTO
+                        {
+                            Id = Convert.ToInt32(dr["id"]),
+                            Descricao = dr["descricao"].ToString(),
+                            Disciplina_Id = dr["disciplina_id"].ToString()
+                        });
+                    }
+                }
+                else
+                {
+                    atividades = null;
+                }
+            }
+            return atividades;
+        }
+        #endregion
+
+        #region Load Descricao Atividades
+        private ObservableCollection<DescricaoAtividadesOrcamentoDTO> LoadAtividadesDescricao(InformacoesListaOrcamentosDTO DTO)
+        {
+            var atividades = new ObservableCollection<DescricaoAtividadesOrcamentoDTO>();
+            var dt = new DataTable();
+            try
+            {
+                var query = "SELECT da.id as descricao_atividade_id, a.descricao, a.id FROM atividade a JOIN negocio n ON a.NEGOCIO_id = n.id JOIN versao_atividade va ON a.VERSAO_ATIVIDADE_id = va.id JOIN desc_atividades da ON a.DESC_ATIVIDADES_id = da.id JOIN disciplina disc ON da.DISCIPLINA_id = disc.id WHERE a.NEGOCIO_id = '"+DTO.Id+"' AND a.habilitado='1' AND va.VERSAO_id = n.versao_valida";
+                bd.Conectar();
+                dt = bd.RetDataTable(query);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.ToString());
+            }
+            finally
+            {
+                if (dt.Rows.Count>0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        atividades.Add(new DescricaoAtividadesOrcamentoDTO
+                        {
+                            Id = Convert.ToInt32(dr["id"]),
+                            Descricao = dr["descricao"].ToString(),
+                            Desc_Atividade_Id = dr["descricao_atividade_id"].ToString()
+                        });
+                    }
+                }
+                else
+                {
+                    atividades = null;
+                }
+                
+            }
+            return atividades;
+        }
+        #endregion
+
+    }
+
 }

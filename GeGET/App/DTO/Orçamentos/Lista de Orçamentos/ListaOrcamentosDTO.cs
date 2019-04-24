@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 
 namespace DTO
@@ -25,8 +26,6 @@ namespace DTO
         private double custo_Total;
         private double preco_Total;
         private int fd;
-        private bool _IsSelected = false;
-        public bool IsSelected { get { return _IsSelected; } set { _IsSelected = value; OnChanged("IsSelected"); } }
 
         public string Id { get => id; set => id = value; }
         public string Produto_Id { get => produto_Id; set => produto_Id = value; }
@@ -42,7 +41,7 @@ namespace DTO
                 Custo_Total = quantidade * preco_Unitario;
                 if (Fd == 1)
                 {
-                    Preco_Total = quantidade * preco_Unitario * 1.15;
+                    Preco_Total = quantidade * preco_Unitario * 1.1;
                 }
                 else
                 {
@@ -52,7 +51,22 @@ namespace DTO
         }
         public double Desconto { get => desconto; set => desconto = value; }
         public double Preco_Unitario { get => preco_Unitario; set => preco_Unitario = value; }
-        public double Bdi { get => bdi; set => bdi = value; }
+        public double Bdi
+        {
+            get { return bdi; }
+            set
+            {
+                bdi = value;
+                if (Fd == 1)
+                {
+                    Preco_Total = quantidade * preco_Unitario * 1.1;
+                }
+                else
+                {
+                    Preco_Total = quantidade * preco_Unitario * (1 + bdi / 100);
+                }
+            }
+        }
         public double Custo_Total
         {
             get { return custo_Total; }
@@ -79,7 +93,7 @@ namespace DTO
                 fd = value;
                 if (Fd == 1)
                 {
-                    Preco_Total = quantidade * preco_Unitario * 1.15;
+                    Preco_Total = quantidade * preco_Unitario * 1.1;
                 }
                 else
                 {
@@ -114,4 +128,63 @@ namespace DTO
         #endregion
 
     }
+
+    public class InformacoesListaOrcamentosDTO
+    {
+        private int id;
+        private int negocio_Id;
+        private string descricao;
+        private string razao_Social;
+        private string cidade;
+        private string uf;
+        private string versao;
+        private string atividade_Id;
+        private ObservableCollection<DisciplinasOrcamentoDTO> disciplinas;
+        private ObservableCollection<AtividadesOrcamentoDTO> atividades;
+        private ObservableCollection<DescricaoAtividadesOrcamentoDTO> descricao_Atividades;
+
+        public int Id { get => id; set => id = value; }
+        public string Descricao { get => descricao; set => descricao = value; }
+        public string Razao_Social { get => razao_Social; set => razao_Social = value; }
+        public string Cidade { get => cidade; set => cidade = value; }
+        public string Uf { get => uf; set => uf = value; }
+        public string Versao { get => versao; set => versao = value; }
+        public int Negocio_Id { get => negocio_Id; set => negocio_Id = value; }
+        public string Atividade_Id { get => atividade_Id; set => atividade_Id = value; }
+        internal ObservableCollection<DisciplinasOrcamentoDTO> Disciplinas { get => disciplinas; set => disciplinas = value; }
+        internal ObservableCollection<AtividadesOrcamentoDTO> Atividades { get => atividades; set => atividades = value; }
+        internal ObservableCollection<DescricaoAtividadesOrcamentoDTO> Descricao_Atividades { get => descricao_Atividades; set => descricao_Atividades = value; }
+    }
+
+    class DisciplinasOrcamentoDTO
+    {
+        private int id;
+        private string descricao;
+
+        public int Id { get => id; set => id = value; }
+        public string Descricao { get => descricao; set => descricao = value; }
+    }
+
+    class AtividadesOrcamentoDTO
+    {
+        private int id;
+        private string descricao;
+        private string disciplina_Id;
+
+        public int Id { get => id; set => id = value; }
+        public string Descricao { get => descricao; set => descricao = value; }
+        public string Disciplina_Id { get => disciplina_Id; set => disciplina_Id = value; }
+    }
+
+    class DescricaoAtividadesOrcamentoDTO
+    {
+        private int id;
+        private string descricao;
+        private string desc_Atividade_Id;
+
+        public int Id { get => id; set => id = value; }
+        public string Descricao { get => descricao; set => descricao = value; }
+        public string Desc_Atividade_Id { get => desc_Atividade_Id; set => desc_Atividade_Id = value; }
+    }
+
 }

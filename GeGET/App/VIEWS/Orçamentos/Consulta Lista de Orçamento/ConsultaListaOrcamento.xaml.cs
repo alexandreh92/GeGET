@@ -23,22 +23,16 @@ namespace GeGET
     {
         #region Declarations
         Helpers helpers = new Helpers();
-        MaterialDTO materialDTO = new MaterialDTO();
-        ListaOrcamentosBLL bll = new ListaOrcamentosBLL();
+
         ListaOrcamentosDTO dto = new ListaOrcamentosDTO();
-        AdicionarItemOrcamentoDTO adicionarItemOrcamentoDTO = new AdicionarItemOrcamentoDTO();
-        OrcamentosBLL Orcamentosbll = new OrcamentosBLL();
-        OrcamentosDTO Orcamentosdto = new OrcamentosDTO();
-        DisciplinaBLL Disciplinasbll = new DisciplinaBLL();
-        DisciplinaDTO Disciplinasdto = new DisciplinaDTO();
-        AtividadesBLL atividadesBLL = new AtividadesBLL();
+        ListaOrcamentosBLL bll = new ListaOrcamentosBLL();
+        InformacoesListaOrcamentosDTO informacoesDTO = new InformacoesListaOrcamentosDTO();
+        InformacoesListaOrcamentosBLL informacoesBLL = new InformacoesListaOrcamentosBLL();
         public ObservableCollection<ListaOrcamentosDTO> listaOrcamentos;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         ManualResetEvent syncValues = new ManualResetEvent(false);
         Thread t1;
         WaitBox wb;
-        ObservableCollection<CopiarItensOrcamentoDTO> listaCopiar;
-        ObservableCollection<MaterialDTO> listaAterarBDI;
         #endregion
 
         #region Initialize
@@ -62,13 +56,13 @@ namespace GeGET
             }
             txtNumero.Text = " ";
             txtCliente.Text = "";
-            txtCategoria.Text = "";
             txtDescricao.Text = "";
             txtVersao.Text = "";
             txtCidade.Text = "";
             txtUF.Text = "";
             cmbAtividade.ItemsSource = null;
             cmbDisciplina.ItemsSource = null;
+            cmbDescricao.ItemsSource = null;
         }
 
         private void WaitBoxLoad()
@@ -84,14 +78,14 @@ namespace GeGET
 
         public void Load()
         {
-            listaOrcamentos = bll.LoadOrcamento(dto);
+            listaOrcamentos = bll.LoadOrcamento(informacoesDTO);
             grdItens.ItemsSource = listaOrcamentos;
             LoadSidePanel();
         }
 
         private void LoadSidePanel()
         {
-            pnlValores.ItemsSource = bll.LoadValores(dto);
+            pnlValores.ItemsSource = bll.LoadValores(informacoesDTO);
         }
 
         #endregion
@@ -109,58 +103,36 @@ namespace GeGET
                 form.ShowDialog();
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {
-                    dto.Id = form.Negocio_Id;
-                    var loadtext = Orcamentosbll.LoadTextBoxes(dto);
-                    if (loadtext.Count > 0)
-                    {
-                        foreach (OrcamentosDTO item in loadtext)
-                        {
-                            txtNumero.Text = "P" + Convert.ToInt32(dto.Id).ToString("0000");
-                            txtDescricao.Text = item.Descricao;
-                            txtCidade.Text = item.Cidade;
-                            txtUF.Text = item.UF;
-                            txtCliente.Text = item.Razao_Social;
-                            txtVersao.Text = Convert.ToInt32(item.Versao_Valida).ToString("00");
-                            cmbDisciplina.ItemsSource = Disciplinasbll.LoadDisciplinas(dto);
-                            cmbDisciplina.SelectedValuePath = "Id";
-                            cmbDisciplina.DisplayMemberPath = "Descricao";
-                            cmbDisciplina.SelectedIndex = 0;
-                        }
-                    }
-                    else
-                    {
-                        bs.Close();
-                        CustomOKMessageBox.Show("Não há atividades cadastradas para este negócio.", "Atenção!", Window.GetWindow(this));
-                        InitializeComponents();
-                    }
+                    informacoesDTO.Id = Convert.ToInt32(form.Negocio_Id);
+                    var informacoes = informacoesBLL.LoadInformacoes(informacoesDTO);
 
+                    if (informacoes.Count > 0)
+                    {
+                        informacoesDTO = informacoes.First();
+                        txtNumero.Text = "P" + Convert.ToInt32(informacoesDTO.Id).ToString("0000");
+                        txtDescricao.Text = informacoesDTO.Descricao;
+                        txtCidade.Text = informacoesDTO.Cidade;
+                        txtUF.Text = informacoesDTO.Uf;
+                        txtCliente.Text = informacoesDTO.Razao_Social;
+                        txtVersao.Text = Convert.ToInt32(informacoesDTO.Versao).ToString("00");
+                        cmbDisciplina.ItemsSource = informacoesDTO.Disciplinas;
+                        cmbDisciplina.SelectedValuePath = "Id";
+                        cmbDisciplina.DisplayMemberPath = "Descricao";
+                        cmbDisciplina.SelectedIndex = 0;
+                    }
                 }
             }
+            
         }
 
         private void Adicionar_Click(object sender, RoutedEventArgs e)
         {
-            using (var form = new ProcurarMateriais(dto))
-            {
-                form.Owner = Window.GetWindow(this);
-                form.ShowDialog();
-                if (form.DialogResult.Value && form.DialogResult.HasValue)
-                {
-
-                }
-                Load();
-            }
+           
         }
 
         private void AtualizarPrecos_Click(object sender, RoutedEventArgs e)
         {
-            var result = CustomOKCancelMessageBox.Show("Você deseja mesmo atualiazar os preços para a versão atual?", "Atenção!", Window.GetWindow(this));
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                bll.AtualizarPreco(dto);
-                Load();
-                CustomOKMessageBox.Show("Preços atualizados com sucesso.","Atualizado!", Window.GetWindow(this));
-            }
+            
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -172,108 +144,20 @@ namespace GeGET
         {
             helpers.Close();
         }
-
-        private void Excluir_Click(object sender, RoutedEventArgs e)
-        {
-            int[] handles = grdItens.GetSelectedRowHandles();
-
-            if (handles.Length > 0)
-            {
-                var result = CustomOKCancelMessageBox.Show("Deseja mesmo excluir todos os itens selecionados?", "Atenção!", Window.GetWindow(this));
-                if (result == System.Windows.Forms.DialogResult.OK)
-                {
-                    new Thread(() =>
-                    {
-                        Dispatcher.Invoke(new Action(() =>
-                        {
-                            wb = new WaitBox();
-                            wb.Show();
-                        }));
-                        syncEvent.Set();
-                        foreach (var rowHandle in handles)
-                        {
-                            Dispatcher.Invoke(DispatcherPriority.Background,
-                               new Action(() =>
-                               {
-                                   var selectedItem = grdItens.GetRow(rowHandle) as ListaOrcamentosDTO;
-                                   adicionarItemOrcamentoDTO.Id = Convert.ToInt32( selectedItem.Id );
-                                   bll.Excluir(adicionarItemOrcamentoDTO);
-                               }));
-                        }
-                        t1 = new Thread(WaitBoxLoad);
-                        t1.Start();
-                    }).Start();
-                }
-            }
-            else
-            {
-                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para excluir.", "Atenção!", Window.GetWindow(this));
-            }
-        }
-
-        private void CopiarItens_Click(object sender, RoutedEventArgs e)
-        {
-            listaCopiar = new ObservableCollection<CopiarItensOrcamentoDTO>();
-            int[] handles = grdItens.GetSelectedRowHandles();
-
-            if (handles.Length > 0)
-            {
-                listaCopiar = new ObservableCollection<CopiarItensOrcamentoDTO>();
-                foreach (var rowHandle in handles)
-                {
-                    var selectedItem = grdItens.GetRow(rowHandle) as ListaOrcamentosDTO;
-                    listaCopiar.Add(new CopiarItensOrcamentoDTO { Id = selectedItem.Produto_Id });
-                }
-                using (var form = new CopiarItensOrcamento(listaCopiar, dto))
-                {
-                    form.Owner = Window.GetWindow(this);
-                    form.ShowDialog();
-                }
-            }
-            else
-            {
-                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para copiar.", "Atenção!", Window.GetWindow(this));
-            }
-        }
-
-        private void AlterarBDI_Click(object sender, RoutedEventArgs e)
-        {
-            listaAterarBDI = new ObservableCollection<MaterialDTO>();
-            int[] handles = grdItens.GetSelectedRowHandles();
-            if (handles.Length>0)
-            {
-                foreach (var rowHandle in handles)
-                {
-                    var selectedItem = grdItens.GetRow(rowHandle) as ListaOrcamentosDTO;
-                    listaAterarBDI.Add(new MaterialDTO { Id = selectedItem.Id });
-                }
-                using (var form = new AlterarBDIOrcamento(listaAterarBDI))
-                {
-                    form.Owner = Window.GetWindow(this);
-                    form.ShowDialog();
-                    if (form.DialogResult.HasValue && form.DialogResult.Value)
-                    {
-                        Load();
-                    }
-                }
-                
-
-            }
-            else
-            {
-                CustomOKMessageBox.Show("Você deve selecionar ao menos um item para alterar o BDI.", "Atenção!", Window.GetWindow(this));
-            }
-        }
-
+        
         #endregion
 
         #region Comboboxes Selection Changed
         private void CmbDisciplina_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Disciplinasdto.Id = Convert.ToInt32(cmbDisciplina.SelectedValue);
-            cmbAtividade.ItemsSource = atividadesBLL.LoadAtividades(dto, Disciplinasdto);
-            cmbAtividade.SelectedValuePath = "Id";
-            cmbAtividade.DisplayMemberPath = "Descricao";
+            if (cmbDisciplina.SelectedValue != null)
+            {
+                var Find = cmbDisciplina.SelectedValue.ToString().ToLower();
+                var filtered = informacoesDTO.Atividades.Where(descricao => descricao.Disciplina_Id == Find);
+                cmbAtividade.ItemsSource = filtered;
+                cmbAtividade.SelectedValuePath = "Id";
+                cmbAtividade.DisplayMemberPath = "Descricao";
+            }
             cmbAtividade.SelectedIndex = 0;
         }
 
@@ -283,12 +167,13 @@ namespace GeGET
         {
             if (cmbAtividade.SelectedValue != null)
             {
-                dto.Atividade_Id = cmbAtividade.SelectedValue.ToString();
+                var Find = cmbAtividade.SelectedValue.ToString().ToLower();
+                var filtered = informacoesDTO.Descricao_Atividades.Where(descricao => descricao.Desc_Atividade_Id == Find);
+                cmbDescricao.ItemsSource = filtered;
+                cmbDescricao.SelectedValuePath = "Id";
+                cmbDescricao.DisplayMemberPath = "Descricao";
             }
-            Load();
-            sideExpander.Visibility = Visibility.Visible;
-            CardPanel.Visibility = Visibility.Visible;
-            
+            cmbDescricao.SelectedIndex = 0;
         }
         #endregion
 
@@ -302,21 +187,21 @@ namespace GeGET
             {
                 if (e.Column.Header.ToString() == "Quantidade")
                 {
-                    materialDTO.Id = material.Id;
-                    materialDTO.Quantidade = material.Quantidade;
-                    bll.AtualizarQuantidade(materialDTO);
+                    dto.Id = material.Id;
+                    dto.Quantidade = material.Quantidade;
+                    bll.AtualizarQuantidade(dto);
                 }
                 else if (e.Column.Header.ToString() == "BDI")
                 {
-                    materialDTO.Id = material.Id;
-                    materialDTO.Bdi = material.Bdi.ToString();
-                    bll.AtualizarBDI(materialDTO);
+                    dto.Id = material.Id;
+                    dto.Bdi = material.Bdi;
+                    bll.AtualizarBDI(dto);
                 }
                 else if (e.Column.Header.ToString() == "FD")
                 {
-                    materialDTO.Id = material.Id;
-                    materialDTO.Fd = material.Fd;
-                    bll.AtualizarFD(materialDTO);
+                    dto.Id = material.Id;
+                    dto.Fd = material.Fd;
+                    bll.AtualizarFD(dto);
                 }
             }));
             LoadSidePanel();
@@ -326,33 +211,15 @@ namespace GeGET
 
         #endregion
 
-        private void TableView_CellValueChanging(object sender, DevExpress.Xpf.Grid.CellValueChangedEventArgs e)
+        private void CmbDescricao_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var material = e.Row as ListaOrcamentosDTO;
-            
-            LoadSidePanel();
-        }
-
-        private void ExportExcel_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog fileDialog = new SaveFileDialog();
-            fileDialog.FileName = "teste";
-            fileDialog.Filter = "Arquivo Microsoft Excel (*.xlsx)|*.xlsx";
-            if (fileDialog.ShowDialog() == true)
+            if (cmbDescricao.SelectedValue != null)
             {
-                grdView.ExportToXlsx(fileDialog.FileName, new XlsxExportOptionsEx() { ExportType = DevExpress.Export.ExportType.Default });
-
+                informacoesDTO.Atividade_Id = cmbDescricao.SelectedValue.ToString();
             }
-
-            //string filepath = AppDomain.CurrentDomain.BaseDirectory;
-            //grdView.ExportToXls(@"grid_export.xls", new XlsExportOptionsEx() { ExportType = DevExpress.Export.ExportType.DataAware });
-            //grdView.ExportToHtml(@"grid_export.html", new HtmlExportOptions() { ExportMode = HtmlExportMode.SingleFile });
-
-        }
-
-        private void ExportExcel_Click_1(object sender, RoutedEventArgs e)
-        {
-
+            Load();
+            sideExpander.Visibility = Visibility.Visible;
+            CardPanel.Visibility = Visibility.Visible;
         }
     }
 }

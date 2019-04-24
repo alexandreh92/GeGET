@@ -89,7 +89,12 @@
                                                                 </StackPanel>
                                                             </materialDesign:HintAssist.Hint>
                                                         </TextBox>
-                                                        <ComboBox x:Name="cmbCategoria" materialDesign:ComboBoxAssist.ShowSelectedItem="True" materialDesign:HintAssist.Hint="Categoria" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,50" Background="White" Foreground="DimGray" Width="Auto" MinWidth="180">
+                                                        <ComboBox x:Name="cmbCategoria" materialDesign:ComboBoxAssist.ShowSelectedItem="True" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,30,20,50" Background="White" Foreground="DimGray" Width="Auto" MinWidth="180">
+                                                            <materialDesign:HintAssist.Hint>
+                                                            <StackPanel Orientation="Horizontal" Margin="0 -4 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                                                                <TextBlock>Categoria</TextBlock>
+                                                            </StackPanel>
+                                                            </materialDesign:HintAssist.Hint>
                                                             <ComboBox.ItemsPanel>
                                                                 <ItemsPanelTemplate>
                                                                     <VirtualizingStackPanel />

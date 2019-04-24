@@ -66,7 +66,7 @@ namespace GeGET
 
                 foreach (var atividade in listaChecked)
                 {
-                    atividadesProjetoDTO.Id = atividade.Id;
+                    atividadesProjetoDTO.Atividade_Id = atividade.Atividade_Id;
                     foreach (var item in listaCopiar)
                     {
                         dto.Produto_Id = item.Produto_Id;
@@ -121,7 +121,7 @@ namespace GeGET
 
                     listaChecked.Add(new AtividadesProjetoDTO
                     {
-                        Id = atividade.Id
+                        Id = atividade.Id, Atividade_Id = atividade.Atividade_Id
                     });
                 }
             }
@@ -150,7 +150,7 @@ namespace GeGET
             if (cmbDisciplina.SelectedValue != null)
             {
                 var Find = cmbDisciplina.SelectedValue.ToString().ToLower();
-                var filtered = informacoesDTO.Atividades.Where(descricao => descricao.Disciplina == Find);
+                var filtered = informacoesDTO.Atividades.Where(descricao => descricao.Disciplina_Id == Find);
                 grdCheck.ItemsSource = filtered;
             }
         }

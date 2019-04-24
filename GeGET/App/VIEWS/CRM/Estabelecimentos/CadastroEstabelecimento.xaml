@@ -95,14 +95,24 @@
                                                                 </StackPanel>
                                                             </materialDesign:HintAssist.Hint>
                                                         </TextBox>
-                                                        <ComboBox x:Name="cmbUF" materialDesign:HintAssist.Hint="UF" materialDesign:ComboBoxAssist.ShowSelectedItem="True" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,50" Background="White" Foreground="DimGray" Width="Auto" MinWidth="60" SelectionChanged="CmbUF_SelectionChanged">
+                                                        <ComboBox x:Name="cmbUF" materialDesign:ComboBoxAssist.ShowSelectedItem="True" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,30,20,50" Background="White" Foreground="DimGray" Width="Auto" MinWidth="60" SelectionChanged="CmbUF_SelectionChanged">
+                                                            <materialDesign:HintAssist.Hint>
+                                                                <StackPanel Orientation="Horizontal" Margin="0 -4 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                                                                    <TextBlock>UF</TextBlock>
+                                                                </StackPanel>
+                                                            </materialDesign:HintAssist.Hint>
                                                             <ComboBox.ItemsPanel>
                                                                 <ItemsPanelTemplate>
                                                                     <VirtualizingStackPanel />
                                                                 </ItemsPanelTemplate>
                                                             </ComboBox.ItemsPanel>
                                                         </ComboBox>
-                                                        <ComboBox x:Name="cmbCidade" materialDesign:HintAssist.Hint="Cidade" materialDesign:ComboBoxAssist.ShowSelectedItem="True" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,50" Background="White" Foreground="DimGray" Width="Auto" MinWidth="180">
+                                                        <ComboBox x:Name="cmbCidade" materialDesign:ComboBoxAssist.ShowSelectedItem="True" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,30,20,50" Background="White" Foreground="DimGray" Width="Auto" MinWidth="180">
+                                                            <materialDesign:HintAssist.Hint>
+                                                                <StackPanel Orientation="Horizontal" Margin="0 -4 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                                                                    <TextBlock>Cidade</TextBlock>
+                                                                </StackPanel>
+                                                            </materialDesign:HintAssist.Hint>
                                                             <ComboBox.ItemsPanel>
                                                                 <ItemsPanelTemplate>
                                                                     <VirtualizingStackPanel />

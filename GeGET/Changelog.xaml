@@ -4,13 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GeGET"
+            xmlns:p="clr-namespace:GeGET.Properties"
              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:teste="clr-namespace:Teste"
-    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" x:Class="GeGET.UserControl1"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" x:Class="GeGET.Changelog"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="800">
     <Grid>
-        
+        <Label Margin="10" Content="{x:Static p:Resources.changelog}" />
     </Grid>
 </UserControl>

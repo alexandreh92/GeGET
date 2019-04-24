@@ -17,6 +17,7 @@ namespace GeGET
         #region Declarations
         AdicionarItemOrcamentoBLL bll = new AdicionarItemOrcamentoBLL();
         AdicionarItemOrcamentoDTO dto = new AdicionarItemOrcamentoDTO();
+        InformacoesListaOrcamentosDTO informacoesDTO = new InformacoesListaOrcamentosDTO();
         public ObservableCollection<AdicionarItemOrcamentoDTO> listaItens;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         WaitBox wb;
@@ -28,13 +29,14 @@ namespace GeGET
         #endregion
 
         #region Initialize
-        public ProcurarMateriais(ListaOrcamentosDTO DTO)
+        public ProcurarMateriais(InformacoesListaOrcamentosDTO DTO)
         {
             InitializeComponent();
+            informacoesDTO = DTO;
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
             Atividade_Id = DTO.Atividade_Id;
-            Negocio_Id = DTO.Id;
+            Negocio_Id = DTO.Id.ToString();
             t1 = new Thread(Load);
             t1.Start();
         }
@@ -113,7 +115,7 @@ namespace GeGET
                       dto.Atividade_Id = Atividade_Id;
                       dto.Negocio_Id = Negocio_Id;
                       dto.Descricao_Produto = selectedItem.Descricao_Produto;
-                      bll.Add(dto);
+                      bll.Add(informacoesDTO,dto);
                       grdItens.UnselectAll();
                   }));
                 }

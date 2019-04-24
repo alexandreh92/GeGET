@@ -90,5 +90,10 @@ namespace GeGET
         {
             helpers.Open<CadastroAtividades>(this.GetType().Name, false);
         }
+
+        private void BtnListaSimplificadaNegocios_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Open<ListaNegociosSimplificada>(this.GetType().Name, false);
+        }
     }
 }

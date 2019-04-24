@@ -52,13 +52,13 @@ namespace GeGET
             }
             txtNumero.Text = " ";
             txtCliente.Text = "";
-            txtCategoria.Text = "";
             txtDescricao.Text = "";
             txtVersao.Text = "";
             txtCidade.Text = "";
             txtUF.Text = "";
             cmbAtividade.ItemsSource = null;
             cmbDisciplina.ItemsSource = null;
+            cmbDescricao.ItemsSource = null;
         }
 
         private void WaitBoxLoad()
@@ -243,7 +243,7 @@ namespace GeGET
             if (cmbDisciplina.SelectedValue != null)
             {
                 var Find = cmbDisciplina.SelectedValue.ToString().ToLower();
-                var filtered = informacoesDTO.Atividades.Where(descricao => descricao.Disciplina == Find);
+                var filtered = informacoesDTO.Atividades.Where(descricao => descricao.Disciplina_Id == Find);
                 cmbAtividade.ItemsSource = filtered;
                 cmbAtividade.SelectedValuePath = "Id";
                 cmbAtividade.DisplayMemberPath = "Descricao";
@@ -257,12 +257,13 @@ namespace GeGET
         {
             if (cmbAtividade.SelectedValue != null)
             {
-                informacoesDTO.Atividade_Id = cmbAtividade.SelectedValue.ToString();
+                var Find = cmbAtividade.SelectedValue.ToString().ToLower();
+                var filtered = informacoesDTO.Descricao_Atividades.Where(descricao => descricao.Desc_Atividade_Id == Find);
+                cmbDescricao.ItemsSource = filtered;
+                cmbDescricao.SelectedValuePath = "Id";
+                cmbDescricao.DisplayMemberPath = "Descricao";
             }
-            Load();
-            sideExpander.Visibility = Visibility.Visible;
-            CardPanel.Visibility = Visibility.Visible;
-
+            cmbDescricao.SelectedIndex = 0;
         }
         #endregion
 
@@ -325,6 +326,7 @@ namespace GeGET
             if (e.Key == Key.Enter)
             {
                 ((TableView)grdItens.View).MoveNextRow();
+                ((TableView)grdItens.View).ShowEditor();
                 e.Handled = true;
             }
         }
@@ -333,8 +335,26 @@ namespace GeGET
         {
             Dispatcher.BeginInvoke((Action)(() =>
             {
-                this.grdView.ActiveEditor.SelectAll();
+                if (this.grdView.ActiveEditor != null)
+                {
+                    this.grdView.ActiveEditor.SelectAll();
+                }
+                else
+                {
+                    ((TableView)grdItens.View).ShowEditor();
+                }
             }), DispatcherPriority.Render);
+        }
+
+        private void CmbDescricao_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbDescricao.SelectedValue != null)
+            {
+                informacoesDTO.Atividade_Id = cmbDescricao.SelectedValue.ToString();
+            }
+            Load();
+            sideExpander.Visibility = Visibility.Visible;
+            CardPanel.Visibility = Visibility.Visible;
         }
     }
 }

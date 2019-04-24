@@ -169,7 +169,7 @@ namespace BLL
         {
             try
             {
-                var query = "INSERT INTO lista_vendas (VENDAS_id, PRODUTO_id, ATIVIDADE_id, preco, anotacoes, USUARIO_id) VALUES ('" + informacoesDTO.Id + "','" + DTO.Produto_Id + "','" + atividadesDTO.Id + "', (SELECT CASE WHEN icms = '0' AND ipi = '0' THEN custounitario+(custounitario*(1+ipi)-(custounitario*(1+ipi)*icms))/(1)*((0))-(custounitario*(1+ipi)*icms)+custounitario*ipi ELSE custounitario+(custounitario*(1+ipi)-(custounitario*(1+ipi)*icms))/(1-0.18)*((0.18))-(custounitario*(1+ipi)*icms)+custounitario*ipi END FROM produto WHERE id='" + DTO.Produto_Id + "'), (SELECT descricao from produto WHERE id='" + DTO.Produto_Id + "'), '" + loginDTO.Id + "' )";
+                var query = "INSERT INTO lista_vendas (VENDAS_id, PRODUTO_id, ATIVIDADE_id, preco, anotacoes, USUARIO_id) VALUES ('" + informacoesDTO.Id + "','" + DTO.Produto_Id + "','" + atividadesDTO.Atividade_Id + "', (SELECT CASE WHEN icms = '0' AND ipi = '0' THEN custounitario+(custounitario*(1+ipi)-(custounitario*(1+ipi)*icms))/(1)*((0))-(custounitario*(1+ipi)*icms)+custounitario*ipi ELSE custounitario+(custounitario*(1+ipi)-(custounitario*(1+ipi)*icms))/(1-0.18)*((0.18))-(custounitario*(1+ipi)*icms)+custounitario*ipi END FROM produto WHERE id='" + DTO.Produto_Id + "'), (SELECT descricao from produto WHERE id='" + DTO.Produto_Id + "'), '" + loginDTO.Id + "' )";
                 bd.Conectar();
                 bd.ExecutarComandoSQL(query);
             }
@@ -229,6 +229,7 @@ namespace BLL
                     Versao = dt.Rows[0]["versao_valida"].ToString(),
                     Disciplinas = LoadDisciplinas(DTO),
                     Atividades = LoadAtividades(DTO),
+                    Descricao_Atividades = LoadAtividadesDescricao(DTO),
                     Negocio_Id = Convert.ToInt32(dt.Rows[0]["negocio_id"])
                 });
             }
@@ -254,13 +255,22 @@ namespace BLL
             }
             finally
             {
-                foreach (DataRow dr in dt.Rows)
+                if (dt.Rows.Count > 0)
                 {
-                    disciplinas.Add(new DisciplinasProjetoDTO {
-                        Id = Convert.ToInt32(dr["id"]),
-                        Descricao = dr["descricao"].ToString()
-                    });
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        disciplinas.Add(new DisciplinasProjetoDTO
+                        {
+                            Id = Convert.ToInt32(dr["id"]),
+                            Descricao = dr["descricao"].ToString()
+                        });
+                    }
                 }
+                else
+                {
+                    disciplinas = null;
+                }
+                
             }
             return disciplinas;
         }
@@ -273,7 +283,7 @@ namespace BLL
             var dt = new DataTable();
             try
             {
-                var query = "SELECT da.descricao as descricao_atividade, a.descricao, a.id, da.disciplina_id FROM atividade a JOIN negocio n ON a.NEGOCIO_id = n.id JOIN versao_atividade va ON a.VERSAO_ATIVIDADE_id = va.id JOIN desc_atividades da ON a.DESC_ATIVIDADES_id = da.id JOIN disciplina disc ON da.DISCIPLINA_id = disc.id WHERE a.NEGOCIO_id = '" + DTO.Id + "' AND va.VERSAO_id = n.versao_valida";
+                var query = "select distinct da.id, da.descricao, da.disciplina_id, a.descricao as descricao_atividade, a.id as atividade_id from atividade a JOIN desc_atividades da ON da.id = a.desc_atividades_id join versao_atividade va ON va.id = a.versao_atividade_id join negocio n ON a.negocio_id = n.id and n.versao_valida = va.versao_id where a.negocio_id = '" + DTO.Id + "' and a.habilitado ='1'";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
@@ -284,15 +294,64 @@ namespace BLL
             }
             finally
             {
-                foreach (DataRow dr in dt.Rows)
+                if (dt.Rows.Count > 0)
                 {
-                    atividades.Add(new AtividadesProjetoDTO {
-                        Id = Convert.ToInt32(dr["id"]),
-                        Descricao = dr["descricao"].ToString(),
-                        Descricao_Atividade = dr["descricao_atividade"].ToString(),
-                        Disciplina = dr["disciplina_id"].ToString()
-                    });
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        atividades.Add(new AtividadesProjetoDTO
+                        {
+                            Id = Convert.ToInt32(dr["id"]),
+                            Descricao = dr["descricao"].ToString(),
+                            Disciplina_Id = dr["disciplina_id"].ToString(),
+                            Descricao_Atividade = dr["descricao_atividade"].ToString(),
+                            Atividade_Id = dr["atividade_id"].ToString()
+                        });
+                    }
                 }
+                else
+                {
+                    atividades = null;
+                }
+            }
+            return atividades;
+        }
+        #endregion
+
+        #region Load Descricao Atividades
+        private ObservableCollection<DescricaoAtividadesProjetoDTO> LoadAtividadesDescricao(InformacoesListaProjetosDTO DTO)
+        {
+            var atividades = new ObservableCollection<DescricaoAtividadesProjetoDTO>();
+            var dt = new DataTable();
+            try
+            {
+                var query = "SELECT da.id as descricao_atividade_id, a.descricao, a.id FROM atividade a JOIN negocio n ON a.NEGOCIO_id = n.id JOIN versao_atividade va ON a.VERSAO_ATIVIDADE_id = va.id JOIN desc_atividades da ON a.DESC_ATIVIDADES_id = da.id JOIN disciplina disc ON da.DISCIPLINA_id = disc.id WHERE a.NEGOCIO_id = '" + DTO.Id + "' AND a.habilitado='1' AND va.VERSAO_id = n.versao_valida";
+                bd.Conectar();
+                dt = bd.RetDataTable(query);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.ToString());
+            }
+            finally
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        atividades.Add(new DescricaoAtividadesProjetoDTO
+                        {
+                            Id = Convert.ToInt32(dr["id"]),
+                            Descricao = dr["descricao"].ToString(),
+                            Desc_Atividade_Id = dr["descricao_atividade_id"].ToString()
+                        });
+                    }
+                }
+                else
+                {
+                    atividades = null;
+                }
+
             }
             return atividades;
         }

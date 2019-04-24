@@ -21,19 +21,12 @@ namespace GeGET
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class Changelog : UserControl
     {
 
-        DashboardComercialBLL bll = new DashboardComercialBLL();
-
-        public UserControl1()
+        public Changelog()
         {
             InitializeComponent();
-        }
-
-        private void lstOrcamentos_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
         }
     }
 }

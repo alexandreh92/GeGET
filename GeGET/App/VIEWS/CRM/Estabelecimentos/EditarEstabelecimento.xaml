@@ -66,14 +66,24 @@
                     </StackPanel>
                 </materialDesign:HintAssist.Hint>
             </TextBox>
-            <ComboBox VerticalAlignment="Center" x:Name="cmbUF" materialDesign:ComboBoxAssist.ShowSelectedItem="True" materialDesign:HintAssist.Hint="UF" SelectionChanged="CmbUF_SelectionChanged" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,40,15,0" Background="White" Width="65" Foreground="DimGray">
+            <ComboBox VerticalAlignment="Center" x:Name="cmbUF" materialDesign:ComboBoxAssist.ShowSelectedItem="True" SelectionChanged="CmbUF_SelectionChanged" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,45,15,0" Background="White" Width="65" Foreground="DimGray">
+                <materialDesign:HintAssist.Hint>
+                    <StackPanel Orientation="Horizontal" Margin="0 -4 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                        <TextBlock>UF</TextBlock>
+                    </StackPanel>
+                </materialDesign:HintAssist.Hint>
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel />
                     </ItemsPanelTemplate>
                 </ComboBox.ItemsPanel>
             </ComboBox>
-            <ComboBox VerticalAlignment="Center" x:Name="cmbCidade" materialDesign:ComboBoxAssist.ShowSelectedItem="True" materialDesign:HintAssist.Hint="Cidade" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="15,40,15,0" Background="White" Foreground="DimGray" Width="180" ScrollViewer.CanContentScroll="True">
+            <ComboBox VerticalAlignment="Center" x:Name="cmbCidade" materialDesign:ComboBoxAssist.ShowSelectedItem="True" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="15,45,15,0" Background="White" Foreground="DimGray" Width="180" ScrollViewer.CanContentScroll="True">
+                <materialDesign:HintAssist.Hint>
+                    <StackPanel Orientation="Horizontal" Margin="0 -4 0 0" Width="Auto" HorizontalAlignment="Stretch">
+                        <TextBlock>Cidade</TextBlock>
+                    </StackPanel>
+                </materialDesign:HintAssist.Hint>
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel />
