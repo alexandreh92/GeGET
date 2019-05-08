@@ -31,8 +31,6 @@ namespace GeGET
         public ObservableCollection<ListaOrcamentosDTO> listaOrcamentos;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         ManualResetEvent syncValues = new ManualResetEvent(false);
-        Thread t1;
-        WaitBox wb;
         #endregion
 
         #region Initialize
@@ -63,17 +61,6 @@ namespace GeGET
             cmbAtividade.ItemsSource = null;
             cmbDisciplina.ItemsSource = null;
             cmbDescricao.ItemsSource = null;
-        }
-
-        private void WaitBoxLoad()
-        {
-            syncEvent.WaitOne();
-            Dispatcher.Invoke(new Action(() =>
-            {
-                grdItens.UnselectAll();
-                Load();
-                wb.Close();
-            }));
         }
 
         public void Load()

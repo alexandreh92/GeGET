@@ -277,7 +277,8 @@ namespace GeGET
 
             new Thread(() =>
             {
-            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
+                syncEvent.Set();
+                Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
             {
                 if (e.Column.Header.ToString() == "Quantidade")
                 {

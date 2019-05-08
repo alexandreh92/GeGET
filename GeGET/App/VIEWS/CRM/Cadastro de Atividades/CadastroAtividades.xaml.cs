@@ -106,6 +106,10 @@ namespace GeGET
                 }
                 CustomOKMessageBox.Show("Versão do orçamento trancada. Crie uma nova versão para adicionar atividades.","Atenção!",Window.GetWindow(this));
             }
+            if (btnEletrica.IsChecked == false)
+            {
+                btnEletrica.IsChecked = true;
+            }
         }
 
         private void BtnEletrica_Click(object sender, RoutedEventArgs e)
@@ -164,6 +168,26 @@ namespace GeGET
             {
                 atividadeCadastradaDTO.Habilitado = false;
                 bll.Update(atividadeCadastradaDTO);
+            }
+        }
+
+        private void TxtDescricaoAtividade_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (txtDescricaoAtividade.Text.TrimStart(' ') != "")
+                {
+                    atividadeCadastradaDTO.Atividade_id = cmbAtividade.SelectedValue.ToString();
+                    atividadeCadastradaDTO.Descricao = txtDescricaoAtividade.Text.Replace("'", "''").TrimStart(' ').ToUpper();
+                    bll.CadastrarAtividade(dto, atividadeCadastradaDTO);
+                    txtDescricaoAtividade.Text = "";
+                    LoadAtividadesCadastradas();
+                    CustomOKMessageBox.Show("Atividade cadastrada com sucesso.", "Sucesso!", Window.GetWindow(this));
+                }
+                else
+                {
+                    CustomOKMessageBox.Show("Descrição não pode ser nula.", "Atenção!", Window.GetWindow(this));
+                }
             }
         }
     }

@@ -172,7 +172,7 @@
                                             </dxg:GridColumn>
                                         </dxg:GridControl.Columns>
                                         <dxg:GridControl.View>
-                                            <dxg:TableView x:Name="grdView" AutoWidth="True" AllowHorizontalScrollingVirtualization="False" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="False" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" SearchDelay="10" SearchPanelCriteriaOperatorType="And" CellValueChanged="GrdView_CellValueChanged" PreviewKeyDown="GrdView_PreviewKeyDown" ShownEditor="GrdView_ShownEditor" EditorShowMode="MouseDown">
+                                            <dxg:TableView x:Name="grdView" AutoWidth="True" AllowHorizontalScrollingVirtualization="False" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="False" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" SearchDelay="10" SearchPanelCriteriaOperatorType="And" CellValueChanged="GrdView_CellValueChanged" PreviewKeyDown="GrdView_PreviewKeyDown" ShownEditor="GrdView_ShownEditor" EditorShowMode="MouseDown" ShowSearchPanelMode="Always">
                                                 <dxg:TableView.RowStyle>
                                                     <Style TargetType="dxg:RowControl">
                                                         <Style.Triggers>

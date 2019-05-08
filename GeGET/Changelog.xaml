@@ -12,6 +12,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="800">
     <Grid>
-        <Label Margin="10" Content="{x:Static p:Resources.changelog}" />
+        <ScrollViewer Margin="0,0,8,8" HorizontalScrollBarVisibility="Auto">
+        <Label Margin="10" Content="{x:Static p:Resources.changelog}"/>
+        </ScrollViewer>
     </Grid>
 </UserControl>

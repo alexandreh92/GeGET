@@ -72,7 +72,7 @@
                                                             <materialDesign:PackIcon Kind="Magnify" Opacity=".56" VerticalAlignment="Center" Height="15" Width="15" />
                                                         </Button>
                                                     </StackPanel>
-                                                    <TextBox x:Name="txtCliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtCliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="350" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Cliente</TextBlock>
@@ -86,7 +86,7 @@
                                                             </StackPanel>
                                                         </materialDesign:HintAssist.Hint>
                                                     </TextBox>
-                                                    <TextBox x:Name="txtStatus" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtStatus" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="146" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Status</TextBlock>
@@ -100,35 +100,35 @@
                                                             </StackPanel>
                                                         </materialDesign:HintAssist.Hint>
                                                     </TextBox>
-                                                    <TextBox x:Name="txtEndereco" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtEndereco" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="250" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Endereço</TextBlock>
                                                             </StackPanel>
                                                         </materialDesign:HintAssist.Hint>
                                                     </TextBox>
-                                                    <TextBox x:Name="txtCidadeEstado" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtCidadeEstado" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="180" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Cidade</TextBlock>
                                                             </StackPanel>
                                                         </materialDesign:HintAssist.Hint>
                                                     </TextBox>
-                                                    <TextBox x:Name="txtDescricao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtDescricao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="350" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Descrição</TextBlock>
                                                             </StackPanel>
                                                         </materialDesign:HintAssist.Hint>
                                                     </TextBox>
-                                                    <TextBox x:Name="txtVendedor" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtVendedor" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="175" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Vendedor</TextBlock>
                                                             </StackPanel>
                                                         </materialDesign:HintAssist.Hint>
                                                     </TextBox>
-                                                    <TextBox x:Name="txtResponsavel" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="Auto" Foreground="DimGray">
+                                                    <TextBox x:Name="txtResponsavel" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="175" Foreground="DimGray">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Responsável</TextBlock>
@@ -166,7 +166,7 @@
                                                             </ItemsPanelTemplate>
                                                         </ComboBox.ItemsPanel>
                                                     </ComboBox>
-                                                    <TextBox x:Name="txtDescricaoAtividade" Margin="30,0,30,6" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="False" FontFamily="Segoe UI" FontSize="16" Text="" Foreground="DimGray">
+                                                    <TextBox x:Name="txtDescricaoAtividade" Margin="30,0,30,6" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="False" FontFamily="Segoe UI" FontSize="16" Text="" Foreground="DimGray" KeyDown="TxtDescricaoAtividade_KeyDown">
                                                         <materialDesign:HintAssist.Hint>
                                                             <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                 <TextBlock>Descrição</TextBlock>

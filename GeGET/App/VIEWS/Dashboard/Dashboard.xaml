@@ -290,7 +290,7 @@
                                         <RadioButton x:Name="btnNegociacao" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="False" Content="NEGOCIAÇÃO" BorderBrush="#FF7A2932" Click="BtnNegociacao_Click"/>
                                     </StackPanel>
                                     <Grid Grid.Row="1" Margin="15,50,15,0" HorizontalAlignment="Stretch">
-                                        <ItemsControl x:Name="lstOrcamentos" Margin="10,0,10,0" MinHeight="225" MaxHeight="225" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                                        <ItemsControl x:Name="lstOrcamentos" Margin="10,0,10,0" MinHeight="220" MaxHeight="220" ScrollViewer.CanContentScroll="True" VirtualizingPanel.ScrollUnit="Pixel" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
                                                     <wpftk:VirtualizingWrapPanel/>
@@ -299,7 +299,7 @@
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
                                                     <materialDesign:Card Margin="5,0,0,10" Width="170">
-                                                        <Grid Height="215">
+                                                        <Grid Height="218">
                                                             <Grid.RowDefinitions>
                                                                 <RowDefinition Height="85"/>
                                                                 <RowDefinition/>
@@ -343,7 +343,7 @@
                                                 <ControlTemplate>
                                                     <Border BorderThickness="{TemplateBinding Border.BorderThickness}" Padding="{TemplateBinding Control.Padding}" BorderBrush="{TemplateBinding Border.BorderBrush}" Background="{TemplateBinding Panel.Background}" SnapsToDevicePixels="True">
                                                         <ScrollViewer Padding="{TemplateBinding Control.Padding}" Focusable="False">
-                                                            <ItemsPresenter SnapsToDevicePixels="True" />
+                                                            <ItemsPresenter SnapsToDevicePixels="True" ScrollViewer.CanContentScroll="True" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingPanel.VirtualizationMode="Recycling" />
                                                         </ScrollViewer>
                                                     </Border>
                                                 </ControlTemplate>

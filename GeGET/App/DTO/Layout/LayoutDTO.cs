@@ -7,7 +7,7 @@
         private string descricao;
         private string mensagem;
         private string negocio;
-        private string lida;
+        private int lida;
         private string data;
         private static int quantidade;
 
@@ -16,7 +16,7 @@
         public string Descricao { get => descricao; set => descricao = value; }
         public string Mensagem { get => mensagem; set => mensagem = value; }
         public string Negocio { get => negocio; set => negocio = value; }
-        public string Lida { get => lida; set => lida = value; }
+        public int Lida { get => lida; set => lida = value; }
         public string Data { get => data; set => data = value; }
         public int Quantidade { get => quantidade; set => quantidade = value; }
         

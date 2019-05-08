@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -16,8 +18,6 @@ namespace GeGET
         #region Declarations
         ItensBLL bll = new ItensBLL();
         ItensDTO dto = new ItensDTO();
-        Thread t1;
-        Thread t2;
         DispatcherTimer timer = new DispatcherTimer();
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         public ObservableCollection<ItensDTO> listaItens;
@@ -36,37 +36,22 @@ namespace GeGET
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
             ColLeft.Width = new GridLength(mouseLocation.X + 230, GridUnitType.Pixel);
-            t1 = new Thread(Load);
-            t1.Start();
             Left = mouseLocation.X;
             Top = mouseLocation.Y - 50;
         }
         #endregion
 
         #region Methods
-        private void Load()
+        private async void Load()
         {
-            Dispatcher.Invoke(DispatcherPriority.Background,
-                     new Action(() =>
-                     {
-                         progressbar.Visibility = Visibility.Visible;
-                         syncEvent.Set();
-                         t2 = new Thread(waitLoad);
-                         t2.Start();
-                         listaItens = bll.LoadItens();
-                         lstMensagens.ItemsSource = listaItens;
-                     }));
-
-        }
-
-        private void waitLoad()
-        {
-            syncEvent.WaitOne();
-            Dispatcher.Invoke(new Action(() =>
+            progressbar.Visibility = Visibility.Visible;
+            await Task.Run(() =>
             {
-                progressbar.Visibility = Visibility.Collapsed;
-                lstMensagens.Visibility = Visibility.Visible;
-            }));
+                listaItens = bll.LoadProcurarItens();
+            });
+            lstMensagens.ItemsSource = listaItens;
+            progressbar.Visibility = Visibility.Collapsed;
+            lstMensagens.Visibility = Visibility.Visible;
         }
 
         private void Commit()
@@ -87,16 +72,14 @@ namespace GeGET
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             timer.Stop();
-            t1 = new Thread(Load);
-            t1.Start();
+            Load();
         }
         #endregion
 
         #region Text Changed
-        private void TxtProcurar_TextChanged(object sender, TextChangedEventArgs e)
+        private async void TxtProcurar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            t1 = new Thread(Commit);
-            t1.Start();
+            await Task.Run(() => Commit());
         }
         #endregion
 

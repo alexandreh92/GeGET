@@ -99,8 +99,17 @@
                                     <dxe:TextEditSettings HorizontalContentAlignment="Center"></dxe:TextEditSettings>
                                 </dxg:GridColumn.EditSettings>
                             </dxg:GridColumn>
-                           
-                            
+                            <!--CUSTO UNITARIO-->
+                            <dxg:GridColumn AllowFocus="False" Header="Custo Un." FieldName="Custo" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="True" FixedWidth="True">
+                                <dxg:GridColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                    </DataTemplate>
+                                </dxg:GridColumn.HeaderTemplate>
+                                <dxg:GridColumn.EditSettings>
+                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                </dxg:GridColumn.EditSettings>
+                            </dxg:GridColumn>
                         </dxg:GridControl.Columns>
                         <dxg:GridControl.View>
                             <dxg:TableView AutoWidth="True" AllowPerPixelScrolling="False" AllowHorizontalScrollingVirtualization="True" VirtualizingPanel.VirtualizationMode="Recycling" VirtualizingPanel.IsVirtualizing="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" SearchDelay="10" SearchPanelFindFilter="Contains" SearchPanelCriteriaOperatorType="And" ShowSearchPanelMode="Always">
@@ -114,6 +123,7 @@
                                                 <Setter Property="Background" Value="White"/>
                                             </DataTrigger>
                                         </Style.Triggers>
+                                        <Setter Property="MaxHeight" Value="37" />
                                     </Style>
                                 </dxg:TableView.RowStyle>
                             </dxg:TableView>

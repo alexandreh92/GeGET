@@ -1,0 +1,193 @@
+﻿<UserControl x:Class="GeGET.EntradaManualEstoque"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:control = "clr-namespace:Teste"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+             xmlns:local="clr-namespace:GeGET"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             mc:Ignorable="d"
+             Language="pt-BR"
+             d:DesignHeight="900" d:DesignWidth="800">
+
+    <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide">
+        <materialDesign:TransitioningContent.OpeningEffects>
+            <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.8" />
+        </materialDesign:TransitioningContent.OpeningEffects>
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"/>
+                <RowDefinition/>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.ColumnSpan="3">
+                <DockPanel>
+                    <Button x:Name="btnBack" Height="40" Width="40" Margin="10,0,-5,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnBack_Click">
+                        <materialDesign:PackIcon Foreground="#7A2932" Kind="LessThan" Width="25" Height="25"/>
+                    </Button>
+                    <TextBlock VerticalAlignment="Center" Foreground="#7A2932" Margin="5,-2,0,0" FontSize="14" FontFamily="{DynamicResource Novecento-Bold}">Entrada Manual de Estoque</TextBlock>
+                    <Button x:Name="btnClose" HorizontalAlignment="Right" ToolTip="Fechar" Height="40" Width="40" Margin="0,0,10,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnClose_Click">
+                        <materialDesign:PackIcon Foreground="#7A2932" Kind="Close" Width="25" Height="25"/>
+                    </Button>
+                </DockPanel>
+                <Separator VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="0 0 0 0" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2">
+                <Grid Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="627*"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{Binding ActualHeight, ElementName=expHeader}"/>
+                            <RowDefinition Height="266*"/>
+                        </Grid.RowDefinitions>
+                        <Grid x:Name="gridpanel" Grid.Row="2">
+                            <materialDesign:Card MaxHeight="{Binding ActualHeight, ElementName=gridpanel}" Visibility="Visible" Background="White" x:Name="CardPanel" Padding="0" Margin="0,10,0,20" VerticalAlignment="Stretch">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="66*"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Vertical" VerticalAlignment="Stretch">
+                                        <Grid>
+                                            <TextBlock Foreground="#7A2932" Grid.Row="0" Margin="24,21,0,21" HorizontalAlignment="Left" FontFamily="{DynamicResource Novecento-Bold}" FontSize="15" Text="Lista de Materiais"></TextBlock>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <Button x:Name="AdicionarProduto" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Adicionar Produto na Lista" Height="25" Width="25" Click="AdicionarProduto_Click">
+                                                    <materialDesign:PackIcon Kind="Add" Foreground="White"/>
+                                                </Button>
+                                                <Button x:Name="AdicionarEstoque" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Adicionar para Estoque" Height="25" Width="25" Click="AdicionarEstoque_Click">
+                                                    <materialDesign:PackIcon Kind="OpenInApp" Foreground="White"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+
+                                    </StackPanel>
+                                    <Border BorderBrush="DarkGray" BorderThickness="0,0,0,0.5"></Border>
+                                    <dxg:GridControl x:Name="grdItens" ShowBorder="False" Grid.Row="1" EnableSmartColumnsGeneration="True" HorizontalAlignment="Stretch" Margin="0,1,0,10" VirtualizingPanel.VirtualizationMode="Recycling" SelectionMode="MultipleRow">
+                                        <dxg:GridControl.Columns>
+                                            <!--CÓDIGO-->
+                                            <dxg:GridColumn Header="Código" FieldName="Codigo" Focusable="False" HorizontalHeaderContentAlignment="Center" Width="130" FixedWidth="True" ReadOnly="True" AllowFocus="False">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--DESCRICAO-->
+                                            <dxg:GridColumn Header="Descrição" FieldName="Descricao" HorizontalHeaderContentAlignment="Left" ReadOnly="True" AllowFocus="False">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="4,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                            </dxg:GridColumn>
+                                            <!--PARTNUMBER-->
+                                            <dxg:GridColumn Header="Partnumber" FieldName="Partnumber" Focusable="False" HorizontalHeaderContentAlignment="Center" Width="140" FixedWidth="True" ReadOnly="True" AllowFocus="False">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings HorizontalContentAlignment="Center" MaskUseAsDisplayFormat="True" MaskType="Numeric" Mask="000000"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--UN-->
+                                            <dxg:GridColumn Name="Unidade" Header="UN" FieldName="Unidade" HorizontalHeaderContentAlignment="Center" Width="80" FixedWidth="True" ReadOnly="True" AllowFocus="False">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--QUANTIDADE-->
+                                            <dxg:GridColumn Header="Quantidade" FieldName="Quantidade" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="False" FixedWidth="True">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="N2" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--CUSTO UNITARIO-->
+                                            <dxg:GridColumn Header="Custo Un." FieldName="Custo" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="False" FixedWidth="True">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--FABRICANTE-->
+                                            <dxg:GridColumn Header="Fabricante" FieldName="Fabricante" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True" AllowFocus="False">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings HorizontalContentAlignment="Left"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--NUMERO DA NOTA-->
+                                            <dxg:GridColumn Header="Nota" FieldName="Nota" HorizontalHeaderContentAlignment="Center" Width="120" FixedWidth="True">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                        </dxg:GridControl.Columns>
+                                        <dxg:GridControl.View>
+                                            <dxg:TableView x:Name="grdView" AutoWidth="True" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" SearchDelay="10" SearchPanelCriteriaOperatorType="And" EditorShowMode="MouseDown" IsTotalSummaryMenuEnabled="False" AllowGrouping="False" AllowCommitOnValidationAttributeError="True">
+                                                <dxg:TableView.RowStyle>
+                                                    <Style TargetType="dxg:RowControl">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{DXBinding Expr='@c.RowHandle.Value % 1'}" Value="0">
+                                                                <Setter Property="Background" Value="#efefef"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{DXBinding Expr='@c.RowHandle.Value % 2'}" Value="0">
+                                                                <Setter Property="Background" Value="White"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </dxg:TableView.RowStyle>
+                                            </dxg:TableView>
+                                        </dxg:GridControl.View>
+                                    </dxg:GridControl>
+                                </Grid>
+                            </materialDesign:Card>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </materialDesign:TransitioningContent>
+</UserControl>

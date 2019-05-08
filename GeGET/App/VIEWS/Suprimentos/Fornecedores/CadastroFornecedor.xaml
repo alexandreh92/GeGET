@@ -147,7 +147,7 @@
                                                                 </StackPanel>
                                                             </materialDesign:HintAssist.Hint>
                                                         </xctk:MaskedTextBox>
-                                                        <TextBox MaxLength="20" x:Name="txtEmail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" MinWidth="300" Foreground="DimGray">
+                                                        <TextBox MaxLength="100" x:Name="txtEmail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" MinWidth="300" Foreground="DimGray">
                                                             <materialDesign:HintAssist.Hint>
                                                                 <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                     <TextBlock>E-Mail</TextBlock>

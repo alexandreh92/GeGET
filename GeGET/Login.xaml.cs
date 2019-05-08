@@ -39,9 +39,9 @@ namespace GeGET
             CheckUpdate();
             InitializeComponent();
             Remember_Data();
-            progressBar.Value = 0;
-            var bc = new BrushConverter();
-            progressBar.Background = (Brush)bc.ConvertFrom("#282828");
+           // progressBar.Value = 0;
+           // var bc = new BrushConverter();
+           // progressBar.Background = (Brush)bc.ConvertFrom("#282828");
             txtVersion.Text = "version" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
         #endregion
@@ -58,7 +58,7 @@ namespace GeGET
             }
             else
             {
-                MessageBox.Show("Você não pode fechar o programa enquanto está fazendo update!");
+                CustomOKMessageBox.Show("Você não pode fechar o programa enquanto está fazendo update!", "Atenção!", Window.GetWindow(this));
             }
         }
 
@@ -75,7 +75,7 @@ namespace GeGET
             }
             else
             {
-                MessageBox.Show("Usuário ou senha inválidos.");
+                CustomOKMessageBox.Show("Credenciais inválidas!", "Atenção!", Window.GetWindow(this));
             }
         }
 
@@ -211,7 +211,19 @@ namespace GeGET
         {
             if (e.Key == System.Windows.Input.Key.Enter)
             {
-                BtnLogin_Click(null, null);
+                dto.Usuario = txtLogin.Text;
+                dto.Senha = txtPassword.Password;
+                Save_Data();
+                if (bll.Login(dto))
+                {
+                    Layout mw = new Layout();
+                    mw.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Usuário ou senha inválidos.");
+                }
             }
         }
 
@@ -224,7 +236,19 @@ namespace GeGET
         {
             if (e.Key == System.Windows.Input.Key.Enter)
             {
-                BtnLogin_Click(null, null);
+                dto.Usuario = txtLogin.Text;
+                dto.Senha = txtPassword.Password;
+                Save_Data();
+                if (bll.Login(dto))
+                {
+                    Layout mw = new Layout();
+                    mw.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Usuário ou senha inválidos.");
+                }
             }
         }
     }
