@@ -134,6 +134,12 @@
                                     <TextBlock Text="Suprimentos" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
                                 </StackPanel>
                             </ListViewItem>
+                            <ListViewItem Visibility="Collapsed" x:Name="btnLogistica" Height="60" PreviewMouseLeftButtonDown="BtnLogistica_PreviewMouseLeftButtonDown" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="TruckDelivery" Height="25" Width="25" Margin="13,8,0,0"/>
+                                    <TextBlock Text="Logística" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
+                                </StackPanel>
+                            </ListViewItem>
                             <ListViewItem Visibility="Collapsed" Height="60" PreviewMouseDown="ListViewItem_PreviewMouseDown" Foreground="White">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Worker" Height="25" Width="25" Margin="13,8,0,0"/>

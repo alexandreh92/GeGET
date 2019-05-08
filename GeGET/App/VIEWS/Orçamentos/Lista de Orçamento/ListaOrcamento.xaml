@@ -315,13 +315,13 @@
                                                         <Setter Property="ContextMenu">
                                                             <Setter.Value>
                                                                 <ContextMenu>
-                                                                    <Button Content="Informações" Foreground="DimGray">
-                                                                        <Button.Style>
-                                                                            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                                                                    <MenuItem Header="Informações" Foreground="DimGray">
+                                                                        <MenuItem.Style>
+                                                                            <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
                                                                                 <EventSetter Event="Click" Handler="BtnAnotacoes_Click"/>
                                                                             </Style>
-                                                                        </Button.Style>
-                                                                    </Button>
+                                                                        </MenuItem.Style>
+                                                                    </MenuItem>
                                                                 </ContextMenu>
                                                             </Setter.Value>
                                                         </Setter>

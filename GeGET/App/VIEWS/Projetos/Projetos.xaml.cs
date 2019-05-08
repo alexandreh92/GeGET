@@ -35,5 +35,10 @@ namespace GeGET
         {
             helpers.Open<ListaProjeto>(this.GetType().Name, false);
         }
+
+        private void BtnRequisicaoMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Open<GerarRequisicaoMaterial>(this.GetType().Name, false);
+        }
     }
 }

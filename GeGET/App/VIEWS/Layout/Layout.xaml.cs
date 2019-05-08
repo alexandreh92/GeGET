@@ -203,5 +203,10 @@ namespace GeGET
         {
             helpers.Open<Changelog>(null, false);
         }
+
+        private void BtnLogistica_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.Open<Logistica>(null, false);
+        }
     }
 }

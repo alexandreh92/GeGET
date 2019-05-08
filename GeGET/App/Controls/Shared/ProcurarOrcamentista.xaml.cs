@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -24,9 +25,6 @@ namespace GeGET
         public string Login;
         public string Nome_Simples;
         public ObservableCollection<OrcamentistasDTO> listaOrcamentistas;
-        ManualResetEvent syncEvent = new ManualResetEvent(false);
-        Thread t1;
-        Thread t2;
         #endregion
 
         #region Initialize
@@ -38,10 +36,7 @@ namespace GeGET
             timer.Start();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
-            dto.Pesquisa = "";
             dto.Id = DTO.Id;
-            t1 = new Thread(Load);
-            t1.Start();
             Left = mouseLocation.X +240;
             Top = mouseLocation.Y - 150;
         }
@@ -50,31 +45,20 @@ namespace GeGET
         #region Methods
 
         #region Load
-        private void Load()
+        private async void Load()
         {
-
-            Dispatcher.Invoke(DispatcherPriority.Background,
-                     new Action(() =>
-                     {
-                         progressbar.Visibility = Visibility.Visible;
-                         syncEvent.Set();
-                         t2 = new Thread(waitLoad);
-                         t2.Start();
-                         listaOrcamentistas = bll.LoadOrcamentistas(dto);
-                         lstMensagens.ItemsSource = listaOrcamentistas;
-                     }));
-        }
-        #endregion
-
-        #region Wait Load
-        private void waitLoad()
-        {
-            syncEvent.WaitOne();
-            Dispatcher.Invoke(new Action(() =>
+            progressbar.Visibility = Visibility.Visible;
+            await Task.Run(() =>
             {
-                progressbar.Visibility = Visibility.Collapsed;
-                lstMensagens.Visibility = Visibility.Visible;
-            }));
+                Dispatcher.Invoke(DispatcherPriority.Background,
+                  new Action(() =>
+                  {
+                      listaOrcamentistas = bll.LoadOrcamentistas(dto);
+                  }));
+            });
+            lstMensagens.ItemsSource = listaOrcamentistas;
+            progressbar.Visibility = Visibility.Collapsed;
+            lstMensagens.Visibility = Visibility.Visible;
         }
         #endregion
 
@@ -99,16 +83,14 @@ namespace GeGET
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             timer.Stop();
-            t1 = new Thread(Load);
-            t1.Start();
+            Load();
         }
         #endregion
 
         #region TextChanged
-        private void TxtProcurar_TextChanged(object sender, TextChangedEventArgs e)
+        private async void TxtProcurar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            t1 = new Thread(Commit);
-            t1.Start();
+            await Task.Run(() => Commit());
         }
         #endregion
 

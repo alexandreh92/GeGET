@@ -252,7 +252,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AnotacoesOrcamento.xaml.cs">
+    <Compile Include="App\VIEWS\Logistica\Entrada Manual\AdicionarItemListaManual.xaml.cs">
+      <DependentUpon>AdicionarItemListaManual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\AnotacoesOrcamento.xaml.cs">
       <DependentUpon>AnotacoesOrcamento.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\BLL\Projetos\AdicionarItemProjetoBLL.cs" />
@@ -422,6 +425,15 @@
     <Compile Include="App\VIEWS\CRM\Relatórios\ListaNegociosSimplificada.xaml.cs">
       <DependentUpon>ListaNegociosSimplificada.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\VIEWS\Logistica\Entrada Nota Fiscal\LinkarProdutoNotaFiscal.xaml.cs">
+      <DependentUpon>LinkarProdutoNotaFiscal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Logistica\Entrada Nota Fiscal\EntradaNotaFiscal.xaml.cs">
+      <DependentUpon>EntradaNotaFiscal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Logistica\Logistica.xaml.cs">
+      <DependentUpon>Logistica.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\VIEWS\Orçamentos\Consulta Lista de Orçamento\ConsultaListaOrcamento.xaml.cs">
       <DependentUpon>ConsultaListaOrcamento.xaml</DependentUpon>
     </Compile>
@@ -436,6 +448,9 @@
     </Compile>
     <Compile Include="App\VIEWS\Orçamentos\Orcamentos.xaml.cs">
       <DependentUpon>Orcamentos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Projetos\Gerar Requisição Material\GerarRequisicaoMaterial.xaml.cs">
+      <DependentUpon>GerarRequisicaoMaterial.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\VIEWS\Projetos\Lista de Projetos\CopiarItensProjeto.xaml.cs">
       <DependentUpon>CopiarItensProjeto.xaml</DependentUpon>
@@ -523,10 +538,24 @@
     <Compile Include="App\BLL\Suprimentos\Fornecedores\FornecedoresBLL.cs" />
     <Compile Include="App\DTO\Suprimentos\Fornecedores\FornecedoresDTO.cs" />
     <Compile Include="App\DTO\Suprimentos\Itens\ItensDTO.cs" />
-    <Compile Include="DashboardBLL.cs" />
-    <Compile Include="DashboardDTO.cs" />
+    <Compile Include="App\BLL\Dashboard\DashboardBLL.cs" />
+    <Compile Include="App\DTO\Dashboard\DashboardDTO.cs" />
     <Compile Include="App\BLL\Projetos\ListaProjetosBLL.cs" />
     <Compile Include="App\DTO\Projetos\ListaProjetosDTO.cs" />
+    <Compile Include="App\BLL\Logística\EntradaNotaFiscalBLL.cs" />
+    <Compile Include="App\DTO\Logística\EntradaNotaFiscalDTO.cs" />
+    <Compile Include="EntradaManualEstoque.xaml.cs">
+      <DependentUpon>EntradaManualEstoque.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EntradaManualEstoqueBLL.cs" />
+    <Compile Include="EntradaManualEstoqueDTO.cs" />
+    <Compile Include="FakeWindow.xaml.cs">
+      <DependentUpon>FakeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\BLL\Projetos\GerarRequisicaoMaterialBLL.cs" />
+    <Compile Include="App\DTO\Projetos\GerarRequisicaoMaterialDTO.cs" />
+    <Compile Include="App\BLL\Logística\LinkarProdutoNotaFiscalBLL.cs" />
+    <Compile Include="App\DTO\Logística\LinkarProdutoNotaFiscalDTO.cs" />
     <Compile Include="Permission.xaml.cs">
       <DependentUpon>Permission.xaml</DependentUpon>
     </Compile>
@@ -534,7 +563,7 @@
     <Compile Include="App\DTO\Suprimentos\Produtos\ProdutosDTO.cs" />
     <Compile Include="App\BLL\Shared\UnidadeBLL.cs" />
     <Compile Include="App\DTO\Shared\UnidadeDTO.cs" />
-    <Compile Include="Dashboard.xaml.cs">
+    <Compile Include="App\VIEWS\Dashboard\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\BLL\Controls\ProcurarVendaBLL.cs" />
@@ -544,7 +573,17 @@
     </Compile>
     <Compile Include="App\BLL\CRM\Gerenciar Orçamento\VersaoOrcamentoBLL.cs" />
     <Compile Include="App\DTO\CRM\Gerenciar Orçamento\VersaoOrcamentoDTO.cs" />
-    <Page Include="AnotacoesOrcamento.xaml">
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xmlimport.xaml.cs">
+      <DependentUpon>xmlimport.xaml</DependentUpon>
+    </Compile>
+    <Page Include="App\VIEWS\Logistica\Entrada Manual\AdicionarItemListaManual.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\AnotacoesOrcamento.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -704,6 +743,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="App\VIEWS\Logistica\Entrada Nota Fiscal\LinkarProdutoNotaFiscal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Logistica\Entrada Nota Fiscal\EntradaNotaFiscal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Logistica\Logistica.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\VIEWS\Orçamentos\Consulta Lista de Orçamento\ConsultaListaOrcamento.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -725,6 +776,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="App\VIEWS\Orçamentos\Lista de Orçamento\AlterarBDIOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Projetos\Gerar Requisição Material\GerarRequisicaoMaterial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -800,6 +855,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="EntradaManualEstoque.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FakeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -856,11 +919,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dashboard.xaml">
+    <Page Include="App\VIEWS\Dashboard\Dashboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Changelog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xmlimport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -939,7 +1010,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\changelog.txt" />
-    <Content Include="template\styles\main.css" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Updater\Updater.csproj">

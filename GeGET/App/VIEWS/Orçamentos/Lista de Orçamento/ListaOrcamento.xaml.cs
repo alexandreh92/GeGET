@@ -291,8 +291,8 @@ namespace GeGET
 
             new Thread(() =>
             {
-
-            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
+                syncEvent.Set();
+                Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
             {
                 if (e.Column.Header.ToString() == "Quantidade")
                 {
@@ -312,25 +312,25 @@ namespace GeGET
                     dto.Fd = material.Fd;
                     new Thread(() => 
                     {
-                        syncEvent.Set();
+                        
                         Dispatcher.BeginInvoke(DispatcherPriority.Render, new Action(() =>
                         {
                             bll.AtualizarFD(dto);
+                            LoadSidePanel();
                         }));
                     }).Start();
-                    
                 }
-            }));
-                new Thread(() =>
-                {
-                    syncEvent.WaitOne();
-                    Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
-                    {
-                        LoadSidePanel();
-                    }));
-                }).Start();
+            }));   
             }).Start();
-            
+
+            new Thread(() =>
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+                {
+                    LoadSidePanel();
+                }));
+            }).Start();
+
         }
 
         #endregion

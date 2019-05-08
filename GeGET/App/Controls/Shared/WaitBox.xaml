@@ -19,7 +19,7 @@
             <Grid>
                 <TextBlock HorizontalAlignment="Center" FontFamily="{DynamicResource Novecento-Bold}" Margin="0,55,0,0" Foreground="#7A2932" VerticalAlignment="Center">Carregando...</TextBlock>
                 <StackPanel Grid.Row="1" x:Name="progressbar" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <materialDesign:Card UniformCornerRadius="14" Padding="4">
+                    <materialDesign:Card UniformCornerRadius="14" Padding="4" Width="30" Height="30">
                         <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" Value="50" IsIndeterminate="True" />
                     </materialDesign:Card>
                 </StackPanel>

@@ -138,7 +138,7 @@ namespace BLL
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    mensagens.Add(new LayoutDTO { Id = dr["msg_id"].ToString(), Descricao = dr["descricao"].ToString(), Mensagem = dr["mensagem"].ToString(), Negocio = Convert.ToInt32(dr["negocio_id"]).ToString("0000"), Nome = dr["nome"].ToString(), Lida = dr["lida"].ToString(), Data = Convert.ToDateTime(dr["data"]).ToString("dd/MM/yyyy") + " - " + Convert.ToDateTime(dr["data"]).ToString("HH:mm") });
+                    mensagens.Add(new LayoutDTO { Id = dr["msg_id"].ToString(), Descricao = dr["descricao"].ToString(), Mensagem = dr["mensagem"].ToString(), Negocio = Convert.ToInt32(dr["negocio_id"]).ToString("0000"), Nome = dr["nome"].ToString(), Lida = Convert.ToInt32(dr["lida"]), Data = Convert.ToDateTime(dr["data"]).ToString("dd/MM/yyyy") + " - " + Convert.ToDateTime(dr["data"]).ToString("HH:mm") });
                 }
                 bd.CloseConection();
             }

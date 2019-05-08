@@ -102,6 +102,7 @@ namespace GeGET
                 Dispatcher.Invoke(new Action(() =>
                 {
                     wb = new WaitBox();
+                    wb.Owner = Window.GetWindow(this);
                     wb.Show();
                 }));
                 syncEvent.Set();
