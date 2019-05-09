@@ -33,12 +33,18 @@ namespace GeGET
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         DashboardComercialBLL dashboardComercialBLL = new DashboardComercialBLL();
         ObservableCollection<DashboardComercialDTO> listaComercial = new ObservableCollection<DashboardComercialDTO>();
+        public SeriesCollection SeriesCollection { get; set; }
+        public List<string> Labels { get; set; }
         string Find;
 
         public Dashboard()
         {
             InitializeComponent();
             DataContext = this;
+            var ChartDTO = dashboardComercialBLL.LoadCharts();
+            chart.Series = ChartDTO.SeriesCollection;
+            chartlabel.Labels = ChartDTO.Labels;
+            txtMedia.Text = ChartDTO.Media.ToString("N2").Replace(",",".");
             listaComercial = dashboardComercialBLL.Load();
             grdComercial.DataContext = listaComercial;
             listaNegocios = listaComercial.First().ListaNegocios;
