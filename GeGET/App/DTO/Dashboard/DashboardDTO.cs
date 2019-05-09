@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using LiveCharts;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace DTO
 {
@@ -38,4 +41,16 @@ namespace DTO
         public ObservableCollection<NegociosDTO> ListaNegocios { get => listaNegocios; set => listaNegocios = value; }
         public string Orcamento_Feito { get => orcamento_Feito; set => orcamento_Feito = value; }
     }
+
+    public class DashboardChartDTO
+    {
+        private SeriesCollection seriesViews;
+        private List<string> labels;
+        private double media;
+
+        public SeriesCollection SeriesCollection { get => seriesViews; set => seriesViews = value; }
+        public List<string> Labels { get => labels; set => labels = value; }
+        public double Media { get => media; set => media = value; }
+    }
+
 }

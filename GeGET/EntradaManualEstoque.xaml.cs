@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Helpers;
 using DTO;
 using BLL;
+using System.Collections.Generic;
 
 namespace GeGET
 {
@@ -24,7 +25,10 @@ namespace GeGET
     public partial class EntradaManualEstoque : UserControl
     {
         Helpers helpers = new Helpers();
+        EntradaManualEstoqueBLL bll = new EntradaManualEstoqueBLL();
+        EntradaManualEstoqueDTO dto = new EntradaManualEstoqueDTO();
         ObservableCollection<EntradaManualEstoqueDTO> listaEntrada = new ObservableCollection<EntradaManualEstoqueDTO>();
+        ObservableCollection<EntradaManualEstoqueDTO> listaInserir;
 
         public EntradaManualEstoque()
         {
@@ -68,7 +72,54 @@ namespace GeGET
 
         private void AdicionarEstoque_Click(object sender, RoutedEventArgs e)
         {
+            bool iNotify = false;
+            var handles = grdItens.GetSelectedRowHandles();
+            if (handles.Length>0)
+            {
+                listaInserir = new ObservableCollection<EntradaManualEstoqueDTO>();
 
+                foreach (var rowHandle in handles)
+                {
+                    dto = grdItens.GetRow(rowHandle) as EntradaManualEstoqueDTO;
+                    if (dto.Quantidade != 0 && dto.Custo != 0)
+                    {
+                        listaInserir.Add(dto);
+                    }
+                    else
+                    {
+                        iNotify = true;
+                    }
+                }
+                if (iNotify)
+                {
+                    CustomOKMessageBox.Show("Existem itens que possuem a quantidade ou o preço zerado.","Atenção!",Window.GetWindow(this));
+                }
+                else
+                {
+                    bll.InserirEstoque(listaInserir);
+                    List<int> selectedRowHandles = new List<int>(grdItens.GetSelectedRowHandles());
+                    var descendingOrder = selectedRowHandles.OrderByDescending(i => i);
+                    grdItens.BeginDataUpdate();
+                    foreach (int i in descendingOrder)
+                    {
+                        grdView.DeleteRow(i);
+                    }
+                    grdItens.EndDataUpdate();
+                    CustomOKMessageBox.Show("Itens adicionados com sucesso ao estoque.", "Sucesso!", Window.GetWindow(this));
+                }
+            }
+        }
+
+        private void ExcluirProduto_Click(object sender, RoutedEventArgs e)
+        {
+            List<int> selectedRowHandles = new List<int>(grdItens.GetSelectedRowHandles());
+            var descendingOrder = selectedRowHandles.OrderByDescending(i => i);
+            grdItens.BeginDataUpdate();
+            foreach (int i in descendingOrder)
+            {
+                grdView.DeleteRow(i);
+            }
+            grdItens.EndDataUpdate();
         }
     }
 }

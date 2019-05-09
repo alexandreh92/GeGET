@@ -209,22 +209,7 @@ namespace GeGET
 
         private void TxtPassword_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key == System.Windows.Input.Key.Enter)
-            {
-                dto.Usuario = txtLogin.Text;
-                dto.Senha = txtPassword.Password;
-                Save_Data();
-                if (bll.Login(dto))
-                {
-                    Layout mw = new Layout();
-                    mw.Show();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Usuário ou senha inválidos.");
-                }
-            }
+            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -247,7 +232,7 @@ namespace GeGET
                 }
                 else
                 {
-                    MessageBox.Show("Usuário ou senha inválidos.");
+                    CustomOKMessageBox.Show("Credenciais inválidas!", "Atenção!", Window.GetWindow(this));
                 }
             }
         }

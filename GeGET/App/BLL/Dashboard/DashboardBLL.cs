@@ -9,6 +9,9 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Globalization;
 using System.Windows;
+using LiveCharts;
+using LiveCharts.Wpf;
+using System.Windows.Media;
 
 namespace BLL
 {
@@ -105,5 +108,113 @@ namespace BLL
             return dashboard;
         }
 
+        public DashboardChartDTO LoadCharts() 
+        {
+            var chart = new DashboardChartDTO();
+            var dtAbertos = new DataTable();
+            var dtFeitos = new DataTable();
+            var abertos = new ChartValues<int>();
+            var feitos = new ChartValues<int>();
+            var labels = new List<string>();
+            double soma_feitos = 0;
+
+            try
+            {
+                var query = "SELECT m as mes, COUNT(`data`) AS Total FROM(SELECT year(now()) AS y UNION ALL SELECT year(now()) - 1 AS y) `years` CROSS JOIN(SELECT  1 AS m UNION ALL SELECT  2 AS m UNION ALL SELECT  3 AS m UNION ALL SELECT  4 AS m UNION ALL SELECT  5 AS m UNION ALL SELECT  6 AS m UNION ALL SELECT  7 AS m UNION ALL SELECT  8 AS m UNION ALL SELECT  9 AS m UNION ALL SELECT 10 AS m UNION ALL SELECT 11 AS m UNION ALL SELECT 12 AS m) `months` LEFT JOIN `negocio` q ON YEAR(`data`) = y AND MONTH(`data`) = m WHERE STR_TO_DATE(CONCAT(y, '-', m, '-01'), '%Y-%m-%d') >= MAKEDATE(year(now() - interval 1 year), 1) + interval 13 month AND STR_TO_DATE(CONCAT(y, '-', m, '-01'), '%Y-%m-%d') <= now() GROUP BY y, m ORDER BY y, m";
+                bd.Conectar();
+                dtAbertos = bd.RetDataTable(query);
+                var queryfeitos = "SELECT m as mes, COUNT(`data`) AS Total FROM(SELECT year(now()) AS y UNION ALL SELECT year(now()) - 1 AS y) `years` CROSS JOIN(SELECT  1 AS m UNION ALL SELECT  2 AS m UNION ALL SELECT  3 AS m UNION ALL SELECT  4 AS m UNION ALL SELECT  5 AS m UNION ALL SELECT  6 AS m UNION ALL SELECT  7 AS m UNION ALL SELECT  8 AS m UNION ALL SELECT  9 AS m UNION ALL SELECT 10 AS m UNION ALL SELECT 11 AS m UNION ALL SELECT 12 AS m) `months` LEFT JOIN `negocio` q ON YEAR(`data`) = y AND MONTH(`data`) = m AND (`STATUS_ORCAMENTO_id`) > 2 WHERE STR_TO_DATE(CONCAT(y, '-', m, '-01'), '%Y-%m-%d') >= MAKEDATE(year(now() - interval 1 year), 1) + interval 13 month AND STR_TO_DATE(CONCAT(y, '-', m, '-01'), '%Y-%m-%d') <= now() GROUP BY y, m ORDER BY y, m";
+                bd.Conectar();
+                dtFeitos = bd.RetDataTable(queryfeitos);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                foreach (DataRow dr in dtAbertos.Rows)
+                {
+                    abertos.Add(Convert.ToInt32(dr["total"]));
+                    labels.Add(ParseMonth(dr["mes"].ToString()));
+                }
+                foreach (DataRow dr in dtFeitos.Rows)
+                {
+                    feitos.Add(Convert.ToInt32(dr["total"]));
+                    soma_feitos = soma_feitos + Convert.ToDouble(dr["total"]);
+                }
+
+                chart.SeriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Executados",
+                    Values = feitos,
+                    Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#907A2932")),
+                    Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#7A2932")),
+                    PointGeometry = null
+
+                },
+                new LineSeries
+                {
+                    Title = "Solicitados",
+                    Values = abertos,
+                    Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#77000000")),
+                    Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#000000")),
+                    PointGeometry = null
+                }
+
+            };
+                chart.Labels = labels;
+                chart.Media = soma_feitos / 4;
+            }
+            return chart;
+        }
+
+
+        private string ParseMonth(string month)
+        {
+            string parsedmonth = "";
+            switch (month)
+            {
+                case "1":
+                    parsedmonth = "Jan";
+                    break;
+                case "2":
+                    parsedmonth = "Fev";
+                    break;
+                case "3":
+                    parsedmonth = "Mar";
+                    break;
+                case "4":
+                    parsedmonth = "Abr";
+                    break;
+                case "5":
+                    parsedmonth = "Mai";
+                    break;
+                case "6":
+                    parsedmonth = "Jun";
+                    break;
+                case "7":
+                    parsedmonth = "Jul";
+                    break;
+                case "8":
+                    parsedmonth = "Ago";
+                    break;
+                case "9":
+                    parsedmonth = "Set";
+                    break;
+                case "10":
+                    parsedmonth = "Out";
+                    break;
+                case "11":
+                    parsedmonth = "Nov";
+                    break;
+                case "12":
+                    parsedmonth = "Dez";
+                    break;
+            }
+            return parsedmonth;
+        }
     }
 }

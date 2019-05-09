@@ -68,7 +68,6 @@ namespace GeGET
                 {
                     dto = grdItens.GetRow(rowHandle) as EntradaManualEstoqueDTO;
                     listaEntrada.Add(dto);
-                    
                 }
             }
             DialogResult = true;
