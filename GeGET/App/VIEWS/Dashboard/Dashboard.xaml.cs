@@ -36,16 +36,32 @@ namespace GeGET
         public SeriesCollection SeriesCollection { get; set; }
         public List<string> Labels { get; set; }
         string Find;
-
+        DashboardChartDTO ChartDTO = new DashboardChartDTO();
         public Dashboard()
         {
             InitializeComponent();
             DataContext = this;
-            var ChartDTO = dashboardComercialBLL.LoadCharts();
+            LoadData();
+        }
+
+        private async void LoadData()
+        {
+            
+
+            await Task.Run(() => 
+            {
+                ChartDTO = dashboardComercialBLL.LoadCharts();
+            }); 
             chart.Series = ChartDTO.SeriesCollection;
             chartlabel.Labels = ChartDTO.Labels;
-            txtMedia.Text = ChartDTO.Media.ToString("N2").Replace(",",".");
-            listaComercial = dashboardComercialBLL.Load();
+            txtMedia.Text = ChartDTO.Media.ToString("N2").Replace(",", ".");
+            await Task.Run(() => 
+            {
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    listaComercial = dashboardComercialBLL.Load();
+                }));
+            });
             grdComercial.DataContext = listaComercial;
             listaNegocios = listaComercial.First().ListaNegocios;
             Find = "1";

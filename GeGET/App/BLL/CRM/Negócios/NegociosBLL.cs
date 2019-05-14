@@ -360,12 +360,12 @@ namespace BLL
                 var mensagem = "◾ " + DTO.Status_Descricao + " ➞ ENVIADO AO CLIENTE";
                 var tipo = "STATUS ALTERADO";
                 var data = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                var query = "UPDATE negocio SET STATUS_ORCAMENTO_id='3' WHERE id='" + DTO.Id + "'; INSERT INTO log_negocios (tipo, data, descricao, USUARIO_id, NEGOCIO_id) VALUES ('" + tipo + "','" + data + "','" + mensagem.ToUpper() + "','" + Logindto.Id + "','" + DTO.Id + "'); UPDATE versao_atividade, negocio set valor_envio = '"+ DTO.Valor_Enviado +"', data_envio = '"+ DateTime.Now.ToString("yyyy/MM/dd") +"' WHERE negocio_id = '"+ DTO.Id + "' AND negocio.versao_valida = versao_atividade.versao_id; UPDATE versao_atividade set locked='1' where negocio_id = '"+DTO.Id+"'";
+                var query = "UPDATE negocio SET STATUS_ORCAMENTO_id='3' WHERE id='" + DTO.Id + "'; INSERT INTO log_negocios (tipo, data, descricao, USUARIO_id, NEGOCIO_id) VALUES ('" + tipo + "','" + data + "','" + mensagem.ToUpper() + "','" + Logindto.Id + "','" + DTO.Id + "'); UPDATE negocio set valor_envio = '"+ DTO.Valor_Enviado +"', data_envio = '"+ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +"' WHERE id = '"+ DTO.Id + "'; UPDATE versao_atividade set locked='1' where negocio_id = '"+DTO.Id+"'";
                 var notify = Logindto.Nome + " ENVIOU O NEGÓCIO P" + Convert.ToInt32(DTO.Id).ToString("0000") + " PARA O CLIENTE.";
                 bd.Conectar();
                 bd.ExecutarComandoSQL(query);
                 DataTable dt = new DataTable();
-                var queryselect = "SELECT distinct usuario_id, login FROM orcamentista_negocio orn JOIN usuario u ON u.id = orn.usuario_id WHERE negocio_id = '" + DTO.Id + "' AND usuario_id != '" + Logindto.Id + "'";
+                var queryselect = "SELECT distinct usuario_id, login FROM orcamentista_negocio orn JOIN usuario u ON u.id = orn.usuario_id WHERE orn.negocio_id = '" + DTO.Id + "' AND usuario_id != '" + Logindto.Id + "'";
                 bd.Conectar();
                 dt = bd.RetDataTable(queryselect);
                 foreach (DataRow dr in dt.Rows)
@@ -373,6 +373,7 @@ namespace BLL
                     var user_id = dr["usuario_id"].ToString();
                     var nome = dr["login"].ToString();
                     var querynotify = "INSERT INTO mensagem_" + nome + " (USUARIO_id, USUARIO_FROM_id, mensagem, data, NEGOCIO_id, descricao) VALUES ('" + user_id + "', '" + Logindto.Id + "', '" + notify.ToUpper() + "', '" + data + "', '" + DTO.Id + "', 'Status Atualizado')";
+                    bd.Conectar();
                     bd.ExecutarComandoSQL(querynotify);
                 }
             }
@@ -440,6 +441,7 @@ namespace BLL
                     var user_id = dr["usuario_id"].ToString();
                     var nome = dr["login"].ToString();
                     var querynotify = "INSERT INTO mensagem_" + nome + " (USUARIO_id, USUARIO_FROM_id, mensagem, data, NEGOCIO_id, descricao) VALUES ('" + user_id + "', '" + Logindto.Id + "', '" + notify.ToUpper() + "', '" + data + "', '" + DTO.Id + "', 'Status Atualizado')";
+                    bd.Conectar();
                     bd.ExecutarComandoSQL(querynotify);
                 }
             }
@@ -471,6 +473,7 @@ namespace BLL
                 var user_id = dr["usuario_id"].ToString();
                 var nome = dr["login"].ToString();
                 var querynotify = "INSERT INTO mensagem_" + nome + " (USUARIO_id, USUARIO_FROM_id, mensagem, data, NEGOCIO_id, descricao) VALUES ('" + user_id + "', '" + Logindto.Id + "', '" + notify.ToUpper() + "', '" + data + "', '" + DTO.Id + "', 'Status Atualizado')";
+                bd.Conectar();
                 bd.ExecutarComandoSQL(querynotify);
             }
         }
@@ -486,8 +489,8 @@ namespace BLL
             {
                 var tipo = "NEGÓCIO CRIADO";
                 var mensagem = "◾ VENDEDOR: " + DTO.Vendedor + "\n◾ RESPONSÁVEL CLIENTE: " + DTO.Contato_Nome + "\n◾ Prioridade: " + DTO.Prioridade_Descricao + "\n◾ DESCRIÇÃO: " + DTO.Descricao + "\n◾ PRAZO: " + Convert.ToDateTime(DTO.Prazo).ToString("dd/MM/yyyy");
-                var data = DateTime.Now.ToString("dd/MM/yyyy");
-                var query = "INSERT INTO negocio (descricao, anotacoes, prazo, VENDEDOR_id, ESTABELECIMENTO_id, CONTATO_CLIENTE_id, USUARIO_id, PRIORIDADE_id) VALUES ('" + DTO.Descricao + "', '" + DTO.Anotacoes + "', '" + DTO.Prazo + "', '" + DTO.Vendedor_Id + "', '" + DTO.Estabelecimento_Id + "','" + DTO.Contato_Id + "', '" + Logindto.Id + "', '" + DTO.Prioridade_Id + "');"
+                var data = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                var query = "INSERT INTO negocio (descricao, anotacoes, prazo, VENDEDOR_id, ESTABELECIMENTO_id, CONTATO_CLIENTE_id, USUARIO_id, PRIORIDADE_id) VALUES ('" + DTO.Descricao + "', '" + DTO.Anotacoes + "', '" + Convert.ToDateTime(DTO.Prazo).ToString("yyyy-MM-dd HH:mm:ss") + "', '" + DTO.Vendedor_Id + "', '" + DTO.Estabelecimento_Id + "','" + DTO.Contato_Id + "', '" + Logindto.Id + "', '" + DTO.Prioridade_Id + "');"
                     + "INSERT INTO versao_atividade(descricao, NEGOCIO_id, USUARIO_id) VALUES('VERSÃO INICIAL', (SELECT MAX(id) as id FROM negocio), '"+ Logindto.Id +"');"
                     + "INSERT INTO log_negocios (tipo, descricao, USUARIO_id, NEGOCIO_id) VALUES ('" + tipo + "','" + mensagem + "','" + Logindto.Id + "',(SELECT MAX(id) as id FROM negocio))";
                 bd.Conectar();

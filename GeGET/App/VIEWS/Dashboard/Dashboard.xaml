@@ -227,6 +227,7 @@
                                                         <lvc:Separator StrokeThickness="0.5" Stroke="#55303030"/>
                                                     </lvc:Axis.Separator>
                                                 </lvc:Axis>
+                                                <lvc:Axis Foreground="#303030" MinValue="0" MaxValue="1" Title="Produtividade" Position="RightTop"/>
                                             </lvc:CartesianChart.AxisY>
                                             <lvc:CartesianChart.AxisX>
                                                 <lvc:Axis x:Name="chartlabel" Foreground="#303030" Title="Mês" Labels="{Binding Labels}">

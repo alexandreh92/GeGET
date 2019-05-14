@@ -12,6 +12,7 @@ using System.Windows;
 using LiveCharts;
 using LiveCharts.Wpf;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace BLL
 {
@@ -41,8 +42,8 @@ namespace BLL
                 }
                 else
                 {
-                    //querynegocios = "SELECT n.id, n.descricao, n.anotacoes, n.prazo, n.valor_fechamento, n.data, v.nome, s.descricao as status_descricao, s.id as status_id, e.cnpj, e.endereco, cid.cidade, e.id as estabelecimento_id, c.id as cliente_id, cid.uf, c.rsocial, c.fantasia FROM negocio n JOIN vendedor v ON n.VENDEDOR_id = v.id JOIN status_orcamento s ON n.STATUS_ORCAMENTO_id = s.id JOIN orcamentista_negocio orn ON orn.negocio_id = n.id JOIN estabelecimento e ON n.ESTABELECIMENTO_id = e.id JOIN cidades cid ON e.CIDADES_id = cid.id JOIN cliente c ON e.CLIENTE_id = c.id WHERE n.status_orcamento_id != '0' AND n.status_orcamento_id != '5' AND orn.usuario_id = '"+loginDTO.Id+"' ORDER BY n.id";
-                    querynegocios = "SELECT n.id, n.descricao, n.anotacoes, n.prazo, n.valor_fechamento, n.data, v.nome, s.descricao as status_descricao, s.id as status_id, e.cnpj, e.endereco, cid.cidade, e.id as estabelecimento_id, c.id as cliente_id, cid.uf, c.rsocial, c.fantasia FROM negocio n JOIN vendedor v ON n.VENDEDOR_id = v.id JOIN status_orcamento s ON n.STATUS_ORCAMENTO_id = s.id JOIN estabelecimento e ON n.ESTABELECIMENTO_id = e.id JOIN cidades cid ON e.CIDADES_id = cid.id JOIN cliente c ON e.CLIENTE_id = c.id WHERE n.status_orcamento_id != '0' AND n.status_orcamento_id != '5' ORDER BY n.id";
+                    querynegocios = "SELECT n.id, n.descricao, n.anotacoes, n.prazo, n.valor_fechamento, n.data, v.nome, s.descricao as status_descricao, s.id as status_id, e.cnpj, e.endereco, cid.cidade, e.id as estabelecimento_id, c.id as cliente_id, cid.uf, c.rsocial, c.fantasia FROM negocio n JOIN vendedor v ON n.VENDEDOR_id = v.id JOIN status_orcamento s ON n.STATUS_ORCAMENTO_id = s.id JOIN orcamentista_negocio orn ON orn.negocio_id = n.id JOIN estabelecimento e ON n.ESTABELECIMENTO_id = e.id JOIN cidades cid ON e.CIDADES_id = cid.id JOIN cliente c ON e.CLIENTE_id = c.id WHERE n.status_orcamento_id != '0' AND n.status_orcamento_id != '5' AND orn.usuario_id = '"+loginDTO.Id+"' ORDER BY n.id";
+                    //querynegocios = "SELECT n.id, n.descricao, n.anotacoes, n.prazo, n.valor_fechamento, n.data, v.nome, s.descricao as status_descricao, s.id as status_id, e.cnpj, e.endereco, cid.cidade, e.id as estabelecimento_id, c.id as cliente_id, cid.uf, c.rsocial, c.fantasia FROM negocio n JOIN vendedor v ON n.VENDEDOR_id = v.id JOIN status_orcamento s ON n.STATUS_ORCAMENTO_id = s.id JOIN estabelecimento e ON n.ESTABELECIMENTO_id = e.id JOIN cidades cid ON e.CIDADES_id = cid.id JOIN cliente c ON e.CLIENTE_id = c.id WHERE n.status_orcamento_id != '0' AND n.status_orcamento_id != '5' ORDER BY n.id";
                 }
                 bd.Conectar();
                 dt_negocios = bd.RetDataTable(querynegocios);
@@ -111,21 +112,18 @@ namespace BLL
         public DashboardChartDTO LoadCharts() 
         {
             var chart = new DashboardChartDTO();
-            var dtAbertos = new DataTable();
-            var dtFeitos = new DataTable();
+            var dt = new DataTable();
             var abertos = new ChartValues<int>();
             var feitos = new ChartValues<int>();
+            var produtividade = new ChartValues<double>();
             var labels = new List<string>();
             double soma_feitos = 0;
 
             try
             {
-                var query = "SELECT m as mes, COUNT(`data`) AS Total FROM(SELECT year(now()) AS y UNION ALL SELECT year(now()) - 1 AS y) `years` CROSS JOIN(SELECT  1 AS m UNION ALL SELECT  2 AS m UNION ALL SELECT  3 AS m UNION ALL SELECT  4 AS m UNION ALL SELECT  5 AS m UNION ALL SELECT  6 AS m UNION ALL SELECT  7 AS m UNION ALL SELECT  8 AS m UNION ALL SELECT  9 AS m UNION ALL SELECT 10 AS m UNION ALL SELECT 11 AS m UNION ALL SELECT 12 AS m) `months` LEFT JOIN `negocio` q ON YEAR(`data`) = y AND MONTH(`data`) = m WHERE STR_TO_DATE(CONCAT(y, '-', m, '-01'), '%Y-%m-%d') >= MAKEDATE(year(now() - interval 1 year), 1) + interval 13 month AND STR_TO_DATE(CONCAT(y, '-', m, '-01'), '%Y-%m-%d') <= now() GROUP BY y, m ORDER BY y, m";
+                var query = "SELECT t1.month as month, COUNT(t2.id) as abertos, COUNT(t3.id) as feitos FROM (SELECT 1 AS mnum, 'Jan' AS month UNION ALL SELECT 2, 'Feb'  UNION ALL SELECT 3, 'Mar'  UNION ALL SELECT 4, 'Apr'  UNION ALL SELECT 5, 'May'  UNION ALL SELECT 6, 'Jun'  UNION ALL SELECT 7, 'Jul'  UNION ALL SELECT 8, 'Aug'  UNION ALL SELECT 9, 'Sep'  UNION ALL SELECT 10, 'Oct'  UNION ALL SELECT 11, 'Nov'  UNION ALL SELECT 12, 'Dec') t1 CROSS JOIN (SELECT DISTINCT YEAR(data) AS year FROM negocio) y LEFT JOIN negocio t2 ON t1.mnum = MONTH(t2.data) AND y.year = YEAR(t2.data) AND t2.data BETWEEN CURDATE() - INTERVAL 3 MONTH AND CURDATE() LEFT JOIN negocio t3 ON t2.id = t3.id AND t3.data_envio is not null WHERE STR_TO_DATE(CONCAT_WS('-', y.year, t1.month, DAY(CURDATE())), '%Y-%b-%d') BETWEEN CURDATE() -INTERVAL 3 MONTH AND CURDATE() GROUP BY y.year, t1.month, t1.mnum ORDER BY y.year, t1.mnum";
                 bd.Conectar();
-                dtAbertos = bd.RetDataTable(query);
-                var queryfeitos = "SELECT m as mes, COUNT(`data`) AS Total FROM(SELECT year(now()) AS y UNION ALL SELECT year(now()) - 1 AS y) `years` CROSS JOIN(SELECT  1 AS m UNION ALL SELECT  2 AS m UNION ALL SELECT  3 AS m UNION ALL SELECT  4 AS m UNION ALL SELECT  5 AS m UNION ALL SELECT  6 AS m UNION ALL SELECT  7 AS m UNION ALL SELECT  8 AS m UNION ALL SELECT  9 AS m UNION ALL SELECT 10 AS m UNION ALL SELECT 11 AS m UNION ALL SELECT 12 AS m) `months` LEFT JOIN `negocio` q ON YEAR(`data`) = y AND MONTH(`data`) = m AND (`STATUS_ORCAMENTO_id`) > 2 WHERE STR_TO_DATE(CONCAT(y, '-', m, '-01'), '%Y-%m-%d') >= MAKEDATE(year(now() - interval 1 year), 1) + interval 13 month AND STR_TO_DATE(CONCAT(y, '-', m, '-01'), '%Y-%m-%d') <= now() GROUP BY y, m ORDER BY y, m";
-                bd.Conectar();
-                dtFeitos = bd.RetDataTable(queryfeitos);
+                dt = bd.RetDataTable(query);
             }
             catch (Exception ex)
             {
@@ -133,18 +131,25 @@ namespace BLL
             }
             finally
             {
-                foreach (DataRow dr in dtAbertos.Rows)
+                foreach (DataRow dr in dt.Rows)
                 {
-                    abertos.Add(Convert.ToInt32(dr["total"]));
-                    labels.Add(ParseMonth(dr["mes"].ToString()));
-                }
-                foreach (DataRow dr in dtFeitos.Rows)
-                {
-                    feitos.Add(Convert.ToInt32(dr["total"]));
-                    soma_feitos = soma_feitos + Convert.ToDouble(dr["total"]);
+                    abertos.Add(Convert.ToInt32(dr["abertos"]));
+                    feitos.Add(Convert.ToInt32(dr["feitos"]));
+                    if (Convert.ToInt32(dr["abertos"]) == 0)
+                    {
+                        produtividade.Add(0);
+                    }
+                    else
+                    {
+                        produtividade.Add(Math.Round(Convert.ToDouble(dr["feitos"]) / Convert.ToDouble(dr["abertos"]),2));
+                    }
+                    soma_feitos = soma_feitos + Convert.ToDouble(dr["feitos"]);
+                    labels.Add(ParseMonth(dr["month"].ToString()));
                 }
 
-                chart.SeriesCollection = new SeriesCollection
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    chart.SeriesCollection = new SeriesCollection
             {
                 new LineSeries
                 {
@@ -162,9 +167,21 @@ namespace BLL
                     Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#77000000")),
                     Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#000000")),
                     PointGeometry = null
-                }
+                },
+                new LineSeries
+                {
+                    Title = "Produtividade",
+                    Values = produtividade,
+                    Fill = new SolidColorBrush(Colors.Transparent),
+                    ScalesYAt = 1,
+                    Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#404040")),
 
+
+                }
             };
+                }));
+
+                
                 chart.Labels = labels;
                 chart.Media = soma_feitos / 4;
             }
@@ -177,40 +194,40 @@ namespace BLL
             string parsedmonth = "";
             switch (month)
             {
-                case "1":
+                case "Jan":
                     parsedmonth = "Jan";
                     break;
-                case "2":
+                case "Feb":
                     parsedmonth = "Fev";
                     break;
-                case "3":
+                case "Mar":
                     parsedmonth = "Mar";
                     break;
-                case "4":
+                case "Apr":
                     parsedmonth = "Abr";
                     break;
-                case "5":
+                case "May":
                     parsedmonth = "Mai";
                     break;
-                case "6":
+                case "Jun":
                     parsedmonth = "Jun";
                     break;
-                case "7":
+                case "Jul":
                     parsedmonth = "Jul";
                     break;
-                case "8":
+                case "Aug":
                     parsedmonth = "Ago";
                     break;
-                case "9":
+                case "Sep":
                     parsedmonth = "Set";
                     break;
-                case "10":
+                case "Oct":
                     parsedmonth = "Out";
                     break;
-                case "11":
+                case "Nov":
                     parsedmonth = "Nov";
                     break;
-                case "12":
+                case "Dec":
                     parsedmonth = "Dez";
                     break;
             }
