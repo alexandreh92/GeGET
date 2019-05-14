@@ -68,10 +68,21 @@ namespace DAL
 
         public void ExecutarComandoSQL(string comandoSql)
         {
-            MySql.Data.MySqlClient.MySqlCommand comando = new MySql.Data.MySqlClient.MySqlCommand(comandoSql, comm);
+            try
+            {
+                MySql.Data.MySqlClient.MySqlCommand comando = new MySql.Data.MySqlClient.MySqlCommand(comandoSql, comm);
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                comm.Close();
+            }
             
-            comando.ExecuteNonQuery();
-            comm.Close();
         }
 
         public void ExecutarComandoSQLWithByteParameter(string comandoSql, byte[] photo)
@@ -95,9 +106,19 @@ namespace DAL
         public DataTable RetDataTable(string sql)
         {
             data = new DataTable();
-            da = new MySql.Data.MySqlClient.MySqlDataAdapter(sql, comm);
-            cb = new MySql.Data.MySqlClient.MySqlCommandBuilder(da);
-            da.Fill(data);
+            try
+            {
+                da = new MySql.Data.MySqlClient.MySqlDataAdapter(sql, comm);
+                cb = new MySql.Data.MySqlClient.MySqlCommandBuilder(da);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                da.Fill(data);
+            }
             return data;
         }
 
@@ -141,8 +162,17 @@ namespace DAL
 
         public MySqlDependency Dependency(string comandoSql)
         {
-            Devart.Data.MySql.MySqlCommand comando = new Devart.Data.MySql.MySqlCommand(comandoSql, com);
-            MySqlDependency dependency = new MySqlDependency(comando, 1000);
+            MySqlDependency dependency;
+            try
+            {
+                Devart.Data.MySql.MySqlCommand comando = new Devart.Data.MySql.MySqlCommand(comandoSql, com);
+                dependency = new MySqlDependency(comando, 1000);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
             return dependency;
         }
 

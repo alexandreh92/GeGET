@@ -208,5 +208,10 @@ namespace GeGET
         {
             helpers.Open<Logistica>(null, false);
         }
+
+        private void BtnSuprimentos_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
