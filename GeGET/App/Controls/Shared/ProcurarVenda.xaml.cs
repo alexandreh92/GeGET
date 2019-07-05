@@ -14,6 +14,7 @@ namespace GeGET
     public partial class ProcurarVenda : Window, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         ProcurarVendaBLL bll = new ProcurarVendaBLL();
         ProcurarVendaDTO dto = new ProcurarVendaDTO();
         public string Negocio_Id;
@@ -116,10 +117,23 @@ namespace GeGET
         #endregion
 
         #region IDisposable
-        void IDisposable.Dispose()
+        public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
         #endregion
     }
 }

@@ -40,5 +40,10 @@ namespace GeGET
         {
             helpers.Open<EntradaManualEstoque>(this.GetType().Name, false);
         }
+
+        private void BtnAtendimento_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Open<Atendimento>(this.GetType().Name, false);
+        }
     }
 }

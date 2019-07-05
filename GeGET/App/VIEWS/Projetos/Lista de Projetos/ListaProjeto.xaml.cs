@@ -8,16 +8,14 @@ using DTO;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
 using System.Threading;
-using MMLib.Extensions;
-using System.Collections.Generic;
-using System.ComponentModel;
 using DevExpress.Xpf.Grid;
 
 namespace GeGET
 {
-    public partial class ListaProjeto : UserControl
+    public partial class ListaProjeto : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         Helpers helpers = new Helpers();
         InformacoesListaProjetosDTO informacoesDTO = new InformacoesListaProjetosDTO();
         InformacoesListaProjetosBLL informacoesBLL = new InformacoesListaProjetosBLL();
@@ -275,6 +273,14 @@ namespace GeGET
         {
             var material = e.Row as ListaProjetosDTO;
 
+            if (e.Column.Header.ToString() == "Quantidade")
+            {
+                if (material.Quantidade < 0)
+                {
+                    material.Quantidade = 0;
+                }
+            }
+
             new Thread(() =>
             {
                 syncEvent.Set();
@@ -357,5 +363,28 @@ namespace GeGET
             sideExpander.Visibility = Visibility.Visible;
             CardPanel.Visibility = Visibility.Visible;
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+                informacoesBLL.Dispose();
+                syncEvent.Dispose();
+                syncValues.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

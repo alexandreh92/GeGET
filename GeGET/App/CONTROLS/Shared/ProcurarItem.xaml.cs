@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
@@ -24,6 +23,7 @@ namespace GeGET
         public string Item_Id;
         public string Item_Descricao;
         public string Item_Unidade;
+        bool disposed = false;
         #endregion
 
         #region Initialize
@@ -112,8 +112,23 @@ namespace GeGET
         #endregion
 
         #region IDisposable
-        void IDisposable.Dispose()
+        public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                syncEvent.Dispose();
+                bll.Dispose();
+            }
+            disposed = true;
         }
         #endregion
     }

@@ -11,8 +11,9 @@ using System.Windows;
 
 namespace GeGET
 {
-    class CopiarItensOrcamentoBLL
+    class CopiarItensOrcamentoBLL : IDisposable
     {
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
 
         public ObservableCollection<DisciplinaDTO> LoadDisciplinas(CopiarItensOrcamentoDTO dTO)
@@ -79,5 +80,26 @@ namespace GeGET
             }
         }
 
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 }

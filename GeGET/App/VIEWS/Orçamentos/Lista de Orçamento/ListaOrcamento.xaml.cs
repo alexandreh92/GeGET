@@ -8,16 +8,15 @@ using DTO;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
 using System.Threading;
-using MMLib.Extensions;
-using System.Collections.Generic;
-using System.ComponentModel;
 using DevExpress.Xpf.Grid;
+using System.Threading.Tasks;
 
 namespace GeGET
 {
-    public partial class ListaOrcamento : UserControl
+    public partial class ListaOrcamento : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         Helpers helpers = new Helpers();
 
         ListaOrcamentosDTO dto = new ListaOrcamentosDTO();
@@ -27,10 +26,11 @@ namespace GeGET
         public ObservableCollection<ListaOrcamentosDTO> listaOrcamentos;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         ManualResetEvent syncValues = new ManualResetEvent(false);
-        Thread t1;
         WaitBox wb;
         ObservableCollection<CopiarItensOrcamentoDTO> listaCopiar;
         ObservableCollection<MaterialDTO> listaAterarBDI;
+        ObservableCollection<ValoresOrcamento> listaValores;
+        ObservableCollection<ListaOrcamentosDTO> listaExcluir;
         #endregion
 
         #region Initialize
@@ -65,25 +65,34 @@ namespace GeGET
 
         private void WaitBoxLoad()
         {
-            syncEvent.WaitOne();
             Dispatcher.Invoke(new Action(() =>
             {
                 grdItens.UnselectAll();
                 Load();
-                wb.Close();
             }));
         }
 
-        public void Load()
+        public async void Load()
         {
-            listaOrcamentos = bll.LoadOrcamento(informacoesDTO);
+            wb = new WaitBox
+            {
+                Owner = Window.GetWindow(this)
+            };
+            wb.Show();
+            await Task.Run(() =>
+            {
+                listaOrcamentos = bll.LoadOrcamento(informacoesDTO);
+            });
             grdItens.ItemsSource = listaOrcamentos;
             LoadSidePanel();
+            wb.Close();
         }
 
         private void LoadSidePanel()
         {
-            pnlValores.ItemsSource = bll.LoadValores(informacoesDTO);
+            listaValores = bll.LoadValores(informacoesDTO);
+            pnlValores.ItemsSource = listaValores;
+            
         }
 
         #endregion
@@ -91,7 +100,7 @@ namespace GeGET
         #region Events
 
         #region Clicks
-        private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
+        private async void BtnPesquisa_Click(object sender, RoutedEventArgs e)
         {
             BlackScreen bs = new BlackScreen();
             var position = Mouse.GetPosition(this);
@@ -102,8 +111,17 @@ namespace GeGET
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {
                     informacoesDTO.Id = Convert.ToInt32(form.Negocio_Id);
-                    var informacoes = informacoesBLL.LoadInformacoes(informacoesDTO);
-                    
+                    var informacoes = new ObservableCollection<InformacoesListaOrcamentosDTO>();
+                    wb = new WaitBox
+                    {
+                        Owner = Window.GetWindow(this)
+                    };
+                    wb.Show();
+                    await Task.Run(() => 
+                    {
+                        informacoes = informacoesBLL.LoadInformacoes(informacoesDTO);
+                    });
+                    wb.Close();
                     if (informacoes.Count > 0)
                     {
                         informacoesDTO = informacoes.First();
@@ -118,6 +136,7 @@ namespace GeGET
                         cmbDisciplina.DisplayMemberPath = "Descricao";
                         cmbDisciplina.SelectedIndex = 0;
                     }
+                    
                 }
             }
         }
@@ -136,14 +155,16 @@ namespace GeGET
             }
         }
 
-        private void AtualizarPrecos_Click(object sender, RoutedEventArgs e)
+        private async void AtualizarPrecos_Click(object sender, RoutedEventArgs e)
         {
             var result = CustomOKCancelMessageBox.Show("Você deseja mesmo atualiazar os preços para a versão atual?", "Atenção!", Window.GetWindow(this));
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                bll.AtualizarPreco(informacoesDTO);
+                await Task.Run(() => 
+                {
+                    bll.AtualizarPreco(informacoesDTO);
+                });
                 Load();
-                CustomOKMessageBox.Show("Preços atualizados com sucesso.","Atualizado!", Window.GetWindow(this));
             }
         }
 
@@ -157,7 +178,7 @@ namespace GeGET
             helpers.Close();
         }
 
-        private void Excluir_Click(object sender, RoutedEventArgs e)
+        private async void Excluir_Click(object sender, RoutedEventArgs e)
         {
             int[] handles = grdItens.GetSelectedRowHandles();
 
@@ -166,27 +187,24 @@ namespace GeGET
                 var result = CustomOKCancelMessageBox.Show("Deseja mesmo excluir todos os itens selecionados?", "Atenção!", Window.GetWindow(this));
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    new Thread(() =>
+                    listaExcluir = new ObservableCollection<ListaOrcamentosDTO>();
+                    foreach (var rowHandle in handles)
                     {
-                        Dispatcher.Invoke(new Action(() =>
-                        {
-                            wb = new WaitBox();
-                            wb.Show();
-                        }));
-                        syncEvent.Set();
-                        foreach (var rowHandle in handles)
-                        {
-                            Dispatcher.Invoke(DispatcherPriority.Background,
-                               new Action(() =>
-                               {
-                                   var selectedItem = grdItens.GetRow(rowHandle) as ListaOrcamentosDTO;
-                                   dto.Id = selectedItem.Id;
-                                   bll.Excluir(dto);
-                               }));
-                        }
-                        t1 = new Thread(WaitBoxLoad);
-                        t1.Start();
-                    }).Start();
+                        var selectedItem = grdItens.GetRow(rowHandle) as ListaOrcamentosDTO;
+                        listaExcluir.Add(selectedItem);
+                    }
+                    wb = new WaitBox
+                    {
+                        Owner = Window.GetWindow(this)
+                    };
+                    wb.Show();
+                    await Task.Run(() => 
+                    {
+                        bll.Excluir(listaExcluir);
+                    });
+                    wb.Close();
+                    grdItens.UnselectAll();
+                    Load();
                 }
             }
             else
@@ -244,15 +262,12 @@ namespace GeGET
                         Load();
                     }
                 }
-                
-
             }
             else
             {
                 CustomOKMessageBox.Show("Você deve selecionar ao menos um item para alterar o BDI.", "Atenção!", Window.GetWindow(this));
             }
         }
-
         #endregion
 
         #region Comboboxes Selection Changed
@@ -289,48 +304,33 @@ namespace GeGET
         {
             var material = e.Row as ListaOrcamentosDTO;
 
-            new Thread(() =>
+            if (e.Column.Header.ToString() == "Quantidade")
             {
-                syncEvent.Set();
-                Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
-            {
-                if (e.Column.Header.ToString() == "Quantidade")
+                if (material.Quantidade < 0)
                 {
-                    dto.Id = material.Id;
-                    dto.Quantidade = material.Quantidade;
-                    bll.AtualizarQuantidade(dto);
+                    material.Quantidade = 0;
                 }
-                else if (e.Column.Header.ToString() == "BDI")
-                {
-                    dto.Id = material.Id;
-                    dto.Bdi = Convert.ToDouble(material.Bdi);
-                    bll.AtualizarBDI(dto);
-                }
-                else if (e.Column.Header.ToString() == "FD")
-                {
-                    dto.Id = material.Id;
-                    dto.Fd = material.Fd;
-                    new Thread(() => 
-                    {
-                        
-                        Dispatcher.BeginInvoke(DispatcherPriority.Render, new Action(() =>
-                        {
-                            bll.AtualizarFD(dto);
-                            LoadSidePanel();
-                        }));
-                    }).Start();
-                }
-            }));   
-            }).Start();
+            }
 
-            new Thread(() =>
+            if (e.Column.Header.ToString() == "Quantidade")
             {
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
-                {
-                    LoadSidePanel();
-                }));
-            }).Start();
-
+                dto.Id = material.Id;
+                dto.Quantidade = material.Quantidade;
+                bll.AtualizarQuantidade(dto);
+            }
+            else if (e.Column.Header.ToString() == "BDI")
+            {
+                dto.Id = material.Id;
+                dto.Bdi = Convert.ToDouble(material.Bdi);
+                bll.AtualizarBDI(dto);
+            }
+            else if (e.Column.Header.ToString() == "FD")
+            {
+                dto.Id = material.Id;
+                dto.Fd = material.Fd;
+                bll.AtualizarFD(dto);
+                LoadSidePanel();
+            }
         }
 
         #endregion
@@ -384,10 +384,33 @@ namespace GeGET
             if (cmbDescricao.SelectedValue != null)
             {
                 informacoesDTO.Atividade_Id = cmbDescricao.SelectedValue.ToString();
+                Load();
             }
-            Load();
             sideExpander.Visibility = Visibility.Visible;
             CardPanel.Visibility = Visibility.Visible;
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+                syncEvent.Dispose();
+                syncValues.Dispose();
+                informacoesBLL.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

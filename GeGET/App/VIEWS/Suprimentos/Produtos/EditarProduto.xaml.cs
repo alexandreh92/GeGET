@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Forms;
 using BLL;
 using DTO;
 
@@ -10,6 +9,7 @@ namespace GeGET
     public partial class EditarProduto : Window, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         public static int id;
         ProdutosBLL bll = new ProdutosBLL();
         ProdutosDTO dto = new ProdutosDTO();
@@ -56,16 +56,29 @@ namespace GeGET
         }
         #endregion
 
-        #region IDisposable
-        void IDisposable.Dispose()
-        {
-        }
-
-        #endregion
-
         private void Txt_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             e.Handled = new Regex("[^0-9,]+").IsMatch(e.Text);
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

@@ -8,22 +8,14 @@ using DTO;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
 using System.Threading;
-using MMLib.Extensions;
-using System.Collections.Generic;
-using System.ComponentModel;
-using DevExpress.Mvvm;
-using DevExpress.Xpf.Grid;
-using System.IO;
-using DevExpress.XtraPrinting;
-using Microsoft.Win32;
 
 namespace GeGET
 {
-    public partial class ConsultaListaOrcamento : UserControl
+    public partial class ConsultaListaOrcamento : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         Helpers helpers = new Helpers();
-
         ListaOrcamentosDTO dto = new ListaOrcamentosDTO();
         ListaOrcamentosBLL bll = new ListaOrcamentosBLL();
         InformacoesListaOrcamentosDTO informacoesDTO = new InformacoesListaOrcamentosDTO();
@@ -162,6 +154,18 @@ namespace GeGET
             }
             cmbDescricao.SelectedIndex = 0;
         }
+
+        private void CmbDescricao_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbDescricao.SelectedValue != null)
+            {
+                informacoesDTO.Atividade_Id = cmbDescricao.SelectedValue.ToString();
+            }
+            Load();
+            sideExpander.Visibility = Visibility.Visible;
+            CardPanel.Visibility = Visibility.Visible;
+        }
+
         #endregion
 
         #region Cell Value Changed
@@ -198,15 +202,29 @@ namespace GeGET
 
         #endregion
 
-        private void CmbDescricao_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        #region IDisposable
+
+        public void Dispose()
         {
-            if (cmbDescricao.SelectedValue != null)
-            {
-                informacoesDTO.Atividade_Id = cmbDescricao.SelectedValue.ToString();
-            }
-            Load();
-            sideExpander.Visibility = Visibility.Visible;
-            CardPanel.Visibility = Visibility.Visible;
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                syncEvent.Dispose();
+                syncValues.Dispose();
+                informacoesBLL.Dispose();
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 }

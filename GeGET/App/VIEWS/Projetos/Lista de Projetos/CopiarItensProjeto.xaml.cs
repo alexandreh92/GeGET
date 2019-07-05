@@ -12,7 +12,6 @@ namespace GeGET
     public partial class CopiarItensProjeto : Window, IDisposable
     {
         #region Declarations
-
         ListaProjetosDTO dto = new ListaProjetosDTO();
         ListaProjetosBLL bll = new ListaProjetosBLL();
         InformacoesListaProjetosDTO informacoesDTO = new InformacoesListaProjetosDTO();
@@ -23,7 +22,7 @@ namespace GeGET
         WaitBox wb;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         Thread t1;
-
+        bool disposed = false;
         #endregion
 
         #region Initialize
@@ -58,8 +57,10 @@ namespace GeGET
             {
                 Dispatcher.Invoke(new Action(() =>
                 {
-                    wb = new WaitBox();
-                    wb.Owner = Window.GetWindow(this);
+                    wb = new WaitBox
+                    {
+                        Owner = Window.GetWindow(this)
+                    };
                     wb.Show();
                 }));
                 syncEvent.Set();
@@ -162,8 +163,25 @@ namespace GeGET
         #endregion
 
         #region IDisposable
-        void IDisposable.Dispose()
+        public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                syncEvent.Dispose();
+                bll.Dispose();
+                informacoesBLL.Dispose();
+
+            }
+            disposed = true;
         }
         #endregion
     }

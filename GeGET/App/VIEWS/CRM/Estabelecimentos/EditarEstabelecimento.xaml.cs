@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using BLL;
@@ -9,6 +11,8 @@ namespace GeGET
     public partial class EditarEstabelecimento : Window, IDisposable
     {
         #region Declarations
+        bool disposed = false;
+        bool initializing;
         public static string id;
         private string cliente_Id;
         EstabelecimentosDTO dto = new EstabelecimentosDTO();
@@ -16,6 +20,7 @@ namespace GeGET
         EstadosBLL Estadosbll = new EstadosBLL();
         EstadoDTO Estadosdto = new EstadoDTO();
         CidadesBLL Cidadesbll = new CidadesBLL();
+        string CidadesID;
         #endregion
 
         #region Initialize
@@ -24,21 +29,19 @@ namespace GeGET
             InitializeComponent();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+            initializing = true;
             id = DTO.Id;
             cliente_Id = DTO.Cliente_Id;
             txtRazao.Text = DTO.Razao_Social;
             txtFantasia.Text = DTO.Nome_Fantasia;
             txtEndereco.Text = DTO.Endereco;
             txtDescricao.Text = DTO.Descricao;
-            cmbUF.ItemsSource = Estadosbll.LoadEstados();
+            LoadEstados();
             cmbUF.DisplayMemberPath = "Uf";
             cmbUF.SelectedValuePath = "Id";
             cmbUF.SelectedValue = Convert.ToInt32(DTO.UF_Id);
             Estadosdto.Id = Convert.ToInt32(cmbUF.SelectedValue);
-            cmbCidade.ItemsSource = Cidadesbll.LoadCidades(Estadosdto);
-            cmbCidade.DisplayMemberPath = "Cidade";
-            cmbCidade.SelectedValuePath = "Id";
-            cmbCidade.SelectedValue = Convert.ToInt32(DTO.Cidade_Id);
+            CidadesID = DTO.Cidade_Id;
             txtCNPJ.Text = DTO.Cnpj;
             txtIE.Text = DTO.Ie;
             txtTelefone.Text = DTO.Telefone;
@@ -46,10 +49,34 @@ namespace GeGET
         }
         #endregion
 
+        #region Methods
+
+        private async void LoadEstados()
+        {
+            var listaEstados = new List<EstadoDTO>();
+            await Task.Run(() =>
+            {
+                listaEstados = Estadosbll.LoadEstados();
+            });
+            cmbUF.ItemsSource = listaEstados;
+        }
+
+
+        private async void LoadCidades()
+        {
+            var listaCidades = new List<CidadesDTO>();
+            await Task.Run(() =>
+            {
+                listaCidades = Cidadesbll.LoadCidades(Estadosdto);
+            });
+            cmbCidade.ItemsSource = listaCidades;
+        }
+        #endregion
+
         #region Events
 
         #region Clicks
-        private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
+        private async void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
             dto.Id = id;
             dto.Razao_Social = txtRazao.Text.Replace("'", "''").ToUpper();
@@ -63,7 +90,16 @@ namespace GeGET
             dto.Cliente_Id = cliente_Id;
             dto.UF_Id = cmbUF.SelectedValue.ToString();
             dto.Cidade_Id = cmbCidade.SelectedValue.ToString();
-            bll.EditarEstabelecimento(dto);
+            WaitBox wb = new WaitBox
+            {
+                Owner = Window.GetWindow(this)
+            };
+            wb.Show();
+            await Task.Run(() => 
+            {
+                bll.EditarEstabelecimento(dto);
+            });
+            wb.Close();
             DialogResult = true;
         }
 
@@ -84,34 +120,57 @@ namespace GeGET
                     txtFantasia.Text = form.new_Nome_Fantasia;
                     cliente_Id = form.new_Cliente_Id;
                 }
-                else
-                {
-
-                }
             }
         }
         #endregion
 
         #region SelectionChanged
-        private void CmbUF_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private async void CmbUF_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (cmbUF.SelectedValue != null)
             {
                 Estadosdto.Id = Convert.ToInt32(cmbUF.SelectedValue);
-                cmbCidade.ItemsSource = Cidadesbll.LoadCidades(Estadosdto);
+                var listaCidades = new List<CidadesDTO>();
+                await Task.Run(() =>
+                {
+                    listaCidades = Cidadesbll.LoadCidades(Estadosdto);
+                });
+                cmbCidade.ItemsSource = listaCidades;
                 cmbCidade.DisplayMemberPath = "Cidade";
                 cmbCidade.SelectedValuePath = "Id";
             }
-
+            if (initializing)
+            {
+                cmbCidade.SelectedValue = Convert.ToInt32(CidadesID);
+                initializing = false;
+            }
         }
         #endregion
 
         #endregion
 
         #region IDisposable
-        void IDisposable.Dispose()
+
+        public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                Cidadesbll.Dispose();
+                bll.Dispose();
+                Estadosbll.Dispose();
+            }
+            disposed = true;
+        }
+
         #endregion
     }
 }

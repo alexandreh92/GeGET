@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="GeGET.ExpandersCRM"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GeGET"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="800">
+    <Grid HorizontalAlignment="Stretch">
+        <materialDesign:Card>
+            <StackPanel x:Name="testes">
+                <Expander IsExpanded="True" Header="CRM" Foreground="#7A2932" FontFamily="{DynamicResource Novecento-Bold}">
+                    <StackPanel>
+                        <WrapPanel Width="{Binding ActualWidth, ElementName=testes}">
+                            <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Button x:Name="btnClientes" Height="90" Width="90" Click="BtnClientes_Click">
+                                        <materialDesign:PackIcon Kind="AccountOutline" HorizontalAlignment="Center" Height="90" Width="90" />
+                                    </Button>
+                                    <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" Margin="0,10,0,0">Clientes</TextBlock>
+                                </StackPanel>
+                            </materialDesign:Card>
+                            <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Button x:Name="btnEstabelecimentos" Height="90" Width="90" Click="BtnEstabelecimentos_Click">
+                                        <materialDesign:PackIcon Kind="OfficeBuilding" HorizontalAlignment="Center" Height="70" Width="70" />
+                                    </Button>
+                                    <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" Margin="0,10,0,0">Estabelecimentos</TextBlock>
+                                </StackPanel>
+                            </materialDesign:Card>
+                            <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Button x:Name="btnNegocios" Height="90" Width="90" Click="BtnNegocios_Click">
+                                        <materialDesign:PackIcon Kind="Cards" HorizontalAlignment="Center" Height="70" Width="70" />
+                                    </Button>
+                                    <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" Margin="0,10,0,0">Negócios</TextBlock>
+                                </StackPanel>
+                            </materialDesign:Card>
+                            <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Button x:Name="btnPessoas" Height="90" Width="90" Click="BtnPessoas_Click">
+                                        <materialDesign:PackIcon Kind="HumanMale" HorizontalAlignment="Center" Height="70" Width="70" />
+                                    </Button>
+                                    <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" Margin="0,10,0,0">Pessoas</TextBlock>
+                                </StackPanel>
+                            </materialDesign:Card>
+                            <materialDesign:Card Visibility="Collapsed" Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Button x:Name="btnFunil" Height="90" Width="90" Click="BtnFunil_Click">
+                                        <materialDesign:PackIcon Kind="Funnel" HorizontalAlignment="Center" Height="70" Width="70" />
+                                    </Button>
+                                    <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" Margin="0,10,0,0">Funil de Negócios</TextBlock>
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </WrapPanel>
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>

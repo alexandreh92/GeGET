@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using DTO;
 using BLL;
 using System.Collections.ObjectModel;
@@ -26,7 +15,7 @@ namespace GeGET
         WaitBox wb;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         Thread t1;
-
+        bool disposed = false;
         public AlterarBDIOrcamento(ObservableCollection<MaterialDTO> dTOs)
         {
             InitializeComponent();
@@ -36,10 +25,6 @@ namespace GeGET
             }
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
-        }
-
-        void IDisposable.Dispose()
-        {
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
@@ -92,5 +77,26 @@ namespace GeGET
             }
             
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                syncEvent.Dispose();
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

@@ -87,7 +87,7 @@
                                                 <Separator/>
                                                 <Button x:Name="btnNegocios" Content="Negócios" Click="BtnNegocios_Click"/>
                                                 <Separator/>
-                                                <Button x:Name="btnOpenFolder" Content="Abrir Pasta" Click="btnOpenFolder_Click"/>
+                                                <Button x:Name="btnOpenFolder" Content="Abrir Pasta" Click="BtnOpenFolder_Click"/>
                                             </StackPanel>
                                         </materialDesign:PopupBox>
                                     </DockPanel>

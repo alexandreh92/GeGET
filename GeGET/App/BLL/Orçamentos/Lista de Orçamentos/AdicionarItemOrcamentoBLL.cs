@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    class AdicionarItemOrcamentoBLL
+    class AdicionarItemOrcamentoBLL : IDisposable
     {
         #region Declarations
+        bool disposed = false;
+
         AcessoBancoDados bd = new AcessoBancoDados();
         #endregion
 
@@ -55,6 +57,28 @@ namespace BLL
 
                 throw new Exception(ex.Message);
             }
+        }
+
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
         }
 
         #endregion

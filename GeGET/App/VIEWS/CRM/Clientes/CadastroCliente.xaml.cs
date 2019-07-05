@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using BLL;
@@ -6,9 +7,10 @@ using DTO;
 
 namespace GeGET
 {
-    public partial class CadastroCliente : UserControl
+    public partial class CadastroCliente : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         CategoriaClienteBLL Categoriabll = new CategoriaClienteBLL();
         ClientesBLL bll = new ClientesBLL();
         ClientesDTO dto = new ClientesDTO();
@@ -51,7 +53,7 @@ namespace GeGET
             helpers.Close();
         }
 
-        private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
+        private async void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
             if (txtRazao.Text != "" && txtFantasia.Text != "" && cmbCategoria.SelectedIndex != -1)
             {
@@ -61,7 +63,16 @@ namespace GeGET
                     dto.Razao_Social = txtRazao.Text.Replace("'", "''").ToUpper();
                     dto.Nome_Fantasia = txtFantasia.Text.Replace("'", "''").ToUpper();
                     dto.Categoria_Id = Convert.ToInt32(cmbCategoria.SelectedValue);
-                    if (bll.CreateCliente(dto))
+                    bool isSucess = false;
+                    WaitBox wb = new WaitBox();
+                    wb.Owner = Window.GetWindow(this);
+                    wb.Show();
+                    await Task.Run(() => 
+                    {
+                        isSucess = bll.CreateCliente(dto);
+                    });
+                    wb.Close();
+                    if (isSucess)
                     {
                         ClearControls();
                         CustomOKCancelMessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso!", Window.GetWindow(this));
@@ -74,6 +85,29 @@ namespace GeGET
             }
         }
         #endregion
+
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+                Categoriabll.Dispose();
+            }
+            disposed = true;
+        }
 
         #endregion
     }

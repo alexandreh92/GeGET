@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using DTO;
 using DAL;
 using System.Windows;
+using GeGET;
 
-namespace GeGET
+namespace BLL
 {
-    class GerarRequisicaoMaterialBLL
+    class GerarRequisicaoMaterialBLL : IDisposable
     {
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         LoginDTO loginDTO = new LoginDTO();
 
@@ -56,40 +56,99 @@ namespace GeGET
         {
             string rm;
             var dtRM = new DataTable();
-            try
+            InformacoesGerarRequisicaoMaterialDTO informacoesDTO = new InformacoesGerarRequisicaoMaterialDTO();
+            ObservableCollection<GerarRequisicaoMaterialDTO> listaSistema;
+            informacoesDTO.Id = DTO.Id;
+            bool isChanged = false;
+
+            listaSistema = LoadLista(informacoesDTO);
+
+
+            foreach (var item in listaMateriais)
             {
-                string substringMateriais = "";
-                foreach (var item in listaMateriais)
+                foreach (var dto in listaSistema)
                 {
-                    substringMateriais = substringMateriais + "((select id from requisicao_material where vendas_id = '"+DTO.Id+"' ORDER BY id desc LIMIT 1), '"+item.Produto_Id+"', '"+item.Quantidade+"'),";
+                    if (item.Produto_Id == dto.Produto_Id)
+                    {
+                        if (item.Saldo != dto.Saldo)
+                        {
+                            isChanged = true;
+                        }
+                    }
                 }
-                string queryMateriais = "INSERT INTO materiais_requeridos (requisicao_material_id, produto_id, quantidade) VALUES " + substringMateriais.TrimEnd(',');
-                
-                var queryRM = "INSERT INTO requisicao_material (vendas_id, usuario_id) VALUES ('"+DTO.Id+"', '"+loginDTO.Id+"');" + queryMateriais;
-                bd.Conectar();
-                bd.ExecutarComandoSQL(queryRM);
-                
-                var querySelectRM = "select id from requisicao_material where vendas_id = '" + DTO.Id + "' ORDER BY id desc LIMIT 1";
-                bd.Conectar();
-                dtRM = bd.RetDataTable(querySelectRM);
             }
-            catch (Exception ex)
+
+
+            if (!isChanged)
             {
-                throw new Exception(ex.ToString());
+                try
+                {
+                    string substringMateriais = "";
+                    foreach (var item in listaMateriais)
+                    {
+                        substringMateriais = substringMateriais + "((select id from requisicao_material where vendas_id = '" + DTO.Id + "' ORDER BY id desc LIMIT 1), '" + item.Produto_Id + "', '" + item.Quantidade + "'),";
+                    }
+                    string queryMateriais = "INSERT INTO materiais_requeridos (requisicao_material_id, produto_id, quantidade) VALUES " + substringMateriais.TrimEnd(',');
+
+                    var queryRM = "INSERT INTO requisicao_material (vendas_id, usuario_id) VALUES ('" + DTO.Id + "', '" + loginDTO.Id + "');" + queryMateriais;
+                    bd.Conectar();
+                    bd.ExecutarComandoSQL(queryRM);
+
+                    var querySelectRM = "select id from requisicao_material where vendas_id = '" + DTO.Id + "' ORDER BY id desc LIMIT 1";
+                    bd.Conectar();
+                    dtRM = bd.RetDataTable(querySelectRM);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.ToString());
+                }
+                finally
+                {
+                    rm = dtRM.Rows[0]["id"].ToString();
+                }
             }
-            finally
+            else
             {
-                rm = dtRM.Rows[0]["id"].ToString();
+                rm = null;
+                CustomOKMessageBox.Show("A requisição não foi gerada.\nAlguns itens foram alterados, a tela será recarregada.","Atenção!",Window.GetWindow(Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout)));
             }
+
+            //verifica com foreach em cada elemento do observablecollection e compara com o saldo da query
+            //SELECT t1.produto_id, t1.descricao, t1.partnumber, t1.un, t1.quantidade-coalesce(t2.quantidade,0) as saldo, t1.rsocial as fabricante FROM (SELECT lv.produto_id, i.descricao, p.partnumber, un.descricao as un, SUM(quantidade) as quantidade, f.rsocial FROM lista_vendas lv JOIN produto p ON p.id = lv.produto_id JOIN item i ON i.id = p.descricao_item_id JOIN unidade un ON un.id = i.unidade_id JOIN fornecedor f ON f.id = p.fornecedor_id WHERE lv.vendas_id = '15' AND lv.fd = 0 AND i.mobra = 0 AND i.id != 1440 GROUP BY produto_id) as t1 LEFT OUTER JOIN (SELECT produto_id, SUM(quantidade) as quantidade from materiais_requeridos mr JOIN requisicao_material rm ON rm.id = mr.requisicao_material_id WHERE rm.vendas_id = '15' GROUP BY PRODUTO_ID) as t2 ON t1.produto_id = t2.produto_id WHERE t1.quantidade - coalesce(t2.quantidade, 0) > 0 AND t1.produto_id = '209' GROUP BY t1.produto_id
+            //se algum variou, cai fora, se não executa o código
+
+            
             return rm;
         }
 
         #endregion
 
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 
-    class InformacoesGerarRequisicaoMaterialBLL
+    class InformacoesGerarRequisicaoMaterialBLL : IDisposable
     {
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         public ObservableCollection<InformacoesGerarRequisicaoMaterialDTO> LoadInformacoes(InformacoesGerarRequisicaoMaterialDTO DTO)
         {
@@ -120,5 +179,27 @@ namespace GeGET
             }
             return informacoes;
         }
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 }

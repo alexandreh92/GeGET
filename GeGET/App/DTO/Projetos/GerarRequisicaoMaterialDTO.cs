@@ -1,4 +1,4 @@
-﻿namespace GeGET
+﻿namespace DTO
 {
     public class GerarRequisicaoMaterialDTO
     {

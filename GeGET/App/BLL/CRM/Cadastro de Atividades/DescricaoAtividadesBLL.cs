@@ -10,8 +10,9 @@ using System.Data;
 
 namespace GeGET
 {
-    class DescricaoAtividadesBLL
+    class DescricaoAtividadesBLL : IDisposable
     {
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
 
         public ObservableCollection<DescricaoAtividadesDTO> LoadAtividades(DescricaoAtividadesDTO DTO)
@@ -37,5 +38,27 @@ namespace GeGET
             }
             return atividades;
         }
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 }

@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO;
 using DAL;
 
 namespace BLL
 {
-    class LinkarProdutoNotaFiscalBLL
+    class LinkarProdutoNotaFiscalBLL : IDisposable
     {
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         public ObservableCollection<LinkarProdutoNotaFiscalDTO> LoadItens()
         {
@@ -89,6 +86,28 @@ namespace BLL
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
         }
 
         #endregion

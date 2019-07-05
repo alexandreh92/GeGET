@@ -13,9 +13,10 @@ using System.Windows.Input;
 
 namespace GeGET
 {
-    public partial class PrecificarProdutos : UserControl
+    public partial class PrecificarProdutos : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         Helpers helpers = new Helpers();
         ProdutosBLL bll = new ProdutosBLL();
         ProdutosDTO dto = new ProdutosDTO();
@@ -203,5 +204,26 @@ namespace GeGET
                 }
             }), DispatcherPriority.Render);
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+                syncEvent.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

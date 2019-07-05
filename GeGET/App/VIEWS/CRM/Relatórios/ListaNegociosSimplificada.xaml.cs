@@ -4,21 +4,21 @@ using System.Windows.Controls;
 using BLL;
 using DTO;
 using System.Collections.ObjectModel;
-using System.Windows.Threading;
 using System.Threading;
 using DevExpress.XtraPrinting;
 using Microsoft.Win32;
+using System.Threading.Tasks;
 
 namespace GeGET
 {
-    public partial class ListaNegociosSimplificada : UserControl
+    public partial class ListaNegociosSimplificada : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         Helpers helpers = new Helpers();
         NegociosBLL bll = new NegociosBLL();
         NegociosDTO dto = new NegociosDTO();
         ManualResetEvent syncEvent = new ManualResetEvent(false);
-        Thread t1;
         WaitBox wb;
         ObservableCollection<NegociosDTO> listaNegocios = new ObservableCollection<NegociosDTO>();
         #endregion
@@ -27,70 +27,32 @@ namespace GeGET
         public ListaNegociosSimplificada()
         {
             InitializeComponent();
-            
-            new Thread(() =>
-            {
-                Dispatcher.Invoke( new Action(() =>
-                {
-                    wb = new WaitBox();
-                    wb.Owner = Window.GetWindow(this);
-                    wb.Show();
-                }));
-
-                syncEvent.Set();
-                Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
-                {
-                    
-                    
-                    listaNegocios = bll.LoadNegocios(dto);
-                    t1 = new Thread(WaitLoad);
-                    t1.Start();
-                }));
-            }).Start();
-            
+            Load();
         }
         #endregion
 
-        private void WaitLoad()
-        {
-            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
-            {
-                syncEvent.WaitOne();
-                Load();
-                wb.Close();
-            }));
-            
-        }
+        #region Methods
 
-        private void Load()
+        #region Load Values
+        private async void Load()
         {
+            wb = new WaitBox();
+            wb.Owner = Window.GetWindow(this);
+            wb.Show();
+            await Task.Run(() =>
+            {
+                listaNegocios = bll.LoadNegocios(dto);
+            });
             grdItens.ItemsSource = listaNegocios;
+            wb.Close();
         }
+        #endregion
+
+        #endregion
 
         #region Events
 
         #region Clicks
-        
-
-        
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
-        {
-            helpers.OpenBack(false);
-        }
-
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
-        {
-            helpers.Close();
-        }
-
-        
-
-
-        #endregion
-
-
-        #endregion
-
 
         private void ExportExcel_Click(object sender, RoutedEventArgs e)
         {
@@ -114,5 +76,44 @@ namespace GeGET
                 grdView.ExportToPdf(fileDialog.FileName, new PdfExportOptions());
             }
         }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.OpenBack(false);
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            helpers.Close();
+        }
+
+
+
+
+        #endregion
+
+
+        #endregion
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+                syncEvent.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

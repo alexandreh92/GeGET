@@ -4,10 +4,11 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System;
 
-namespace GeGET
+namespace BLL
 {
-    class ProdutosBLL
+    class ProdutosBLL : IDisposable
     {
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         LoginDTO loginDTO = new LoginDTO();
 
@@ -229,6 +230,28 @@ namespace GeGET
                 throw new Exception(ex.ToString());
             }
         }
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
         #endregion
     }
 }

@@ -23,6 +23,7 @@ namespace GeGET
         public ObservableCollection<FornecedoresDTO> listaFornecedores;
         public string Fornecedor_Id;
         public string Fornecedor_Descricao;
+        bool disposed = false;
         #endregion
 
         #region Initialize
@@ -111,8 +112,23 @@ namespace GeGET
         #endregion
 
         #region IDisposable
-        void IDisposable.Dispose()
+        public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                syncEvent.Dispose();
+                bll.Dispose();
+            }
+            disposed = true;
         }
         #endregion
     }

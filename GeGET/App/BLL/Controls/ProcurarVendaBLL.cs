@@ -6,8 +6,9 @@ using DTO;
 
 namespace BLL
 {
-    class ProcurarVendaBLL
+    class ProcurarVendaBLL : IDisposable
     {
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
 
         public ObservableCollection<ProcurarVendaDTO> LoadVendas()
@@ -34,5 +35,26 @@ namespace BLL
             return vendas;
         }
 
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 }

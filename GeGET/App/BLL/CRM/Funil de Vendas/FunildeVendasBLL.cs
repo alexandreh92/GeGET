@@ -3,12 +3,12 @@ using DTO;
 using DAL;
 using System.Data;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
 
 namespace BLL
 {
-    class FunildeVendasBLL
+    class FunildeVendasBLL : IDisposable
     {
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         readonly FunildeVendasDTO dto = new FunildeVendasDTO();
 
@@ -38,5 +38,26 @@ namespace BLL
             return negocios;
         }
 
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 }

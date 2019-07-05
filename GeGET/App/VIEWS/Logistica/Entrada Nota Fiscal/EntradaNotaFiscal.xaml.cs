@@ -18,9 +18,10 @@ using System.Threading.Tasks;
 
 namespace GeGET
 {
-    public partial class EntradaNotaFiscal : UserControl
+    public partial class EntradaNotaFiscal : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         Helpers helpers = new Helpers();
         XmlDocument xmlDocument;
         EntradaNotaFiscalBLL bll = new EntradaNotaFiscalBLL();
@@ -64,9 +65,11 @@ namespace GeGET
 
         private void ImportarXML_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Selecione uma Nota Fiscal XML";
-            op.Filter = "Extensible Markup Language (*.xml)|*.xml";
+            OpenFileDialog op = new OpenFileDialog
+            {
+                Title = "Selecione uma Nota Fiscal XML",
+                Filter = "Extensible Markup Language (*.xml)|*.xml"
+            };
             if (op.ShowDialog() == true)
             { 
                 XMLReader(op.FileName);
@@ -75,8 +78,10 @@ namespace GeGET
 
         private async void XMLReader(string FileName)
         {
-            WaitBox wb = new WaitBox();
-            wb.Owner = Window.GetWindow(this);
+            WaitBox wb = new WaitBox
+            {
+                Owner = Window.GetWindow(this)
+            };
             wb.Show();
 
             xmlDocument = new XmlDocument();
@@ -136,7 +141,7 @@ namespace GeGET
                     findproduto.First().Nota = numero;
                     await Task.Run(() => 
                     {
-                        ispresent = bll.isPresent(findproduto.First());
+                        ispresent = bll.IsPresent(findproduto.First());
                     });
                 }
                 else
@@ -260,5 +265,25 @@ namespace GeGET
                 }
             }
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

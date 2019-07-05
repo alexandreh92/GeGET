@@ -25,8 +25,9 @@ namespace GeGET
     /// <summary>
     /// Interaction logic for Teste.xaml
     /// </summary>
-    public partial class Funil : UserControl
+    public partial class Funil : UserControl, IDisposable
     {
+        bool disposed = false;
         FunildeVendasBLL bll = new FunildeVendasBLL();
         Control teste;
         Thread t1;
@@ -136,5 +137,27 @@ namespace GeGET
         {
 
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+                syncEvent.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
+
     }
 }

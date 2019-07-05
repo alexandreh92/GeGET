@@ -3,21 +3,19 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using BLL;
-using DTO;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
 using System.Threading;
-using MMLib.Extensions;
-using System.Collections.Generic;
-using System.ComponentModel;
 using DevExpress.Xpf.Grid;
+using BLL;
+using DTO;
 
 namespace GeGET
 {
-    public partial class GerarRequisicaoMaterial : UserControl
+    public partial class GerarRequisicaoMaterial : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         Helpers helpers = new Helpers();
         InformacoesGerarRequisicaoMaterialDTO informacoesDTO = new InformacoesGerarRequisicaoMaterialDTO();
         InformacoesGerarRequisicaoMaterialBLL informacoesBLL = new InformacoesGerarRequisicaoMaterialBLL();
@@ -161,12 +159,16 @@ namespace GeGET
                         listaGerar.Add(new GerarRequisicaoMaterialDTO
                         {
                             Produto_Id = selectedItem.Produto_Id,
-                            Quantidade = selectedItem.Quantidade
+                            Quantidade = selectedItem.Quantidade,
+                            Saldo = selectedItem.Saldo
                         });
                     }
                     var rm = bll.GerarRM(informacoesDTO, listaGerar);
-                    CustomOKMessageBox.Show("Requisição de Materiais Nº " + rm + " gerada com sucesso.", "Atenção!", Window.GetWindow(this));
-                    Load();
+                    if (rm != null && rm != "")
+                    {
+                        CustomOKMessageBox.Show("Requisição de Materiais Nº " + rm + " gerada com sucesso.", "Atenção!", Window.GetWindow(this));
+                        Load();
+                    }
                 }
             }
             else
@@ -174,5 +176,28 @@ namespace GeGET
                 CustomOKMessageBox.Show("Você deve selecionar ao menos um item para gerar RM.", "Atenção!", Window.GetWindow(this));
             }
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+                informacoesBLL.Dispose();
+                syncEvent.Dispose();
+                syncValues.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

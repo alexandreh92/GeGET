@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using DTO;
 using DAL;
 using System.Data;
@@ -7,14 +6,15 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using System.Windows;
-using GeGET;
 
 namespace BLL
 {
-    class NegociosBLL
+    class NegociosBLL : IDisposable
     {
         #region Declarations
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         NegociosDTO dto = new NegociosDTO();
         LoginDTO Logindto = new LoginDTO();
@@ -228,6 +228,7 @@ namespace BLL
             {
                 foreach (DataRow dr in dt.Rows)
                 {
+
                     BitmapImage bi = new BitmapImage();
 
                     if (!String.IsNullOrEmpty(dr["foto"].ToString()))
@@ -660,6 +661,28 @@ namespace BLL
         }
 
         #endregion
+
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
 
         #endregion
     }

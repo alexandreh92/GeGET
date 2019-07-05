@@ -32,7 +32,7 @@
                     <Button x:Name="btnBack" ToolTip="Voltar" Height="40" Width="40" Margin="10,0,-5,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnBack_Click">
                         <materialDesign:PackIcon Foreground="#7A2932" Kind="LessThan" Width="25" Height="25"/>
                     </Button>
-                    <TextBlock VerticalAlignment="Center" Foreground="#7A2932" Margin="5,-2,0,0" FontSize="14" FontFamily="{DynamicResource Novecento-Bold}">Cadastro de Estabelecimento</TextBlock>
+                    <TextBlock VerticalAlignment="Center" Foreground="#7A2932" Margin="5,-2,0,0" FontSize="14" FontFamily="{DynamicResource Novecento-Bold}">Cadastro de Negócio</TextBlock>
                     <Button x:Name="btnClose" HorizontalAlignment="Right" ToolTip="Fechar" Height="40" Width="40" Margin="0,0,10,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnClose_Click">
                         <materialDesign:PackIcon Foreground="#7A2932" Kind="Close" Width="25" Height="25"/>
                     </Button>
@@ -50,7 +50,7 @@
                         <Grid Grid.Column="1">
                             <materialDesign:Card x:Name="card1" Margin="0,0,0,20" Background="{DynamicResource MaterialDesignBackground}">
                                 <StackPanel x:Name="StackPanel1">
-                                    <TextBlock Foreground="#7A2932" Grid.Row="0" Margin="24,21,0,21" FontFamily="{DynamicResource Novecento-Bold}">Cadastro de Novo Estabelecimento</TextBlock>
+                                    <TextBlock Foreground="#7A2932" Grid.Row="0" Margin="24,21,0,21" FontFamily="{DynamicResource Novecento-Bold}">Cadastro de Novo Negócio</TextBlock>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
                                     <StackPanel HorizontalAlignment="Stretch">
                                         <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="0,40">

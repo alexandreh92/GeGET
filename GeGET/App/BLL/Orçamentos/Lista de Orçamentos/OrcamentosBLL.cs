@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO;
 using DAL;
 using System.Data;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace BLL
 {
-    class OrcamentosBLL
+    class OrcamentosBLL : IDisposable
     {
         #region Declarations
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         DataSet ds = new DataSet();
         #endregion
@@ -48,6 +44,29 @@ namespace BLL
         }
 
         #endregion
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+                ds.Dispose();
+            }
+            disposed = true;
+        }
+
         #endregion
     }
 }

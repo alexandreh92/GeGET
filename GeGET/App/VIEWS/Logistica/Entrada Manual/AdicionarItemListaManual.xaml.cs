@@ -1,15 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Threading;
-using BLL;
-using DTO;
-using MMLib.Extensions;
 
 namespace GeGET
 {
@@ -20,6 +12,7 @@ namespace GeGET
         EntradaManualEstoqueDTO dto = new EntradaManualEstoqueDTO();
         public ObservableCollection<EntradaManualEstoqueDTO> listaItens;
         public ObservableCollection<EntradaManualEstoqueDTO> listaEntrada = new ObservableCollection<EntradaManualEstoqueDTO>();
+        bool disposed = false;
         #endregion
 
         #region Initialize
@@ -48,7 +41,6 @@ namespace GeGET
 
 
         #endregion
-
 
         #region Events
 
@@ -83,9 +75,25 @@ namespace GeGET
         #endregion
 
         #region IDisposable
-        void IDisposable.Dispose()
+
+        public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+
         #endregion
     }
 }
