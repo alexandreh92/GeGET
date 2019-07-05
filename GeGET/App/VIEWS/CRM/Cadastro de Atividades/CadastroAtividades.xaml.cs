@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
 using BLL;
 using DTO;
 using System.Linq;
@@ -14,9 +10,8 @@ using System.Windows.Controls.Primitives;
 
 namespace GeGET
 {
-    public partial class CadastroAtividades : UserControl
+    public partial class CadastroAtividades : UserControl, IDisposable
     {
-
         #region Declarations
         Helpers helpers = new Helpers();
         LoginDTO login = new LoginDTO();
@@ -26,6 +21,7 @@ namespace GeGET
         DescricaoAtividadesDTO descricaoAtividadesDTO = new DescricaoAtividadesDTO();
         AtividadeCadastradaDTO atividadeCadastradaDTO = new AtividadeCadastradaDTO();
         ManualResetEvent syncEvent = new ManualResetEvent(false);
+        bool disposed = false;
         #endregion
 
         #region Initialize
@@ -190,5 +186,29 @@ namespace GeGET
                 }
             }
         }
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                syncEvent.Dispose();
+                bll.Dispose();
+                descricaoAtividadesBLL.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 }

@@ -4,12 +4,14 @@ using DAL;
 using System.Data;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace BLL
 {
-    class PessoasBLL
+    class PessoasBLL : IDisposable
     {
         #region Declarations
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         PessoasDTO dto = new PessoasDTO();
         LoginDTO Logindto = new LoginDTO();
@@ -29,7 +31,7 @@ namespace BLL
             var dt = new DataTable();
             try
             {
-                var query = "SELECT cc.id, cc.nome, cc.STATUS_id, cc.email, cc.telefone, cc.celular, cc.data, cc.USUARIO_id, fc.id as id_funcao, fc.descricao as desc_funcao, c.id as cliente_id, c.rsocial, c.fantasia FROM contato_cliente cc join cliente c on cc.CLIENTE_id = c.id join funcoes_contato fc ON cc.funcao_id = fc.id " + Procurar + " ORDER BY cc.nome";
+                var query = "SELECT cc.id, cc.nome, cc.anotacoes, cc.STATUS_id, cc.email, cc.telefone, cc.celular, cc.data, cc.USUARIO_id, fc.id as id_funcao, fc.descricao as desc_funcao, c.id as cliente_id, c.rsocial, c.fantasia FROM contato_cliente cc join cliente c on cc.CLIENTE_id = c.id join funcoes_contato fc ON cc.funcao_id = fc.id " + Procurar + " ORDER BY cc.nome";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
@@ -41,7 +43,7 @@ namespace BLL
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    pessoas.Add(new PessoasDTO { Id = dr["id"].ToString(), Status_Id = dr["status_id"].ToString(), Nome = dr["nome"].ToString(), Email = dr["email"].ToString(), Funcao = dr["desc_funcao"].ToString() + " NA " + dr["rsocial"].ToString(), Telefone = dr["telefone"].ToString(), Celular = dr["celular"].ToString(), Cliente_Id = dr["cliente_id"].ToString(), Funcao_Id = dr["id_funcao"].ToString(), Rsocial = dr["rsocial"].ToString() });
+                    pessoas.Add(new PessoasDTO { Id = dr["id"].ToString(), Status_Id = dr["status_id"].ToString(), Nome = dr["nome"].ToString(), Email = dr["email"].ToString(), Funcao = dr["desc_funcao"].ToString() + " NA " + dr["rsocial"].ToString(), Telefone = dr["telefone"].ToString(), Celular = dr["celular"].ToString(), Cliente_Id = dr["cliente_id"].ToString(), Funcao_Id = dr["id_funcao"].ToString(), Rsocial = dr["rsocial"].ToString(), Anotacoes = dr["anotacoes"].ToString() });
                 }
                 bd.CloseConection();
             }
@@ -51,15 +53,15 @@ namespace BLL
 
         #region Create Pessoa
 
-        public bool CreatePessoa(PessoasDTO DTO)
+        public async Task<bool> CreatePessoa(PessoasDTO DTO)
         {
             bool sucess = false;
             try
             {
                 var data = DateTime.Now.ToString();
-                var query = "INSERT INTO contato_cliente (nome, email, funcao_id, telefone, celular, data, USUARIO_id, CLIENTE_id) VALUES ('" + DTO.Nome + "', '" + DTO.Email + "','" + DTO.Funcao_Id + "', '" + DTO.Telefone + "','" + DTO.Telefone + "','" + data + "', '" + Logindto.Id + "', '" + DTO.Cliente_Id + "')";
+                var query = "INSERT INTO contato_cliente (nome, email, funcao_id, telefone, celular, data, USUARIO_id, CLIENTE_id, anotacoes) VALUES ('" + DTO.Nome + "', '" + DTO.Email + "','" + DTO.Funcao_Id + "', '" + DTO.Telefone + "','" + DTO.Telefone + "','" + data + "', '" + Logindto.Id + "', '" + DTO.Cliente_Id + "', '"+DTO.Anotacoes+"')";
                 bd.Conectar();
-                bd.ExecutarComandoSQL(query);
+                await bd.ExecutarComandoSQLAsync(query);
             }
             catch (Exception ex)
             {
@@ -110,13 +112,14 @@ namespace BLL
         #endregion
 
         #region Update Pessoas
-        public void UpdatePessoas(PessoasDTO DTO)
+        public async Task<bool> UpdatePessoas(PessoasDTO DTO)
         {
+            bool isTrue = false;
             try
             {
-                var query = "UPDATE contato_cliente SET nome='" + DTO.Nome + "' , email='" + DTO.Email + "', funcao_id='" + DTO.Funcao_Id + "', CLIENTE_id='" + DTO.Cliente_Id + "' , telefone='" + DTO.Telefone + "', celular='" + DTO.Celular + "', STATUS_id='" + DTO.Status_Id + "'  WHERE id='" + DTO.Id + "'";
+                var query = "UPDATE contato_cliente SET nome='" + DTO.Nome + "' , email='" + DTO.Email + "', funcao_id='" + DTO.Funcao_Id + "', CLIENTE_id='" + DTO.Cliente_Id + "' , telefone='" + DTO.Telefone + "', celular='" + DTO.Celular + "', STATUS_id='" + DTO.Status_Id + "', anotacoes='"+DTO.Anotacoes+"'  WHERE id='" + DTO.Id + "'";
                 bd.Conectar();
-                bd.ExecutarComandoSQL(query);
+                await bd.ExecutarComandoSQLAsync(query);
             }
             catch (Exception ex)
             {
@@ -124,10 +127,34 @@ namespace BLL
             }
             finally
             {
+                isTrue = true;
                 bd.CloseConection();
             }
+            return isTrue;
         }
         #endregion
+
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
 
         #endregion
     }

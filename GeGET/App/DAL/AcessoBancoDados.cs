@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    class AcessoBancoDados
+    class AcessoBancoDados : IDisposable
     {
+        bool disposed = false;
 
         public MySql.Data.MySqlClient.MySqlConnection comm;
         public Devart.Data.MySql.MySqlConnection com;
@@ -26,10 +27,10 @@ namespace DAL
         //public static string server = "getacengenharia.ddns.net";
         //public static string server = "localhost";
         public static string user = "root";
-        public static string password = "root";
+        public static string password = "TwukASH_05";
         public static string database = "gegetdb";
         readonly string comStrDev = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false;", server, user, password, database);
-        string commStr = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false; Allow User Variables = true", server, user, password, database);
+        readonly string commStr = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false; Allow User Variables = true", server, user, password, database);
 
         public void Conectar()
         {
@@ -66,6 +67,7 @@ namespace DAL
 
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public void ExecutarComandoSQL(string comandoSql)
         {
             try
@@ -85,6 +87,7 @@ namespace DAL
             
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public void ExecutarComandoSQLWithByteParameter(string comandoSql, byte[] photo)
         {
             MySql.Data.MySqlClient.MySqlCommand comando = new MySql.Data.MySqlClient.MySqlCommand(comandoSql, comm);
@@ -103,6 +106,7 @@ namespace DAL
             await conn.CloseAsync();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public DataTable RetDataTable(string sql)
         {
             data = new DataTable();
@@ -140,6 +144,7 @@ namespace DAL
             return datatable;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public DataSet RetDataSet(List<QueryHelper> list)
         {
             ds = new DataSet();
@@ -152,6 +157,7 @@ namespace DAL
             return ds;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public MySql.Data.MySqlClient.MySqlDataReader RetDataReader(string sql)
         {
             MySql.Data.MySqlClient.MySqlCommand comando = new MySql.Data.MySqlClient.MySqlCommand(sql, comm);
@@ -160,6 +166,7 @@ namespace DAL
             return dr;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public MySqlDependency Dependency(string comandoSql)
         {
             MySqlDependency dependency;
@@ -190,6 +197,48 @@ namespace DAL
         {
             comm.Close();
         }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                if (data!=null)
+                {
+                    data.Dispose();
+                }
+                if (ds!=null)
+                {
+                    ds.Dispose();
+                }
+                if (da!=null)
+                {
+                    da.Dispose();
+                }
+                if (cb!=null)
+                {
+                    cb.Dispose();
+                }
+                if (com!=null)
+                {
+                    com.Dispose();
+                }
+                if (comm!= null)
+                {
+                    comm.Dispose();
+                }
+            }
+            disposed = true;
+        }
+
 
     }
 }

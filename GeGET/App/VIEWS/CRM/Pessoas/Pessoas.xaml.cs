@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -11,13 +12,15 @@ using MMLib.Extensions;
 
 namespace GeGET
 {
-    public partial class Pessoas : UserControl
+    public partial class Pessoas : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         PessoasBLL bll = new PessoasBLL();
         PessoasDTO dto = new PessoasDTO();
         Helpers helpers = new Helpers();
         Thread t1;
+        WaitBox wb;
         ObservableCollection<PessoasDTO> listaPessoas;
         #endregion
 
@@ -32,10 +35,17 @@ namespace GeGET
         #endregion
 
         #region Methods
-        private void LoadPessoas()
+        private async void LoadPessoas()
         {
-            listaPessoas = bll.LoadPessoas();
+            wb = new WaitBox();
+            wb.Owner = Window.GetWindow(this);
+            wb.Show();
+            await Task.Run(() => 
+            {
+                listaPessoas = bll.LoadPessoas();
+            });
             lstClientes.ItemsSource = listaPessoas;
+            wb.Close();
         }
 
         private void Commit()
@@ -67,6 +77,11 @@ namespace GeGET
             helpers.Close();
         }
 
+        private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
+        {
+            Commit();
+        }
+
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             if (dto.FromParent)
@@ -93,15 +108,7 @@ namespace GeGET
         {
             Button btn = sender as Button;
             int index = lstClientes.Items.IndexOf(btn.DataContext);
-            dto.Id = ((PessoasDTO)lstClientes.Items[index]).Id;
-            dto.Nome = ((PessoasDTO)lstClientes.Items[index]).Nome;
-            dto.Rsocial = ((PessoasDTO)lstClientes.Items[index]).Rsocial;
-            dto.Email = ((PessoasDTO)lstClientes.Items[index]).Email;
-            dto.Telefone = ((PessoasDTO)lstClientes.Items[index]).Telefone;
-            dto.Celular = ((PessoasDTO)lstClientes.Items[index]).Celular;
-            dto.Cliente_Id = ((PessoasDTO)lstClientes.Items[index]).Cliente_Id;
-            dto.Funcao_Id = ((PessoasDTO)lstClientes.Items[index]).Funcao_Id;
-            dto.Status_Id = ((PessoasDTO)lstClientes.Items[index]).Status_Id;
+            dto = ((PessoasDTO)lstClientes.Items[index]) as PessoasDTO;
             using (var form = new EditarPessoas(dto))
             {
                 form.Owner = Window.GetWindow(this);
@@ -124,8 +131,7 @@ namespace GeGET
         }
         #endregion
 
-        #endregion
-
+        #region KeyDown
         private void TxtProcurar_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Enter)
@@ -133,10 +139,28 @@ namespace GeGET
                 Commit();
             }
         }
+        #endregion
 
-        private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region IDisposable
+        public void Dispose()
         {
-            Commit();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

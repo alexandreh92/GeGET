@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using DAL;
 using DTO;
 
 namespace BLL
 {
-    class AdicionarItemProjetoBLL
+    class AdicionarItemProjetoBLL : IDisposable
     {
+        #region Declarations
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         LoginDTO loginDTO = new LoginDTO();
+        #endregion
 
+        #region Methos
 
+        #region Load Itens
         public ObservableCollection<AdicionarItemProjetoDTO> LoadItens()
         {
             var itens = new ObservableCollection<AdicionarItemProjetoDTO>();
@@ -38,15 +40,20 @@ namespace BLL
                         Id = Convert.ToInt32(item["id"]),
                         Descricao = item["descricao"].ToString(),
                         Anotacoes = item["desc_completa"].ToString(),
-                        Unidade = item["un"].ToString(), Partnumber = item["partnumber"].ToString(),
-                        Custo = Convert.ToDouble(item["custounitario"]), Fabricante = item["rsocial"].ToString(),
-                        Codigo = Convert.ToInt32(item["id"]).ToString("000000") });
+                        Unidade = item["un"].ToString(),
+                        Partnumber = item["partnumber"].ToString(),
+                        Custo = Convert.ToDouble(item["custounitario"]),
+                        Fabricante = item["rsocial"].ToString(),
+                        Codigo = Convert.ToInt32(item["id"]).ToString("000000")
+                    });
                 }
                 bd.CloseConection();
             }
             return itens;
         }
+        #endregion
 
+        #region Inserir
         public void Inserir(AdicionarItemProjetoDTO DTO)
         {
             try
@@ -61,6 +68,30 @@ namespace BLL
                 throw new Exception(ex.Message);
             }
         }
+        #endregion
 
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 }

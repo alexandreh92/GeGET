@@ -1,27 +1,20 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using BLL;
 using DTO;
 using System.Collections.ObjectModel;
-using System.Windows.Threading;
 using System.Threading;
-using MMLib.Extensions;
-using System.Collections.Generic;
-using System.ComponentModel;
-using DevExpress.Mvvm;
-using DevExpress.Xpf.Grid;
-using System.IO;
 using DevExpress.XtraPrinting;
 using Microsoft.Win32;
 
 namespace GeGET
 {
-    public partial class ExportarListaOrcamento : UserControl
+    public partial class ExportarListaOrcamento : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         Helpers helpers = new Helpers();
         MaterialDTO materialDTO = new MaterialDTO();
         ListaOrcamentosBLL bll = new ListaOrcamentosBLL();
@@ -136,9 +129,11 @@ namespace GeGET
 
         private void ExportExcel_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog fileDialog = new SaveFileDialog();
-            fileDialog.FileName = "P" + Convert.ToInt32(dto.Id).ToString("0000") + "-LO";
-            fileDialog.Filter = "Arquivo Microsoft Excel (*.xlsx)|*.xlsx";
+            SaveFileDialog fileDialog = new SaveFileDialog
+            {
+                FileName = "P" + Convert.ToInt32(dto.Id).ToString("0000") + "-LO",
+                Filter = "Arquivo Microsoft Excel (*.xlsx)|*.xlsx"
+            };
             if (fileDialog.ShowDialog() == true)
             {
                 grdView.ExportToXlsx(fileDialog.FileName, new XlsxExportOptionsEx() { ExportType = DevExpress.Export.ExportType.Default });
@@ -158,13 +153,39 @@ namespace GeGET
 
         private void ExportPDF_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog fileDialog = new SaveFileDialog();
-            fileDialog.FileName = "P" + Convert.ToInt32(dto.Id).ToString("0000") + "-LO";
-            fileDialog.Filter = "Arquivo Portable Document Format (*.pdf)|*.pdf";
+            SaveFileDialog fileDialog = new SaveFileDialog
+            {
+                FileName = "P" + Convert.ToInt32(dto.Id).ToString("0000") + "-LO",
+                Filter = "Arquivo Portable Document Format (*.pdf)|*.pdf"
+            };
             if (fileDialog.ShowDialog() == true)
             {
                 grdView.ExportToPdf(fileDialog.FileName, new PdfExportOptions());
             }
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                syncValues.Dispose();
+                syncEvent.Dispose();
+                bll.Dispose();
+                Orcamentosbll.Dispose();
+                versaoBLL.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

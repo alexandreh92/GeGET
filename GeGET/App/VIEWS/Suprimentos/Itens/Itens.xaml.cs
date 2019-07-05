@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -11,13 +12,15 @@ using MMLib.Extensions;
 
 namespace GeGET
 {
-    public partial class Itens : UserControl
+    public partial class Itens : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         ItensBLL bll = new ItensBLL();
         ItensDTO dto = new ItensDTO();
         Helpers helpers = new Helpers();
         Thread t1;
+        WaitBox wb;
         public ObservableCollection<ItensDTO> listaItens;
 
         #endregion
@@ -27,19 +30,25 @@ namespace GeGET
         public Itens()
         {
             InitializeComponent();
-            LoadClients();
+            LoadItens();
         }
 
         #endregion
 
         #region Methods
-        private void LoadClients()
+        private async void LoadItens()
         {
-            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
+            wb = new WaitBox
+            {
+                Owner = Window.GetWindow(this)
+            };
+            wb.Show();
+            await Task.Run(() =>
             {
                 listaItens = bll.LoadItens();
-                lstItens.ItemsSource = listaItens;
-            }));
+            });
+            lstItens.ItemsSource = listaItens;
+            wb.Close();
         }
 
         private void Commit()
@@ -65,6 +74,11 @@ namespace GeGET
         #endregion
 
         #region Clicks
+
+        private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
+        {
+            Commit();
+        }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -103,8 +117,7 @@ namespace GeGET
         }
         #endregion
 
-        #endregion
-
+        #region KeyDowns
         private void TxtProcurar_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Enter)
@@ -112,10 +125,28 @@ namespace GeGET
                 Commit();
             }
         }
+        #endregion
 
-        private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region IDisposable
+        public void Dispose()
         {
-            Commit();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

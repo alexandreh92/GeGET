@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
 using BLL;
 using DTO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GeGET
 {
-    public partial class GerenciarOrcamento : UserControl
+    public partial class GerenciarOrcamento : UserControl, IDisposable
     {
 
         #region Declarations
+        bool disposed = false;
         Helpers helpers = new Helpers();
         LoginDTO login = new LoginDTO();
         OrcamentistasDTO orcamentistasDTO = new OrcamentistasDTO();
@@ -45,7 +44,7 @@ namespace GeGET
             helpers.OpenBack(false);
         }
 
-        private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
+        private async void BtnPesquisa_Click(object sender, RoutedEventArgs e)
         {
             var position = Mouse.GetPosition(this);
             using (var form = new ProcurarNegocio(position))
@@ -55,8 +54,16 @@ namespace GeGET
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {
                     dto.Id = form.Negocio_Id;
+                    WaitBox wb = new WaitBox
+                    {
+                        Owner = Window.GetWindow(this)
+                    };
+                    wb.Show();
+                    await Task.Run(() =>
+                    {
+                        dto = bll.LoadGerenciarOrcamento(dto).First();
+                    });
                     
-                    dto = bll.LoadGerenciarOrcamento(dto).First();
 
                     txtNumero.Text = dto.Numero.ToUpper();
                     txtCliente.Text = dto.Razao_Social;
@@ -76,6 +83,7 @@ namespace GeGET
                     InitializeComponents();
                     orcamentistas = bll.LoadOrcamentistaCadastrado(dto);
                     pnlOrcamentistas.ItemsSource = orcamentistas;
+                    wb.Close();
                 }
             }
         }
@@ -144,7 +152,7 @@ namespace GeGET
             gridOptions.Visibility = Visibility.Visible;
         }
 
-        private void BtnOrcamentista_Click(object sender, RoutedEventArgs e)
+        private async void BtnOrcamentista_Click(object sender, RoutedEventArgs e)
         {
             BlackScreen bs = new BlackScreen();
             var position = Mouse.GetPosition(this);
@@ -154,38 +162,65 @@ namespace GeGET
                 form.ShowDialog();
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {
+                    WaitBox wb = new WaitBox
+                    {
+                        Owner = Window.GetWindow(this)
+                    };
+                    wb.Show();
                     orcamentistasDTO.Id = form.Id;
                     orcamentistasDTO.Login = form.Login;
                     orcamentistasDTO.Nome_Simples = form.Nome_Simples;
                     orcamentistasDTO.Negocio_Id = dto.Id;
-                    bll.InserirOracamentista(orcamentistasDTO);
+                    await Task.Run(() =>
+                    {
+                        bll.InserirOracamentista(orcamentistasDTO);
+                    });
                     orcamentistas = bll.LoadOrcamentistaCadastrado(dto);
                     pnlOrcamentistas.ItemsSource = orcamentistas;
+                    wb.Close();
                 }
             }
             bs.Close();
         }
 
-        private void ButtonsDemoChip_DeleteClick(object sender, RoutedEventArgs e)
+        private async void ButtonsDemoChip_DeleteClick(object sender, RoutedEventArgs e)
         {
             var btn = sender as MaterialDesignThemes.Wpf.Chip;
             int index = pnlOrcamentistas.Items.IndexOf(btn.DataContext);
             orcamentistasDTO.Id = ((OrcamentistasDTO)pnlOrcamentistas.Items[index]).Id;
             orcamentistasDTO.Negocio_Id = dto.Id;
             orcamentistasDTO.Nome_Simples = ((OrcamentistasDTO)pnlOrcamentistas.Items[index]).Nome_Simples;
-            bll.RemoverOrcamentista(orcamentistasDTO);
+            WaitBox wb = new WaitBox
+            {
+                Owner = Window.GetWindow(this)
+            };
+            wb.Show();
+            await Task.Run(() =>
+            {
+                bll.RemoverOrcamentista(orcamentistasDTO);
+            });
             orcamentistas = bll.LoadOrcamentistaCadastrado(dto);
             pnlOrcamentistas.ItemsSource = orcamentistas;
+            wb.Close();
         }
 
-        private void BtnHabilitar_Click(object sender, RoutedEventArgs e)
+        private async void BtnHabilitar_Click(object sender, RoutedEventArgs e)
         {
             if (pnlOrcamentistas.Items.Count > 0)
             {
-                bll.HabilitarOrcamento(dto);
+                WaitBox wb = new WaitBox
+                {
+                    Owner = Window.GetWindow(this)
+                };
+                wb.Show();
+                await Task.Run(() =>
+                {
+                    bll.HabilitarOrcamento(dto);
+                });
                 dto.Status_Id = 2;
                 dto.Status_Descricao = "EM ANDAMENTO";
                 txtStatus.Text = dto.Status_Descricao;
+                wb.Close();
                 InitializeComponents();
             }
             else
@@ -194,7 +229,7 @@ namespace GeGET
             }
         }
 
-        private void BtnEnviar_Click(object sender, RoutedEventArgs e)
+        private async void BtnEnviar_Click(object sender, RoutedEventArgs e)
         {
             var result = CustomOKCancelMessageBox.Show("Enviar o orçamento para o cliente desabilitará esta versão para alteraçoes.\nDeseja mesmo fazer isso?","Atenção!", Window.GetWindow(this));
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -206,30 +241,48 @@ namespace GeGET
                     if (form.DialogResult.Value && form.DialogResult.HasValue)
                     {
                         dto.Valor_Enviado = form.Valor;
-                        bll.EnviarCliente(dto);
+                        WaitBox wb = new WaitBox
+                        {
+                            Owner = Window.GetWindow(this)
+                        };
+                        wb.Show();
+                        await Task.Run(() =>
+                        {
+                            bll.EnviarCliente(dto);
+                        });
                         dto.Status_Descricao = "ENVIADO AO CLIENTE";
                         txtStatus.Text = dto.Status_Descricao;
                         dto.Status_Id = 3;
+                        wb.Close();
                         InitializeComponents();
                     }
                 }    
             }
         }
 
-        private void BtnNegociacao_Click(object sender, RoutedEventArgs e)
+        private async void BtnNegociacao_Click(object sender, RoutedEventArgs e)
         {
             var result = CustomOKCancelMessageBox.Show("Você deseja mesmo marcar este orçamento como em negociação?","Atenção!", Window.GetWindow(this));
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                bll.EmNegociacao(dto); //adicionar na query para atualizar a coluna negociado para 1
+                WaitBox wb = new WaitBox
+                {
+                    Owner = Window.GetWindow(this)
+                };
+                wb.Show();
+                await Task.Run(() =>
+                {
+                    bll.EmNegociacao(dto);
+                });
                 dto.Status_Descricao = "EM NEGOCIAÇÃO";
                 txtStatus.Text = dto.Status_Descricao;
                 dto.Status_Id = 4;
+                wb.Close();
                 InitializeComponents();
             }
         }
 
-        private void BtnFechar_Click(object sender, RoutedEventArgs e)
+        private async void BtnFechar_Click(object sender, RoutedEventArgs e)
         {
             var result = CustomOKCancelMessageBox.Show("Este procedimento não tem volta. Após fechar o orçamento você irá criar uma Ordem de Serviço baseada no número deste orçamento.\nDeseja continuar?","Atenção!",Window.GetWindow(this));
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -241,17 +294,26 @@ namespace GeGET
                     if (form.DialogResult.Value && form.DialogResult.HasValue)
                     {
                         dto.Valor_Fechamento = form.Valor;
-                        bll.FecharNegocio(dto);
+                        WaitBox wb = new WaitBox
+                        {
+                            Owner = Window.GetWindow(this)
+                        };
+                        wb.Show();
+                        await Task.Run(() =>
+                        {
+                            bll.FecharNegocio(dto);
+                        });
                         dto.Status_Id = 5;
                         dto.Status_Descricao = "FECHADO";
                         txtStatus.Text = dto.Status_Descricao;
+                        wb.Close();
                         InitializeComponents();
                     }
                 }
             }
         }
 
-        private void BtnCancelar_Click(object sender, RoutedEventArgs e)
+        private async void BtnCancelar_Click(object sender, RoutedEventArgs e)
         {
             var result = CustomOKCancelMessageBox.Show("Este procedimento irá cancelar o orçamento, este processo não tem volta.\nDeseja continuar?", "Atenção!", Window.GetWindow(this));
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -281,10 +343,19 @@ namespace GeGET
                         }
                         dto.Motivo_Cancelamento = form.Motivo_Cancelamento;
                         dto.Motivo_Cancelamento_Id = form.Motivo_Cancelamento_Id;
-                        bll.CancelarNegocio(dto);
+                        WaitBox wb = new WaitBox
+                        {
+                            Owner = Window.GetWindow(this)
+                        };
+                        wb.Show();
+                        await Task.Run(() =>
+                        {
+                            bll.CancelarNegocio(dto);
+                        });
                         dto.Status_Id = 5;
                         dto.Status_Descricao = "CANCELADO";
                         txtStatus.Text = dto.Status_Descricao;
+                        wb.Close();
                         InitializeComponents();
                     }
                 }
@@ -349,5 +420,26 @@ namespace GeGET
                 CustomOKMessageBox.Show("Este orçamento só possui uma versão ou não possui versão habilitada para edição!","Atenção!",Window.GetWindow(this));
             }
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+                syncEvent.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

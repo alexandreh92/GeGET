@@ -16,8 +16,9 @@ using System.Windows.Threading;
 
 namespace BLL
 {
-    class DashboardComercialBLL
+    class DashboardComercialBLL : IDisposable
     {
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         LoginDTO loginDTO = new LoginDTO();
 
@@ -30,7 +31,7 @@ namespace BLL
             var dt_negocios = new DataTable();
             try
             {
-                var query = "SELECT (SELECT COUNT(id) FROM negocio) AS orcamentos_feitos, (SELECT COALESCE(COUNT(*),0) as quantidade FROM negocio WHERE STATUS_ORCAMENTO_id < 5 AND STATUS_ORCAMENTO_ID != 0) AS orcamentos_abertos, (SELECT COALESCE(COUNT(*),0) as quantidade FROM negocio WHERE STATUS_ORCAMENTO_id = 5) as orcamentos_fechados, (SELECT COALESCE(COUNT(*),0) as quantidade FROM negocio WHERE STATUS_ORCAMENTO_id = 0) as orcamentos_cancelados, (SELECT COALESCE(COUNT(*),0) as quantidade FROM negocio WHERE STATUS_ORCAMENTO_id = 3) as orcamentos_enviados, (SELECT COALESCE(COUNT(*),0) as quantidade FROM negocio WHERE STATUS_ORCAMENTO_id = 4) as orcamentos_negociacao, (SELECT COUNT(*) FROM orcamentista_negocio orcn JOIN negocio n ON n.id = orcn.NEGOCIO_id WHERE orcn.USUARIO_id = '1' AND n.STATUS_ORCAMENTO_id = '1') as mensagem_total_fila, (SELECT COUNT(*) FROM orcamentista_negocio orcn JOIN negocio n ON n.id = orcn.NEGOCIO_id WHERE orcn.USUARIO_id = '1' AND n.STATUS_ORCAMENTO_id = '2') as mensagem_total_aberto";
+                var query = "SELECT (SELECT COUNT(id) FROM negocio) AS orcamentos_feitos, (SELECT COALESCE(COUNT(*),0) as quantidade FROM negocio WHERE STATUS_ORCAMENTO_id < 5 AND STATUS_ORCAMENTO_ID != 0) AS orcamentos_abertos, (SELECT COALESCE(COUNT(*),0) as quantidade FROM negocio WHERE negociado = 1) as orcamentos_negociados, (SELECT COALESCE(COUNT(*),0) as quantidade FROM negocio WHERE STATUS_ORCAMENTO_id = 5) as orcamentos_fechados, (SELECT COALESCE(COUNT(*),0) as quantidade FROM negocio WHERE STATUS_ORCAMENTO_id = 0) as orcamentos_cancelados, (SELECT COALESCE(COUNT(*),0) as quantidade FROM negocio WHERE STATUS_ORCAMENTO_id = 3) as orcamentos_enviados, (SELECT COALESCE(COUNT(*),0) as quantidade FROM negocio WHERE STATUS_ORCAMENTO_id = 4) as orcamentos_negociacao, (SELECT COUNT(*) FROM orcamentista_negocio orcn JOIN negocio n ON n.id = orcn.NEGOCIO_id WHERE orcn.USUARIO_id = '1' AND n.STATUS_ORCAMENTO_id = '1') as mensagem_total_fila, (SELECT COUNT(*) FROM orcamentista_negocio orcn JOIN negocio n ON n.id = orcn.NEGOCIO_id WHERE orcn.USUARIO_id = '1' AND n.STATUS_ORCAMENTO_id = '2') as mensagem_total_aberto";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
 
@@ -103,9 +104,12 @@ namespace BLL
                 }
                 foreach (DataRow dr in dt.Rows)
                 {
-                    dashboard.Add(new DashboardComercialDTO { Nome_Usuario = "Olá " + char.ToUpper(loginDTO.Primeiro_Nome[0]) + loginDTO.Primeiro_Nome.Substring(1).ToLower() + ",", Nivel_Usuario = loginDTO.Nivel, Orcamento_Aberto = dr["orcamentos_abertos"].ToString(), Orcamento_Cancelado = dr["orcamentos_cancelados"].ToString(), Orcamento_Enviado = dr["orcamentos_enviados"].ToString(), Orcamento_Fechado = dr["orcamentos_fechados"].ToString(), Orcamento_Negociacao = dr["orcamentos_negociacao"].ToString(), Orcamento_Feito = dr["orcamentos_feitos"].ToString() , Mensagem = mensagem_usuario, ListaNegocios = negocios, Graph_2 = Convert.ToDouble(dr["orcamentos_fechados"])/Convert.ToDouble(dr["orcamentos_cancelados"])*100, Graph_3 = Convert.ToDouble(dr["orcamentos_fechados"])/Convert.ToDouble(dr["orcamentos_feitos"])*100, Graph_4 = Convert.ToDouble(dr["orcamentos_cancelados"]) / Convert.ToDouble(dr["orcamentos_feitos"]) * 100 });
+                    dashboard.Add(new DashboardComercialDTO { Nome_Usuario = "Olá " + char.ToUpper(loginDTO.Primeiro_Nome[0]) + loginDTO.Primeiro_Nome.Substring(1).ToLower() + ",", Nivel_Usuario = loginDTO.Nivel, Orcamento_Aberto = Convert.ToDouble(dr["orcamentos_abertos"]), Orcamento_Cancelado = Convert.ToDouble(dr["orcamentos_cancelados"]), Orcamento_Enviado = Convert.ToDouble(dr["orcamentos_enviados"]), Orcamento_Fechado = Convert.ToDouble(dr["orcamentos_fechados"]), Orcamento_Negociacao = Convert.ToDouble(dr["orcamentos_negociacao"]), Orcamento_Feito = Convert.ToDouble(dr["orcamentos_feitos"]) , Mensagem = mensagem_usuario, ListaNegocios = negocios, Graph_1 = Math.Round(Convert.ToDouble(dr["orcamentos_negociados"]) / Convert.ToDouble(dr["orcamentos_feitos"]) * 100,2), Graph_2 = Math.Round(Convert.ToDouble(dr["orcamentos_fechados"])/Convert.ToDouble(dr["orcamentos_cancelados"])*100,2), Graph_3 = Math.Round(Convert.ToDouble(dr["orcamentos_fechados"])/Convert.ToDouble(dr["orcamentos_feitos"])*100,2), Graph_4 = Math.Round(Convert.ToDouble(dr["orcamentos_cancelados"]) / Convert.ToDouble(dr["orcamentos_feitos"]) * 100,2), Formatter = value => (value/100).ToString("P2") });
                 }
             }
+
+            
+
             return dashboard;
         }
 
@@ -184,6 +188,9 @@ namespace BLL
                 
                 chart.Labels = labels;
                 chart.Media = soma_feitos / 4;
+
+                
+
             }
             return chart;
         }
@@ -233,5 +240,28 @@ namespace BLL
             }
             return parsedmonth;
         }
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
+
     }
 }

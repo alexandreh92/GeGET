@@ -6,9 +6,10 @@ using System.Data;
 
 namespace BLL
 {
-    class EstadosBLL
+    class EstadosBLL : IDisposable
     {
         #region Declarations
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         #endregion
 
@@ -37,6 +38,28 @@ namespace BLL
             }
             return estados;
         }
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
         #endregion
     }
 }

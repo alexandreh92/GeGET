@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Threading;
 using BLL;
 using DTO;
@@ -17,6 +14,7 @@ namespace GeGET
     public partial class ProcurarOrcamentista : Window, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         NegociosBLL bll = new NegociosBLL();
         NegociosDTO dto = new NegociosDTO();
         DispatcherTimer timer = new DispatcherTimer();
@@ -127,10 +125,23 @@ namespace GeGET
         #endregion
 
         #region IDisposable
-        void IDisposable.Dispose()
+        public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
         #endregion
     }
 }

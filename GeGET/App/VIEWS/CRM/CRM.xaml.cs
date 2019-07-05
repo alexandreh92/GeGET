@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,12 +19,14 @@ namespace GeGET
     /// <summary>
     /// Interaction logic for Teste.xaml
     /// </summary>
+    /// 
     public partial class CRM : UserControl
     {
         Helpers helpers = new Helpers();
         public CRM()
         {
             InitializeComponent();
+            
         }
 
         private void Button_Click()

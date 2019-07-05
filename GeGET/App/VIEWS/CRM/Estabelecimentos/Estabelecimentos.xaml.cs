@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,14 +13,16 @@ using MMLib.Extensions;
 
 namespace GeGET
 {
-    public partial class Estabelecimentos : UserControl
+    public partial class Estabelecimentos : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         EstabelecimentosBLL bll = new EstabelecimentosBLL();
         EstabelecimentosDTO dto = new EstabelecimentosDTO();
         NegociosDTO Negociosdto = new NegociosDTO();
         Helpers helpers = new Helpers();
         Thread t1;
+        WaitBox wb;
         public ObservableCollection<EstabelecimentosDTO> listaEstabelecimentos;
         #endregion
 
@@ -34,21 +37,33 @@ namespace GeGET
         #endregion
 
         #region Methods
-        private void LoadEstabelecimentos()
+        private async void LoadEstabelecimentos()
         {
-            listaEstabelecimentos = bll.LoadEstabelecimentos();
+            wb = new WaitBox
+            {
+                Owner = Window.GetWindow(this)
+            };
+            wb.Show();
+            await Task.Run(() => 
+            {
+                listaEstabelecimentos = bll.LoadEstabelecimentos();
+            });
             lstClientes.ItemsSource = listaEstabelecimentos;
+            wb.Close();
         }
 
-        private void Commit()
+        private async void Commit()
         {
-            Dispatcher.Invoke(DispatcherPriority.Background,
+            await Task.Run(() => 
+            {
+                Dispatcher.Invoke(DispatcherPriority.Background,
                   new Action(() =>
                   {
                       var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
                       var filtered = listaEstabelecimentos.Where(descricao => Find.All(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Nome_Fantasia.ToLower().RemoveDiacritics().Contains(list) || descricao.Endereco.ToLower().Contains(list) || descricao.Cidade.ToLower().Contains(list) || descricao.Cnpj.ToLower().Contains(list)));
                       lstClientes.ItemsSource = filtered;
                   }));
+            });
         }
         #endregion
 
@@ -123,6 +138,11 @@ namespace GeGET
             }
         }
 
+        private void BtnOpenFolder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         #endregion
 
         #region Unloaded
@@ -133,12 +153,7 @@ namespace GeGET
         }
         #endregion
 
-        #endregion
-
-        private void btnOpenFolder_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        #region KeyDown
 
         private void TxtProcurar_KeyDown(object sender, KeyEventArgs e)
         {
@@ -148,5 +163,28 @@ namespace GeGET
             }
         }
 
+        #endregion
+
+        #endregion
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

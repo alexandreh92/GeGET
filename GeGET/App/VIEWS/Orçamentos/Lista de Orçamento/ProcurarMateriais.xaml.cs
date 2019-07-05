@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Threading;
 using BLL;
 using DTO;
-using MMLib.Extensions;
 
 namespace GeGET
 {
@@ -23,7 +19,7 @@ namespace GeGET
         WaitBox wb;
         Thread t1;
         Thread t2;
-
+        bool disposed = false;
         string Atividade_Id;
         string Negocio_Id;
         #endregion
@@ -49,7 +45,7 @@ namespace GeGET
             Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
             {
                 syncEvent.Set();
-                t2 = new Thread(waitLoad);
+                t2 = new Thread(WaitLoad);
                 t2.Start();
                 listaItens = bll.LoadItens();
                 grdItens.ItemsSource = listaItens;
@@ -58,7 +54,7 @@ namespace GeGET
         #endregion
 
         #region waitLoad
-        private void waitLoad()
+        private void WaitLoad()
         {
             syncEvent.WaitOne();
             Dispatcher.Invoke(new Action(() =>
@@ -101,8 +97,10 @@ namespace GeGET
             {
                 Dispatcher.Invoke(new Action(() =>
                 {
-                    wb = new WaitBox();
-                    wb.Owner = Window.GetWindow(this);
+                    wb = new WaitBox
+                    {
+                        Owner = Window.GetWindow(this)
+                    };
                     wb.Show();
                 }));
                 syncEvent.Set();
@@ -135,8 +133,23 @@ namespace GeGET
         #endregion
 
         #region IDisposable
-        void IDisposable.Dispose()
+        public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                syncEvent.Dispose();
+                bll.Dispose();
+            }
+            disposed = true;
         }
         #endregion
     }

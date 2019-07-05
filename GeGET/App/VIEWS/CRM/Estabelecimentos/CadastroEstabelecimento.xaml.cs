@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -7,9 +8,10 @@ using DTO;
 
 namespace GeGET
 {
-    public partial class CadastroEstabelecimento : UserControl
+    public partial class CadastroEstabelecimento : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         CidadesBLL Cidadesbll = new CidadesBLL();
         EstadosBLL Estadosbll = new EstadosBLL();
         EstadoDTO Estadosdto = new EstadoDTO();
@@ -37,6 +39,7 @@ namespace GeGET
             txtRazao.Text = " ";
             txtEndereco.Text = "";
             txtIE.Text = "";
+            txtDescricao.Text = "";
             txtCNPJ.Text = "";
             txtTelefone.Text = "";
             cmbUF.SelectedIndex = -1;
@@ -59,7 +62,7 @@ namespace GeGET
             helpers.Close();
         }
 
-        private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
+        private async void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
             if (txtRazao.Text != "" && txtFantasia.Text != "" && txtEndereco.Text != "" && txtCNPJ.Text != "" && txtTelefone.Text != "" && cmbUF.SelectedIndex != -1 && cmbCidade.SelectedIndex != -1)
             {
@@ -75,7 +78,18 @@ namespace GeGET
                     dto.UF_Id = cmbUF.SelectedValue.ToString();
                     dto.Cidade_Id = cmbCidade.SelectedValue.ToString();
                     dto.Descricao = txtDescricao.Text.Replace("'", "''").ToUpper();
-                    if (bll.CreateEstabelecimento(dto))
+                    WaitBox wb = new WaitBox
+                    {
+                        Owner = Window.GetWindow(this)
+                    };
+                    wb.Show();
+                    bool isSuccess = false;
+                    await Task.Run(() => 
+                    {
+                        isSuccess = bll.CreateEstabelecimento(dto);
+                    });
+                    wb.Close();
+                    if (isSuccess)
                     {
                         ClearControls();
                         CustomOKMessageBox.Show("Estabelecimento cadastrado com sucesso!", "Sucesso!", Window.GetWindow(this));
@@ -123,6 +137,30 @@ namespace GeGET
             txtRazao.Focus();
         }
         #endregion
+
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                Cidadesbll.Dispose();
+                bll.Dispose();
+                Estadosbll.Dispose();
+            }
+            disposed = true;
+        }
 
         #endregion
     }

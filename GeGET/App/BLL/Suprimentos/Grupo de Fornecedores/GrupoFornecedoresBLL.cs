@@ -6,8 +6,9 @@ using System;
 
 namespace BLL
 {
-    class GrupoFornecedoresBLL
+    class GrupoFornecedoresBLL : IDisposable
     {
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         LoginDTO loginDTO = new LoginDTO();
 
@@ -62,5 +63,26 @@ namespace BLL
 
         #endregion
 
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 }

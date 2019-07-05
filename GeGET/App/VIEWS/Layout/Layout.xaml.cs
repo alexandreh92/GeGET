@@ -4,19 +4,17 @@ using MaterialDesignThemes.Wpf;
 using DTO;
 using BLL;
 using System.Reflection;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System;
-using System.Drawing;
-using System.Windows.Interop;
 using System.Threading;
 using System.Windows.Threading;
+using System.Threading.Tasks;
 
 namespace GeGET
 {
-    public partial class Layout : Window
+    public partial class Layout : Window, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         Helpers helpers = new Helpers();
         LoginDTO Logindto = new LoginDTO();
         LayoutDTO dto = new LayoutDTO();
@@ -30,10 +28,10 @@ namespace GeGET
             InitializeComponent();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
-            #region MyRegion
+            #region Configura Nome
             txtNome.Text = Logindto.Primeiro_Nome + " " + Logindto.Ultimo_Sobrenome;
             #endregion
-            imgFoto.ImageSource = Logindto.Foto;
+            LoadFoto();
             txtTitle.Text = txtTitle.Text + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             LoadMensagens();
             dependency.Start();
@@ -41,15 +39,25 @@ namespace GeGET
         }
         #endregion
 
-        #region WaitLoad
-
-
-        #endregion
+        private async void LoadFoto()
+        {
+            await Task.Run(() =>
+            {
+                Dispatcher.Invoke(DispatcherPriority.Render, new Action(() => 
+                {
+                    imgFoto.ImageSource = Logindto.Foto;
+                }));
+            });
+        }
 
         #region Carrega Mensagens
-        private void LoadMensagens()
+        private async void LoadMensagens()
         {
-            var hasNewMessages = dependency.HasNewMessages();
+            bool hasNewMessages = false;
+            await Task.Run(() => 
+            {
+                hasNewMessages = dependency.HasNewMessages();
+            }); 
             if (hasNewMessages)
             {
                 btnNotificationIcon.Kind = PackIconKind.Bell;
@@ -161,7 +169,7 @@ namespace GeGET
             helpers.Open<UserPanel>(null, false);
         }
 
-        private void btnSuprimentos_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void BtnSuprimentos_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             helpers.Open<Suprimentos>(null, false);
         }
@@ -213,5 +221,41 @@ namespace GeGET
         {
 
         }
+
+        private void BtnRH_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void BtnEngenharia_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void BtnFinanceiro_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                dependency.Dispose();
+                syncEvent.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

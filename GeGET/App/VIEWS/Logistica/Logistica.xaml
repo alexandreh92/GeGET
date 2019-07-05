@@ -68,6 +68,14 @@
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" Margin="0,10,0,0">Entrada Manual</TextBlock>
                                                         </StackPanel>
                                                     </materialDesign:Card>
+                                                    <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                            <Button x:Name="btnAtendimento" Height="90" Width="90" Click="BtnAtendimento_Click">
+                                                                <materialDesign:PackIcon Kind="ExitToApp" HorizontalAlignment="Center" Height="70" Width="70" />
+                                                            </Button>
+                                                            <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" Margin="0,10,0,0">Atendimento</TextBlock>
+                                                        </StackPanel>
+                                                    </materialDesign:Card>
                                                 </WrapPanel>
                                             </StackPanel>
                                         </Expander>

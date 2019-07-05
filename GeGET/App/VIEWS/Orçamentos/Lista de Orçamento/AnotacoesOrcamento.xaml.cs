@@ -1,26 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using DTO;
 using BLL;
 
 namespace GeGET
 {
-    /// <summary>
-    /// Interaction logic for AnotacoesOrcamento.xaml
-    /// </summary>
     public partial class AnotacoesOrcamento : Window, IDisposable
     {
+        bool disposed = false;
         ListaOrcamentosDTO dto = new ListaOrcamentosDTO();
         ListaOrcamentosBLL bll = new ListaOrcamentosBLL();
         public AnotacoesOrcamento(string Id, string Anotacoes, string Produto_Id)
@@ -37,11 +24,6 @@ namespace GeGET
             }
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
-        }
-
-        public void Dispose()
-        {
-            
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
@@ -61,5 +43,27 @@ namespace GeGET
         {
             txtAnotacoes.Focus();
         }
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 }

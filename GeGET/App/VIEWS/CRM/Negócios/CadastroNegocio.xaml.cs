@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -7,9 +8,10 @@ using DTO;
 
 namespace GeGET
 {
-    public partial class CadastroNegocio : UserControl
+    public partial class CadastroNegocio : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         NegociosBLL bll = new NegociosBLL();
         NegociosDTO dto = new NegociosDTO();
 
@@ -99,19 +101,38 @@ namespace GeGET
             helpers.Close();
         }
 
-        private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
+        private async void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
             if (txtRazao.Text != "" && txtEstabelecimento.Text != "" && txtNome.Text != "" && dtPicker.Text != "" && cmbContato.SelectedIndex != -1 && cmbPrioridade.SelectedIndex != -1 && cmbVendedor.SelectedIndex != -1)
             {
-                var result = CustomOKCancelMessageBox.Show("Deseja mesmo cadastrar este estabelecimento?", "Atenção!", Window.GetWindow(this));
+                var result = CustomOKCancelMessageBox.Show("Deseja mesmo cadastrar este negócio?", "Atenção!", Window.GetWindow(this));
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    GetValues();
-                    if (bll.CreateNegocios(dto))
+                    WaitBox wb = new WaitBox
                     {
-                        var negocio = bll.RetNegocioId();
+                        Owner = Window.GetWindow(this)
+                    };
+                    wb.Show();
+                    GetValues();
+                    var isSucceed = false;
+                    await Task.Run(() =>
+                    {
+                        isSucceed = bll.CreateNegocios(dto);
+                    });
+                    if (isSucceed)
+                    {
+                        var negocio = new NegociosDTO();
+                        await Task.Run(() =>
+                        {
+                            negocio = bll.RetNegocioId();
+                        });
                         ClearControls();
+                        wb.Close();
                         CustomOKMessageBox.Show("Negocio P" + Convert.ToInt32(negocio.Id).ToString("0000") + " cadastrado com sucesso!", "Sucesso!", Window.GetWindow(this));
+                    }
+                    else
+                    {
+                        wb.Close();
                     }
                 }
             }
@@ -192,6 +213,31 @@ namespace GeGET
                 dtPicker.Text = DateTime.Today.ToString("dd/MM/yyyy");
             }
         }
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                Contatobll.Dispose();
+                bll.Dispose();
+                Prioridadesbll.Dispose();
+                Vendedoresbll.Dispose();
+            }
+            disposed = true;
+        }
+
         #endregion
     }
 }

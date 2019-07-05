@@ -27,7 +27,7 @@ namespace GeGET
         WaitBox wb;
         ManualResetEvent syncEvent = new ManualResetEvent(false);
         Thread t1;
-
+        bool disposed = false;
         public CopiarItensOrcamento(ObservableCollection<CopiarItensOrcamentoDTO> dTOs, InformacoesListaOrcamentosDTO dTO)
         {
             InitializeComponent();
@@ -50,10 +50,6 @@ namespace GeGET
             cmbDisciplina.SelectedIndex = 0;
         }
 
-        void IDisposable.Dispose()
-        {
-        }
-
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
@@ -73,8 +69,10 @@ namespace GeGET
             {
                 Dispatcher.Invoke(new Action(() =>
                 {
-                    wb = new WaitBox();
-                    wb.Owner = Window.GetWindow(this);
+                    wb = new WaitBox
+                    {
+                        Owner = Window.GetWindow(this)
+                    };
                     wb.Show();
                 }));
                 syncEvent.Set();
@@ -133,5 +131,26 @@ namespace GeGET
                 Insert();
             }
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                syncEvent.Dispose();
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

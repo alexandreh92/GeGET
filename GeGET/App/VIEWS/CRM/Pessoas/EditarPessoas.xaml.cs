@@ -9,6 +9,7 @@ namespace GeGET
     public partial class EditarPessoas : Window, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         public static string id;
         private string cliente_Id;
         PessoasDTO dto = new PessoasDTO();
@@ -26,6 +27,7 @@ namespace GeGET
             txtNome.Text = DTO.Nome;
             txtEmail.Text = DTO.Email;
             txtRazao.Text = DTO.Rsocial;
+            txtAnotacoes.Text = DTO.Anotacoes;
             id = DTO.Id;
             cliente_Id = DTO.Cliente_Id;
             txtTelefone.Text = DTO.Telefone;
@@ -41,7 +43,7 @@ namespace GeGET
         #region Events
 
         #region Clicks
-        private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
+        private async void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
             dto.Id = id;
             dto.Cliente_Id = cliente_Id;
@@ -51,8 +53,12 @@ namespace GeGET
             dto.Nome = txtNome.Text.Replace("'", "''").ToUpper();
             dto.Funcao_Id = cmbFuncao.SelectedValue.ToString();
             dto.Status_Id = Convert.ToInt32(cbxStatus.IsChecked).ToString();
-            bll.UpdatePessoas(dto);
-            DialogResult = true;
+            dto.Anotacoes = txtAnotacoes.Text.Replace("'", "''").ToUpper();
+            var isSucceed = await bll.UpdatePessoas(dto);
+            if (isSucceed)
+            {
+                DialogResult = true;
+            }
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
@@ -82,9 +88,27 @@ namespace GeGET
         #endregion
 
         #region IDisposable
-        void IDisposable.Dispose()
+
+        public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                Cidadesbll.Dispose();
+                Estadosbll.Dispose();
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+
         #endregion
     }
 }

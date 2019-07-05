@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -11,9 +12,10 @@ using MMLib.Extensions;
 
 namespace GeGET
 {
-    public partial class Clientes : UserControl
+    public partial class Clientes : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         ClientesBLL bll = new ClientesBLL();
         ClientesDTO dto = new ClientesDTO();
         EstabelecimentosDTO Estabelecimentosdto = new EstabelecimentosDTO();
@@ -21,6 +23,7 @@ namespace GeGET
         PessoasDTO Pessoasdto = new PessoasDTO();
         Helpers helpers = new Helpers();
         Thread t1;
+        WaitBox wb;
         public ObservableCollection<ClientesDTO> listaClientes;
 
         #endregion
@@ -36,24 +39,31 @@ namespace GeGET
         #endregion
 
         #region Methods
-        private void LoadClients()
+        private async void LoadClients()
         {
-            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
+            wb = new WaitBox();
+            wb.Show();
+            wb.Owner = Window.GetWindow(this);
+            await Task.Run(() => 
             {
                 listaClientes = bll.LoadClientes();
-                lstClientes.ItemsSource = listaClientes;
-            }));
+            });
+            lstClientes.ItemsSource = listaClientes;
+            wb.Close();
         }
 
-        private void Commit()
+        private async void Commit()
         {
-            Dispatcher.Invoke(DispatcherPriority.Background,
+            await Task.Run(() =>
+            {
+                Dispatcher.Invoke(DispatcherPriority.Background,
                   new Action(() =>
                   {
                       var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
                       var filtered = listaClientes.Where(descricao => Find.All(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Nome_Fantasia.ToLower().RemoveDiacritics().Contains(list) || descricao.Categoria.RemoveDiacritics().ToLower().Contains(list)));
                       lstClientes.ItemsSource = filtered;
                   }));
+            });
         }
         #endregion
 
@@ -116,7 +126,7 @@ namespace GeGET
             helpers.Open<Pessoas>(this.GetType().Name, true);
         }
 
-        private void BtnEditar_Click(object sender, RoutedEventArgs e)
+        private async void BtnEditar_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             var index = lstClientes.Items.IndexOf(btn.DataContext);
@@ -131,13 +141,15 @@ namespace GeGET
                 form.ShowDialog();
                 if (form.DialogResult.Value && form.DialogResult.HasValue)
                 {
-                    lstClientes.ItemsSource = bll.LoadClientes();
+                    await Task.Run(()=>
+                    {
+                        listaClientes = bll.LoadClientes();
+                    });
+                    lstClientes.ItemsSource = listaClientes;
+                    CustomOKMessageBox.Show("Cliente Atualizado com sucesso.","Sucesso!",Window.GetWindow(this));
                 }
             }
         }
-        #endregion
-
-        #endregion
 
         private void btnOpenFolder_Click(object sender, RoutedEventArgs e)
         {
@@ -156,5 +168,31 @@ namespace GeGET
                 Commit();
             }
         }
+
+        #endregion
+
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 }

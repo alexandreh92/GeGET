@@ -12,6 +12,7 @@
         private string status_Id;
         private string cliente_Id;
         private string funcao_Id;
+        private string anotacoes;
 
         private static string pesquisa;
         private static bool fromParent = false;
@@ -33,6 +34,6 @@
         public bool FromParent { get => fromParent; set => fromParent = value; }
         public bool FromChildrenParent { get => fromChildrenParent; set => fromChildrenParent = value; }
         public string ParentId { get => parentId; set => parentId = value; }
-        
+        public string Anotacoes { get => anotacoes; set => anotacoes = value; }
     }
 }

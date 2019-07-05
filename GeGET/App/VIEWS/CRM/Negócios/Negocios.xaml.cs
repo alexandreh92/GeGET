@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,13 +14,15 @@ using MMLib.Extensions;
 
 namespace GeGET
 {
-    public partial class Negocios : UserControl
+    public partial class Negocios : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         NegociosBLL bll = new NegociosBLL();
         NegociosDTO dto = new NegociosDTO();
         Helpers helpers = new Helpers();
         Thread t1;
+        WaitBox wb;
         public ObservableCollection<NegociosDTO> listaNegocios;
         #endregion
 
@@ -35,21 +38,31 @@ namespace GeGET
         #endregion
 
         #region Methods
-        private void LoadNegocios()
+        private async void LoadNegocios()
         {
-            listaNegocios = bll.LoadNegocios(dto);
+            wb = new WaitBox();
+            wb.Owner= Window.GetWindow(this);
+            wb.Show();
+            await Task.Run(() => 
+            {
+                listaNegocios = bll.LoadNegocios(dto);
+            });
             lstClientes.ItemsSource = listaNegocios;
+            wb.Close();
         }
 
-        private void Commit()
+        private async void Commit()
         {
-            Dispatcher.Invoke(DispatcherPriority.Background,
+            await Task.Run(() => 
+            {
+                Dispatcher.Invoke(DispatcherPriority.Background,
                   new Action(() =>
                   {
                       var Find = txtProcurar.Text.ToLower().RemoveDiacritics().Split(' ').ToList();
                       var filtered = listaNegocios.Where(descricao => Find.All(list => descricao.Razao_Social.ToLower().RemoveDiacritics().Contains(list) || descricao.Descricao.ToLower().RemoveDiacritics().Contains(list) || descricao.Endereco.ToLower().Contains(list) || descricao.Anotacoes.ToLower().Contains(list) || descricao.Vendedor.ToLower().Contains(list) || descricao.CidadeEstado.ToLower().Contains(list) || descricao.Status_Descricao.ToLower().Contains(list) || descricao.Id.ToLower().Contains(list) || descricao.Numero.ToLower().Contains(list)));
                       lstClientes.ItemsSource = filtered;
                   }));
+            });
         }
         #endregion
 
@@ -125,8 +138,7 @@ namespace GeGET
 
         #endregion
 
-        #endregion
-
+        #region KeyDown
         private void TxtProcurar_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Enter)
@@ -134,7 +146,31 @@ namespace GeGET
                 Commit();
             }
         }
+        #endregion
+
+        #endregion
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
+    #region Converter
     [ValueConversion(typeof(string), typeof(Visibility))]
     public class StringToVisibilityConverter : IValueConverter
     {
@@ -155,4 +191,5 @@ namespace GeGET
             throw new NotImplementedException();
         }
     }
+    #endregion
 }

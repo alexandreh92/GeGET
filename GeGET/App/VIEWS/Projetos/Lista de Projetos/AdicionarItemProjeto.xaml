@@ -112,8 +112,8 @@
                             </dxg:GridColumn>
                         </dxg:GridControl.Columns>
                         <dxg:GridControl.View>
-                            <dxg:TableView AutoWidth="True" AllowPerPixelScrolling="False" AllowHorizontalScrollingVirtualization="True" VirtualizingPanel.VirtualizationMode="Recycling" VirtualizingPanel.IsVirtualizing="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" SearchDelay="10" SearchPanelFindFilter="Contains" SearchPanelCriteriaOperatorType="And" ShowSearchPanelMode="Always">
-                                <dxg:TableView.RowStyle>
+                            <dxg:TableView AutoWidth="True" SearchPanelNullText="Procurar..." AllowPerPixelScrolling="False" AllowHorizontalScrollingVirtualization="True" VirtualizingPanel.VirtualizationMode="Recycling" VirtualizingPanel.IsVirtualizing="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" SearchDelay="10" SearchPanelFindFilter="Contains" SearchPanelCriteriaOperatorType="And" ShowSearchPanelMode="Always">
+                                <dxg:TableView.RowStyle> 
                                     <Style TargetType="dxg:RowControl">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{DXBinding Expr='@c.RowHandle.Value % 1'}" Value="0">

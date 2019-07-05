@@ -63,7 +63,7 @@
                                                 <Grid Grid.Row="0">
                                                     <control:AlignableWrapPanel HorizontalContentAlignment="Center" HorizontalAlignment="Center">
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" Margin="0,25,20,50">
-                                                            <TextBox x:Name="txtRazao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text=" " IsReadOnly="True" VerticalAlignment="Top" Margin="5,0,0,0" Width="Auto" MinWidth="350" Foreground="DimGray">
+                                                            <TextBox x:Name="txtRazao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text=" " IsReadOnly="True" VerticalAlignment="Top" Margin="5,0,0,0" Width="350" Foreground="DimGray">
                                                                 <materialDesign:HintAssist.Hint>
                                                                     <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                         <TextBlock>Razão Social</TextBlock>
@@ -74,21 +74,21 @@
                                                                 <materialDesign:PackIcon Kind="Magnify" Opacity=".56" VerticalAlignment="Center" Height="15" Width="15" />
                                                             </Button>
                                                         </StackPanel>
-                                                        <TextBox x:Name="txtFantasia" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" IsReadOnly="True" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="350" Foreground="DimGray">
+                                                        <TextBox x:Name="txtFantasia" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" IsReadOnly="True" VerticalAlignment="Top" Margin="5,25,20,50" Width="350" Foreground="DimGray">
                                                             <materialDesign:HintAssist.Hint>
                                                                 <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                     <TextBlock>Nome Fantasia</TextBlock>
                                                                 </StackPanel>
                                                             </materialDesign:HintAssist.Hint>
                                                         </TextBox>
-                                                        <TextBox MaxLength="45" x:Name="txtDescricao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="250" Foreground="DimGray">
+                                                        <TextBox MaxLength="45" x:Name="txtDescricao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="250" Foreground="DimGray">
                                                             <materialDesign:HintAssist.Hint>
                                                                 <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                     <TextBlock>Descrição</TextBlock>
                                                                 </StackPanel>
                                                             </materialDesign:HintAssist.Hint>
                                                         </TextBox>
-                                                        <TextBox MaxLength="100" x:Name="txtEndereco" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="350" Foreground="DimGray">
+                                                        <TextBox MaxLength="100" x:Name="txtEndereco" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="350" Foreground="DimGray">
                                                             <materialDesign:HintAssist.Hint>
                                                                 <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                     <TextBlock>Endereço</TextBlock>
@@ -119,7 +119,7 @@
                                                                 </ItemsPanelTemplate>
                                                             </ComboBox.ItemsPanel>
                                                         </ComboBox>
-                                                        <xctk:MaskedTextBox MaxLength="18" Mask="00,000,000/0000-00" x:Name="txtCNPJ" TextAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="146" Foreground="DimGray">
+                                                        <xctk:MaskedTextBox MaxLength="18" Mask="00,000,000/0000-00" x:Name="txtCNPJ" TextAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" VerticalAlignment="Top" Margin="5,25,20,50" Width="160" Foreground="DimGray">
                                                             <materialDesign:HintAssist.Hint>
                                                                 <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                     <TextBlock>CNPJ</TextBlock>
@@ -133,7 +133,7 @@
                                                                 </StackPanel>
                                                             </materialDesign:HintAssist.Hint>
                                                         </TextBox>
-                                                        <xctk:MaskedTextBox MaxLength="20" Mask="(00) 0000-0000" x:Name="txtTelefone" TextAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="Auto" MinWidth="120" Foreground="DimGray">
+                                                        <xctk:MaskedTextBox MaxLength="20" Mask="(00) 0000-0000" x:Name="txtTelefone" TextAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,50" Width="120" Foreground="DimGray">
                                                             <materialDesign:HintAssist.Hint>
                                                                 <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
                                                                     <TextBlock>Telefone</TextBlock>

@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using DAL;
 using DTO;
 
 namespace BLL
 {
-    class EntradaNotaFiscalBLL
+    class EntradaNotaFiscalBLL : IDisposable
     {
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         LoginDTO loginDTO = new LoginDTO();
 
@@ -73,7 +70,7 @@ namespace BLL
 
         #region Verifica se o item já foi adicionado ao estoque
 
-        public bool isPresent(EntradaNotaFiscalDTO DTO)
+        public bool IsPresent(EntradaNotaFiscalDTO DTO)
         {
             bool ispresent = false;
             var dt = new DataTable();
@@ -126,5 +123,26 @@ namespace BLL
 
         #endregion
 
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -11,13 +12,15 @@ using MMLib.Extensions;
 
 namespace GeGET
 {
-    public partial class Fornecedores : UserControl
+    public partial class Fornecedores : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         FornecedoresBLL bll = new FornecedoresBLL();
         FornecedoresDTO dto = new FornecedoresDTO();
         Helpers helpers = new Helpers();
         Thread t1;
+        WaitBox wb;
         public ObservableCollection<FornecedoresDTO> listaFornecedores;
 
         #endregion
@@ -27,19 +30,25 @@ namespace GeGET
         public Fornecedores()
         {
             InitializeComponent();
-            LoadClients();
+            LoadFornecedores();
         }
 
         #endregion
 
         #region Methods
-        private void LoadClients()
+        private async void LoadFornecedores()
         {
-            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
+            wb = new WaitBox
+            {
+                Owner = Window.GetWindow(this)
+            };
+            wb.Show();
+            await Task.Run(() => 
             {
                 listaFornecedores = bll.LoadFornecedores();
-                lstFornecedores.ItemsSource = listaFornecedores;
-            }));
+            });
+            lstFornecedores.ItemsSource = listaFornecedores;
+            wb.Close();
         }
 
         private void Commit()
@@ -101,10 +110,15 @@ namespace GeGET
                 }
             }
         }
-        #endregion
+
+        private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
+        {
+            Commit();
+        }
 
         #endregion
 
+        #region KeyDown
         private void TxtProcurar_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Enter)
@@ -112,10 +126,28 @@ namespace GeGET
                 Commit();
             }
         }
+        #endregion
 
-        private void BtnPesquisa_Click(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region IDisposable
+        public void Dispose()
         {
-            Commit();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

@@ -83,7 +83,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Rectangle Grid.Column="0" Fill="#7A2932"></Rectangle>
                                     <TextBlock Grid.Column="1" HorizontalAlignment="Left" Foreground="#7A2932" Margin="15,20,0,0" FontSize="13" FontFamily="{DynamicResource Novecento-Bold}" TextTrimming="CharacterEllipsis">Orçamentos Feitos</TextBlock>
-                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,35,0,0" FontSize="20" Foreground="DimGray" Text="{Binding Orcamento_Feito}"></TextBlock>
+                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,35,0,0" FontSize="20" Foreground="DimGray" Text="{Binding Orcamento_Feito, StringFormat={}{0:00}}"></TextBlock>
                                     <materialDesign:PackIcon Kind="Check" Height="30" Width="30" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#e0e0e0"/>
                                 </Grid>
                             </materialDesign:Card>
@@ -96,7 +96,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Rectangle Grid.Column="0" Margin="-1,0,0,0" Fill="#7A2932"></Rectangle>
                                     <TextBlock Grid.Column="1" HorizontalAlignment="Left" Foreground="#7A2932" Margin="15,20,0,0" FontSize="13" FontFamily="{DynamicResource Novecento-Bold}" TextTrimming="CharacterEllipsis">Orçamentos Ganhos</TextBlock>
-                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,35,0,0" FontSize="20" Foreground="DimGray" Text="{Binding Orcamento_Fechado}"></TextBlock>
+                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,35,0,0" FontSize="20" Foreground="DimGray" Text="{Binding Orcamento_Fechado, StringFormat={}{0:00}}"></TextBlock>
                                     <materialDesign:PackIcon Kind="Trophy" Height="30" Width="30" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#e0e0e0"/>
                                 </Grid>
                             </materialDesign:Card>
@@ -109,7 +109,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Rectangle Grid.Column="0" Fill="#7A2932"></Rectangle>
                                     <TextBlock Grid.Column="1" HorizontalAlignment="Left" Foreground="#7A2932" Margin="15,20,0,0" FontSize="13" FontFamily="{DynamicResource Novecento-Bold}" TextTrimming="CharacterEllipsis">Orçamentos Cancelados</TextBlock>
-                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,35,0,0" FontSize="20" Foreground="DimGray" Text="{Binding Orcamento_Cancelado}"></TextBlock>
+                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,35,0,0" FontSize="20" Foreground="DimGray" Text="{Binding Orcamento_Cancelado, StringFormat={}{0:00}}"></TextBlock>
                                     <materialDesign:PackIcon Kind="Close" Height="30" Width="30" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#e0e0e0"/>
                                 </Grid>
                             </materialDesign:Card>
@@ -122,7 +122,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Rectangle Grid.Column="0" Fill="#7A2932"></Rectangle>
                                     <TextBlock Grid.Column="1" HorizontalAlignment="Left" Foreground="#7A2932" Margin="15,20,0,0" FontSize="13" FontFamily="{DynamicResource Novecento-Bold}" TextTrimming="CharacterEllipsis">Orçamentos Abertos</TextBlock>
-                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,35,0,0" FontSize="20" Foreground="DimGray" Text="{Binding Orcamento_Aberto}"></TextBlock>
+                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,35,0,0" FontSize="20" Foreground="DimGray" Text="{Binding Orcamento_Aberto, StringFormat={}{0:00}}"></TextBlock>
                                     <materialDesign:PackIcon Kind="LockOpen" Height="30" Width="30" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#e0e0e0"/>
                                 </Grid>
                             </materialDesign:Card>
@@ -135,7 +135,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Rectangle Grid.Column="0" Margin="-1,0,0,0" Fill="#7A2932"></Rectangle>
                                     <TextBlock Grid.Column="1" HorizontalAlignment="Left" Foreground="#7A2932" Margin="15,20,0,0" FontSize="13" FontFamily="{DynamicResource Novecento-Bold}" TextTrimming="CharacterEllipsis">Enviados Ao Cliente</TextBlock>
-                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,35,0,0" FontSize="20" Foreground="DimGray" Text="{Binding Orcamento_Enviado}"></TextBlock>
+                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,35,0,0" FontSize="20" Foreground="DimGray" Text="{Binding Orcamento_Enviado, StringFormat={}{0:00}}"></TextBlock>
                                     <materialDesign:PackIcon Kind="EmailCheck" Height="30" Width="30" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#e0e0e0"/>
                                 </Grid>
                             </materialDesign:Card>
@@ -148,7 +148,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Rectangle Grid.Column="0" Fill="#7A2932"></Rectangle>
                                     <TextBlock Grid.Column="1" HorizontalAlignment="Left" Foreground="#7A2932" Margin="15,20,0,0" FontSize="13" FontFamily="{DynamicResource Novecento-Bold}" TextTrimming="CharacterEllipsis">Em Negociação</TextBlock>
-                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,35,0,0" FontSize="20" Foreground="DimGray" Text="{Binding Orcamento_Negociacao}" ></TextBlock>
+                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,35,0,0" FontSize="20" Foreground="DimGray" Text="{Binding Orcamento_Negociacao, StringFormat={}{0:00}}" ></TextBlock>
                                     <materialDesign:PackIcon Kind="CashRefund" Height="30" Width="30" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#e0e0e0"/>
                                 </Grid>
                             </materialDesign:Card>
@@ -178,28 +178,52 @@
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <teste:ProgressCircle StrokeThickness="5" Foreground="#7A2932" Text="{Binding Graph_1, StringFormat={}{0:0}%}" ToolTip="{Binding Graph_1}" StrokeColor="#e0e0e0" TextSize="20" ArcThickness="5" Margin="0,70,0,0" HorizontalAlignment="Center" Value="{Binding Graph_1}" VerticalAlignment="Top" Height="70" Width="70" IndicatorBrush="#7A2932"/>
+                                        <lvc:Gauge LabelFormatter="{Binding Formatter}" Foreground="#7A2932" InnerRadius="37" Width="90" Height="90" Grid.Column="1" Margin="5,-70,0,0" GaugeBackground="#FFE0E0E0" GaugeActiveFill="#7A2932" HighFontSize="16" Uses360Mode="True" From="0" To="100" Value="{Binding Graph_1, StringFormat=P}">
+                                            <lvc:Gauge.GaugeRenderTransform>
+                                                <TransformGroup>
+                                                    <RotateTransform Angle="90"/>
+                                                </TransformGroup>
+                                            </lvc:Gauge.GaugeRenderTransform>
+                                        </lvc:Gauge>
                                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" Foreground="DimGray" TextAlignment="Center" Margin="0,155,0,0">NEGOCIADOS/GANHOS</TextBlock>
                                     </Grid>
                                     <Grid Grid.Row="1" Grid.Column="1" Margin="0,20,0,20">
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <teste:ProgressCircle StrokeThickness="5" Foreground="#7A2932" Text="{Binding Graph_2, StringFormat={}{0:0}%}" ToolTip="{Binding Graph_2}" StrokeColor="#e0e0e0" TextSize="20" ArcThickness="5" Margin="0,70,0,0" HorizontalAlignment="Center" Value="{Binding Graph_2}" VerticalAlignment="Top" Height="70" Width="70" IndicatorBrush="#7A2932"/>
+                                        <lvc:Gauge LabelFormatter="{Binding Formatter}" Foreground="#7A2932" InnerRadius="37" Width="90" Height="90" Grid.Column="1" Margin="5,-70,0,0" GaugeBackground="#FFE0E0E0" GaugeActiveFill="#7A2932" HighFontSize="16" Uses360Mode="True" From="0" To="100" Value="{Binding Graph_2, StringFormat=P}">
+                                            <lvc:Gauge.GaugeRenderTransform>
+                                                <TransformGroup>
+                                                    <RotateTransform Angle="90"/>
+                                                </TransformGroup>
+                                            </lvc:Gauge.GaugeRenderTransform>
+                                        </lvc:Gauge>
                                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="DimGray" TextAlignment="Center" Margin="0,155,0,0">VENDIDOS/CANCELADOS</TextBlock>
                                     </Grid>
                                     <Grid Grid.Row="1" Grid.Column="2" Margin="0,20,0,20">
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <teste:ProgressCircle StrokeThickness="5" Foreground="#7A2932" Text="{Binding Graph_3, StringFormat={}{0:0}%}" ToolTip="{Binding Graph_3}" StrokeColor="#e0e0e0" TextSize="20" ArcThickness="5" Margin="0,70,0,0" HorizontalAlignment="Center" Value="{Binding Graph_3}" VerticalAlignment="Top" Height="70" Width="70" IndicatorBrush="#7A2932"/>
+                                        <lvc:Gauge LabelFormatter="{Binding Formatter}" Foreground="#7A2932" InnerRadius="37" Width="90" Height="90" Grid.Column="1" Margin="5,-70,0,0" GaugeBackground="#FFE0E0E0" GaugeActiveFill="#7A2932" HighFontSize="16" Uses360Mode="True" From="0" To="100" Value="{Binding Graph_3, StringFormat=P}">
+                                            <lvc:Gauge.GaugeRenderTransform>
+                                                <TransformGroup>
+                                                    <RotateTransform Angle="90"/>
+                                                </TransformGroup>
+                                            </lvc:Gauge.GaugeRenderTransform>
+                                        </lvc:Gauge>
                                         <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="DimGray" TextAlignment="Center" Margin="0,155,0,0">VENDIDOS/ORÇADOS</TextBlock>
                                     </Grid>
                                     <Grid Grid.Row="1" Grid.Column="3" Margin="0,20,0,20">
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <teste:ProgressCircle StrokeThickness="5" Foreground="#7A2932" Text="{Binding Graph_4, StringFormat={}{0:0}%}" ToolTip="{Binding Graph_4}" StrokeColor="#e0e0e0" TextSize="20" ArcThickness="5" Margin="0,70,0,0" HorizontalAlignment="Center" Value="{Binding Graph_4}" VerticalAlignment="Top" Height="70" Width="70" IndicatorBrush="#7A2932"/>
+                                        <lvc:Gauge LabelFormatter="{Binding Formatter}" Foreground="#7A2932" InnerRadius="37" Width="90" Height="90" Grid.Column="1" Margin="5,-70,0,0" GaugeBackground="#FFE0E0E0" GaugeActiveFill="#7A2932" HighFontSize="16" Uses360Mode="True" From="0" To="100" Value="{Binding Graph_4, StringFormat=P}">
+                                            <lvc:Gauge.GaugeRenderTransform>
+                                                <TransformGroup>
+                                                    <RotateTransform Angle="90"/>
+                                                </TransformGroup>
+                                            </lvc:Gauge.GaugeRenderTransform>
+                                        </lvc:Gauge>
                                         <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="DimGray" TextAlignment="Center" Margin="0,155,0,0">CANCELADOS/ORÇADOS</TextBlock>
                                     </Grid>
                                 </Grid>

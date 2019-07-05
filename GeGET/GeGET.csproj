@@ -252,6 +252,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="App\Controls\Shared\ProcurarRequisicaoMaterial.xaml.cs">
+      <DependentUpon>ProcurarRequisicaoMaterial.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\VIEWS\Logistica\Entrada Manual\AdicionarItemListaManual.xaml.cs">
       <DependentUpon>AdicionarItemListaManual.xaml</DependentUpon>
     </Compile>
@@ -544,11 +547,16 @@
     <Compile Include="App\DTO\Projetos\ListaProjetosDTO.cs" />
     <Compile Include="App\BLL\Logística\EntradaNotaFiscalBLL.cs" />
     <Compile Include="App\DTO\Logística\EntradaNotaFiscalDTO.cs" />
-    <Compile Include="EntradaManualEstoque.xaml.cs">
+    <Compile Include="App\VIEWS\Logistica\Entrada Manual\EntradaManualEstoque.xaml.cs">
       <DependentUpon>EntradaManualEstoque.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EntradaManualEstoqueBLL.cs" />
-    <Compile Include="EntradaManualEstoqueDTO.cs" />
+    <Compile Include="App\BLL\Logística\EntradaManualEstoqueBLL.cs" />
+    <Compile Include="App\DTO\Logística\EntradaManualEstoqueDTO.cs" />
+    <Compile Include="AtendimentoBLL.cs" />
+    <Compile Include="AtendimentoDTO.cs" />
+    <Compile Include="ExpandersCRM.xaml.cs">
+      <DependentUpon>ExpandersCRM.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FakeWindow.xaml.cs">
       <DependentUpon>FakeWindow.xaml</DependentUpon>
     </Compile>
@@ -556,6 +564,9 @@
     <Compile Include="App\DTO\Projetos\GerarRequisicaoMaterialDTO.cs" />
     <Compile Include="App\BLL\Logística\LinkarProdutoNotaFiscalBLL.cs" />
     <Compile Include="App\DTO\Logística\LinkarProdutoNotaFiscalDTO.cs" />
+    <Compile Include="Atendimento.xaml.cs">
+      <DependentUpon>Atendimento.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Permission.xaml.cs">
       <DependentUpon>Permission.xaml</DependentUpon>
     </Compile>
@@ -573,12 +584,21 @@
     </Compile>
     <Compile Include="App\BLL\CRM\Gerenciar Orçamento\VersaoOrcamentoBLL.cs" />
     <Compile Include="App\DTO\CRM\Gerenciar Orçamento\VersaoOrcamentoDTO.cs" />
+    <Compile Include="ProcurarRequisicaoMaterialBLL.cs" />
+    <Compile Include="ProcurarRequisicaoMaterialDTO.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window2.xaml.cs">
+      <DependentUpon>Window2.xaml</DependentUpon>
     </Compile>
     <Compile Include="xmlimport.xaml.cs">
       <DependentUpon>xmlimport.xaml</DependentUpon>
     </Compile>
+    <Page Include="App\Controls\Shared\ProcurarRequisicaoMaterial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\VIEWS\Logistica\Entrada Manual\AdicionarItemListaManual.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -855,13 +875,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="EntradaManualEstoque.xaml">
+    <Page Include="App\VIEWS\Logistica\Entrada Manual\EntradaManualEstoque.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExpandersCRM.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FakeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Atendimento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
@@ -931,6 +959,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Window2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="xmlimport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -983,7 +1015,9 @@
     <Resource Include="Resources\Images\GETAC.Image.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\updateurl.xml" />
+    <Resource Include="Resources\updateurl.xml">
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Icon.ico" />

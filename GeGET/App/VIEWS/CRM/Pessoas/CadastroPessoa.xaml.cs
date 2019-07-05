@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using BLL;
@@ -6,10 +7,10 @@ using DTO;
 
 namespace GeGET
 {
-    public partial class CadastroPessoa : UserControl
+    public partial class CadastroPessoa : UserControl, IDisposable
     {
         #region Declarations
-
+        bool disposed = false;
         PessoasBLL bll = new PessoasBLL();
         PessoasDTO dto = new PessoasDTO();
         Helpers helpers = new Helpers();
@@ -55,22 +56,24 @@ namespace GeGET
             helpers.Close();
         }
 
-        private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
+        private async void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
             if (txtRazao.Text != "" && txtNome.Text != "" && txtEmail.Text != "" && txtTelefone.Text != "" && txtCelular.Text != "" && cmbCategoria.SelectedIndex != -1)
             {
-                var result = CustomOKCancelMessageBox.Show("Deseja mesmo cadastrar este estabelecimento?", "Atenção!", Window.GetWindow(this));
+                var result = CustomOKCancelMessageBox.Show("Deseja mesmo cadastrar este contato?", "Atenção!", Window.GetWindow(this));
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
+                    dto.Anotacoes = txtAnotacoes.Text.Replace("'", "''").ToUpper();
                     dto.Nome = txtNome.Text.Replace("'", "''").ToUpper();
                     dto.Email = txtEmail.Text.Replace("'", "''").ToUpper();
                     dto.Telefone = txtTelefone.Text.Replace("'", "''").ToUpper();
                     dto.Celular = txtCelular.Text.Replace("'", "''").ToUpper();
                     dto.Funcao_Id = cmbCategoria.SelectedValue.ToString();
-                    if (bll.CreatePessoa(dto))
+                    var isSucceed = await bll.CreatePessoa(dto);
+                    if (isSucceed)
                     {
                         ClearControls();
-                        CustomOKMessageBox.Show("Estabelecimento cadastrado com sucesso!", "Sucesso!", Window.GetWindow(this));
+                        CustomOKMessageBox.Show("Contato cadastrado com sucesso!", "Sucesso!", Window.GetWindow(this));
                     }
                 }
             }
@@ -104,6 +107,26 @@ namespace GeGET
         }
         #endregion
 
+        #endregion
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
         #endregion
     }
 }

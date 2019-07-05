@@ -7,9 +7,10 @@ using DTO;
 
 namespace GeGET
 {
-    public partial class CadastroFornecedor : UserControl
+    public partial class CadastroFornecedor : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         CidadesBLL Cidadesbll = new CidadesBLL();
         EstadosBLL Estadosbll = new EstadosBLL();
         EstadoDTO Estadosdto = new EstadoDTO();
@@ -126,6 +127,30 @@ namespace GeGET
             txtRazao.Focus();
         }
         #endregion
+
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                Cidadesbll.Dispose();
+                bll.Dispose();
+                Estadosbll.Dispose();
+            }
+            disposed = true;
+        }
 
         #endregion
     }

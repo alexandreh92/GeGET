@@ -6,9 +6,10 @@ using DTO;
 
 namespace GeGET
 {
-    public partial class CadastroGrupodeFornecedores : UserControl
+    public partial class CadastroGrupodeFornecedores : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         CategoriaClienteBLL Categoriabll = new CategoriaClienteBLL();
         GrupoFornecedoresBLL bll = new GrupoFornecedoresBLL();
         GrupoFornecedoresDTO dto = new GrupoFornecedoresDTO();
@@ -67,6 +68,29 @@ namespace GeGET
             }
         }
         #endregion
+
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                Categoriabll.Dispose();
+                bll.Dispose();
+            }
+            disposed = true;
+        }
 
         #endregion
     }

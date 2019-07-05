@@ -8,9 +8,10 @@ using DTO;
 
 namespace GeGET
 {
-    public partial class CadastroProdutos : UserControl
+    public partial class CadastroProdutos : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         ProdutosBLL bll = new ProdutosBLL();
         ProdutosDTO dto = new ProdutosDTO();
         Helpers helpers = new Helpers();
@@ -133,5 +134,25 @@ namespace GeGET
         {
             e.Handled = new Regex("[^0-9,]+").IsMatch(e.Text);
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

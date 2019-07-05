@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using DTO;
 using DAL;
 using System.Data;
@@ -7,9 +6,10 @@ using System.Collections.ObjectModel;
 
 namespace BLL
 {
-    class EstabelecimentosBLL
+    class EstabelecimentosBLL : IDisposable
     {
         #region Declarations
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         EstabelecimentosDTO dto = new EstabelecimentosDTO();
         LoginDTO Logindto = new LoginDTO();
@@ -129,6 +129,28 @@ namespace BLL
             }
         }
         #endregion
+
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
 
         #endregion
     }

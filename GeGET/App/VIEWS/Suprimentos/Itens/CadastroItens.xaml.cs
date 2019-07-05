@@ -7,9 +7,10 @@ using DTO;
 
 namespace GeGET
 {
-    public partial class CadastroItens : UserControl
+    public partial class CadastroItens : UserControl, IDisposable
     {
         #region Declarations
+        bool disposed = false;
         ItensBLL bll = new ItensBLL();
         ItensDTO dto = new ItensDTO();
         UnidadeBLL unidadeBLL = new UnidadeBLL();
@@ -103,6 +104,27 @@ namespace GeGET
         }
         #endregion
 
+        #endregion
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+                unidadeBLL.Dispose();
+            }
+            disposed = true;
+        }
         #endregion
     }
 }

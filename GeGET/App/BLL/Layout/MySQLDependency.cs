@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using DAL;
@@ -14,9 +11,10 @@ using GeGET;
 
 namespace BLL
 {
-    class MySQLDependency
+    class MySQLDependency : IDisposable
     {
         #region Declarations
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         LayoutDTO dto = new LayoutDTO();
         LoginDTO Logindto = new LoginDTO();
@@ -168,6 +166,28 @@ namespace BLL
         }
 
         #endregion
+
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
 
         #endregion
     }

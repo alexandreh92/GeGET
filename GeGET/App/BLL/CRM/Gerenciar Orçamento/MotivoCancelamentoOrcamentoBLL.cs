@@ -6,8 +6,9 @@ using DTO;
 
 namespace BLL
 {
-    class MotivoCancelamentoOrcamentoBLL
+    class MotivoCancelamentoOrcamentoBLL : IDisposable
     {
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
 
         public ObservableCollection<MotivoCancelamentoOrcamentoDTO> LoadMotivos()
@@ -33,5 +34,27 @@ namespace BLL
             }
             return motivos;
         }
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 }

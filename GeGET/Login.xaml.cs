@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Media;
 using DTO;
 using BLL;
 using System.Xml.Linq;
@@ -8,16 +7,15 @@ using System.Reflection;
 using System.Net;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Security;
 using System.IO;
-using SimpleImpersonation;
 
 namespace GeGET
 {
-    public partial class Login : Window
+    public partial class Login : Window, IDisposable
     {
-       
+
         #region Declarations
+        bool disposed = false;
         LoginDTO dto = new LoginDTO();
         LoginBLL bll = new LoginBLL();
 
@@ -236,5 +234,25 @@ namespace GeGET
                 }
             }
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

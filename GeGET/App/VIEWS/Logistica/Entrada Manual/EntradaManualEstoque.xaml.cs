@@ -1,29 +1,15 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Helpers;
-using DTO;
-using BLL;
 using System.Collections.Generic;
 
 namespace GeGET
 {
-    /// <summary>
-    /// Interaction logic for EntradaManualEstoque.xaml
-    /// </summary>
-    public partial class EntradaManualEstoque : UserControl
+    public partial class EntradaManualEstoque : UserControl, IDisposable
     {
+        bool disposed = false;
         Helpers helpers = new Helpers();
         EntradaManualEstoqueBLL bll = new EntradaManualEstoqueBLL();
         EntradaManualEstoqueDTO dto = new EntradaManualEstoqueDTO();
@@ -121,5 +107,25 @@ namespace GeGET
             }
             grdItens.EndDataUpdate();
         }
+
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            disposed = true;
+        }
+        #endregion
     }
 }

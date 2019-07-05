@@ -105,47 +105,66 @@
                     </Grid>
                         <ListView x:Name="ListViewMenu" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ShadowAssist.ShadowEdges="Right">
                             <ListViewItem x:Name="btnDashBoard" Height="60" Foreground="White" PreviewMouseLeftButtonDown="BtnDashBoard_PreviewMouseLeftButtonDown">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="13,8,0,0"/>
-                                <TextBlock Text="DASHBOARD" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="15.0"/>
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem x:Name="btnCRM" Height="60" PreviewMouseLeftButtonDown="BtnCRM_PreviewMouseLeftButtonDown" Foreground="White">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Briefcase" Height="25" Width="25" Margin="13,8,0,0"/>
-                                <TextBlock Text="CRM" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Book}" FontSize="15.0"/>
-                            </StackPanel>
-                        </ListViewItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="13,8,0,0"/>
+                                    <TextBlock Text="DASHBOARD" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="15.0"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="btnCRM" Height="60" PreviewMouseLeftButtonDown="BtnCRM_PreviewMouseLeftButtonDown" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Briefcase" Height="25" Width="25" Margin="13,8,0,0"/>
+                                    <TextBlock Text="CRM" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Book}" FontSize="15.0"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="btnRH" Visibility="Collapsed" Height="60" PreviewMouseLeftButtonDown="BtnRH_PreviewMouseLeftButtonDown" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Account" Height="25" Width="25" Margin="13,8,0,0"/>
+                                    <TextBlock Text="Recursos Humanos" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Book}" FontSize="15.0"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="btnFinanceiro" Visibility="Collapsed" Height="60" PreviewMouseLeftButtonDown="BtnFinanceiro_PreviewMouseLeftButtonDown" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Cash" Height="25" Width="25" Margin="13,8,0,0"/>
+                                    <TextBlock Text="Financeiro" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Book}" FontSize="15.0"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="btnEngenharia" Visibility="Collapsed" Height="60" PreviewMouseLeftButtonDown="BtnEngenharia_PreviewMouseLeftButtonDown" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Crane" Height="25" Width="25" Margin="13,8,0,0"/>
+                                    <TextBlock Text="Engenharia" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
+                                </StackPanel>
+                            </ListViewItem>
                             <ListViewItem x:Name="btnOrcamentos" Height="60" PreviewMouseLeftButtonDown="BtnOrcamentos_PreviewMouseLeftButtonDown" Foreground="White">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Wallet" Height="25" Width="25" Margin="13,8,0,0"/>
-                                <TextBlock Text="Orçamentos" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
-                            </StackPanel>
-                        </ListViewItem>
-                            <ListViewItem Visibility="Collapsed" x:Name="btnProjetos" Height="60" PreviewMouseLeftButtonDown="BtnProjetos_PreviewMouseLeftButtonDown" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Wallet" Height="25" Width="25" Margin="13,8,0,0"/>
+                                    <TextBlock Text="Orçamentos" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
+                                </StackPanel>
+                            </ListViewItem>
+
+                            <ListViewItem Visibility="Visible" x:Name="btnProjetos" Height="60" PreviewMouseLeftButtonDown="BtnProjetos_PreviewMouseLeftButtonDown" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Laptop" Height="25" Width="25" Margin="13,8,0,0"/>
                                     <TextBlock Text="Projetos" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
                                 </StackPanel>
                             </ListViewItem>
-                            <ListViewItem x:Name="btnSuprimentos" Height="60" PreviewMouseLeftButtonDown="btnSuprimentos_PreviewMouseLeftButtonDown" Foreground="White" Selected="BtnSuprimentos_Selected">
+                            <ListViewItem x:Name="btnSuprimentos" Height="60" PreviewMouseLeftButtonDown="BtnSuprimentos_PreviewMouseLeftButtonDown" Foreground="White" Selected="BtnSuprimentos_Selected">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Package" Height="25" Width="25" Margin="13,8,0,0"/>
                                     <TextBlock Text="Suprimentos" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
                                 </StackPanel>
                             </ListViewItem>
-                            <ListViewItem Visibility="Collapsed" x:Name="btnLogistica" Height="60" PreviewMouseLeftButtonDown="BtnLogistica_PreviewMouseLeftButtonDown" Foreground="White">
+                            <ListViewItem Visibility="Visible" x:Name="btnLogistica" Height="60" PreviewMouseLeftButtonDown="BtnLogistica_PreviewMouseLeftButtonDown" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="TruckDelivery" Height="25" Width="25" Margin="13,8,0,0"/>
                                     <TextBlock Text="Logística" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
                                 </StackPanel>
                             </ListViewItem>
-                            <ListViewItem Visibility="Collapsed" Height="60" PreviewMouseDown="ListViewItem_PreviewMouseDown" Foreground="White">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Worker" Height="25" Width="25" Margin="13,8,0,0"/>
-                                <TextBlock Text="Obras" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="14.0" TextDecorations="{x:Null}"/>
-                            </StackPanel>
-                        </ListViewItem>
+                            <ListViewItem Height="60" Visibility="Collapsed" PreviewMouseDown="ListViewItem_PreviewMouseDown" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Worker" Height="25" Width="25" Margin="13,8,0,0"/>
+                                    <TextBlock Text="Obras" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="14.0" TextDecorations="{x:Null}"/>
+                                </StackPanel>
+                            </ListViewItem>
                             <ListViewItem x:Name="btnChangelog" Height="60" PreviewMouseDown="BtnChangelog_PreviewMouseDown" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Stackexchange" Height="25" Width="25" Margin="13,8,0,0"/>

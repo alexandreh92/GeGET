@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO;
 using DAL;
 using System.Data;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using Helpers;
 
 namespace BLL
 {
-    class ListaOrcamentosBLL
+    class ListaOrcamentosBLL : IDisposable
     {
         #region Declarations
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         #endregion
 
@@ -41,6 +38,7 @@ namespace BLL
                 {
                     orcamento.Add(new ListaOrcamentosDTO { Id = dr["pk"].ToString(), Produto_Id = dr["id"].ToString(), Codigo_Produto = Convert.ToInt32(dr["id"]).ToString("000000"), Descricao = dr["descricao"].ToString(), Partnumber = dr["partnumber"].ToString(), Anotacoes = dr["desc_completa"].ToString(), Un = dr["un"].ToString(), Quantidade = Convert.ToDouble(dr["quantidade"]), Fabricante = dr["rsocial"].ToString(), Custo_Total = Convert.ToDouble(dr["preco_total"]), Bdi = Convert.ToDouble(dr["bdi"]), Preco_Unitario = Convert.ToDouble(dr["preco_orc"]), Preco_Total = Convert.ToDouble(dr["preco_total_bdi"]), Fd = Convert.ToInt32(dr["fd"]) });
                 }
+                bd.CloseConection();
             }
             return orcamento;
         }
@@ -106,11 +104,17 @@ namespace BLL
 
         #region Excluir
 
-        public void Excluir(ListaOrcamentosDTO dTO)
+        public void Excluir(ObservableCollection<ListaOrcamentosDTO> dTO)
         {
             try
             {
-                var query = "DELETE FROM lista_orcamento WHERE id = '"+ dTO.Id +"'";
+                string substring = "";
+                foreach (ListaOrcamentosDTO dto in dTO)
+                {
+                    substring = substring + "OR id='"+dto.Id+"' ";
+                }
+                var query = "DELETE FROM lista_orcamento WHERE " + substring.TrimStart(new Char[] { 'O', 'R'});
+
                 bd.Conectar();
                 bd.ExecutarComandoSQL(query);
             }
@@ -204,9 +208,9 @@ namespace BLL
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception(ex.ToString());
             }
             finally
             {
@@ -239,10 +243,33 @@ namespace BLL
         #endregion
 
         #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 
-    class InformacoesListaOrcamentosBLL
+    class InformacoesListaOrcamentosBLL : IDisposable
     {
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
 
         #region Load Informações
@@ -397,6 +424,27 @@ namespace BLL
         }
         #endregion
 
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
 
 }

@@ -25,8 +25,9 @@ using System.Globalization;
 
 namespace GeGET
 {
-    public partial class Dashboard : UserControl
+    public partial class Dashboard : UserControl, IDisposable
     {
+        bool disposed = false;
         NegociosBLL bll = new NegociosBLL();
         NegociosDTO dto = new NegociosDTO();
         public ObservableCollection<NegociosDTO> listaNegocios = new ObservableCollection<NegociosDTO>();
@@ -37,6 +38,10 @@ namespace GeGET
         public List<string> Labels { get; set; }
         string Find;
         DashboardChartDTO ChartDTO = new DashboardChartDTO();
+        public Func<double, string> Formatter { get; set; }
+        WaitBox wb;
+
+
         public Dashboard()
         {
             InitializeComponent();
@@ -46,8 +51,10 @@ namespace GeGET
 
         private async void LoadData()
         {
-            
-
+            wb = new WaitBox();
+            wb.Show();
+            wb.Owner = Window.GetWindow(this);
+            wb.Show();
             await Task.Run(() => 
             {
                 ChartDTO = dashboardComercialBLL.LoadCharts();
@@ -64,8 +71,11 @@ namespace GeGET
             });
             grdComercial.DataContext = listaComercial;
             listaNegocios = listaComercial.First().ListaNegocios;
+            Formatter = value => value.ToString("P");
+            DataContext = this;
             Find = "1";
             Commit();
+            wb.Close();
         }
 
         private void Commit()
@@ -97,6 +107,30 @@ namespace GeGET
             Find = "4";
             Commit();
         }
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                syncEvent.Dispose();
+                bll.Dispose();
+                dashboardComercialBLL.Dispose();
+            }
+            disposed = true;
+        }
+
+        #endregion
     }
     public class BooleanToVisibilityMultiConverter : IMultiValueConverter
     {

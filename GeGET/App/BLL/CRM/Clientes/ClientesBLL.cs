@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using DTO;
 using DAL;
 using System.Data;
@@ -8,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    class ClientesBLL
+    class ClientesBLL : IDisposable
     {
         #region Declarations
+        bool disposed = false;
         AcessoBancoDados bd = new AcessoBancoDados();
         LoginDTO Logindto = new LoginDTO();
         ClientesDTO dto = new ClientesDTO();
@@ -109,13 +109,15 @@ namespace BLL
 
         #region Update Clientes
 
-        public void UpdateClientes(ClientesDTO DTO)
+        public async Task<bool> UpdateClientes(ClientesDTO DTO)
         {
+            bool isTrue = false;
+
             try
             {
                 var query = "UPDATE cliente SET rsocial='" + DTO.Razao_Social + "', fantasia='" + DTO.Nome_Fantasia + "', categoria_cliente_id='" + DTO.Categoria_Id + "', status_id='" + DTO.Status + "' WHERE id='" + DTO.Id + "'";
                 bd.Conectar();
-                bd.ExecutarComandoSQL(query);
+                await bd.ExecutarComandoSQLAsync(query);
             }
             catch (Exception ex)
             {
@@ -124,10 +126,35 @@ namespace BLL
             finally
             {
                 bd.CloseConection();
+                isTrue = true;
             }
+
+            return isTrue;
         }
 
         #endregion
+
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                bd.Dispose();
+            }
+            disposed = true;
+        }
 
         #endregion
     }
