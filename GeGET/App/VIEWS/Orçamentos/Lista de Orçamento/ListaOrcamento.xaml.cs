@@ -19,6 +19,8 @@ namespace GeGET
         bool disposed = false;
         Helpers helpers = new Helpers();
 
+        private volatile object _locker = new object();
+
         ListaOrcamentosDTO dto = new ListaOrcamentosDTO();
         ListaOrcamentosBLL bll = new ListaOrcamentosBLL();
         InformacoesListaOrcamentosDTO informacoesDTO = new InformacoesListaOrcamentosDTO();
@@ -92,7 +94,6 @@ namespace GeGET
         {
             listaValores = bll.LoadValores(informacoesDTO);
             pnlValores.ItemsSource = listaValores;
-            
         }
 
         #endregion
@@ -329,8 +330,8 @@ namespace GeGET
                 dto.Id = material.Id;
                 dto.Fd = material.Fd;
                 bll.AtualizarFD(dto);
-                LoadSidePanel();
             }
+            LoadSidePanel();
         }
 
         #endregion
