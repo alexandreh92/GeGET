@@ -14,6 +14,7 @@
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              mc:Ignorable="d"
              Language="pt-BR"
+             Tag="CRM: Relatório Simplificado"
              d:DesignHeight="900" d:DesignWidth="800">
 
 

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GeGET.ExportarListaOrcamento"
+﻿<UserControl x:Class="GeGET.RelatorioProdutos"
              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
              xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -14,7 +14,6 @@
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              mc:Ignorable="d"
              Language="pt-BR"
-             Tag="Orçamentos: Exportar Lista de Orçamento"
              d:DesignHeight="900" d:DesignWidth="800">
 
 
@@ -56,76 +55,11 @@
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="{Binding ActualHeight, ElementName=expHeader}"/>
                             <RowDefinition Height="266*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Margin="0,0,0,10" Orientation="Vertical" Grid.RowSpan="2">
-                            <materialDesign:Card Background="White">
-                                <StackPanel x:Name="StackPanel1">
-                                    <Border Background="White" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Expander x:Name="expHeader" HorizontalAlignment="Stretch" IsExpanded="True" Header="Informações" Background="White" Foreground="#7A2932" FontFamily="{DynamicResource Novecento-Bold}">
-                                        <control:AlignableWrapPanel HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" Margin="0,25,20,30">
-                                                <TextBox x:Name="txtNumero" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Segoe UI" FontSize="16" Text=" " TextAlignment="Center" IsReadOnly="True" VerticalAlignment="Top" Margin="5,0,0,0" Width="70" Foreground="DimGray">
-                                                    <materialDesign:HintAssist.Hint>
-                                                        <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
-                                                            <TextBlock>Negócio</TextBlock>
-                                                        </StackPanel>
-                                                    </materialDesign:HintAssist.Hint>
-                                                </TextBox>
-                                                <Button x:Name="btnPesquisa" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Top" Margin="-22,0,0,0" HorizontalAlignment="Left" Height="25" Width="25" Click="BtnPesquisa_Click">
-                                                    <materialDesign:PackIcon Kind="Magnify" Opacity=".56" VerticalAlignment="Center" Height="15" Width="15" />
-                                                </Button>
-                                            </StackPanel>
-                                            <TextBox x:Name="txtCliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" MinWidth="350" Width="Auto" Foreground="DimGray">
-                                                <materialDesign:HintAssist.Hint>
-                                                    <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
-                                                        <TextBlock>Cliente</TextBlock>
-                                                    </StackPanel>
-                                                </materialDesign:HintAssist.Hint>
-                                            </TextBox>
-                                            <ComboBox x:Name="cmbVersao" materialDesign:HintAssist.Hint="Versão" FontFamily="Segoe UI" FontSize="16" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="5,23,20,30" Background="White" Foreground="DimGray" Width="65" SelectionChanged="CmbVersao_SelectionChanged">
-                                                <ComboBox.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <VirtualizingStackPanel />
-                                                    </ItemsPanelTemplate>
-                                                </ComboBox.ItemsPanel>
-                                            </ComboBox>
-                                            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="{Binding ElementName=cmbVersao, Path=SelectedItem.Descricao}" VerticalAlignment="Top" Margin="5,25,20,30" Width="200" Foreground="DimGray">
-                                                <materialDesign:HintAssist.Hint>
-                                                    <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
-                                                        <TextBlock>Descrição da Versão</TextBlock>
-                                                    </StackPanel>
-                                                </materialDesign:HintAssist.Hint>
-                                            </TextBox>
-                                            <TextBox x:Name="txtDescricao" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="400" Foreground="DimGray">
-                                                <materialDesign:HintAssist.Hint>
-                                                    <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
-                                                        <TextBlock>Descrição</TextBlock>
-                                                    </StackPanel>
-                                                </materialDesign:HintAssist.Hint>
-                                            </TextBox>
-                                            <TextBox x:Name="txtCidade" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" VerticalAlignment="Top" Margin="5,25,20,30" Width="Auto" MaxWidth="350" Foreground="DimGray">
-                                                <materialDesign:HintAssist.Hint>
-                                                    <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Stretch">
-                                                        <TextBlock>Cidade</TextBlock>
-                                                    </StackPanel>
-                                                </materialDesign:HintAssist.Hint>
-                                            </TextBox>
-                                            <TextBox x:Name="txtUF" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" FontFamily="Segoe UI" FontSize="16" Text="" TextAlignment="Center" VerticalAlignment="Top" Margin="5,25,20,30" Width="50" Foreground="DimGray">
-                                                <materialDesign:HintAssist.Hint>
-                                                    <StackPanel Orientation="Horizontal" Margin="-2 0 0 0" Width="Auto" HorizontalAlignment="Center">
-                                                        <TextBlock>UF</TextBlock>
-                                                    </StackPanel>
-                                                </materialDesign:HintAssist.Hint>
-                                            </TextBox>
-                                        </control:AlignableWrapPanel>
-                                    </Expander>
-                                </StackPanel>
-                            </materialDesign:Card>
-                        </StackPanel>
+
                         <Grid x:Name="gridpanel" Grid.Row="2">
-                            <materialDesign:Card MaxHeight="{Binding ActualHeight, ElementName=gridpanel}" Visibility="Collapsed" Background="White" x:Name="CardPanel" Padding="0" Margin="0,10,0,20" VerticalAlignment="Stretch">
+                            <materialDesign:Card MaxHeight="{Binding ActualHeight, ElementName=gridpanel}" Visibility="Visible" Background="White" x:Name="CardPanel" Padding="0" Margin="0,10,0,20" VerticalAlignment="Stretch">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -138,7 +72,7 @@
                                                 <Button x:Name="ExportExcel" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Exportar para Excel" Height="25" Width="25" Click="ExportExcel_Click">
                                                     <materialDesign:PackIcon Kind="FileExcelBox" Foreground="White"/>
                                                 </Button>
-                                                <Button x:Name="ExportPDF" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Exportar para PDF" Height="25" Width="25" Click="ExportPDF_Click">
+                                                <Button x:Name="ExportPDF" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Exportar para PDF" Height="25" Width="25">
                                                     <materialDesign:PackIcon Kind="FilePdfBox" Foreground="White"/>
                                                 </Button>
                                             </StackPanel>

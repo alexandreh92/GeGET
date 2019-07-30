@@ -101,14 +101,14 @@ namespace GeGET
             }
         }
 
-        private void BtnNegocios_Click(object sender, RoutedEventArgs e)
+        private void BtnNegocios_Click(object sender, MouseButtonEventArgs e)
         {
             Button btn = sender as Button;
             int index = lstClientes.Items.IndexOf(btn.DataContext);
             var Id = ((EstabelecimentosDTO)lstClientes.Items[index]).Cliente_Id;
             Negociosdto.FromParent = true;
             Negociosdto.ParentId = Id;
-            helpers.Open<Negocios>(this.GetType().Name, true);
+            helpers.OpenTab<Negocios>(sender, e, this.GetType().Name, true);
         }
 
         private void BtnEditar_Click(object sender, RoutedEventArgs e)

@@ -12,6 +12,7 @@
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              mc:Ignorable="d"
              Language="pt-BR"
+             Tag="Projetos: Lista de Projeto"
              d:DesignHeight="900" d:DesignWidth="800">
     
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide">

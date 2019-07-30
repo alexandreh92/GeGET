@@ -16,6 +16,7 @@ namespace GeGET
         public static DialogResult Show(string Text, string Caption, Window parent)
         {
             MsgBoxOKCancel = new CustomOKCancelMessageBox(parent);
+            MsgBoxOKCancel.btnConfirmar.Focus();
             MsgBoxOKCancel.Height = parent.ActualHeight;
             MsgBoxOKCancel.Width = parent.ActualWidth;
             MsgBoxOKCancel.txtDescricao.Text = Text;

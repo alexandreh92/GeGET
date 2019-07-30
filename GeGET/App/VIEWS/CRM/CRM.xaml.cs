@@ -34,54 +34,54 @@ namespace GeGET
 
         }
 
-        private void BtnClientes_Click(object sender, RoutedEventArgs e)
+        private void BtnClientes_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Clientes>(this.GetType().Name,false);
+            helpers.OpenTab<Clientes>(sender, e, this.GetType().Name,false);
         }
 
-        private void BtnEstabelecimentos_Click(object sender, RoutedEventArgs e)
+        private void BtnEstabelecimentos_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Estabelecimentos>(this.GetType().Name, false);
+            helpers.OpenTab<Estabelecimentos>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnNegocios_Click(object sender, RoutedEventArgs e)
+        private void BtnNegocios_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Negocios>(this.GetType().Name, false);
+            helpers.OpenTab<Negocios>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnPessoas_Click(object sender, RoutedEventArgs e)
+        private void BtnPessoas_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Pessoas>(this.GetType().Name, false);
+            helpers.OpenTab<Pessoas>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnFunil_Click(object sender, RoutedEventArgs e)
+        private void BtnFunil_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Funil>(this.GetType().Name, false);
+            helpers.OpenTab<Funil>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnCadastroCliente_Click(object sender, RoutedEventArgs e)
+        private void BtnCadastroCliente_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<CadastroCliente>(this.GetType().Name, false);
+            helpers.OpenTab<CadastroCliente>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnCadastroEstabelecimento_Click(object sender, RoutedEventArgs e)
+        private void BtnCadastroEstabelecimento_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<CadastroEstabelecimento>(this.GetType().Name, false);
+            helpers.OpenTab<CadastroEstabelecimento>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnCadastroPessoa_Click(object sender, RoutedEventArgs e)
+        private void BtnCadastroPessoa_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<CadastroPessoa>(this.GetType().Name, false);
+            helpers.OpenTab<CadastroPessoa>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnCadastroNegocio_Click(object sender, RoutedEventArgs e)
+        private void BtnCadastroNegocio_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<CadastroNegocio>(this.GetType().Name, false);
+            helpers.OpenTab<CadastroNegocio>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnDashboardNegocio_Click(object sender, RoutedEventArgs e)
+        private void BtnDashboardNegocio_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<GerenciarOrcamento>(this.GetType().Name, false);
+            helpers.OpenTab<GerenciarOrcamento>(sender, e, this.GetType().Name, false);
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
@@ -89,14 +89,14 @@ namespace GeGET
             helpers.Close();
         }
 
-        private void BtnCadastroAtividades_Click(object sender, RoutedEventArgs e)
+        private void BtnCadastroAtividades_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<CadastroAtividades>(this.GetType().Name, false);
+            helpers.OpenTab<CadastroAtividades>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnListaSimplificadaNegocios_Click(object sender, RoutedEventArgs e)
+        private void BtnListaSimplificadaNegocios_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<ListaNegociosSimplificada>(this.GetType().Name, false);
+            helpers.OpenTab<ListaNegociosSimplificada>(sender, e, this.GetType().Name, false);
         }
     }
 }

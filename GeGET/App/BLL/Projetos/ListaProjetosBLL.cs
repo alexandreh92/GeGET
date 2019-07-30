@@ -307,7 +307,7 @@ namespace BLL
             var dt = new DataTable();
             try
             {
-                var query = "select distinct da.id, da.descricao, da.disciplina_id, a.descricao as descricao_atividade, a.id as atividade_id from atividade a JOIN desc_atividades da ON da.id = a.desc_atividades_id join versao_atividade va ON va.id = a.versao_atividade_id join negocio n ON a.negocio_id = n.id and n.versao_valida = va.versao_id where a.negocio_id = '" + DTO.Id + "' and a.habilitado ='1'";
+                var query = "select distinct da.id, da.descricao, da.disciplina_id from atividade a JOIN desc_atividades da ON da.id = a.desc_atividades_id join versao_atividade va ON va.id = a.versao_atividade_id join negocio n ON a.negocio_id = n.id and n.versao_valida = va.versao_id where a.negocio_id = '" + DTO.Id + "' and a.habilitado ='1'";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
@@ -326,9 +326,7 @@ namespace BLL
                         {
                             Id = Convert.ToInt32(dr["id"]),
                             Descricao = dr["descricao"].ToString(),
-                            Disciplina_Id = dr["disciplina_id"].ToString(),
-                            Descricao_Atividade = dr["descricao_atividade"].ToString(),
-                            Atividade_Id = dr["atividade_id"].ToString()
+                            Disciplina_Id = dr["disciplina_id"].ToString()
                         });
                     }
                 }

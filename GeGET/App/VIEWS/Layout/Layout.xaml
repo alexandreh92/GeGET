@@ -5,6 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GeGET"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+        xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
         mc:Ignorable="d"
         Title="GeGET" Height="768" Width="1366"
         WindowState="Maximized"
@@ -33,6 +35,13 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="70"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <DataTemplate x:Key="DataTemplate1">
+            <DockPanel>
+                <TextBlock Text="{Binding DataContext.Header}"></TextBlock>
+            </DockPanel>
+        </DataTemplate>
+
+
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
@@ -57,7 +66,16 @@
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid x:Name="GridMain" Grid.Column="1" Grid.Row="1">
+                <Grid Grid.Row="3">
+                    <dragablz:TabablzControl x:Name="actionTabs" ShowDefaultCloseButton="True" Foreground="#FF7A2932" BorderBrush="#FF282828" Style="{StaticResource MaterialDesignTabablzControlStyle}" MouseDown="ActionTabs_MouseDown"/>
 
+                    <dxg:GridControl Width="0" Height="0" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" HorizontalAlignment="Left" Margin="105,37,0,0" VerticalAlignment="Top">
+                        <dxg:GridControl.View>
+                            <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True"/>
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+
+                </Grid>
             </Grid>
             <Grid x:Name="Header" Height="60" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="Auto">
                 <materialDesign:ColorZone Mode="PrimaryDark" Height="{Binding ActualHeight, ElementName=Header}" Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="0,0,0,0" MouseDown="ColorZone_MouseDown" MouseLeftButtonDown="ColorZone_MouseLeftButtonDown">
@@ -88,72 +106,72 @@
                 <materialDesign:ColorZone Background="#282828" VerticalAlignment="Stretch" materialDesign:ShadowAssist.ShadowDepth="Depth4" materialDesign:ShadowAssist.ShadowEdges="Right">
                     <StackPanel>
                         <Grid Height="Auto" Background="#282828" RenderTransformOrigin="0.5,0.5">
-                        <Grid.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Grid.RenderTransform>
-                        <Button x:Name="ButtonOpenMenu" Height="60" Width="60" Margin="5" Visibility="Collapsed" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ButtonOpenMenu_Click">
-                            <materialDesign:PackIcon Kind="Menu" Width="25" Height="25"/>
-                        </Button>
-                        <Button x:Name="ButtonCloseMenu" Height="60" Width="60" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ButtonCloseMenu_Click">
-                            <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
-                        </Button>
-                    </Grid>
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+                            <Button x:Name="ButtonOpenMenu" Height="60" Width="60" Margin="5" Visibility="Collapsed" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ButtonOpenMenu_Click">
+                                <materialDesign:PackIcon Kind="Menu" Width="25" Height="25"/>
+                            </Button>
+                            <Button x:Name="ButtonCloseMenu" Height="60" Width="60" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ButtonCloseMenu_Click">
+                                <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
+                            </Button>
+                        </Grid>
                         <ListView x:Name="ListViewMenu" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ShadowAssist.ShadowEdges="Right">
-                            <ListViewItem x:Name="btnDashBoard" Height="60" Foreground="White" PreviewMouseLeftButtonDown="BtnDashBoard_PreviewMouseLeftButtonDown">
+                            <ListViewItem x:Name="btnDashBoard" Height="60" Foreground="White" PreviewMouseDown="BtnDashBoard_PreviewMouseLeftButtonDown">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="13,8,0,0"/>
                                     <TextBlock Text="DASHBOARD" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="15.0"/>
                                 </StackPanel>
                             </ListViewItem>
-                            <ListViewItem x:Name="btnCRM" Height="60" PreviewMouseLeftButtonDown="BtnCRM_PreviewMouseLeftButtonDown" Foreground="White">
+                            <ListViewItem x:Name="btnCRM" Height="60" PreviewMouseDown="BtnCRM_PreviewMouseLeftButtonDown" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Briefcase" Height="25" Width="25" Margin="13,8,0,0"/>
                                     <TextBlock Text="CRM" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Book}" FontSize="15.0"/>
                                 </StackPanel>
                             </ListViewItem>
-                            <ListViewItem x:Name="btnRH" Visibility="Collapsed" Height="60" PreviewMouseLeftButtonDown="BtnRH_PreviewMouseLeftButtonDown" Foreground="White">
+                            <ListViewItem x:Name="btnRH" Visibility="Collapsed" Height="60" PreviewMouseDown="BtnRH_PreviewMouseLeftButtonDown" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Account" Height="25" Width="25" Margin="13,8,0,0"/>
                                     <TextBlock Text="Recursos Humanos" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Book}" FontSize="15.0"/>
                                 </StackPanel>
                             </ListViewItem>
-                            <ListViewItem x:Name="btnFinanceiro" Visibility="Collapsed" Height="60" PreviewMouseLeftButtonDown="BtnFinanceiro_PreviewMouseLeftButtonDown" Foreground="White">
+                            <ListViewItem x:Name="btnFinanceiro" Visibility="Collapsed" Height="60" PreviewMouseDown="BtnFinanceiro_PreviewMouseLeftButtonDown" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Cash" Height="25" Width="25" Margin="13,8,0,0"/>
                                     <TextBlock Text="Financeiro" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Book}" FontSize="15.0"/>
                                 </StackPanel>
                             </ListViewItem>
-                            <ListViewItem x:Name="btnEngenharia" Visibility="Collapsed" Height="60" PreviewMouseLeftButtonDown="BtnEngenharia_PreviewMouseLeftButtonDown" Foreground="White">
+                            <ListViewItem x:Name="btnEngenharia" Visibility="Collapsed" Height="60" PreviewMouseDown="BtnEngenharia_PreviewMouseLeftButtonDown" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Crane" Height="25" Width="25" Margin="13,8,0,0"/>
                                     <TextBlock Text="Engenharia" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
                                 </StackPanel>
                             </ListViewItem>
-                            <ListViewItem x:Name="btnOrcamentos" Height="60" PreviewMouseLeftButtonDown="BtnOrcamentos_PreviewMouseLeftButtonDown" Foreground="White">
+                            <ListViewItem x:Name="btnOrcamentos" Height="60" PreviewMouseDown="BtnOrcamentos_PreviewMouseLeftButtonDown" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Wallet" Height="25" Width="25" Margin="13,8,0,0"/>
                                     <TextBlock Text="Orçamentos" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
                                 </StackPanel>
                             </ListViewItem>
 
-                            <ListViewItem Visibility="Visible" x:Name="btnProjetos" Height="60" PreviewMouseLeftButtonDown="BtnProjetos_PreviewMouseLeftButtonDown" Foreground="White">
+                            <ListViewItem Visibility="Visible" x:Name="btnProjetos" Height="60" PreviewMouseDown="BtnProjetos_PreviewMouseLeftButtonDown" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Laptop" Height="25" Width="25" Margin="13,8,0,0"/>
                                     <TextBlock Text="Projetos" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
                                 </StackPanel>
                             </ListViewItem>
-                            <ListViewItem x:Name="btnSuprimentos" Height="60" PreviewMouseLeftButtonDown="BtnSuprimentos_PreviewMouseLeftButtonDown" Foreground="White" Selected="BtnSuprimentos_Selected">
+                            <ListViewItem x:Name="btnSuprimentos" Height="60" PreviewMouseDown="BtnSuprimentos_PreviewMouseLeftButtonDown" Foreground="White" Selected="BtnSuprimentos_Selected">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Package" Height="25" Width="25" Margin="13,8,0,0"/>
                                     <TextBlock Text="Suprimentos" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
                                 </StackPanel>
                             </ListViewItem>
-                            <ListViewItem Visibility="Visible" x:Name="btnLogistica" Height="60" PreviewMouseLeftButtonDown="BtnLogistica_PreviewMouseLeftButtonDown" Foreground="White">
+                            <ListViewItem Visibility="Visible" x:Name="btnLogistica" Height="60" PreviewMouseDown="BtnLogistica_PreviewMouseLeftButtonDown" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="TruckDelivery" Height="25" Width="25" Margin="13,8,0,0"/>
                                     <TextBlock Text="Logística" VerticalAlignment="Center"  Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontStretch="SemiExpanded" FontStyle="Normal" FontWeight="Regular" FontSize="14"/>
@@ -172,7 +190,7 @@
                                 </StackPanel>
                             </ListViewItem>
                         </ListView>
-                </StackPanel>
+                    </StackPanel>
                 </materialDesign:ColorZone>
                 <StackPanel x:Name="pnUsuario" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,10">
 
@@ -190,7 +208,7 @@
                             </Grid>
                         </materialDesign:PopupBox.ToggleContent>
                         <StackPanel x:Name="teste" Width="150">
-                            <Button x:Name="btnAccount" Content="Conta" Click="BtnAccount_Click"/>
+                            <Button x:Name="btnAccount" Content="Conta" PreviewMouseDown="BtnAccount_Click"/>
                             <Separator/>
                             <Button x:Name="btnLogout" Content="Logout" Click="BtnLogout_Click"/>
                         </StackPanel>
@@ -199,9 +217,9 @@
                     <TextBlock TextTrimming="CharacterEllipsis" x:Name="txtNome" Text="Alexandre" Width="180" VerticalAlignment="Center" FontFamily="{StaticResource Novecento-Bold}" Margin="-5,-5,0,0" FontSize="13.0" Foreground="White"/>
                 </StackPanel>
             </Grid>
-            
-                
-            
+
+
+
         </Grid>
     </materialDesign:TransitioningContent>
 </Window>

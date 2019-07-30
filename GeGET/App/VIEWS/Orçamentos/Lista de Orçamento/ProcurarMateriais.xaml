@@ -13,12 +13,12 @@
         ShowInTaskbar="False"
         WindowStyle="None"
         mc:Ignorable="d"
-        Title="ProcurarMateriais" Height="820" Width="1200">
+        Title="ProcurarMateriais" Height="820" Width="1250">
     <Window.Background>
         <SolidColorBrush Opacity="0.2" Color="Black"/>
     </Window.Background>
     <Grid>
-        <Grid x:Name="gridpanel" Height="820" Width="1200" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid x:Name="gridpanel" Height="820" Width="1250" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <materialDesign:Card Background="White" x:Name="CardPanel" Padding="0" Margin="0,10,0,20" VerticalAlignment="Stretch">
                 <Grid>
                     <Grid.RowDefinitions>

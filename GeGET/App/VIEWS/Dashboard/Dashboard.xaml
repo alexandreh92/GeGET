@@ -11,6 +11,7 @@
              xmlns:teste="clr-namespace:Teste"
              xmlns:wpftk="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
              mc:Ignorable="d" 
+             Tag="Dashboard"
              d:DesignHeight="1500" d:DesignWidth="800">
     <UserControl.Resources>
         <local:BooleanToVisibilityMultiConverter x:Key="BooleanToVisibilityMultiConverter"/>

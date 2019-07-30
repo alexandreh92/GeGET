@@ -33,9 +33,8 @@ namespace BLL
                 dependency.OnChange += new OnChangeEventHandler(dependency_OnChange);
                 bd.StartDependency();
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
             }
         }
         #endregion
@@ -66,7 +65,6 @@ namespace BLL
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(ex.Message);
                 }
                 finally
                 {

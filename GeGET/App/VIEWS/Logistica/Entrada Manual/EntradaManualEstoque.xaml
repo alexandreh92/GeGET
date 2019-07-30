@@ -12,6 +12,7 @@
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              mc:Ignorable="d"
              Language="pt-BR"
+             Tag="Logística: Entrada Manual de Estoque"
              d:DesignHeight="900" d:DesignWidth="800">
 
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide">
@@ -69,7 +70,7 @@
                                                 <Button x:Name="AdicionarProduto" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Adicionar Produto na Lista" Height="25" Width="25" Click="AdicionarProduto_Click">
                                                     <materialDesign:PackIcon Kind="Add" Foreground="White"/>
                                                 </Button>
-                                                <Button x:Name="ExcluirProduto" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Adicionar Produto na Lista" Height="25" Width="25" Click="ExcluirProduto_Click">
+                                                <Button x:Name="ExcluirProduto" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Excluir Produto da Lista" Height="25" Width="25" Click="ExcluirProduto_Click">
                                                     <materialDesign:PackIcon Kind="Close" Foreground="White"/>
                                                 </Button>
                                                 <Button x:Name="AdicionarEstoque" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Adicionar para Estoque" Height="25" Width="25" Click="AdicionarEstoque_Click">

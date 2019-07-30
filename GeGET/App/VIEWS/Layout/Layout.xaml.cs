@@ -8,6 +8,8 @@ using System;
 using System.Threading;
 using System.Windows.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using Dragablz.Core;
 
 namespace GeGET
 {
@@ -35,7 +37,7 @@ namespace GeGET
             txtTitle.Text = txtTitle.Text + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             LoadMensagens();
             dependency.Start();
-            helpers.Open<Dashboard>(null, false);
+            helpers.OpenTab<Dashboard>(null, null, null, false);
         }
         #endregion
 
@@ -122,12 +124,12 @@ namespace GeGET
 
         private void BtnCRM_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<CRM>(null, false);
+            helpers.OpenTab<CRM>(sender, e, null, false);
         }
 
         private void BtnOrcamentos_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Orcamentos>(null, false);
+            helpers.OpenTab<Orcamentos>(sender, e, null, false);
         }
 
         private void PopupBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -164,19 +166,19 @@ namespace GeGET
         }
 
 
-        private void BtnAccount_Click(object sender, RoutedEventArgs e)
+        private void BtnAccount_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<UserPanel>(null, false);
+            helpers.OpenTab<UserPanel>(sender, e, null, false);
         }
 
         private void BtnSuprimentos_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Suprimentos>(null, false);
+            helpers.OpenTab<Suprimentos>(sender, e, null, false);
         }
 
         private void BtnDashBoard_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Dashboard>(null, false);
+            helpers.OpenTab<Dashboard>(sender, e, null, false);
         }
 
         private void ColorZone_MouseDown(object sender, MouseButtonEventArgs e)
@@ -204,17 +206,21 @@ namespace GeGET
 
         private void BtnProjetos_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Projetos>(null, false);
+            helpers.OpenTab<Projetos>(sender, e, null, false);
+
         }
 
         private void BtnChangelog_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Changelog>(null, false);
+            helpers.OpenTab<Changelog>(sender, e, null, false);
         }
 
         private void BtnLogistica_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Logistica>(null, false);
+            helpers.OpenTab<Logistica>(sender, e, null, false);
+            
+
+            
         }
 
         private void BtnSuprimentos_Selected(object sender, RoutedEventArgs e)
@@ -257,5 +263,10 @@ namespace GeGET
             disposed = true;
         }
         #endregion
+
+        private void ActionTabs_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

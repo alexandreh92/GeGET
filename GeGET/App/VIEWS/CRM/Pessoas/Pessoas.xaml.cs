@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
 using BLL;
 using DTO;
@@ -94,14 +95,14 @@ namespace GeGET
             }
         }
 
-        private void BtnNegocios_Click(object sender, RoutedEventArgs e)
+        private void BtnNegocios_Click(object sender, MouseButtonEventArgs e)
         {
             Button btn = sender as Button;
             int index = lstClientes.Items.IndexOf(btn.DataContext);
             var Id = ((EstabelecimentosDTO)lstClientes.Items[index]).Id;
             //Negociosdto.FromParent = true;
             //Negociosdto.ParentId = Id;
-            helpers.Open<Negocios>(this.GetType().Name, true);
+            helpers.OpenTab<Negocios>(sender, e, this.GetType().Name, true);
         }
 
         private void BtnEditar_Click(object sender, RoutedEventArgs e)
