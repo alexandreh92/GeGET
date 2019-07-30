@@ -64,14 +64,6 @@
                     <Image Source="/Resources/Images/GETAC.Image.png" Height="160" Width="160"/>
                 </StackPanel>
             </Grid>
-            <Grid Grid.Row="3">
-                <dxg:GridControl Width="0" Height="0" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" HorizontalAlignment="Left" Margin="105,37,0,0" VerticalAlignment="Top">
-                    <dxg:GridControl.View>
-                        <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True"/>
-                    </dxg:GridControl.View>
-                </dxg:GridControl>
-
-            </Grid>
             <Grid Grid.Row="2">
                 <TextBlock FontFamily="{StaticResource Novecento-Bold}" FontSize="28" Margin="60,31,0,0" Text="GeGET" Foreground="White"/>
                 <TextBlock x:Name="txtVersion" FontFamily="Century Gothic" FontSize="10" Margin="152,49,0,0" Text="version 1.0.0.0" Foreground="White"/>

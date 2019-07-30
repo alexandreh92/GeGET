@@ -31,14 +31,14 @@ namespace GeGET
             helpers.Close();
         }
 
-        private void BtnListaProjeto_Click(object sender, RoutedEventArgs e)
+        private void BtnListaProjeto_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<ListaProjeto>(this.GetType().Name, false);
+            helpers.OpenTab<ListaProjeto>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnRequisicaoMaterial_Click(object sender, RoutedEventArgs e)
+        private void BtnRequisicaoMaterial_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<GerarRequisicaoMaterial>(this.GetType().Name, false);
+            helpers.OpenTab<GerarRequisicaoMaterial>(sender, e, this.GetType().Name, false);
         }
     }
 }

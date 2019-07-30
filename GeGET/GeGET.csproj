@@ -139,6 +139,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2016White.v17.2.dll</HintPath>
     </Reference>
+    <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
@@ -506,6 +509,9 @@
     <Compile Include="App\VIEWS\Suprimentos\Produtos\Produtos.xaml.cs">
       <DependentUpon>Produtos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Relatórios\RelatorioProdutos.xaml.cs">
+      <DependentUpon>RelatorioProdutos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\VIEWS\Suprimentos\Suprimentos.xaml.cs">
       <DependentUpon>Suprimentos.xaml</DependentUpon>
     </Compile>
@@ -586,6 +592,7 @@
     <Compile Include="App\DTO\CRM\Gerenciar Orçamento\VersaoOrcamentoDTO.cs" />
     <Compile Include="ProcurarRequisicaoMaterialBLL.cs" />
     <Compile Include="ProcurarRequisicaoMaterialDTO.cs" />
+    <Compile Include="RelatorioProdutos.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
@@ -871,6 +878,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="App\VIEWS\Suprimentos\Relatórios\RelatorioProdutos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\VIEWS\Suprimentos\Suprimentos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1024,6 +1035,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Controls\Orçamentos\Lista de Orçamentos\" />
+    <Folder Include="App\DTO\Suprimentos\Relatórios\" />
     <Folder Include="App\VIEWS\Controls\" />
   </ItemGroup>
   <ItemGroup>

@@ -28,59 +28,59 @@ namespace GeGET
 
         }
 
-        private void BtnProdutos_Click(object sender, RoutedEventArgs e)
+        private void BtnProdutos_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Produtos>(this.GetType().Name, false);
+            helpers.OpenTab<Produtos>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnItens_Click(object sender, RoutedEventArgs e)
+        private void BtnItens_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Itens>(this.GetType().Name, false);
+            helpers.OpenTab<Itens>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnFornecedores_Click(object sender, RoutedEventArgs e)
+        private void BtnFornecedores_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Fornecedores>(this.GetType().Name, false);
+            helpers.OpenTab<Fornecedores>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnGrupoFornecedores_Click(object sender, RoutedEventArgs e)
+        private void BtnGrupoFornecedores_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<GrupodeFornecedores>(this.GetType().Name, false);
+            helpers.OpenTab<GrupodeFornecedores>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnGrupoItens_Click(object sender, RoutedEventArgs e)
+        private void BtnGrupoItens_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<GrupodeItens>(this.GetType().Name, false);
+            helpers.OpenTab<GrupodeItens>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnCadastroFornecedores_Click(object sender, RoutedEventArgs e)
+        private void BtnCadastroFornecedores_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<CadastroFornecedor>(this.GetType().Name, false);
+            helpers.OpenTab<CadastroFornecedor>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnCadastroGrupoFornecedores_Click(object sender, RoutedEventArgs e)
+        private void BtnCadastroGrupoFornecedores_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<CadastroGrupodeFornecedores>(this.GetType().Name, false);
+            helpers.OpenTab<CadastroGrupodeFornecedores>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnCadastroItem_Click(object sender, RoutedEventArgs e)
+        private void BtnCadastroItem_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<CadastroItens>(this.GetType().Name, false);
+            helpers.OpenTab<CadastroItens>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnCadastroProduto_Click(object sender, RoutedEventArgs e)
+        private void BtnCadastroProduto_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<CadastroProdutos>(this.GetType().Name, false);
+            helpers.OpenTab<CadastroProdutos>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnCadastroGrupoItens_Click(object sender, RoutedEventArgs e)
+        private void BtnCadastroGrupoItens_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<CadastroGrupodeItens>(this.GetType().Name, false);
+            helpers.OpenTab<CadastroGrupodeItens>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnPrecificar_Click(object sender, RoutedEventArgs e)
+        private void BtnPrecificar_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<PrecificarProdutos>(this.GetType().Name, false);
+            helpers.OpenTab<PrecificarProdutos>(sender, e, this.GetType().Name, false);
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)

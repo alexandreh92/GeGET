@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Windows;
+using System.Threading.Tasks;
 
 namespace BLL
 {
@@ -637,7 +638,7 @@ namespace BLL
         {
             try
             {
-                var query = "INSERT INTO atividade (descricao, NEGOCIO_id, DESC_ATIVIDADES_id, VERSAO_ATIVIDADE_id, USUARIO_id) SELECT descricao, NEGOCIO_id, DESC_ATIVIDADES_id, (select id from versao_atividade where negocio_id = '"+DTO.Id+"' and versao_id = (select max(versao_id) from versao_atividade where negocio_id = '"+DTO.Id+"')), '"+Logindto.Id+"' FROM atividade WHERE VERSAO_ATIVIDADE_id = '"+ versaoDTO.Versao_Atividade_Id +"' and NEGOCIO_id = '"+DTO.Id+ "'";
+                var query = "INSERT INTO atividade (descricao, NEGOCIO_id, DESC_ATIVIDADES_id, VERSAO_ATIVIDADE_id, USUARIO_id, habilitado) SELECT descricao, NEGOCIO_id, DESC_ATIVIDADES_id, (select id from versao_atividade where negocio_id = '"+DTO.Id+"' and versao_id = (select max(versao_id) from versao_atividade where negocio_id = '"+DTO.Id+"')), '"+Logindto.Id+"', habilitado FROM atividade WHERE VERSAO_ATIVIDADE_id = '"+ versaoDTO.Versao_Atividade_Id +"' and NEGOCIO_id = '"+DTO.Id+ "'";
                 bd.Conectar();
                 bd.ExecutarComandoSQL(query);
 
@@ -661,6 +662,30 @@ namespace BLL
         }
 
         #endregion
+
+        public Task<bool> HasPricelessItems(NegociosDTO DTO)
+        {
+            bool isTrue = false;
+            var dt = new DataTable();
+            try
+            {
+                var query = "SELECT lo.preco_orc FROM lista_orcamento lo JOIN negocio n ON lo.negocio_id = n.id JOIN atividade a ON a.id = lo.atividades_id JOIN versao_atividade va ON va.id = a.versao_atividade_id WHERE n.id = '" + DTO.Id + "' AND va.versao_id = n.versao_valida AND lo.preco_orc = 0";
+                bd.Conectar();
+                dt = bd.RetDataTable(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    isTrue = true;
+                }
+            }
+            return Task.FromResult(isTrue);
+        }
 
         #endregion
 

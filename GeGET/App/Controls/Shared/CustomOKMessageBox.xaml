@@ -35,7 +35,7 @@
         </Grid>
         <Grid Grid.Column="1" Grid.Row="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,15">
-                <Button x:Name="btnConfirmar" Margin="0,0,0,0" FontFamily="{DynamicResource Novecento-Bold}" Click="BtnConfirmar_Click">CONFIRMAR</Button>
+                <Button x:Name="btnConfirmar"  Margin="0,0,0,0" FontFamily="{DynamicResource Novecento-Bold}" Click="BtnConfirmar_Click">CONFIRMAR</Button>
             </StackPanel>
         </Grid>
     </Grid>

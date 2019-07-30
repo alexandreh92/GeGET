@@ -9,6 +9,7 @@
              xmlns:control = "clr-namespace:Teste"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
+             Tag="Suprimentos: Cadastro de Fornecedor"
              d:DesignHeight="450" d:DesignWidth="800">
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide">
         <materialDesign:TransitioningContent.OpeningEffects>

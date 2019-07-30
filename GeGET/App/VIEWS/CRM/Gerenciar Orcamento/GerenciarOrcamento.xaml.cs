@@ -231,32 +231,39 @@ namespace GeGET
 
         private async void BtnEnviar_Click(object sender, RoutedEventArgs e)
         {
-            var result = CustomOKCancelMessageBox.Show("Enviar o orçamento para o cliente desabilitará esta versão para alteraçoes.\nDeseja mesmo fazer isso?","Atenção!", Window.GetWindow(this));
-            if (result == System.Windows.Forms.DialogResult.OK)
+            if (!await bll.HasPricelessItems(dto))
             {
-                using (var form = new ValorEnviadoOrcamento())
+                var result = CustomOKCancelMessageBox.Show("Enviar o orçamento para o cliente desabilitará esta versão para alteraçoes.\nDeseja mesmo fazer isso?", "Atenção!", Window.GetWindow(this));
+                if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    form.Owner = Window.GetWindow(this);
-                    form.ShowDialog();
-                    if (form.DialogResult.Value && form.DialogResult.HasValue)
+                    using (var form = new ValorEnviadoOrcamento())
                     {
-                        dto.Valor_Enviado = form.Valor;
-                        WaitBox wb = new WaitBox
+                        form.Owner = Window.GetWindow(this);
+                        form.ShowDialog();
+                        if (form.DialogResult.Value && form.DialogResult.HasValue)
                         {
-                            Owner = Window.GetWindow(this)
-                        };
-                        wb.Show();
-                        await Task.Run(() =>
-                        {
-                            bll.EnviarCliente(dto);
-                        });
-                        dto.Status_Descricao = "ENVIADO AO CLIENTE";
-                        txtStatus.Text = dto.Status_Descricao;
-                        dto.Status_Id = 3;
-                        wb.Close();
-                        InitializeComponents();
+                            dto.Valor_Enviado = form.Valor;
+                            WaitBox wb = new WaitBox
+                            {
+                                Owner = Window.GetWindow(this)
+                            };
+                            wb.Show();
+                            await Task.Run(() =>
+                            {
+                                bll.EnviarCliente(dto);
+                            });
+                            dto.Status_Descricao = "ENVIADO AO CLIENTE";
+                            txtStatus.Text = dto.Status_Descricao;
+                            dto.Status_Id = 3;
+                            wb.Close();
+                            InitializeComponents();
+                        }
                     }
-                }    
+                }
+            }
+            else
+            {
+                CustomOKMessageBox.Show("Não é possivel enviar o orçamento. Existem preços zerados no mesmo, por favor revise.", "Atenção!", Window.GetWindow(this));
             }
         }
 

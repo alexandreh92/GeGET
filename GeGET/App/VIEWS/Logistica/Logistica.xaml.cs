@@ -31,19 +31,19 @@ namespace GeGET
             helpers.Close();
         }
 
-        private void BtnEntradaXML_Click(object sender, RoutedEventArgs e)
+        private void BtnEntradaXML_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<EntradaNotaFiscal>(this.GetType().Name, false);
+            helpers.OpenTab<EntradaNotaFiscal>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnEntradaManual_Click(object sender, RoutedEventArgs e)
+        private void BtnEntradaManual_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<EntradaManualEstoque>(this.GetType().Name, false);
+            helpers.OpenTab<EntradaManualEstoque>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnAtendimento_Click(object sender, RoutedEventArgs e)
+        private void BtnAtendimento_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<Atendimento>(this.GetType().Name, false);
+            helpers.OpenTab<Atendimento>(sender, e, this.GetType().Name, false);
         }
     }
 }

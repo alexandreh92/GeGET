@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 using DevExpress.Xpf.Grid;
 
@@ -20,11 +22,17 @@ namespace GeGET
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
                 var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-                targetWindow.GridMain.Children.Clear();
+                if (targetWindow.actionTabs.SelectedItem != null)
+                {
+                    var tab = targetWindow.actionTabs.SelectedItem as TabItem;
+                    targetWindow.actionTabs.Items.Remove(tab);
+                }
             }
             ));
         }
-        public void Open<T>(string BackForm, bool Instanced) where T : UserControl, new()
+        
+
+        public void OpenTab<T>(object sender, MouseButtonEventArgs e, string BackForm, bool Instanced) where T : UserControl, new()
         {
             if (Instanced)
             {
@@ -34,10 +42,57 @@ namespace GeGET
             {
                 back = BackForm;
             }
-            T frm = new T();
             var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-            targetWindow.GridMain.Children.Clear();
-            targetWindow.GridMain.Children.Add(frm);
+            T frm = new T();
+            if (e != null)
+            {
+                if (e.ChangedButton == MouseButton.Middle && e.ButtonState == MouseButtonState.Pressed)
+                {
+                    var tab = new TabItem()
+                    {
+                        Content = frm,
+                        Header = frm.Tag,
+                    };
+                    targetWindow.actionTabs.Items.Add(tab);
+                    targetWindow.actionTabs.SelectedItem = tab;
+                }
+                else if (e.ChangedButton == MouseButton.Left && e.ButtonState == MouseButtonState.Pressed)
+                {
+                    if (targetWindow.actionTabs.SelectedItem != null && targetWindow.actionTabs.Items.Count > 0)
+                    {
+                        var tab = targetWindow.actionTabs.SelectedItem as TabItem;
+                        targetWindow.actionTabs.Items.Remove(tab);
+                        var newtab = new TabItem()
+                        {
+                            Content = frm,
+                            Header = frm.Tag
+                        };
+                        targetWindow.actionTabs.Items.Add(newtab);
+                        targetWindow.actionTabs.SelectedItem = newtab;
+                    }
+                    else
+                    {
+                        var tab = new TabItem()
+                        {
+                            Content = frm,
+                            Header = frm.Tag
+                        };
+                        targetWindow.actionTabs.Items.Add(tab);
+                        targetWindow.actionTabs.SelectedItem = tab;
+                    }
+
+                }
+            }
+            else
+            {
+                var tab = new TabItem()
+                {
+                    Content = frm,
+                    Header = frm.Tag
+                };
+                targetWindow.actionTabs.Items.Add(tab);
+                targetWindow.actionTabs.SelectedItem = tab;
+            }
         }
 
         public void OpenBack(bool Instanced)
@@ -54,8 +109,19 @@ namespace GeGET
             Type.GetType("GeGET." + back);
             UserControl ctrl = (UserControl)Activator.CreateInstance(type);
             var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-            targetWindow.GridMain.Children.Clear();
-            targetWindow.GridMain.Children.Add(ctrl);
+            if (targetWindow.actionTabs.SelectedItem != null)
+            {
+                var tab = targetWindow.actionTabs.SelectedItem as TabItem;
+                targetWindow.actionTabs.Items.Remove(tab);
+
+                var newTab = new TabItem()
+                {
+                    Content = ctrl,
+                    Header = ctrl.Tag
+                };
+                targetWindow.actionTabs.Items.Add(newTab);
+                targetWindow.actionTabs.SelectedItem = newTab;
+            }
         }
 
 

@@ -26,14 +26,14 @@ namespace GeGET
             InitializeComponent();
         }
 
-        private void BtnListaOrcamento_Click(object sender, RoutedEventArgs e)
+        private void BtnListaOrcamento_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<ListaOrcamento>(this.GetType().Name, false);
+            helpers.OpenTab<ListaOrcamento>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnConsultaOrcamento_Click(object sender, RoutedEventArgs e)
+        private void BtnConsultaOrcamento_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<ConsultaListaOrcamento>(this.GetType().Name, false);
+            helpers.OpenTab<ConsultaListaOrcamento>(sender, e, this.GetType().Name, false);
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
@@ -41,9 +41,9 @@ namespace GeGET
             helpers.Close();
         }
 
-        private void BtnExportarListaOrcamento_Click(object sender, RoutedEventArgs e)
+        private void BtnExportarListaOrcamento_Click(object sender, MouseButtonEventArgs e)
         {
-            helpers.Open<ExportarListaOrcamento>(this.GetType().Name, false);
+            helpers.OpenTab<ExportarListaOrcamento>(sender, e, this.GetType().Name, false);
         }
     }
 }
