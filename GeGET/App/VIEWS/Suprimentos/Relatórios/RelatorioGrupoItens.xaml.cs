@@ -1,26 +1,28 @@
-﻿using BLL;
-using DevExpress.XtraPrinting;
-using DTO;
-using Microsoft.Win32;
-using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using BLL;
+using DTO;
+using System.Collections.ObjectModel;
+using System.Threading;
+using DevExpress.XtraPrinting;
+using Microsoft.Win32;
+using System.Threading.Tasks;
 
 namespace GeGET
 {
-    public partial class RelatorioProdutos : UserControl, IDisposable
+    public partial class RelatorioGrupoItens : UserControl, IDisposable
     {
         #region Declarations
-        private bool disposed = false;
-        private Helpers helpers = new Helpers();
-        private RelatorioProdutoBLL bll = new RelatorioProdutoBLL();
-        public ObservableCollection<RelatorioProdutoDTO> listaItens;
+        bool disposed = false;
+        Helpers helpers = new Helpers();
+        RelatorioGrupoItensBLL bll = new RelatorioGrupoItensBLL();
+        public ObservableCollection<RelatorioGrupoItensDTO> listaItens;
         #endregion
 
         #region Initialize
-        public RelatorioProdutos()
+        public RelatorioGrupoItens()
         {
             InitializeComponent();
             Load();
@@ -32,10 +34,10 @@ namespace GeGET
 
         public async void Load()
         {
-            await Task.Run(() =>
+            await Task.Run(() => 
             {
-                listaItens = bll.ListaProdutos();
-            });
+                listaItens = bll.ListaItens();
+            }); 
             grdItens.ItemsSource = listaItens;
         }
 
@@ -84,9 +86,7 @@ namespace GeGET
         protected virtual void Dispose(bool disposing)
         {
             if (disposed)
-            {
                 return;
-            }
 
             if (disposing)
             {

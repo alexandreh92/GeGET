@@ -75,13 +75,13 @@ namespace GeGET
                     if (isSucess)
                     {
                         ClearControls();
-                        CustomOKCancelMessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso!", Window.GetWindow(this));
+                        CustomOKMessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso!", Window.GetWindow(this));
                     }
                 }
             }
             else
             {
-                CustomOKCancelMessageBox.Show("Campos não podem estar em branco.", "Atenção!", Window.GetWindow(this));
+                CustomOKMessageBox.Show("Campos não podem estar em branco.", "Atenção!", Window.GetWindow(this));
             }
         }
         #endregion

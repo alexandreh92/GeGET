@@ -87,5 +87,25 @@ namespace GeGET
         {
             helpers.Close();
         }
+
+        private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.OpenTab<RelatorioGrupoItens>(sender, e, this.GetType().Name, false);
+        }
+
+        private void BtnGrpForn_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.OpenTab<RelatorioGrupoFornecedor>(sender, e, this.GetType().Name, false);
+        }
+
+        private void BtnRelatorioItens_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.OpenTab<RelatorioItens>(sender, e, this.GetType().Name, false);
+        }
+
+        private void BtnRelatorioProdutos_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.OpenTab<RelatorioProdutos>(sender, e, this.GetType().Name, false);
+        }
     }
 }

@@ -10,17 +10,17 @@ using System.Windows.Controls;
 
 namespace GeGET
 {
-    public partial class RelatorioProdutos : UserControl, IDisposable
+    public partial class RelatorioItens : UserControl, IDisposable
     {
         #region Declarations
         private bool disposed = false;
         private Helpers helpers = new Helpers();
-        private RelatorioProdutoBLL bll = new RelatorioProdutoBLL();
-        public ObservableCollection<RelatorioProdutoDTO> listaItens;
+        private RelatorioItensBLL bll = new RelatorioItensBLL();
+        public ObservableCollection<RelatorioItensDTO> listaItens;
         #endregion
 
         #region Initialize
-        public RelatorioProdutos()
+        public RelatorioItens()
         {
             InitializeComponent();
             Load();
@@ -30,11 +30,11 @@ namespace GeGET
         #region Methods
 
 
-        public async void Load()
+        private async void Load()
         {
             await Task.Run(() =>
             {
-                listaItens = bll.ListaProdutos();
+                listaItens = bll.ListaItens();
             });
             grdItens.ItemsSource = listaItens;
         }

@@ -186,7 +186,7 @@ namespace GeGET
                 }
                 else
                 {
-                    var result = CustomOKCancelMessageBox.Show("Deseja mesmo atender os produtos selecionados?.", "Atenção!", Window.GetWindow(this));
+                    var result = CustomOKCancelMessageBox.Show("Deseja mesmo atender os produtos selecionados?", "Atenção!", Window.GetWindow(this));
                     if (result == System.Windows.Forms.DialogResult.OK)
                     {
                         listaAtender = new ObservableCollection<AtendimentoDTO>();

@@ -255,9 +255,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="App\BLL\Suprimentos\Relatórios\RelatorioGrupoFornecedoresBLL.cs" />
     <Compile Include="App\Controls\Shared\ProcurarRequisicaoMaterial.xaml.cs">
       <DependentUpon>ProcurarRequisicaoMaterial.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\BLL\Suprimentos\Relatórios\RelatorioGrupoItensBLL.cs" />
+    <Compile Include="App\DTO\Suprimentos\Relatórios\RelatorioGrupoFornecedoresDTO.cs" />
     <Compile Include="App\VIEWS\Logistica\Entrada Manual\AdicionarItemListaManual.xaml.cs">
       <DependentUpon>AdicionarItemListaManual.xaml</DependentUpon>
     </Compile>
@@ -509,8 +512,17 @@
     <Compile Include="App\VIEWS\Suprimentos\Produtos\Produtos.xaml.cs">
       <DependentUpon>Produtos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Relatórios\RelatorioGrupoFornecedor.xaml.cs">
+      <DependentUpon>RelatorioGrupoFornecedor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\VIEWS\Suprimentos\Relatórios\RelatorioProdutos.xaml.cs">
       <DependentUpon>RelatorioProdutos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Relatórios\RelatorioItens.xaml.cs">
+      <DependentUpon>RelatorioItens.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Relatórios\RelatorioGrupoItens.xaml.cs">
+      <DependentUpon>RelatorioGrupoItens.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\VIEWS\Suprimentos\Suprimentos.xaml.cs">
       <DependentUpon>Suprimentos.xaml</DependentUpon>
@@ -558,8 +570,8 @@
     </Compile>
     <Compile Include="App\BLL\Logística\EntradaManualEstoqueBLL.cs" />
     <Compile Include="App\DTO\Logística\EntradaManualEstoqueDTO.cs" />
-    <Compile Include="AtendimentoBLL.cs" />
-    <Compile Include="AtendimentoDTO.cs" />
+    <Compile Include="App\BLL\Logística\AtendimentoBLL.cs" />
+    <Compile Include="App\DTO\Logística\AtendimentoDTO.cs" />
     <Compile Include="ExpandersCRM.xaml.cs">
       <DependentUpon>ExpandersCRM.xaml</DependentUpon>
     </Compile>
@@ -570,7 +582,7 @@
     <Compile Include="App\DTO\Projetos\GerarRequisicaoMaterialDTO.cs" />
     <Compile Include="App\BLL\Logística\LinkarProdutoNotaFiscalBLL.cs" />
     <Compile Include="App\DTO\Logística\LinkarProdutoNotaFiscalDTO.cs" />
-    <Compile Include="Atendimento.xaml.cs">
+    <Compile Include="App\VIEWS\Logistica\Atendimento.xaml.cs">
       <DependentUpon>Atendimento.xaml</DependentUpon>
     </Compile>
     <Compile Include="Permission.xaml.cs">
@@ -590,17 +602,18 @@
     </Compile>
     <Compile Include="App\BLL\CRM\Gerenciar Orçamento\VersaoOrcamentoBLL.cs" />
     <Compile Include="App\DTO\CRM\Gerenciar Orçamento\VersaoOrcamentoDTO.cs" />
-    <Compile Include="ProcurarRequisicaoMaterialBLL.cs" />
-    <Compile Include="ProcurarRequisicaoMaterialDTO.cs" />
-    <Compile Include="RelatorioProdutos.cs" />
+    <Compile Include="App\BLL\Logística\ProcurarRequisicaoMaterialBLL.cs" />
+    <Compile Include="App\DTO\Logística\ProcurarRequisicaoMaterialDTO.cs" />
+    <Compile Include="App\DTO\Suprimentos\Relatórios\RelatorioGrupoItensDTO.cs" />
+    <Compile Include="App\BLL\Suprimentos\Relatórios\RelatorioProdutoBLL.cs" />
+    <Compile Include="App\BLL\Suprimentos\Relatórios\RelatorioItensBLL.cs" />
+    <Compile Include="App\DTO\Suprimentos\Relatórios\RelatorioItensDTO.cs" />
+    <Compile Include="App\DTO\Suprimentos\Relatórios\RelatorioProdutoDTO.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Window2.xaml.cs">
       <DependentUpon>Window2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="xmlimport.xaml.cs">
-      <DependentUpon>xmlimport.xaml</DependentUpon>
     </Compile>
     <Page Include="App\Controls\Shared\ProcurarRequisicaoMaterial.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -878,7 +891,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="App\VIEWS\Suprimentos\Relatórios\RelatorioGrupoFornecedor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\VIEWS\Suprimentos\Relatórios\RelatorioProdutos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Relatórios\RelatorioItens.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Relatórios\RelatorioGrupoItens.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -898,7 +923,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Atendimento.xaml">
+    <Page Include="App\VIEWS\Logistica\Atendimento.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -974,10 +999,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="xmlimport.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\ProcurarMateriais.xaml.cs">
@@ -1035,7 +1056,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Controls\Orçamentos\Lista de Orçamentos\" />
-    <Folder Include="App\DTO\Suprimentos\Relatórios\" />
     <Folder Include="App\VIEWS\Controls\" />
   </ItemGroup>
   <ItemGroup>
