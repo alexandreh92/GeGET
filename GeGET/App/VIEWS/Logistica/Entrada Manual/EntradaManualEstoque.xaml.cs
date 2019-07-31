@@ -1,20 +1,23 @@
-﻿using System;
+﻿using DevExpress.Xpf.Grid;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Collections.Generic;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace GeGET
 {
     public partial class EntradaManualEstoque : UserControl, IDisposable
     {
-        bool disposed = false;
-        Helpers helpers = new Helpers();
-        EntradaManualEstoqueBLL bll = new EntradaManualEstoqueBLL();
-        EntradaManualEstoqueDTO dto = new EntradaManualEstoqueDTO();
-        ObservableCollection<EntradaManualEstoqueDTO> listaEntrada = new ObservableCollection<EntradaManualEstoqueDTO>();
-        ObservableCollection<EntradaManualEstoqueDTO> listaInserir;
+        private bool disposed = false;
+        private Helpers helpers = new Helpers();
+        private EntradaManualEstoqueBLL bll = new EntradaManualEstoqueBLL();
+        private EntradaManualEstoqueDTO dto = new EntradaManualEstoqueDTO();
+        private ObservableCollection<EntradaManualEstoqueDTO> listaEntrada = new ObservableCollection<EntradaManualEstoqueDTO>();
+        private ObservableCollection<EntradaManualEstoqueDTO> listaInserir;
 
         public EntradaManualEstoque()
         {
@@ -41,7 +44,7 @@ namespace GeGET
 
         private void AdicionarProduto_Click(object sender, RoutedEventArgs e)
         {
-            using (var form = new AdicionarItemListaManual())
+            using (AdicionarItemListaManual form = new AdicionarItemListaManual())
             {
                 form.Owner = Window.GetWindow(this);
                 form.ShowDialog();
@@ -59,12 +62,12 @@ namespace GeGET
         private void AdicionarEstoque_Click(object sender, RoutedEventArgs e)
         {
             bool iNotify = false;
-            var handles = grdItens.GetSelectedRowHandles();
-            if (handles.Length>0)
+            int[] handles = grdItens.GetSelectedRowHandles();
+            if (handles.Length > 0)
             {
                 listaInserir = new ObservableCollection<EntradaManualEstoqueDTO>();
 
-                foreach (var rowHandle in handles)
+                foreach (int rowHandle in handles)
                 {
                     dto = grdItens.GetRow(rowHandle) as EntradaManualEstoqueDTO;
                     if (dto.Quantidade != 0 && dto.Custo != 0)
@@ -78,34 +81,42 @@ namespace GeGET
                 }
                 if (iNotify)
                 {
-                    CustomOKMessageBox.Show("Existem itens que possuem a quantidade ou o preço zerado.","Atenção!",Window.GetWindow(this));
+                    CustomOKMessageBox.Show("Existem itens que possuem a quantidade ou o preço zerado.", "Atenção!", Window.GetWindow(this));
                 }
                 else
                 {
-                    bll.InserirEstoque(listaInserir);
-                    List<int> selectedRowHandles = new List<int>(grdItens.GetSelectedRowHandles());
-                    var descendingOrder = selectedRowHandles.OrderByDescending(i => i);
-                    grdItens.BeginDataUpdate();
-                    foreach (int i in descendingOrder)
+                    System.Windows.Forms.DialogResult result = CustomOKCancelMessageBox.Show("Deseja mesmo dar entrada nos itens selecionados?", "Atenção!", Window.GetWindow(this));
+                    if (result == System.Windows.Forms.DialogResult.OK)
                     {
-                        grdView.DeleteRow(i);
+                        bll.InserirEstoque(listaInserir);
+                        List<int> selectedRowHandles = new List<int>(grdItens.GetSelectedRowHandles());
+                        IOrderedEnumerable<int> descendingOrder = selectedRowHandles.OrderByDescending(i => i);
+                        grdItens.BeginDataUpdate();
+                        foreach (int i in descendingOrder)
+                        {
+                            grdView.DeleteRow(i);
+                        }
+                        grdItens.EndDataUpdate();
+                        CustomOKMessageBox.Show("Itens adicionados com sucesso ao estoque.", "Sucesso!", Window.GetWindow(this));
                     }
-                    grdItens.EndDataUpdate();
-                    CustomOKMessageBox.Show("Itens adicionados com sucesso ao estoque.", "Sucesso!", Window.GetWindow(this));
                 }
             }
         }
 
         private void ExcluirProduto_Click(object sender, RoutedEventArgs e)
         {
-            List<int> selectedRowHandles = new List<int>(grdItens.GetSelectedRowHandles());
-            var descendingOrder = selectedRowHandles.OrderByDescending(i => i);
-            grdItens.BeginDataUpdate();
-            foreach (int i in descendingOrder)
+            System.Windows.Forms.DialogResult result = CustomOKCancelMessageBox.Show("Deseja mesmo remover os itens selecionados?", "Atenção!", Window.GetWindow(this));
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
-                grdView.DeleteRow(i);
+                List<int> selectedRowHandles = new List<int>(grdItens.GetSelectedRowHandles());
+                IOrderedEnumerable<int> descendingOrder = selectedRowHandles.OrderByDescending(i => i);
+                grdItens.BeginDataUpdate();
+                foreach (int i in descendingOrder)
+                {
+                    grdView.DeleteRow(i);
+                }
+                grdItens.EndDataUpdate();
             }
-            grdItens.EndDataUpdate();
         }
 
         #region IDisposable
@@ -118,7 +129,9 @@ namespace GeGET
         protected virtual void Dispose(bool disposing)
         {
             if (disposed)
+            {
                 return;
+            }
 
             if (disposing)
             {
@@ -127,5 +140,30 @@ namespace GeGET
             disposed = true;
         }
         #endregion
+
+        private void GrdItens_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                ((TableView)grdItens.View).MoveNextRow();
+                ((TableView)grdItens.View).ShowEditor();
+                //e.Handled = true;
+            }
+        }
+
+        private void GrdView_ShownEditor(object sender, DevExpress.Xpf.Grid.EditorEventArgs e)
+        {
+            Dispatcher.BeginInvoke((Action)(() =>
+            {
+                if (this.grdView.ActiveEditor != null)
+                {
+                    this.grdView.ActiveEditor.SelectAll();
+                }
+                else
+                {
+                    ((TableView)grdItens.View).ShowEditor();
+                }
+            }), DispatcherPriority.Render);
+        }
     }
 }

@@ -179,7 +179,31 @@
                                                 <WrapPanel Width="{Binding ActualWidth, ElementName=StackPanel1}">
                                                     <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <Button Height="90" Width="90">
+                                                            <Button Height="90" Width="90" PreviewMouseDown="Button_PreviewMouseDown">
+                                                                <materialDesign:PackIcon Kind="FormatListBulleted" HorizontalAlignment="Center" Height="70" Width="70" />
+                                                            </Button>
+                                                            <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,10,0,0">Relatório de Grupo de Itens</TextBlock>
+                                                        </StackPanel>
+                                                    </materialDesign:Card>
+                                                    <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                            <Button x:Name="btnGrpForn" Height="90" Width="90" PreviewMouseDown="BtnGrpForn_PreviewMouseDown">
+                                                                <materialDesign:PackIcon Kind="FormatListBulleted" HorizontalAlignment="Center" Height="70" Width="70" />
+                                                            </Button>
+                                                            <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,10,0,0">Relatório de Grupo de Fornecedores</TextBlock>
+                                                        </StackPanel>
+                                                    </materialDesign:Card>
+                                                    <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                            <Button x:Name="btnRelatorioItens" Height="90" Width="90" PreviewMouseDown="BtnRelatorioItens_PreviewMouseDown">
+                                                                <materialDesign:PackIcon Kind="FormatListBulleted" HorizontalAlignment="Center" Height="70" Width="70" />
+                                                            </Button>
+                                                            <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,10,0,0">Relatório de Itens</TextBlock>
+                                                        </StackPanel>
+                                                    </materialDesign:Card>
+                                                    <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                            <Button x:Name="btnRelatorioProdutos" Height="90" Width="90" PreviewMouseDown="BtnRelatorioProdutos_PreviewMouseDown">
                                                                 <materialDesign:PackIcon Kind="FormatListBulleted" HorizontalAlignment="Center" Height="70" Width="70" />
                                                             </Button>
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,10,0,0">Relatório de Produtos</TextBlock>
