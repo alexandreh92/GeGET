@@ -1,4 +1,8 @@
-﻿using System;
+﻿using GeGET.Infrastructure;
+using Prism.Ioc;
+using Prism.Modularity;
+using Prism.Unity;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -12,8 +16,18 @@ namespace GeGET
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
+        protected override Window CreateShell()
+        {
+            return Container.Resolve<Login>();
+        }
+
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            
+        }
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             this.Dispatcher.UnhandledException += OnDispatcherUnhandledException;
@@ -27,5 +41,17 @@ namespace GeGET
             // for quick debugging etc.
             e.Handled = true;
         }
+
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        {
+            var moduleInfrastructureType = typeof(InfrastructureModule);
+            moduleCatalog.AddModule(new ModuleInfo()
+            {
+                ModuleName = moduleInfrastructureType.Name,
+                ModuleType = moduleInfrastructureType.AssemblyQualifiedName,
+                InitializationMode = InitializationMode.OnDemand
+            });
+        }
+
     }
 }
