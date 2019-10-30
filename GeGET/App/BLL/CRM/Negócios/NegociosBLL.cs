@@ -111,7 +111,7 @@ namespace BLL
             try
             {
                 var query = "SELECT distinct t1.* FROM (SELECT n.id, n.descricao, n.anotacoes, n.prazo, n.valor_fechamento, n.data, v.nome, s.descricao as status_descricao, s.id as status_id, e.cnpj, e.endereco, cid.cidade, e.id as estabelecimento_id, c.id as cliente_id, cid.uf, c.rsocial, c.fantasia, e.descricao as descricao_estabelecimento FROM negocio n JOIN vendedor v ON n.VENDEDOR_id = v.id JOIN status_orcamento s ON n.STATUS_ORCAMENTO_id = s.id JOIN estabelecimento e ON n.ESTABELECIMENTO_id = e.id JOIN cidades cid ON e.CIDADES_id = cid.id JOIN cliente c ON e.CLIENTE_id = c.id join orcamentista_negocio orc ON orc.negocio_id = n.id WHERE orc.usuario_id = '"+ Logindto.Id +"' AND n.status_orcamento_id = '2') as t1" +
-                            " LEFT OUTER JOIN (SELECT distinct a.id as atividade, a.negocio_id FROM atividade a JOIN versao_atividade va ON a.versao_atividade_id = va.id JOIN negocio n ON n.id = a.negocio_id AND n.versao_valida = va.versao_id JOIN orcamentista_negocio orn ON orn.negocio_id = n.id) as t2 ON t1.id = t2.negocio_id WHERE t2.negocio_id = t1.id GROUP BY t1.id HAVING COUNT(t2.atividade) > 0";
+                            " LEFT OUTER JOIN (SELECT distinct a.id as atividade, a.negocio_id FROM atividade a JOIN versao_atividade va ON a.versao_atividade_id = va.id JOIN negocio n ON n.id = a.negocio_id AND n.versao_valida = va.versao_id JOIN orcamentista_negocio orn ON orn.negocio_id = n.id) as t2 ON t1.id = t2.negocio_id WHERE t2.negocio_id = t1.id GROUP BY t1.id HAVING COUNT(t2.atividade) > 0 ORDER BY t1.id ASC";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
