@@ -98,5 +98,10 @@ namespace GeGET
         {
             helpers.OpenTab<ListaNegociosSimplificada>(sender, e, this.GetType().Name, false);
         }
+
+        private void BtnCopiarAtividades_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.OpenTab<CopiarAtividades>(sender, e, this.GetType().Name, false);
+        }
     }
 }

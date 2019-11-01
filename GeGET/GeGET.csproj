@@ -293,6 +293,9 @@
     </Compile>
     <Compile Include="App\BLL\Suprimentos\Relatórios\RelatorioGrupoItensBLL.cs" />
     <Compile Include="App\DTO\Suprimentos\Relatórios\RelatorioGrupoFornecedoresDTO.cs" />
+    <Compile Include="App\VIEWS\CRM\Copiar Atividades\CopiarAtividades.xaml.cs">
+      <DependentUpon>CopiarAtividades.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\VIEWS\Logistica\Entrada Manual\AdicionarItemListaManual.xaml.cs">
       <DependentUpon>AdicionarItemListaManual.xaml</DependentUpon>
     </Compile>
@@ -656,6 +659,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="App\Controls\Shared\ProcurarRequisicaoMaterial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\CRM\Copiar Atividades\CopiarAtividades.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

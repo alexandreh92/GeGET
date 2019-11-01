@@ -62,8 +62,8 @@ namespace Updater.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;App&gt;
-        ///  &lt;!--&lt;Mirror&gt;\\SERVIDORAD\Storage\version.xml&lt;/Mirror&gt;--&gt;
-        ///&lt;Mirror&gt;\\130.1.1.101\teste\version.xml&lt;/Mirror&gt;
+        ///  &lt;Mirror&gt;\\SERVIDORAD\Storage\version.xml&lt;/Mirror&gt;
+        ///  &lt;!--&lt;Mirror&gt;\\130.1.1.101\teste\version.xml&lt;/Mirror&gt;--&gt;
         ///&lt;/App&gt;.
         /// </summary>
         internal static string updateurl {

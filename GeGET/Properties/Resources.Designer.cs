@@ -62,15 +62,15 @@ namespace GeGET.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to # CHANGELOG TODAS AS ALTERAÇÕES SERÃO DOCUMENTADAS NESTE ARQUIVO.
-        ///## [2.0.0.5] - ??-??-?? - ?
-        ///### ADICIONADO
-        ///- ADICIONADO TELA DE LISTA DE PROJETOS;
-        ///- ADICIONADO MENU STRIP NA TELA DE LISTA DE MATERIAIS PARA EDITAR;
-        ///### EDITADO
-        ///- MELHORADO O FILTRO DE PESQUISA DE TODAS AS TELAS PARA MÉTODO &apos;AND&apos;;
-        ///- EDITADO QUANDO ITEM DA COMBOBOX É SELECIONADO PARA FICAR EM SEU LUGAR NA LISTA;
-        ///--------------------------------------------------------------------------------------------------------
-        ///## [2.0.0.4] - 22- [rest of string was truncated]&quot;;.
+        ///## [2.0.0.18] - 25-07-2019 - ATUALIZAÇÃO DE EMERGÊNCIA
+        ///### CORRIGIDO:
+        ///- CORRIGIDO ERRO QUE ACONTECIA QUANDO O NÚMERO DE OPÇÕES ULTRAPASSAVA O LIMITE DA TELA DE COPIAR ITENS DE ORÇAMENTO;
+        ///- CORRIGIDO LISTAGEM POR SEQUENCIA NA TELA DE ORÇAMENTOS.
+        ///## [2.0.0.17] - 25-07-2019 - ATUALIZAÇÃO DE ROTINA
+        ///### ADICIONADO:
+        ///- ADICIONADO TABS NO FUNCIONAMENTO DAS PÁGINAS PARA MELHOR NAVEGAÇÃO;
+        ///- ADICIONADO TELA DE EXPORTAR GRUPO DE ITENS;
+        ///- ADICION [rest of string was truncated]&quot;;.
         /// </summary>
         public static string changelog {
             get {
