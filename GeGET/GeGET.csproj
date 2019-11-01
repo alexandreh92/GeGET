@@ -285,6 +285,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="App\BLL\Suprimentos\Relatórios\RelatorioGrupoFornecedoresBLL.cs" />
+    <Compile Include="App\Controls\Shared\CustomCopiarItensOkCancel.xaml.cs">
+      <DependentUpon>CustomCopiarItensOkCancel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\Controls\Shared\ProcurarRequisicaoMaterial.xaml.cs">
       <DependentUpon>ProcurarRequisicaoMaterial.xaml</DependentUpon>
     </Compile>
@@ -648,6 +651,10 @@
     <Compile Include="Window2.xaml.cs">
       <DependentUpon>Window2.xaml</DependentUpon>
     </Compile>
+    <Page Include="App\Controls\Shared\CustomCopiarItensOkCancel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\Controls\Shared\ProcurarRequisicaoMaterial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

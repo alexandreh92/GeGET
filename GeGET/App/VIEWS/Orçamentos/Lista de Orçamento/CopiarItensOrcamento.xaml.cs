@@ -34,7 +34,7 @@ namespace GeGET
             dto.Negocio_Id = dTO.Id.ToString();
             foreach (CopiarItensOrcamentoDTO item in dTOs)
             {
-                listaCopiar.Add(new CopiarItensOrcamentoDTO { Id = item.Id });
+                listaCopiar.Add(new CopiarItensOrcamentoDTO { Id = item.Id, Quantidade = item.Quantidade });
             }
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
@@ -83,7 +83,37 @@ namespace GeGET
                     foreach (var item in listaCopiar)
                     {
                         dto.Id = item.Id;
+                        dto.Quantidade = item.Quantidade;
                         bll.Insert(dto);
+                    }
+                }
+                t1 = new Thread(WaitBoxLoad);
+                t1.Start();
+            }).Start();
+        }
+
+        private void InsertComQtde()
+        {
+            new Thread(() =>
+            {
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    wb = new WaitBox
+                    {
+                        Owner = Window.GetWindow(this)
+                    };
+                    wb.Show();
+                }));
+                syncEvent.Set();
+
+                foreach (var atividade in listaChecked)
+                {
+                    dto.Atividade_Id = atividade.Id.ToString();
+                    foreach (var item in listaCopiar)
+                    {
+                        dto.Id = item.Id;
+                        dto.Quantidade = item.Quantidade;
+                        bll.InsertComQtde(dto);
                     }
                 }
                 t1 = new Thread(WaitBoxLoad);
@@ -152,5 +182,32 @@ namespace GeGET
             disposed = true;
         }
         #endregion
+
+        private void BtnComQtde_Click(object sender, RoutedEventArgs e)
+        {
+            int checks = 0;
+
+            for (int i = 0; i < grdCheck.Items.Count; i++)
+            {
+
+                ContentPresenter c = (ContentPresenter)grdCheck.ItemContainerGenerator.ContainerFromItem(grdCheck.Items[i]);
+                CheckBox cb = c.ContentTemplate.FindName("cbx", c) as CheckBox;
+                if (cb.IsChecked.Value)
+                {
+                    checks++;
+                    int index = grdCheck.Items.IndexOf(cb.DataContext);
+                    var atividade = ((AtividadeDTO)grdCheck.Items[index]);
+
+                    listaChecked.Add(new AtividadeDTO
+                    {
+                        Id = atividade.Id
+                    });
+                }
+            }
+            if (checks > 0)
+            {
+                InsertComQtde();
+            }
+        }
     }
 }

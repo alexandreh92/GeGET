@@ -225,7 +225,7 @@ namespace GeGET
                 foreach (var rowHandle in handles)
                 {
                     var selectedItem = grdItens.GetRow(rowHandle) as ListaOrcamentosDTO;
-                    listaCopiar.Add(new CopiarItensOrcamentoDTO { Id = selectedItem.Produto_Id });
+                    listaCopiar.Add(new CopiarItensOrcamentoDTO { Id = selectedItem.Produto_Id, Quantidade = selectedItem.Quantidade });
                 }
                 using (var form = new CopiarItensOrcamento(listaCopiar, informacoesDTO))
                 {

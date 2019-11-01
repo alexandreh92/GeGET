@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeGET.Infrastructure", "GeGET.Infrastructure\GeGET.Infrastructure.csproj", "{5B50A16B-7201-4BB5-B7BA-1F6746E4D397}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{401036F5-52F1-4E30-A6F9-C0754D162E20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5B50A16B-7201-4BB5-B7BA-1F6746E4D397}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B50A16B-7201-4BB5-B7BA-1F6746E4D397}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B50A16B-7201-4BB5-B7BA-1F6746E4D397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{401036F5-52F1-4E30-A6F9-C0754D162E20}.Debug|Any CPU.ActiveCfg = Debug
+		{401036F5-52F1-4E30-A6F9-C0754D162E20}.Debug|Any CPU.Build.0 = Debug
+		{401036F5-52F1-4E30-A6F9-C0754D162E20}.Release|Any CPU.ActiveCfg = Release
+		{401036F5-52F1-4E30-A6F9-C0754D162E20}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

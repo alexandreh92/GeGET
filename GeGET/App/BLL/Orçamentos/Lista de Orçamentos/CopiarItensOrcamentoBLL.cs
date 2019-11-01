@@ -80,6 +80,20 @@ namespace GeGET
             }
         }
 
+        public void InsertComQtde(CopiarItensOrcamentoDTO dTO)
+        {
+            try
+            {
+                var query = "INSERT INTO lista_orcamento (quantidade, NEGOCIO_id, PRODUTO_id, ATIVIDADES_id, preco_orc, descricao_orc) VALUES ('"+ dTO.Quantidade +"','" + dTO.Negocio_Id + "','" + dTO.Id + "','" + dTO.Atividade_Id + "', (SELECT CASE WHEN icms = '0' AND ipi = '0' THEN custounitario+(custounitario*(1+ipi)-(custounitario*(1+ipi)*icms))/(1)*((0))-(custounitario*(1+ipi)*icms)+custounitario*ipi ELSE custounitario+(custounitario*(1+ipi)-(custounitario*(1+ipi)*icms))/(1-0.18)*((0.18))-(custounitario*(1+ipi)*icms)+custounitario*ipi END FROM produto WHERE id='" + dTO.Id + "'), (SELECT descricao from produto WHERE id='" + dTO.Id + "'))";
+                bd.Conectar();
+                bd.ExecutarComandoSQL(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+
         #region IDisposable
 
         public void Dispose()

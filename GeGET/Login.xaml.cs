@@ -163,12 +163,12 @@ namespace GeGET
                     if (File.Exists(newfile))
                     {
                         Process.Start(newfile);
+                        Application.Current.Shutdown();
                     }
                     else
                     {
                         StartUpdate();
                     }
-                    this.Close();
                 }
             }
             catch (Exception)

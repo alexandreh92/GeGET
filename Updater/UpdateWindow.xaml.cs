@@ -116,17 +116,15 @@ namespace Updater
             {
                 try
                 {
-                    if (System.IO.Path.GetFileName(fileName) != "Deploy.zip" && System.IO.Path.GetFileName(fileName) != "Updater_Old.exe" && System.IO.Path.GetFileName(fileName) != "MaterialDesignThemes.Wpf.dll" && System.IO.Path.GetFileName(fileName) != "MaterialDesignColors.dll" && System.IO.Path.GetFileName(fileName) != "Ionic.Zip.dll")
+                    if (System.IO.Path.GetFileName(fileName) != "Deploy.zip" && System.IO.Path.GetFileName(fileName) != "Updater_Old.exe" && System.IO.Path.GetFileName(fileName) != "MaterialDesignThemes.Wpf.dll" && System.IO.Path.GetFileName(fileName) != "MaterialDesignColors.dll" && System.IO.Path.GetFileName(fileName) != "Ionic.Zip.dll" && System.IO.Path.GetFileName(fileName) != "CommonServiceLocator.dll")
                     {
                         File.Delete(fileName);
                     }
                 }
                 catch (Exception ex)
                 {
-
                     throw new Exception(ex.ToString());
                 }
-                
             }
         }
 
@@ -156,7 +154,7 @@ namespace Updater
                 {
                     foreach (ZipEntry e in zip1)
                     {
-                        if (e.FileName != "Ionic.Zip.dll" && e.FileName != "MaterialDesignColors.dll" && e.FileName != "MaterialDesignThemes.Wpf.dll")
+                        if (e.FileName != "Ionic.Zip.dll" && e.FileName != "MaterialDesignColors.dll" && e.FileName != "CommonServiceLocator.dll" && e.FileName != "MaterialDesignThemes.Wpf.dll" && e.FileName != "Updater_Old.exe")
                         {
                             e.Extract(unpackDirectory, ExtractExistingFileAction.OverwriteSilently);
                         }
