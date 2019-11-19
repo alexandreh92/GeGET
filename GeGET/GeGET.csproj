@@ -17,19 +17,24 @@
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>\\servidorad\Informática\GeGET\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <InstallUrl>\\servidorad\Informática\GeGET\</InstallUrl>
+    <ProductName>GeGET</ProductName>
+    <PublisherName>Getac Engenharia Integrada</PublisherName>
+    <ApplicationRevision>19</ApplicationRevision>
+    <ApplicationVersion>1.0.0.19</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -62,6 +67,18 @@
     <StartupObject>GeGET.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>0F6565BF1F7239AA6D737A56AB0D902EEB5BD34C</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>GeGET_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net46\CommonServiceLocator.dll</HintPath>
@@ -1073,6 +1090,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="GeGET_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1108,6 +1126,7 @@
   <ItemGroup>
     <Folder Include="App\Controls\Orçamentos\Lista de Orçamentos\" />
     <Folder Include="App\VIEWS\Controls\" />
+    <Folder Include="App\VIEWS\Logistica\Saldo de Estoque\" />
     <Folder Include="DataModels\" />
     <Folder Include="Models\" />
   </ItemGroup>
@@ -1121,6 +1140,11 @@
     <Resource Include="Resources\Images\teste.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
@@ -1134,12 +1158,6 @@
     <ProjectReference Include="..\GeGET.Infrastructure\GeGET.Infrastructure.csproj">
       <Project>{5b50a16b-7201-4bb5-b7ba-1f6746e4d397}</Project>
       <Name>GeGET.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Updater\Updater.csproj">
-      <Project>{e6d9ef14-e80f-4522-93ab-397c6fabde42}</Project>
-      <Name>Updater</Name>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

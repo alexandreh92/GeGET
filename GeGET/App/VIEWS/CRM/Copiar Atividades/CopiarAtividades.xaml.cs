@@ -14,13 +14,14 @@ namespace GeGET
     {
         #region Declarations
         Helpers helpers = new Helpers();
-        LoginDTO login = new LoginDTO();
+
         CadastroAtividadesDTO dto = new CadastroAtividadesDTO();
         CadastroAtividadeBLL bll = new CadastroAtividadeBLL();
+
         DescricaoAtividadesBLL descricaoAtividadesBLL = new DescricaoAtividadesBLL();
         DescricaoAtividadesDTO descricaoAtividadesDTO = new DescricaoAtividadesDTO();
         AtividadeCadastradaDTO atividadeCadastradaDTO = new AtividadeCadastradaDTO();
-        ManualResetEvent syncEvent = new ManualResetEvent(false);
+
         bool disposed = false;
         #endregion
 
@@ -85,7 +86,8 @@ namespace GeGET
 
         private void InitializeComponents()
         {
-            
+            grdAtividades.Visibility = Visibility.Visible;
+            cardPanel.Visibility = Visibility.Visible;
         }
 
         private void BtnEletrica_Click(object sender, RoutedEventArgs e)
@@ -133,7 +135,6 @@ namespace GeGET
 
             if (disposing)
             {
-                syncEvent.Dispose();
                 bll.Dispose();
                 descricaoAtividadesBLL.Dispose();
             }

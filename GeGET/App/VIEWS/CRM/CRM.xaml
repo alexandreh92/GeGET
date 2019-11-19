@@ -190,7 +190,7 @@
                                             </StackPanel>
                                         </ItemsControl>
                                         <ItemsControl>
-                                            <StackPanel Orientation="Vertical" Width="130" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30,30,30,30" Visibility="Hidden">
+                                            <StackPanel Orientation="Vertical" Width="130" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30,30,30,30">
                                                 <Button x:Name="btnCopiarAtividades" Height="90" Width="90" PreviewMouseDown="BtnCopiarAtividades_PreviewMouseDown">
                                                     <materialDesign:PackIcon Kind="ClipboardTickOutline" HorizontalAlignment="Center" Height="70" Width="70" />
                                                 </Button>

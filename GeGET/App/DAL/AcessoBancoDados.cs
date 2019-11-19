@@ -23,12 +23,12 @@ namespace DAL
         //public static string server_local = "192.168.15.5";
         //public static string server_local = "getacengenharia.ddns.net";
         //public static string server_remoto = "getacengenharia.ddns.net";
-        //public static string server = "192.168.15.5";
+        public static string server = "192.168.15.5";
         //public static string server = "getacengenharia.ddns.net";
-        public static string server = "localhost";
+        //public static string server = "localhost";
         public static string user = "root";
-        //public static string password = "TwukASH_05";
-        public static string password = "root";
+        public static string password = "TwukASH_05";
+        //public static string password = "root";
         public static string database = "gegetdb";
         readonly string comStrDev = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false;", server, user, password, database);
         readonly string commStr = String.Format("server={0}; user id={1}; password={2}; database={3}; pooling=false; Allow User Variables = true;SslMode=none", server, user, password, database);

@@ -162,7 +162,7 @@
                                     </materialDesign:Card>
                                 </StackPanel>
                                 
-                                <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" Margin="0 20 0 0" Visibility="Collapsed">
+                                <materialDesign:Card x:Name="cardPanel" Background="{DynamicResource MaterialDesignBackground}" Margin="0 20 0 0" Visibility="Collapsed">
                                     <StackPanel x:Name="StackPanel2">
                                         <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
                                         <Expander HorizontalAlignment="Stretch" IsExpanded="True" Background="White" Header="Copiar Para" Foreground="#7A2932" FontFamily="{DynamicResource Novecento-Bold}">

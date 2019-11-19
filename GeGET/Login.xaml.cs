@@ -34,7 +34,7 @@ namespace GeGET
         #region Initialize
         public Login()
         {
-            CheckUpdate();
+            //CheckUpdate();
             InitializeComponent();
             Remember_Data();
            // progressBar.Value = 0;
