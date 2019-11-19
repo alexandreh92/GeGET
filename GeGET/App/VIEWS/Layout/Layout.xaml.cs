@@ -38,6 +38,10 @@ namespace GeGET
             LoadMensagens();
             dependency.Start();
             helpers.OpenTab<Dashboard>(null, null, null, false);
+            if (Logindto.Nivel < 6)
+            {
+                btnConfigs.Visibility = Visibility.Collapsed;
+            }
         }
         #endregion
 
@@ -267,6 +271,11 @@ namespace GeGET
         private void ActionTabs_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void BtnConfigs_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.OpenTab<Configuracoes>(sender, e, null, false);
         }
     }
 }

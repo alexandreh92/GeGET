@@ -7,6 +7,8 @@ using System.Windows.Media.Imaging;
 using DTO;
 using BLL;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace GeGET
 {
@@ -71,7 +73,7 @@ namespace GeGET
             {
                 if (txtSenha.Password == txtConfirmaSenha.Password)
                 {
-                    dto.Senha = txtSenha.Password.Replace("'", "''");
+                    dto.Senha = Encrypt(txtSenha.Password.Replace("'", "''"));
                     passwordsave = bll.SavePassword(dto);
                     txtSenha.Password = "";
                     txtConfirmaSenha.Password = "";
@@ -91,6 +93,17 @@ namespace GeGET
 
 
         }
+
+        private string Encrypt(string value)
+        {
+            using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
+            {
+                UTF8Encoding utf8 = new UTF8Encoding();
+                byte[] data = md5.ComputeHash(utf8.GetBytes(value));
+                return Convert.ToBase64String(data);
+            }
+        }
+
 
         #region IDisposable
         public void Dispose()

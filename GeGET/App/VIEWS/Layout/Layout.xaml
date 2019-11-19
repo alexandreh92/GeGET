@@ -189,6 +189,12 @@
                                     <TextBlock Text="Changelog" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="14.0" TextDecorations="{x:Null}"/>
                                 </StackPanel>
                             </ListViewItem>
+                            <ListViewItem x:Name="btnConfigs" Height="60" PreviewMouseDown="BtnConfigs_PreviewMouseDown" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Wrench" Height="25" Width="25" Margin="13,8,0,0"/>
+                                    <TextBlock Text="Configurações" VerticalAlignment="Center" Margin="16 10" FontFamily="{StaticResource Novecento-Normal}" FontSize="14.0" TextDecorations="{x:Null}"/>
+                                </StackPanel>
+                            </ListViewItem>
                         </ListView>
                     </StackPanel>
                 </materialDesign:ColorZone>

@@ -8,6 +8,8 @@ using System.Net;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace GeGET
 {
@@ -63,7 +65,7 @@ namespace GeGET
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             dto.Usuario = txtLogin.Text;
-            dto.Senha = txtPassword.Password;
+            dto.Senha = Encrypt(txtPassword.Password);
             Save_Data();
             if (bll.Login(dto))
             {
@@ -75,6 +77,16 @@ namespace GeGET
             {
                 CustomOKMessageBox.Show("Credenciais inválidas!", "Atenção!", Window.GetWindow(this));
             }
+        }
+
+        private string Encrypt(string value)
+        {
+            using(MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
+            {
+                UTF8Encoding utf8 = new UTF8Encoding();
+                byte[] data = md5.ComputeHash(utf8.GetBytes(value));
+                return Convert.ToBase64String(data);
+            } 
         }
 
         #endregion
@@ -220,7 +232,7 @@ namespace GeGET
             if (e.Key == System.Windows.Input.Key.Enter)
             {
                 dto.Usuario = txtLogin.Text;
-                dto.Senha = txtPassword.Password;
+                dto.Senha = Encrypt(txtPassword.Password);
                 Save_Data();
                 if (bll.Login(dto))
                 {

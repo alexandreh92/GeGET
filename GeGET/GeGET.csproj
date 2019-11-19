@@ -30,8 +30,8 @@
     <InstallUrl>\\servidorad\Informática\GeGET\</InstallUrl>
     <ProductName>GeGET</ProductName>
     <PublisherName>Getac Engenharia Integrada</PublisherName>
-    <ApplicationRevision>20</ApplicationRevision>
-    <ApplicationVersion>2.0.0.20</ApplicationVersion>
+    <ApplicationRevision>21</ApplicationRevision>
+    <ApplicationVersion>2.0.0.21</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -301,6 +301,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="App\BLL\Configurações\CadstroUsuarioBLL.cs" />
     <Compile Include="App\BLL\Logística\EstornoEstoqueBLL.cs" />
     <Compile Include="App\BLL\Logística\SaldoEstoqueBLL.cs" />
     <Compile Include="App\BLL\Suprimentos\Relatórios\RelatorioGrupoFornecedoresBLL.cs" />
@@ -314,9 +315,16 @@
       <DependentUpon>ProcurarRequisicaoMaterial.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\BLL\Suprimentos\Relatórios\RelatorioGrupoItensBLL.cs" />
+    <Compile Include="App\DTO\Configurações\CadastroUsuarioDTO.cs" />
     <Compile Include="App\DTO\Logística\EstornoEstoqueDTO.cs" />
     <Compile Include="App\DTO\Logística\SaldoEstoqueDTO.cs" />
     <Compile Include="App\DTO\Suprimentos\Relatórios\RelatorioGrupoFornecedoresDTO.cs" />
+    <Compile Include="App\VIEWS\Configurações\CadastroUsuario.xaml.cs">
+      <DependentUpon>CadastroUsuario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Configurações\Configuracoes.xaml.cs">
+      <DependentUpon>Configuracoes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\VIEWS\CRM\Copiar Atividades\CopiarAtividades.xaml.cs">
       <DependentUpon>CopiarAtividades.xaml</DependentUpon>
     </Compile>
@@ -693,6 +701,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="App\Controls\Shared\ProcurarRequisicaoMaterial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Configurações\CadastroUsuario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Configurações\Configuracoes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
