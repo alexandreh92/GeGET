@@ -80,9 +80,17 @@
                                                     <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                             <Button x:Name="btnSaldo" Height="90" Width="90" PreviewMouseDown="BtnSaldo_PreviewMouseDown">
-                                                                <materialDesign:PackIcon Kind="BoxVariantClosed" HorizontalAlignment="Center" Height="70" Width="70" />
+                                                                <materialDesign:PackIcon Kind="Contrast" HorizontalAlignment="Center" Height="70" Width="70" />
                                                             </Button>
                                                             <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" Margin="0,10,0,0">Saldo de Estoque</TextBlock>
+                                                        </StackPanel>
+                                                    </materialDesign:Card>
+                                                    <materialDesign:Card Width="200" Height="200" materialDesign:ShadowAssist.ShadowDepth="Depth0" Background="#fafafa" Margin="5,5,5,5">
+                                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                            <Button x:Name="btnEstorno" Height="90" Width="90" PreviewMouseDown="BtnEstorno_PreviewMouseDown">
+                                                                <materialDesign:PackIcon Kind="ArrowBack" HorizontalAlignment="Center" Height="70" Width="70" />
+                                                            </Button>
+                                                            <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" Margin="0,10,0,0">Estorno de Material</TextBlock>
                                                         </StackPanel>
                                                     </materialDesign:Card>
                                                 </WrapPanel>

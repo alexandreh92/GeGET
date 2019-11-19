@@ -14,7 +14,7 @@
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              mc:Ignorable="d"
              Language="pt-BR"
-             Tag="Logística: Saldo Estoque"
+             Tag="Logística: Movimento de Estoque"
              d:DesignHeight="900" d:DesignWidth="800">
 
 
@@ -40,7 +40,7 @@
                     <Button x:Name="btnBack" Height="40" Width="40" Margin="10,0,-5,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnBack_Click">
                         <materialDesign:PackIcon Foreground="#7A2932" Kind="LessThan" Width="25" Height="25"/>
                     </Button>
-                    <TextBlock VerticalAlignment="Center" Foreground="#7A2932" Margin="5,-2,0,0" FontSize="14" FontFamily="{DynamicResource Novecento-Bold}">Relatório de Status de Negócios</TextBlock>
+                    <TextBlock VerticalAlignment="Center" Foreground="#7A2932" Margin="5,-2,0,0" FontSize="14" FontFamily="{DynamicResource Novecento-Bold}">Saldo de Estoque</TextBlock>
                     <Button x:Name="btnClose" HorizontalAlignment="Right" ToolTip="Fechar" Height="40" Width="40" Margin="0,0,10,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnClose_Click">
                         <materialDesign:PackIcon Foreground="#7A2932" Kind="Close" Width="25" Height="25"/>
                     </Button>
@@ -84,7 +84,7 @@
                                     <dxg:GridControl x:Name="grdItens" ShowBorder="False" Grid.Row="1" EnableSmartColumnsGeneration="True" HorizontalAlignment="Stretch" Margin="0,1,0,10" VirtualizingPanel.VirtualizationMode="Recycling" SelectionMode="MultipleRow">
                                         <dxg:GridControl.Columns>
                                             <!--CÓDIGO-->
-                                            <dxg:GridColumn AllowFocus="False" Header="Código" FieldName="Codigo" HorizontalHeaderContentAlignment="Center" Width="70" FixedWidth="True" ReadOnly="True">
+                                            <dxg:GridColumn AllowFocus="False" Header="Código" FieldName="Id" HorizontalHeaderContentAlignment="Center" Width="70" FixedWidth="True" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -94,7 +94,7 @@
                                                     <dxe:TextEditSettings CharacterCasing="Upper" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
-                                            <!--PARTNUMBER-->
+                                            <!--DESCRIÇÃO-->
                                             <dxg:GridColumn AllowFocus="False" Header="Descrição" FieldName="Descricao" HorizontalHeaderContentAlignment="Center" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
@@ -106,14 +106,14 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--PARTNUMBER-->
-                                            <dxg:GridColumn AllowFocus="False" Header="Partnumber" FieldName="Partnumber" HorizontalHeaderContentAlignment="Center" Width="230" FixedWidth="True" ReadOnly="True">
+                                            <dxg:GridColumn AllowFocus="False" Header="Partnumber" FieldName="Partnumber" HorizontalHeaderContentAlignment="Center" Width="160" FixedWidth="True" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
                                                     </DataTemplate>
                                                 </dxg:GridColumn.HeaderTemplate>
                                                 <dxg:GridColumn.EditSettings>
-                                                    <dxe:TextEditSettings HorizontalContentAlignment="Left"></dxe:TextEditSettings>
+                                                    <dxe:TextEditSettings HorizontalContentAlignment="Center"></dxe:TextEditSettings>
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--NOME FANTASIA-->
@@ -127,8 +127,19 @@
                                                     <dxe:TextEditSettings HorizontalContentAlignment="Left"></dxe:TextEditSettings>
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
-                                            <!--PRAZO-->
-                                            <dxg:GridColumn AllowFocus="False" Header="UN" FieldName="Un" HorizontalHeaderContentAlignment="Center" Width="130" FixedWidth="True" ReadOnly="True">
+                                            <!--QUANTIDADE-->
+                                            <dxg:GridColumn Header="Quantidade" FieldName="Qtde" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="False" FixedWidth="True">
+                                                <dxg:GridColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
+                                                    </DataTemplate>
+                                                </dxg:GridColumn.HeaderTemplate>
+                                                <dxg:GridColumn.EditSettings>
+                                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="N2" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                                </dxg:GridColumn.EditSettings>
+                                            </dxg:GridColumn>
+                                            <!--UN-->
+                                            <dxg:GridColumn AllowFocus="False" Header="UN" FieldName="Un" HorizontalHeaderContentAlignment="Center" Width="80" FixedWidth="True" ReadOnly="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -136,17 +147,6 @@
                                                 </dxg:GridColumn.HeaderTemplate>
                                                 <dxg:GridColumn.EditSettings>
                                                     <dxe:TextEditSettings HorizontalContentAlignment="Center"></dxe:TextEditSettings>
-                                                </dxg:GridColumn.EditSettings>
-                                            </dxg:GridColumn>
-                                            <!--QUANTIDADE-->
-                                            <dxg:GridColumn AllowFocus="False" Header="Quantidade" FieldName="Qtde" HorizontalHeaderContentAlignment="Center" Width="130" FixedWidth="True" ReadOnly="True">
-                                                <dxg:GridColumn.HeaderTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
-                                                    </DataTemplate>
-                                                </dxg:GridColumn.HeaderTemplate>
-                                                <dxg:GridColumn.EditSettings>
-                                                    <dxe:TextEditSettings HorizontalContentAlignment="Left"></dxe:TextEditSettings>
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                         </dxg:GridControl.Columns>

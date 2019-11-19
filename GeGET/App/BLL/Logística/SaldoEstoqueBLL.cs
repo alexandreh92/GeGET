@@ -20,7 +20,7 @@ namespace BLL
             var dt = new DataTable();
             try
             {
-                var query = "SELECT p.id, p.descricao, p.partnumber, un.descricao as un, f.rsocial, e.quantidade FROM estoque e JOIN produto p ON e.produto_id = p.id JOIN fornecedor f ON f.id = p.FORNECEDOR_id JOIN item i ON i.id = p.DESCRICAO_ITEM_id JOIN unidade un ON un.id = i.unidade_id;";
+                var query = "SELECT p.id, i.descricao, p.partnumber, un.descricao as un, f.rsocial, e.quantidade FROM estoque e JOIN produto p ON e.produto_id = p.id JOIN fornecedor f ON f.id = p.FORNECEDOR_id JOIN item i ON i.id = p.DESCRICAO_ITEM_id JOIN unidade un ON un.id = i.unidade_id;";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
@@ -34,7 +34,7 @@ namespace BLL
                 {
                     estoque.Add(new SaldoEstoqueDTO
                     {
-                        Id = dr["id"].ToString(),
+                        Id = "P" + Convert.ToInt32(dr["id"]).ToString("0000"),
                         Descricao = dr["descricao"].ToString(),
                         Partnumber = dr["partnumber"].ToString(),
                         Fabricante = dr["rsocial"].ToString(),

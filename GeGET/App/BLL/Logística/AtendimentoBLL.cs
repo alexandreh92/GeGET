@@ -21,7 +21,7 @@ namespace BLL
             var dt = new DataTable();
             try
             {
-                var query = "SELECT t.* FROM (SELECT T1.id, T1.vendas_id, T1.fabricante, T1.produto_id, T1.descricao, T1.partnumber, T1.un, T1.anotacoes, sum(t1.solicitado)-coalesce(t3.quantidade,0) as solicitado, coalesce(T2.estoque,0) as estoque FROM (SELECT mr.id, rm.id as rm_id, rm.vendas_id, f.rsocial as fabricante, mr.produto_id, i.descricao, p.partnumber, un.descricao as un, p.descricao as anotacoes, mr.quantidade as solicitado FROM materiais_requeridos mr JOIN requisicao_material rm ON rm.id = mr.requisicao_material_id JOIN produto p ON p.id = mr.produto_id JOIN item i ON i.id = p.descricao_item_id JOIN fornecedor f ON f.id = p.fornecedor_id JOIN unidade un ON un.id = i.unidade_id) as T1 LEFT OUTER JOIN (select produto_id, sum(quantidade) as estoque from estoque WHERE quantidade > 0 GROUP BY produto_id) as T2 ON T1.produto_id = T2.produto_id LEFT OUTER JOIN (select produto_id, sum(quantidade) as quantidade, vendas_id from saida_estoque GROUP BY produto_id, vendas_id) T3 ON T1.vendas_id = T3.vendas_id and T1.produto_id = T3.produto_id WHERE T1.rm_id = '"+DTO.Id+"' group by produto_id) as t WHERE t.solicitado > 0";
+                var query = "SELECT t.* FROM (SELECT T1.id, T1.vendas_id, T1.fabricante, T1.produto_id, T1.descricao, T1.partnumber, T1.un, T1.anotacoes, sum(t1.solicitado)-coalesce(t3.quantidade,0) as solicitado, coalesce(T2.estoque,0) as estoque FROM (SELECT mr.id, rm.id as rm_id, rm.vendas_id, f.rsocial as fabricante, mr.produto_id, i.descricao, p.partnumber, un.descricao as un, p.descricao as anotacoes, mr.quantidade as solicitado FROM materiais_requeridos mr JOIN requisicao_material rm ON rm.id = mr.requisicao_material_id JOIN produto p ON p.id = mr.produto_id JOIN item i ON i.id = p.descricao_item_id JOIN fornecedor f ON f.id = p.fornecedor_id JOIN unidade un ON un.id = i.unidade_id) as T1 LEFT OUTER JOIN (select produto_id, sum(quantidade) as estoque from estoque WHERE quantidade > 0 GROUP BY produto_id) as T2 ON T1.produto_id = T2.produto_id LEFT OUTER JOIN (select produto_id, sum(quantidade) as quantidade, rm.vendas_id from saida_estoque se JOIN requisicao_material rm ON se.rm_id = rm.id GROUP BY produto_id, vendas_id) T3 ON T1.vendas_id = T3.vendas_id and T1.produto_id = T3.produto_id WHERE T1.rm_id = '" + DTO.Id + "' group by produto_id) as t WHERE t.solicitado > 0";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
@@ -59,7 +59,7 @@ namespace BLL
             {
                 try
                 {
-                    var query = "call gegetdb.SP_SaidaProdutos('"+dto.Produto_Id+"', '"+dto.Quantidade+"', '"+loginDTO.Id+"', '"+informacoesDTO.Vendas_Id+"');";
+                    var query = "call gegetdb.SP_SaidaProdutos('"+dto.Produto_Id+"', '"+dto.Quantidade+"', '"+loginDTO.Id+"', '"+informacoesDTO.Id+"');";
                     bd.Conectar();
                     bd.ExecutarComandoSQL(query);
                 }
