@@ -301,6 +301,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="App\BLL\Logística\SaldoEstoqueBLL.cs" />
     <Compile Include="App\BLL\Suprimentos\Relatórios\RelatorioGrupoFornecedoresBLL.cs" />
     <Compile Include="App\Controls\Shared\CustomCopiarItensOkCancel.xaml.cs">
       <DependentUpon>CustomCopiarItensOkCancel.xaml</DependentUpon>
@@ -309,12 +310,16 @@
       <DependentUpon>ProcurarRequisicaoMaterial.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\BLL\Suprimentos\Relatórios\RelatorioGrupoItensBLL.cs" />
+    <Compile Include="App\DTO\Logística\SaldoEstoqueDTO.cs" />
     <Compile Include="App\DTO\Suprimentos\Relatórios\RelatorioGrupoFornecedoresDTO.cs" />
     <Compile Include="App\VIEWS\CRM\Copiar Atividades\CopiarAtividades.xaml.cs">
       <DependentUpon>CopiarAtividades.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\VIEWS\Logistica\Entrada Manual\AdicionarItemListaManual.xaml.cs">
       <DependentUpon>AdicionarItemListaManual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Logistica\Saldo de Estoque\SaldoEstoque.xaml.cs">
+      <DependentUpon>SaldoEstoque.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\VIEWS\Orçamentos\Lista de Orçamento\AnotacoesOrcamento.xaml.cs">
       <DependentUpon>AnotacoesOrcamento.xaml</DependentUpon>
@@ -684,6 +689,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="App\VIEWS\Logistica\Entrada Manual\AdicionarItemListaManual.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Logistica\Saldo de Estoque\SaldoEstoque.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1126,7 +1135,6 @@
   <ItemGroup>
     <Folder Include="App\Controls\Orçamentos\Lista de Orçamentos\" />
     <Folder Include="App\VIEWS\Controls\" />
-    <Folder Include="App\VIEWS\Logistica\Saldo de Estoque\" />
     <Folder Include="DataModels\" />
     <Folder Include="Models\" />
   </ItemGroup>

@@ -45,5 +45,11 @@ namespace GeGET
         {
             helpers.OpenTab<Atendimento>(sender, e, this.GetType().Name, false);
         }
+
+        private void BtnSaldo_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.OpenTab<SaldoEstoque>(sender, e, this.GetType().Name, false);
+        }
+
     }
 }
