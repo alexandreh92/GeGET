@@ -62,7 +62,6 @@ namespace GeGET
             if (fileDialog.ShowDialog() == true)
             {
                 grdView.ExportToXlsx(fileDialog.FileName, new XlsxExportOptionsEx() { ExportType = DevExpress.Export.ExportType.Default });
-
             }
         }
 
