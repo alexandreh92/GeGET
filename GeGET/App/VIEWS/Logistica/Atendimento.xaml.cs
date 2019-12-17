@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using DevExpress.Xpf.Grid;
 using System.Threading.Tasks;
+using Microsoft.Win32;
+using DevExpress.XtraPrinting;
 
 namespace GeGET
 {
@@ -239,5 +241,19 @@ namespace GeGET
         }
 
         #endregion
+
+        private void ExportExcel_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog fileDialog = new SaveFileDialog
+            {
+                FileName = "P" + Convert.ToInt32(dto.Id).ToString("0000") + "-LO",
+                Filter = "Arquivo Microsoft Excel (*.xlsx)|*.xlsx"
+            };
+            if (fileDialog.ShowDialog() == true)
+            {
+                grdView.ExportToXlsx(fileDialog.FileName, new XlsxExportOptionsEx() { ExportType = DevExpress.Export.ExportType.DataAware });
+
+            }
+        }
     }
 }

@@ -142,6 +142,9 @@
                                                 <Button x:Name="AtenderMateriais" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Atender Materiais" Height="25" Width="25" Click="AtenderMateriais_Click">
                                                     <materialDesign:PackIcon Kind="ExitToApp" Foreground="White"/>
                                                 </Button>
+                                                <Button x:Name="ExportExcel" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Margin="1,0" ToolTip="Exportar para Excel" Height="25" Width="25" Click="ExportExcel_Click">
+                                                    <materialDesign:PackIcon Kind="FileExcelBox" Foreground="White"/>
+                                                </Button>
                                             </StackPanel>
                                         </Grid>
 
