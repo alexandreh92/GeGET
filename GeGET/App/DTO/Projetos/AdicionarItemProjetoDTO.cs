@@ -12,6 +12,7 @@
         private string negocio_Id;
         private string atividade_Id;
         private string codigo;
+        private double estoque;
 
         public int Id { get => id; set => id = value; }
         public string Descricao { get => descricao; set => descricao = value; }
@@ -23,5 +24,6 @@
         public string Negocio_Id { get => negocio_Id; set => negocio_Id = value; }
         public string Atividade_Id { get => atividade_Id; set => atividade_Id = value; }
         public string Codigo { get => codigo; set => codigo = value; }
+        public double Estoque { get => estoque; set => estoque = value; }
     }
 }

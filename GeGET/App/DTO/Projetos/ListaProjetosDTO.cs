@@ -18,6 +18,7 @@ namespace DTO
         private string fabricante;
         private double total;
         private int fd;
+        private double estoque;
 
         public int Id { get => id; set => id = value; }
         public string Codigo { get => codigo; set => codigo = value; }
@@ -41,6 +42,7 @@ namespace DTO
         public int Fd { get => fd; set => fd = value; }
         public double Total { get => total; set => total = value; }
         public string Produto_Id { get => produto_Id; set => produto_Id = value; }
+        public double Estoque { get => estoque; set => estoque = value; }
     }
 
     public class InformacoesListaProjetosDTO

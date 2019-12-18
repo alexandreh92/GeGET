@@ -15,6 +15,8 @@ using DevExpress.Xpf.Grid;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using DevExpress.XtraPrinting;
+using DevExpress.Export;
+using DevExpress.Printing.ExportHelpers;
 
 namespace GeGET
 {
@@ -251,9 +253,31 @@ namespace GeGET
             };
             if (fileDialog.ShowDialog() == true)
             {
-                grdView.ExportToXlsx(fileDialog.FileName, new XlsxExportOptionsEx() { ExportType = DevExpress.Export.ExportType.DataAware });
+                var options = new XlsxExportOptionsEx() { ExportType = DevExpress.Export.ExportType.DataAware };
+                options.CustomizeSheetHeader += options_CustomizeSheetHeader;
+
+                grdView.ExportToXlsx(fileDialog.FileName, options );
 
             }
+        }
+
+        private void options_CustomizeSheetHeader(ContextEventArgs e)
+        {
+            // Create a new row. 
+            CellObject row = new CellObject();
+            // Specify row values. 
+            row.Value = "RM" + informacoesDTO.Id.ToString("00000") + " - P" + informacoesDTO.Negocio_Id.ToString("0000");
+            // Specify row formatting. 
+            XlFormattingObject rowFormatting = new XlFormattingObject();
+            rowFormatting.Font = new XlCellFont { Bold = true, Size = 14 };
+            rowFormatting.Alignment = new DevExpress.Export.Xl.XlCellAlignment { HorizontalAlignment = DevExpress.Export.Xl.XlHorizontalAlignment.Center, VerticalAlignment = DevExpress.Export.Xl.XlVerticalAlignment.Top };
+            row.Formatting = rowFormatting;
+            // Add the created row to the output document. 
+            e.ExportContext.AddRow(new[] { row });
+            // Add an empty row to the output document. 
+            e.ExportContext.AddRow();
+            // Merge cells of two new rows.  
+            e.ExportContext.MergeCells(new DevExpress.Export.Xl.XlCellRange(new DevExpress.Export.Xl.XlCellPosition(0, 0), new DevExpress.Export.Xl.XlCellPosition(7, 1)));
         }
     }
 }

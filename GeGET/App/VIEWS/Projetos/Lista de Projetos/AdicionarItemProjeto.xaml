@@ -13,12 +13,12 @@
         ShowInTaskbar="False"
         WindowStyle="None"
         mc:Ignorable="d"
-        Title="ProcurarMateriais" Height="820" Width="1200">
+        Title="ProcurarMateriais" Height="820" Width="1350">
     <Window.Background>
         <SolidColorBrush Opacity="0.2" Color="Black"/>
     </Window.Background>
     <Grid>
-        <Grid x:Name="gridpanel" Height="820" Width="1200" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid x:Name="gridpanel" Height="820" Width="1350" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <materialDesign:Card Background="White" x:Name="CardPanel" Padding="0" Margin="0,10,0,20" VerticalAlignment="Stretch">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -40,7 +40,7 @@
                     <dxg:GridControl x:Name="grdItens" ShowBorder="False" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" Background="#FAFAFA" Grid.Row="1" EnableSmartColumnsGeneration="True" HorizontalAlignment="Stretch" Margin="0,0,0,10" SelectionMode="MultipleRow">
                         <dxg:GridControl.Columns>
                             <!--CÓDIGO-->
-                            <dxg:GridColumn AllowFocus="False" Header="Código" FieldName="Codigo_Produto" HorizontalHeaderContentAlignment="Center" Width="90" FixedWidth="True" ReadOnly="True">
+                            <dxg:GridColumn AllowFocus="False" Header="Código" FieldName="Id" HorizontalHeaderContentAlignment="Center" Width="90" FixedWidth="True" ReadOnly="True">
                                 <dxg:GridColumn.HeaderTemplate>
                                     <DataTemplate>
                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -89,7 +89,7 @@
                                 </dxg:GridColumn.EditSettings>
                             </dxg:GridColumn>
                             <!--UN-->
-                            <dxg:GridColumn AllowFocus="False" Name="Unidade" FieldName="Un" Header="UN" HorizontalHeaderContentAlignment="Center" Width="80" FixedWidth="True" ReadOnly="True">
+                            <dxg:GridColumn AllowFocus="False" Name="Unidade" FieldName="Unidade" Header="UN" HorizontalHeaderContentAlignment="Center" Width="80" FixedWidth="True" ReadOnly="True">
                                 <dxg:GridColumn.HeaderTemplate>
                                     <DataTemplate>
                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -108,6 +108,17 @@
                                 </dxg:GridColumn.HeaderTemplate>
                                 <dxg:GridColumn.EditSettings>
                                     <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
+                                </dxg:GridColumn.EditSettings>
+                            </dxg:GridColumn>
+                            <!--ESTOQUE-->
+                            <dxg:GridColumn Header="Estoque" FieldName="Estoque" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="False" FixedWidth="True" AllowFocus="False">
+                                <dxg:GridColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" TextAlignment="Center" TextWrapping="Wrap" FontSize="13" Text="{Binding}"/>
+                                    </DataTemplate>
+                                </dxg:GridColumn.HeaderTemplate>
+                                <dxg:GridColumn.EditSettings>
+                                    <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="N2" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
                                 </dxg:GridColumn.EditSettings>
                             </dxg:GridColumn>
                         </dxg:GridControl.Columns>
