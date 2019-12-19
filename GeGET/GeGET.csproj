@@ -30,7 +30,7 @@
     <InstallUrl>\\servidorad\Informática\GeGET\</InstallUrl>
     <ProductName>GeGET</ProductName>
     <PublisherName>Getac Engenharia Integrada</PublisherName>
-    <ApplicationRevision>26</ApplicationRevision>
+    <ApplicationRevision>27</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -304,6 +304,7 @@
     <Compile Include="App\BLL\Configurações\CadstroUsuarioBLL.cs" />
     <Compile Include="App\BLL\Logística\EstornoEstoqueBLL.cs" />
     <Compile Include="App\BLL\Logística\SaldoEstoqueBLL.cs" />
+    <Compile Include="App\BLL\Suprimentos\CadastroItensLote\CadastroItensLoteBLL.cs" />
     <Compile Include="App\BLL\Suprimentos\Relatórios\RelatorioGrupoFornecedoresBLL.cs" />
     <Compile Include="App\Controls\Shared\CustomCopiarItensOkCancel.xaml.cs">
       <DependentUpon>CustomCopiarItensOkCancel.xaml</DependentUpon>
@@ -545,6 +546,12 @@
     </Compile>
     <Compile Include="App\VIEWS\Projetos\Projetos.xaml.cs">
       <DependentUpon>Projetos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Cadastro Lote Item\CadastroLoteItem.xaml.cs">
+      <DependentUpon>CadastroLoteItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\VIEWS\Suprimentos\Cadastro Lote Produto\CadastroLoteProduto.xaml.cs">
+      <DependentUpon>CadastroLoteProduto.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\VIEWS\Suprimentos\Fornecedores\CadastroFornecedor.xaml.cs">
       <DependentUpon>CadastroFornecedor.xaml</DependentUpon>
@@ -944,6 +951,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="App\VIEWS\Suprimentos\Cadastro Lote Item\CadastroLoteItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Suprimentos\Cadastro Lote Produto\CadastroLoteProduto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\VIEWS\Suprimentos\Fornecedores\CadastroFornecedor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1137,6 +1152,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\modelo_itens_lote.xlsx" />
     <Resource Include="Resources\Fonts\abadimtstd-opentype.otf" />
     <Resource Include="Resources\Fonts\Roboto-Medium.ttf" />
     <Resource Include="Resources\Fonts\Roboto-Regular.ttf" />
@@ -1199,6 +1215,35 @@
       <Project>{5b50a16b-7201-4bb5-b7ba-1f6746e4d397}</Project>
       <Name>GeGET.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

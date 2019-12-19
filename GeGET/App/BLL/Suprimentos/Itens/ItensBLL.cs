@@ -75,7 +75,7 @@ namespace BLL
             bool sucess = false;
             try
             {
-                var query = "INSERT INTO item (descricao, USUARIO_id, GRUPO_ITEM_id, mobra, unidade_id, data) VALUES ('" + DTO.Descricao + "', '" + loginDTO.Id + "', '" + DTO.Grupo_Id + "', '" + DTO.Mobra + "', '" + DTO.Un + "','" + DateTime.Now + "')";
+                var query = "INSERT INTO item (descricao, USUARIO_id, GRUPO_ITEM_id, mobra, unidade_id) VALUES ('" + DTO.Descricao + "', '" + loginDTO.Id + "', '" + DTO.Grupo_Id + "', '" + DTO.Mobra + "', '" + DTO.Un + "')";
                 bd.Conectar();
                 bd.ExecutarComandoSQL(query);
             }

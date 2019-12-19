@@ -113,7 +113,7 @@ namespace BLL
             bool success = false;
             try
             {
-                var query = "INSERT INTO produto (descricao, DESCRICAO_ITEM_id, ncm, custounitario, ipi, FORNECEDOR_id, USUARIO_id, data, partnumber, icms) VALUES ('" + DTO.Anotacoes + "','" + DTO.Item_Id + "', '" + DTO.Ncm + "', '" + DTO.Custo.ToString().Replace(",", ".") + "', '" + DTO.Ipi.ToString().Replace(",", ".") + "', '" + DTO.Fornecedor_Id + "', '" + loginDTO.Id + "' ,'" + DateTime.Now + "', '" + DTO.Partnumber + "', '" + DTO.Icms.ToString().Replace(",", ".") + "')";
+                var query = "INSERT INTO produto (descricao, DESCRICAO_ITEM_id, ncm, custounitario, ipi, FORNECEDOR_id, USUARIO_id, partnumber, icms) VALUES ('" + DTO.Anotacoes + "','" + DTO.Item_Id + "', '" + DTO.Ncm + "', '" + DTO.Custo.ToString().Replace(",", ".") + "', '" + DTO.Ipi.ToString().Replace(",", ".") + "', '" + DTO.Fornecedor_Id + "', '" + loginDTO.Id + "', '" + DTO.Partnumber + "', '" + DTO.Icms.ToString().Replace(",", ".") + "')";
                 bd.Conectar();
                 bd.ExecutarComandoSQL(query);
             }

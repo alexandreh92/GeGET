@@ -107,5 +107,15 @@ namespace GeGET
         {
             helpers.OpenTab<RelatorioProdutos>(sender, e, this.GetType().Name, false);
         }
+
+        private void BtnCadastro_Lote_Item_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.OpenTab<CadastroLoteItem>(sender, e, this.GetType().Name, false);
+        }
+
+        private void BtnCadastro_Lote_Produto_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.OpenTab<CadastroLoteProduto>(sender, e, this.GetType().Name, false);
+        }
     }
 }

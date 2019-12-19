@@ -79,6 +79,16 @@ namespace GeGET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] modelo_itens_lote {
+            get {
+                object obj = ResourceManager.GetObject("modelo_itens_lote", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;App&gt;
         ///  &lt;Mirror&gt;\\SERVIDORAD\Storage\version.xml&lt;/Mirror&gt;
         ///  &lt;!--&lt;Mirror&gt;\\130.1.1.101\teste\version.xml&lt;/Mirror&gt;--&gt;
