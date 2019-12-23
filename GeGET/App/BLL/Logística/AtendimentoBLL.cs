@@ -46,7 +46,45 @@ namespace BLL
                         Anotacoes = dr["anotacoes"].ToString(),
                         Solicitado = Convert.ToDouble(dr["solicitado"]),
                         Estoque = Convert.ToDouble(dr["estoque"]),
-                        Atendido = CheckAtendido()
+
+                    });
+                }
+            }
+            return itens;
+        }
+
+        public ObservableCollection<AtendimentoDTO> LoadItensConsulta(InformacoesAtendimentoDTO DTO)
+        {
+            var itens = new ObservableCollection<AtendimentoDTO>();
+            var dt = new DataTable();
+            try
+            {
+                var query = "SELECT t.* FROM (SELECT T1.id,T1.vendas_id,T1.fabricante,T1.produto_id,T1.descricao,T1.partnumber,T1.un,T1.anotacoes,SUM(t1.solicitado) AS solicitado,COALESCE(t3.quantidade,0) AS atendido,COALESCE(T2.estoque,0) AS estoque FROM (SELECT mr.id,rm.id AS rm_id,rm.vendas_id,f.rsocial AS fabricante,mr.produto_id,i.descricao,p.partnumber,un.descricao AS un,p.descricao AS anotacoes,mr.quantidade AS solicitado FROM materiais_requeridos mr JOIN requisicao_material rm ON rm.id=mr.requisicao_material_id JOIN produto p ON p.id=mr.produto_id JOIN item i ON i.id=p.descricao_item_id JOIN fornecedor f ON f.id=p.fornecedor_id JOIN unidade un ON un.id=i.unidade_id) AS T1 LEFT OUTER JOIN (SELECT produto_id,SUM(quantidade) AS estoque FROM estoque WHERE quantidade>0 GROUP BY produto_id) AS T2 ON T1.produto_id=T2.produto_id LEFT OUTER JOIN (SELECT rm.id AS rm_id,produto_id,SUM(quantidade) AS quantidade,rm.vendas_id FROM saida_estoque se JOIN requisicao_material rm ON se.rm_id=rm.id GROUP BY produto_id,rm_id) T3 ON T1.rm_id=T3.rm_id AND T1.produto_id=T3.produto_id WHERE T1.rm_id='"+ DTO.Id +"' GROUP BY produto_id) AS t WHERE t.solicitado>0";
+                bd.Conectar();
+                dt = bd.RetDataTable(query);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.ToString());
+            }
+            finally
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    itens.Add(new AtendimentoDTO
+                    {
+                        Id = Convert.ToInt32(dr["id"]),
+                        Descricao = dr["descricao"].ToString(),
+                        Produto_Id = dr["produto_id"].ToString(),
+                        Fabricante = dr["fabricante"].ToString(),
+                        Codigo = Convert.ToInt32(dr["produto_id"]).ToString("000000"),
+                        Partnumber = dr["partnumber"].ToString(),
+                        Unidade = dr["un"].ToString(),
+                        Anotacoes = dr["anotacoes"].ToString(),
+                        Solicitado = Convert.ToDouble(dr["solicitado"]),
+                        Estoque = Convert.ToDouble(dr["estoque"]),
+                        Atendido = Convert.ToDouble(dr["atendido"])
                     });
                 }
             }

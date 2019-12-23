@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Deployment.Application;
 
 namespace GeGET
 {
@@ -39,12 +40,30 @@ namespace GeGET
             //CheckUpdate();
             InitializeComponent();
             Remember_Data();
-           // progressBar.Value = 0;
-           // var bc = new BrushConverter();
-           // progressBar.Background = (Brush)bc.ConvertFrom("#282828");
-            txtVersion.Text = "version" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            // progressBar.Value = 0;
+            // var bc = new BrushConverter();
+            // progressBar.Background = (Brush)bc.ConvertFrom("#282828");
+            txtVersion.Text = DeployVersion();
         }
         #endregion
+
+        private string DeployVersion()
+        {
+            string version = null;
+            try
+            {
+                //// get deployment version
+                version = "version" + ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+            catch (InvalidDeploymentException)
+            {
+                //// you cannot read publish version when app isn't installed 
+                //// (e.g. during debug)
+                version = "not installed";
+            }
+            return version;
+        }
+
 
         #region Events
 
@@ -128,91 +147,6 @@ namespace GeGET
                 Properties.Settings.Default.Remme = "no";
                 Properties.Settings.Default.Save();
             }
-        }
-
-        #endregion
-
-        #region Updater
-
-        private void CheckUpdate()
-        {
-            try
-            {
-                XDocument doc2 = XDocument.Parse(Properties.Resources.updateurl);
-
-                var Mirror = doc2.Descendants("Mirror");
-                var mirrorurl = string.Concat(Mirror.Nodes());
-
-                XDocument doc = XDocument.Load(mirrorurl);
-
-                var VersionElement = doc.Descendants("Version");
-                oVersion = Convert.ToInt32(string.Concat(VersionElement.Nodes()).Replace(".", ""));
-
-                var LocationElement = doc.Descendants("FileLocation");
-                FileLocation = string.Concat(LocationElement.Nodes());
-
-                var FilenameElement = doc.Descendants("Filename");
-                Filename = string.Concat(FilenameElement.Nodes());
-
-                var UpdaterLocationElement = doc.Descendants("UpdaterLocation");
-                UpdaterLocation = string.Concat(UpdaterLocationElement.Nodes());
-
-                var UpdaterFilenameElement = doc.Descendants("UpdaterFilename");
-                UpdaterFilename = string.Concat(UpdaterFilenameElement.Nodes());
-
-                if (Convert.ToInt32(cVersion) < oVersion)
-                {
-                    string oldfile = "Updater.exe";
-                    string newfile = "Updater_Old.exe";
-                    if (File.Exists(oldfile))
-                    {
-                        if (File.Exists(newfile))
-                        {
-                            File.Delete(newfile);
-                        }
-                        File.Move(oldfile,newfile);
-                    }
-                    if (File.Exists(newfile))
-                    {
-                        Process.Start(newfile);
-                        Application.Current.Shutdown();
-                    }
-                    else
-                    {
-                        StartUpdate();
-                    }
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void StartUpdate()
-        {
-            
-            WebClient client = new WebClient();
-            client.DownloadFileAsync(new Uri(UpdaterLocation), System.AppDomain.CurrentDomain.BaseDirectory + "/" + UpdaterFilename);
-            client.DownloadFileCompleted += new AsyncCompletedEventHandler(Client_DownloadFileCompleted);
-            client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(Client_DownloadProgressChanged);
-        }
-        private void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (e.Error == null)
-            {
-                Process.Start("Updater_Old.exe");
-                Application.Current.Shutdown();
-            }
-            else
-            {
-                MessageBox.Show(e.Error.Message);
-            }
-            ((WebClient)sender).Dispose();
-        }
-
-        private void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            
         }
 
         #endregion

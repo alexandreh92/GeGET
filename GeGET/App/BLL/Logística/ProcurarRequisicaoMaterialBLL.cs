@@ -45,6 +45,40 @@ namespace BLL
             return rm;
         }
 
+        public ObservableCollection<ProcurarRequisicaoMaterialDTO> LoadRMConsulta()
+        {
+            var rm = new ObservableCollection<ProcurarRequisicaoMaterialDTO>();
+            var dt = new DataTable();
+            try
+            {
+                var query = "SELECT rm.id,n.id AS negocio_id,c.rsocial,n.descricao,n.versao_valida,cid.cidade,cid.uf,f.nome,e.endereco,vendas_id FROM requisicao_material rm JOIN vendas v ON v.id=rm.vendas_id JOIN negocio n ON n.id=v.negocio_id JOIN estabelecimento e ON n.estabelecimento_id=e.id JOIN cliente c ON c.id=e.cliente_id JOIN usuario u ON u.id=rm.usuario_id JOIN funcionario f ON f.id=u.funcionario_id JOIN cidades cid ON cid.id=e.cidades_id JOIN estados est ON est.id=e.estados_id ORDER BY id ASC";
+                bd.Conectar();
+                dt = bd.RetDataTable(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    rm.Add(new ProcurarRequisicaoMaterialDTO
+                    {
+                        Id = Convert.ToInt32(dr["id"]),
+                        Negocio_Id = Convert.ToInt32(dr["negocio_id"]),
+                        Vendas_Id = Convert.ToInt32(dr["vendas_id"]),
+                        Razao_Social = dr["rsocial"].ToString(),
+                        Descricao = dr["descricao"].ToString(),
+                        Endereco = dr["endereco"].ToString(),
+                        CidadeEstado = dr["cidade"].ToString() + " - " + dr["uf"].ToString(),
+                        Solicitante = dr["nome"].ToString()
+                    });
+                }
+            }
+            return rm;
+        }
+
         public ObservableCollection<ProcurarRequisicaoMaterialDTO> LoadRMEstorno()
         {
             var rm = new ObservableCollection<ProcurarRequisicaoMaterialDTO>();

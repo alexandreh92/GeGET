@@ -11,9 +11,9 @@
         private string partnumber;
         private double solicitado;
         private double quantidade;
+        private double atendido;
         private double estoque;
         private string fabricante;
-        private bool atendido;
 
         public int Id { get => id; set => id = value; }
         public string Codigo { get => codigo; set => codigo = value; }
@@ -23,10 +23,10 @@
         public double Solicitado { get => solicitado; set => solicitado = value; }
         public double Quantidade { get => quantidade; set => quantidade = value; }
         public double Estoque { get => estoque; set => estoque = value; }
-        public bool Atendido { get => atendido; set => atendido = value; }
         public string Anotacoes { get => anotacoes; set => anotacoes = value; }
         public string Produto_Id { get => produto_Id; set => produto_Id = value; }
         public string Fabricante { get => fabricante; set => fabricante = value; }
+        public double Atendido { get => atendido; set => atendido = value; }
     }
 
 

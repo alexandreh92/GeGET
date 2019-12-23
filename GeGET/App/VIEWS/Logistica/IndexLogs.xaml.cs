@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,12 +19,14 @@ namespace GeGET
     /// <summary>
     /// Interaction logic for Teste.xaml
     /// </summary>
-    public partial class Logistica : UserControl
+    /// 
+    public partial class IndexLogs : UserControl
     {
         Helpers helpers = new Helpers();
-        public Logistica()
+        public IndexLogs()
         {
             InitializeComponent();
+            
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
@@ -31,17 +34,17 @@ namespace GeGET
             helpers.Close();
         }
 
-        private void BtnEntradaXML_Click(object sender, MouseButtonEventArgs e)
+        private void BtnEntradaXML_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             helpers.OpenTab<EntradaNotaFiscal>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnEntradaManual_Click(object sender, MouseButtonEventArgs e)
+        private void BtnEntradaManual_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             helpers.OpenTab<EntradaManualEstoque>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnAtendimento_Click(object sender, MouseButtonEventArgs e)
+        private void BtnAtendimento_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             helpers.OpenTab<Atendimento>(sender, e, this.GetType().Name, false);
         }
@@ -56,9 +59,9 @@ namespace GeGET
             helpers.OpenTab<EstornoEstoque>(sender, e, this.GetType().Name, false);
         }
 
-        private void BtnMovimento_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void BtnExportar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            
+            helpers.OpenTab<ConsultaRequisicaoMaterial>(sender, e, this.GetType().Name, false);
         }
     }
 }

@@ -221,10 +221,7 @@ namespace GeGET
 
         private void BtnLogistica_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            helpers.OpenTab<Logistica>(sender, e, null, false);
-            
-
-            
+            helpers.OpenTab<IndexLogs>(sender, e, null, false);
         }
 
         private void BtnSuprimentos_Selected(object sender, RoutedEventArgs e)
