@@ -266,7 +266,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--ESTOQUE-->
-                                            <dxg:GridColumn Header="Estoque" FieldName="Estoque" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="False" FixedWidth="True">
+                                            <dxg:GridColumn Header="Estoque" FieldName="Estoque" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="True" AllowFocus="False" FixedWidth="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>

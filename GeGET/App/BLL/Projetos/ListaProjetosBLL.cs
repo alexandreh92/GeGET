@@ -24,7 +24,7 @@ namespace BLL
             var dt = new DataTable();
             try
             {
-                var query = "SELECT (@cnt := @cnt + 1) AS num, t.* FROM (SELECT p.id, coalesce(e.produto_id,0) as estoque, i.descricao, p.partnumber, un.descricao as un, f.rsocial,lv.quantidade_orc, lv.preco_orc, lv.anotacoes, lv.quantidade, lv.quantidade * lv.preco as preco_total, lv.preco, lv.fd, lv.id as pk FROM lista_vendas lv JOIN produto p ON lv.PRODUTO_id = p.id JOIN item i ON p.DESCRICAO_ITEM_id = i.id JOIN fornecedor f ON p.FORNECEDOR_id = f.id JOIN unidade un ON un.id = i.unidade_id JOIN vendas vnd ON vnd.id = lv.vendas_id LEFT OUTER JOIN estoque e ON e.produto_id = lv.produto_id WHERE vnd.NEGOCIO_id = '" + DTO.Negocio_Id + "' AND lv.ATIVIDADE_id = '" + DTO.Atividade_Id + "') t CROSS JOIN(SELECT @cnt:= 0) AS dummy";
+                var query = "SELECT (@cnt := @cnt + 1) AS num, t.* FROM (SELECT p.id, coalesce(e.quantidade,0) as estoque, i.descricao, p.partnumber, un.descricao as un, f.rsocial,lv.quantidade_orc, lv.preco_orc, lv.anotacoes, lv.quantidade, lv.quantidade * lv.preco as preco_total, lv.preco, lv.fd, lv.id as pk FROM lista_vendas lv JOIN produto p ON lv.PRODUTO_id = p.id JOIN item i ON p.DESCRICAO_ITEM_id = i.id JOIN fornecedor f ON p.FORNECEDOR_id = f.id JOIN unidade un ON un.id = i.unidade_id JOIN vendas vnd ON vnd.id = lv.vendas_id LEFT OUTER JOIN estoque e ON e.produto_id = lv.produto_id WHERE vnd.NEGOCIO_id = '" + DTO.Negocio_Id + "' AND lv.ATIVIDADE_id = '" + DTO.Atividade_Id + "') t CROSS JOIN(SELECT @cnt:= 0) AS dummy";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }

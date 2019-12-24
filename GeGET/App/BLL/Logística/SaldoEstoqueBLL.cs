@@ -34,7 +34,7 @@ namespace BLL
                 {
                     estoque.Add(new SaldoEstoqueDTO
                     {
-                        Id = "P" + Convert.ToInt32(dr["id"]).ToString("0000"),
+                        Id = Convert.ToInt32(dr["id"]).ToString("00000"),
                         Descricao = dr["descricao"].ToString(),
                         Partnumber = dr["partnumber"].ToString(),
                         Fabricante = dr["rsocial"].ToString(),
