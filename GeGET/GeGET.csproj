@@ -30,7 +30,7 @@
     <InstallUrl>\\servidorad\Informática\GeGET\</InstallUrl>
     <ProductName>GeGET</ProductName>
     <PublisherName>Getac Engenharia Integrada</PublisherName>
-    <ApplicationRevision>32</ApplicationRevision>
+    <ApplicationRevision>34</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

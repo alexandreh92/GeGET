@@ -54,15 +54,20 @@ namespace GeGET
 
         private void ExportExcel_Click(object sender, RoutedEventArgs e)
         {
+            grd_item_id.Visible = true;
+            grd_fabricante_id.Visible = true;
             SaveFileDialog fileDialog = new SaveFileDialog();
-            fileDialog.FileName = "Lista de Negócios Simplificada - " + DateTime.Now.ToString("dd-MM-yyyy");
+            fileDialog.FileName = "Saldo de Estoque - " + DateTime.Now.ToString("dd-MM-yyyy");
             fileDialog.Filter = "Arquivo Microsoft Excel (*.xlsx)|*.xlsx";
             if (fileDialog.ShowDialog() == true)
             {
                 grdView.ExportToXlsx(fileDialog.FileName, new XlsxExportOptionsEx() { ExportType = DevExpress.Export.ExportType.Default });
 
             }
+            grd_item_id.Visible = false;
+            grd_fabricante_id.Visible = false;
         }
+
 
         private void ExportPDF_Click(object sender, RoutedEventArgs e)
         {
