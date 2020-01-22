@@ -90,7 +90,7 @@ namespace BLL
                     }
                     string queryMateriais = "INSERT INTO materiais_requeridos (requisicao_material_id, produto_id, quantidade) VALUES " + substringMateriais.TrimEnd(',');
 
-                    var queryRM = "INSERT INTO requisicao_material (vendas_id, usuario_id) VALUES ('" + DTO.Id + "', '" + loginDTO.Id + "');" + queryMateriais;
+                    var queryRM = "INSERT INTO requisicao_material (vendas_id, usuario_id, description) VALUES ('" + DTO.Id + "', '" + loginDTO.Id + "', '"+ DTO.RM_Descricao +"');" + queryMateriais;
                     bd.Conectar();
                     bd.ExecutarComandoSQL(queryRM);
 

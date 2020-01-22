@@ -152,23 +152,32 @@ namespace GeGET
                 var result = CustomOKCancelMessageBox.Show("Deseja mesmo gerar uma requisição de material para todos os itens selecionados?", "Atenção!", Window.GetWindow(this));
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    listaGerar = new ObservableCollection<GerarRequisicaoMaterialDTO>();
-                    foreach (var rowHandle in handles)
+                    using (var pp = new DescricaoRM())
                     {
-                        var selectedItem = grdItens.GetRow(rowHandle) as GerarRequisicaoMaterialDTO;
-                        listaGerar.Add(new GerarRequisicaoMaterialDTO
+                        pp.Owner = Window.GetWindow(this);
+                        pp.ShowDialog();
+                        if (pp.DialogResult.HasValue && pp.DialogResult.Value)
                         {
-                            Produto_Id = selectedItem.Produto_Id,
-                            Quantidade = selectedItem.Quantidade,
-                            Saldo = selectedItem.Saldo
-                        });
-                    }
-                    var rm = bll.GerarRM(informacoesDTO, listaGerar);
-                    if (rm != null && rm != "")
-                    {
-                        CustomOKMessageBox.Show("Requisição de Materiais Nº " + rm + " gerada com sucesso.", "Atenção!", Window.GetWindow(this));
-                        Load();
-                    }
+                            informacoesDTO.RM_Descricao = pp.Valor;
+                            listaGerar = new ObservableCollection<GerarRequisicaoMaterialDTO>();
+                            foreach (var rowHandle in handles)
+                            {
+                                var selectedItem = grdItens.GetRow(rowHandle) as GerarRequisicaoMaterialDTO;
+                                listaGerar.Add(new GerarRequisicaoMaterialDTO
+                                {
+                                    Produto_Id = selectedItem.Produto_Id,
+                                    Quantidade = selectedItem.Quantidade,
+                                    Saldo = selectedItem.Saldo
+                                });
+                            }
+                            var rm = bll.GerarRM(informacoesDTO, listaGerar);
+                            if (rm != null && rm != "")
+                            {
+                                CustomOKMessageBox.Show("Requisição de Materiais Nº " + rm + " gerada com sucesso.", "Atenção!", Window.GetWindow(this));
+                                Load();
+                            }
+                        }
+                    }                    
                 }
             }
             else

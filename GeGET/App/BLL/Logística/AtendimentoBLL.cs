@@ -153,7 +153,7 @@ namespace BLL
             var dt = new DataTable();
             try
             {
-                var query = "select rm.id, n.id as negocio_id, v.id as vendas_id, c.rsocial, n.descricao, n.versao_valida, cid.cidade, est.uf, f.nome, e.endereco from requisicao_material rm JOIN vendas v ON v.id = rm.vendas_id JOIN negocio n ON n.id = v.negocio_id JOIN usuario u ON u.id = rm.usuario_id JOIN funcionario f ON f.id = u.funcionario_id JOIN estabelecimento e ON e.id = n.estabelecimento_id JOIN cliente c ON c.id = e.cliente_id JOIN cidades cid ON cid.id = e.cidades_id JOIN estados est ON est.id = e.estados_id WHERE rm.id = '"+DTO.Id+"'";
+                var query = "select rm.id, n.id as negocio_id, v.id as vendas_id, c.rsocial, rm.description, n.versao_valida, cid.cidade, est.uf, f.nome, e.endereco from requisicao_material rm JOIN vendas v ON v.id = rm.vendas_id JOIN negocio n ON n.id = v.negocio_id JOIN usuario u ON u.id = rm.usuario_id JOIN funcionario f ON f.id = u.funcionario_id JOIN estabelecimento e ON e.id = n.estabelecimento_id JOIN cliente c ON c.id = e.cliente_id JOIN cidades cid ON cid.id = e.cidades_id JOIN estados est ON est.id = e.estados_id WHERE rm.id = '"+DTO.Id+"'";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
@@ -171,7 +171,7 @@ namespace BLL
                     Razao_Social = dt.Rows[0]["rsocial"].ToString(),
                     Cidade = dt.Rows[0]["cidade"].ToString(),
                     Uf = dt.Rows[0]["uf"].ToString(),
-                    Descricao = dt.Rows[0]["descricao"].ToString(),
+                    Descricao = dt.Rows[0]["description"].ToString(),
                     Versao = dt.Rows[0]["versao_valida"].ToString(),
                     Solicitante = dt.Rows[0]["nome"].ToString(),
                     Endereco = dt.Rows[0]["endereco"].ToString()

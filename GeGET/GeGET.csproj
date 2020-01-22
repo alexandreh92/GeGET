@@ -542,6 +542,9 @@
     <Compile Include="App\VIEWS\Projetos\Gerar Requisição Material\GerarRequisicaoMaterial.xaml.cs">
       <DependentUpon>GerarRequisicaoMaterial.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\VIEWS\Projetos\Gerar Requisição Material\DescricaoRM.xaml.cs">
+      <DependentUpon>DescricaoRM.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App\VIEWS\Projetos\Lista de Projetos\CopiarItensProjeto.xaml.cs">
       <DependentUpon>CopiarItensProjeto.xaml</DependentUpon>
     </Compile>
@@ -947,6 +950,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="App\VIEWS\Projetos\Gerar Requisição Material\GerarRequisicaoMaterial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\VIEWS\Projetos\Gerar Requisição Material\DescricaoRM.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

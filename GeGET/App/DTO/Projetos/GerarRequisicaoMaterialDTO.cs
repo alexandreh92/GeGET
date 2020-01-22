@@ -28,6 +28,7 @@
         private string cidade;
         private string uf;
         private string versao;
+        private string rM_Descricao;
 
         public int Id { get => id; set => id = value; }
         public int Negocio_Id { get => negocio_Id; set => negocio_Id = value; }
@@ -36,6 +37,7 @@
         public string Cidade { get => cidade; set => cidade = value; }
         public string Uf { get => uf; set => uf = value; }
         public string Versao { get => versao; set => versao = value; }
+        public string RM_Descricao { get => rM_Descricao; set => rM_Descricao = value; }
     }
 
 }

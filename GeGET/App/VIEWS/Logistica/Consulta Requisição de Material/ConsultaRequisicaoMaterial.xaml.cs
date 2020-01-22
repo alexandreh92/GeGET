@@ -166,7 +166,7 @@ namespace GeGET
         {
             SaveFileDialog fileDialog = new SaveFileDialog
             {
-                FileName = "P" + Convert.ToInt32(dto.Id).ToString("0000") + "-LO",
+                FileName = "P" + Convert.ToInt32(informacoesDTO.Negocio_Id).ToString("0000") + "-RM-"+informacoesDTO.Id.ToString("00000"),
                 Filter = "Arquivo Microsoft Excel (*.xlsx)|*.xlsx"
             };
             if (fileDialog.ShowDialog() == true)
@@ -184,7 +184,7 @@ namespace GeGET
             // Create a new row. 
             CellObject row = new CellObject();
             // Specify row values. 
-            row.Value = "RM" + informacoesDTO.Id.ToString("00000") + " - P" + informacoesDTO.Negocio_Id.ToString("0000");
+            row.Value = "RM" + informacoesDTO.Id.ToString("00000") + " - P" + informacoesDTO.Negocio_Id.ToString("0000") + " - DESCRIÇÃO: " + informacoesDTO.Descricao.ToUpper();
             // Specify row formatting. 
             XlFormattingObject rowFormatting = new XlFormattingObject();
             rowFormatting.Font = new XlCellFont { Bold = true, Size = 14 };
