@@ -32,7 +32,7 @@
                     <Button x:Name="btnBack" Height="40" Width="40" Margin="10,0,-5,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
                         <materialDesign:PackIcon Foreground="#7A2932" Kind="GreaterThan" Width="25" Height="25"/>
                     </Button>
-                    <TextBlock VerticalAlignment="Center" Foreground="#7A2932" Margin="5,-2,0,0" FontSize="14" FontFamily="{DynamicResource Novecento-Bold}">CRM</TextBlock>
+                    <TextBlock VerticalAlignment="Center" Foreground="#7A2932" Margin="5,-2,0,0" FontSize="14" FontFamily="{DynamicResource Novecento-Bold}">Logística</TextBlock>
                     <Button x:Name="btnClose" HorizontalAlignment="Right" ToolTip="Fechar" Height="40" Width="40" Margin="0,0,10,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="BtnClose_Click">
                         <materialDesign:PackIcon Foreground="#7A2932" Kind="Close" Width="25" Height="25"/>
                     </Button>
@@ -97,6 +97,22 @@
                                                 <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" TextAlignment="Center" Margin="0,10,0,0">Estorno de Material</TextBlock>
                                             </StackPanel>
                                         </ItemsControl>
+                                        <ItemsControl>
+                                            <StackPanel Orientation="Vertical" Width="130" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30,30,30,30">
+                                                <Button x:Name="btnEntradaEstoque" Height="90" Width="90" PreviewMouseDown="btnEntradaEstoque_PreviewMouseDown">
+                                                    <materialDesign:PackIcon Kind="KeyboardTab" HorizontalAlignment="Center" Height="70" Width="70" />
+                                                </Button>
+                                                <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" TextAlignment="Center" Margin="0,10,0,0">Movimento de Entrada</TextBlock>
+                                            </StackPanel>
+                                        </ItemsControl>
+                                        <ItemsControl>
+                                            <StackPanel Orientation="Vertical" Width="130" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30,30,30,30">
+                                                <Button x:Name="btnSaidaEstoque" Height="90" Width="90" PreviewMouseDown="btnSaidaEstoque_PreviewMouseDown">
+                                                    <materialDesign:PackIcon Kind="KeyboardReturn" HorizontalAlignment="Center" Height="70" Width="70" />
+                                                </Button>
+                                                <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" TextAlignment="Center" Margin="0,10,0,0">Movimento de Saída</TextBlock>
+                                            </StackPanel>
+                                        </ItemsControl>
                                     </ItemsControl.Items>
                                 </ItemsControl>
                             </Grid>
@@ -108,7 +124,7 @@
                                     <RowDefinition Height="55"/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Foreground="#7A2932" FontSize="13" Grid.Row="0" Margin="24,21,0,21" FontFamily="{DynamicResource Novecento-Bold}">Cadastros</TextBlock>
+                                <TextBlock Foreground="#7A2932" FontSize="13" Grid.Row="0" Margin="24,21,0,21" FontFamily="{DynamicResource Novecento-Bold}">Consultas</TextBlock>
                                 <Border Grid.Row="0" Background="{DynamicResource MaterialDesignDivider}" Height="1" VerticalAlignment="Top" Margin="0,54,0,0" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
                                 <ItemsControl HorizontalAlignment="Stretch" Grid.Row="1" Foreground="#3e3e3e">
                                     <ItemsControl.ItemsPanel>

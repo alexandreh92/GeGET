@@ -63,5 +63,15 @@ namespace GeGET
         {
             helpers.OpenTab<ConsultaRequisicaoMaterial>(sender, e, this.GetType().Name, false);
         }
+
+        private void btnEntradaEstoque_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.OpenTab<MovimentoEntrada>(sender, e, this.GetType().Name, false);
+        }
+
+        private void btnSaidaEstoque_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            helpers.OpenTab<MovimentoSaida>(sender, e, this.GetType().Name, false);
+        }
     }
 }

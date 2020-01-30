@@ -30,7 +30,7 @@
     <InstallUrl>\\servidorad\Informática\GeGET\</InstallUrl>
     <ProductName>GeGET</ProductName>
     <PublisherName>Getac Engenharia Integrada</PublisherName>
-    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationRevision>34</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -68,7 +68,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
-    <ManifestCertificateThumbprint>EDBD3E86824AA788AA442C7672DFC0B9574B55AA</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>0F6565BF1F7239AA6D737A56AB0D902EEB5BD34C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>GeGET_TemporaryKey.pfx</ManifestKeyFile>
@@ -92,77 +92,106 @@
     <Reference Include="Devart.DbForge.Interfaces">
       <HintPath>..\..\..\Downloads\DLLs\Devart.DbForge.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Charts.v18.2.Core">
+    <Reference Include="DevExpress.Charts.v17.2.Core">
+      <HintPath>..\..\..\Downloads\DLLs\DevExpress.Charts.v17.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Data.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Data.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Downloads\DLLs\DevExpress.Data.v17.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Data.v18.2">
+    <Reference Include="DevExpress.Data.v18.1">
+      <HintPath>..\..\..\Downloads\DLLs\DevExpress.Data.v18.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.DataAccess.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.DataAccess.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.DataAccess.v17.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Images.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Images.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Images.v17.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Mvvm.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Office.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Mvvm.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Office.v17.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Pdf.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Pdf.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Downloads\DLLs\DevExpress.Pdf.v17.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Pdf.v18.2.Core">
+    <Reference Include="DevExpress.Pdf.v18.1.Core">
+      <HintPath>..\..\..\Downloads\DLLs\DevExpress.Pdf.v18.1.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Printing.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Downloads\DLLs\DevExpress.Printing.v17.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Printing.v18.2.Core">
+    <Reference Include="DevExpress.Printing.v18.1.Core">
+      <HintPath>..\..\..\Downloads\DLLs\DevExpress.Printing.v18.1.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.RichEdit.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.RichEdit.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.RichEdit.v17.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.RichEdit.v18.2.Export, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.RichEdit.v17.2.Export, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.RichEdit.v17.2.Export.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Utils.v18.2">
+    <Reference Include="DevExpress.Utils.v17.2">
+      <HintPath>..\..\..\Downloads\DLLs\DevExpress.Utils.v17.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpf.Core.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Xpf.Docking.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Utils.v18.1">
+      <HintPath>..\..\..\Downloads\DLLs\DevExpress.Utils.v18.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Docking.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.Docking.v17.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpf.DocumentViewer.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Xpf.DocumentViewer.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.DocumentViewer.v17.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpf.ExpressionEditor.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Xpf.ExpressionEditor.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.ExpressionEditor.v17.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpf.Grid.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Xpf.Grid.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Xpf.Layout.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Xpf.Grid.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Layout.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.Layout.v17.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpf.LayoutControl.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Xpf.LayoutControl.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.LayoutControl.v17.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpf.Printing.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Xpf.Printing.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.Printing.v17.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpf.Ribbon.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Xpf.Ribbon.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.Ribbon.v17.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpf.RichEdit.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Xpf.RichEdit.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.RichEdit.v17.2.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Xpf.Themes.Office2016White.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Xpf.Themes.Office2016White.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 17.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2016White.v17.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.XtraCharts.v18.2">
+    <Reference Include="DevExpress.XtraCharts.v17.2">
+      <HintPath>..\..\..\Downloads\DLLs\DevExpress.XtraCharts.v17.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.XtraCharts.v18.2.UI">
+    <Reference Include="DevExpress.XtraCharts.v17.2.UI">
+      <HintPath>..\..\..\Downloads\DLLs\DevExpress.XtraCharts.v17.2.UI.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.XtraEditors.v18.2">
+    <Reference Include="DevExpress.XtraEditors.v17.2">
+      <HintPath>..\..\..\Downloads\DLLs\DevExpress.XtraEditors.v17.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.XtraGrid.v18.2">
+    <Reference Include="DevExpress.XtraGrid.v17.2">
+      <HintPath>..\..\..\Downloads\DLLs\DevExpress.XtraGrid.v17.2.dll</HintPath>
     </Reference>
     <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
@@ -309,8 +338,6 @@
     </ApplicationDefinition>
     <Compile Include="App\BLL\Configurações\CadstroUsuarioBLL.cs" />
     <Compile Include="App\BLL\Logística\EstornoEstoqueBLL.cs" />
-    <Compile Include="App\BLL\Logística\MovimentoEntradaBLL.cs" />
-    <Compile Include="App\BLL\Logística\MovimentoSaidaBLL.cs" />
     <Compile Include="App\BLL\Logística\SaldoEstoqueBLL.cs" />
     <Compile Include="App\BLL\Suprimentos\CadastroItensLote\CadastroItensLoteBLL.cs" />
     <Compile Include="App\BLL\Suprimentos\Relatórios\RelatorioGrupoFornecedoresBLL.cs" />
@@ -329,8 +356,6 @@
     <Compile Include="App\BLL\Suprimentos\Relatórios\RelatorioGrupoItensBLL.cs" />
     <Compile Include="App\DTO\Configurações\CadastroUsuarioDTO.cs" />
     <Compile Include="App\DTO\Logística\EstornoEstoqueDTO.cs" />
-    <Compile Include="App\DTO\Logística\MovimentoEntradaDTO.cs" />
-    <Compile Include="App\DTO\Logística\MovimentoSaidaDTO.cs" />
     <Compile Include="App\DTO\Logística\SaldoEstoqueDTO.cs" />
     <Compile Include="App\DTO\Suprimentos\Relatórios\RelatorioGrupoFornecedoresDTO.cs" />
     <Compile Include="App\VIEWS\Configurações\CadastroUsuario.xaml.cs">
@@ -353,12 +378,6 @@
     </Compile>
     <Compile Include="App\VIEWS\Logistica\Estorno Estoque\EstornoEstoque.xaml.cs">
       <DependentUpon>EstornoEstoque.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="App\VIEWS\Logistica\Movimento Entrada\MovimentoEntrada.xaml.cs">
-      <DependentUpon>MovimentoEntrada.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="App\VIEWS\Logistica\Movimento Saida\MovimentoSaida.xaml.cs">
-      <DependentUpon>MovimentoSaida.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\VIEWS\Logistica\Saldo de Estoque\SaldoEstoque.xaml.cs">
       <DependentUpon>SaldoEstoque.xaml</DependentUpon>
@@ -765,14 +784,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="App\VIEWS\Logistica\Estorno Estoque\EstornoEstoque.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="App\VIEWS\Logistica\Movimento Entrada\MovimentoEntrada.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="App\VIEWS\Logistica\Movimento Saida\MovimentoSaida.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1191,7 +1202,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="GeGET_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1243,7 +1253,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 e x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
