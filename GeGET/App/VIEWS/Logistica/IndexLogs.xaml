@@ -94,7 +94,7 @@
                                                 <Button x:Name="btnEstorno" Height="90" Width="90" PreviewMouseDown="BtnEstorno_PreviewMouseDown">
                                                     <materialDesign:PackIcon Kind="ArrowBack" HorizontalAlignment="Center" Height="70" Width="70" />
                                                 </Button>
-                                                <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" TextAlignment="Center" Margin="0,10,0,0">Estorno de Material</TextBlock>
+                                                <TextBlock FontFamily="{DynamicResource Novecento-Bold}" FontSize="14" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" TextAlignment="Center" Margin="0,10,0,0">Estorno de Material RM</TextBlock>
                                             </StackPanel>
                                         </ItemsControl>
                                         <ItemsControl>

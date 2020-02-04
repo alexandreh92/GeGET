@@ -202,7 +202,7 @@
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
                                             <!--QUANTIDADE-->
-                                            <dxg:GridColumn Header="Quantidade" FieldName="Quantidade" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="False" FixedWidth="True">
+                                            <dxg:GridColumn Header="Quantidade" FieldName="Quantidade" HorizontalHeaderContentAlignment="Center" Width="100" ReadOnly="True" AllowFocus="False" FixedWidth="True">
                                                 <dxg:GridColumn.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
@@ -212,29 +212,6 @@
                                                     <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="N2" HorizontalContentAlignment="Center"></dxe:TextEditSettings>
                                                 </dxg:GridColumn.EditSettings>
                                             </dxg:GridColumn>
-                                            <!--USUARIO-->
-                                            <dxg:GridColumn Header="Solicitado Por" FieldName="Usuario_id" HorizontalHeaderContentAlignment="Center" Width="150" FixedWidth="True" ReadOnly="True" AllowFocus="False">
-                                                <dxg:GridColumn.HeaderTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
-                                                    </DataTemplate>
-                                                </dxg:GridColumn.HeaderTemplate>
-                                                <dxg:GridColumn.EditSettings>
-                                                    <dxe:TextEditSettings HorizontalContentAlignment="Left"></dxe:TextEditSettings>
-                                                </dxg:GridColumn.EditSettings>
-                                            </dxg:GridColumn>
-                                            <!--DATA-->
-                                            <dxg:GridColumn Header="Data" FieldName="Data" HorizontalHeaderContentAlignment="Center" Width="100" FixedWidth="True" ReadOnly="True" AllowFocus="False">
-                                                <dxg:GridColumn.HeaderTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Foreground="#6C6C6C" Padding="0,13,0,13" FontFamily="Segoe UI" FontWeight="SemiBold" FontSize="13" Text="{Binding}"/>
-                                                    </DataTemplate>
-                                                </dxg:GridColumn.HeaderTemplate>
-                                                <dxg:GridColumn.EditSettings>
-                                                    <dxe:TextEditSettings HorizontalContentAlignment="Center"></dxe:TextEditSettings>
-                                                </dxg:GridColumn.EditSettings>
-                                            </dxg:GridColumn>
-                                            
                                         </dxg:GridControl.Columns>
                                         <dxg:GridControl.View>
                                             <dxg:TableView x:Name="grdView" AutoWidth="True" AllowPerPixelScrolling="True" RowMinHeight="37" AlternateRowBackground="#efefef" AllowResizing="False" VerticalScrollbarVisibility="Auto" ShowCheckBoxSelectorColumn="True" ShowBandsPanel="False" ShowGroupPanel="False" ShowIndicator="False" ShowHorizontalLines="False" FontSize="13" SearchDelay="10" SearchPanelCriteriaOperatorType="And" EditorShowMode="MouseDown" IsTotalSummaryMenuEnabled="False" AllowGrouping="False" AllowCommitOnValidationAttributeError="True" >

@@ -20,7 +20,7 @@ namespace BLL
             var dt = new DataTable();
             try
             {
-                var query = "SELECT se.id, i.descricao, p.id as produto_id, p.partnumber, forn.rsocial, un.descricao as un, se.quantidade, f.nome as usuario, se.data FROM saida_estoque se JOIN produto p ON se.produto_id = p.id JOIN item i ON i.id = p.DESCRICAO_ITEM_id JOIN unidade un ON un.id = i.unidade_id JOIN usuario u ON u.id = se.usuario_id JOIN funcionario f ON f.id = u.funcionario_id JOIN fornecedor forn ON forn.id = p.fornecedor_id WHERE se.rm_id = '"+ dTO.Id +"'";
+                var query = "SELECT mr.id, p.id as produto_id, i.descricao, p.partnumber,  un.descricao as un, mr.quantidade, f.rsocial FROM materiais_requeridos mr JOIN produto p ON p.id = mr.produto_id JOIN item i ON i.id = p.DESCRICAO_ITEM_id JOIN fornecedor f ON f.id = p.FORNECEDOR_id JOIN unidade un ON un.id = i.unidade_id WHERE mr.requisicao_material_id = '"+ dTO.Id +"' ";
                 bd.Conectar();
                 dt = bd.RetDataTable(query);
             }
@@ -41,8 +41,6 @@ namespace BLL
                         Fornecedor = dr["rsocial"].ToString(),
                         Un = dr["un"].ToString(),
                         Quantidade = Convert.ToDouble(dr["quantidade"]),
-                        Usuario_id = dr["usuario"].ToString(),
-                        Data = Convert.ToDateTime(dr["data"]).ToString("dd/MM/yyyy")
                     });
                 }
             }
@@ -55,7 +53,7 @@ namespace BLL
             {
                 try
                 {
-                    var query = "DELETE FROM saida_estoque WHERE id = '"+ dto.Id +"'";
+                    var query = "DELETE FROM materiais_requeridos WHERE id = '"+ dto.Id +"'";
                     bd.Conectar();
                     bd.ExecutarComandoSQL(query);
                 }
